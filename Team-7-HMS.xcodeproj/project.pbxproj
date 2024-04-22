@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		174C2D052BD6256C00945401 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 174C2D042BD6256C00945401 /* GoogleService-Info.plist */; };
+		174C2D072BD629D300945401 /* loginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C2D062BD629D200945401 /* loginScreen.swift */; };
 		176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */; };
 		176900262BD2A94500F5F81E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176900252BD2A94500F5F81E /* ContentView.swift */; };
 		176900282BD2A94700F5F81E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 176900272BD2A94700F5F81E /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		174C2D042BD6256C00945401 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		174C2D062BD629D200945401 /* loginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginScreen.swift; sourceTree = "<group>"; };
 		176900202BD2A94500F5F81E /* Team-7-HMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team-7-HMS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team_7_HMSApp.swift; sourceTree = "<group>"; };
 		176900252BD2A94500F5F81E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				176900252BD2A94500F5F81E /* ContentView.swift */,
 				174C2D042BD6256C00945401 /* GoogleService-Info.plist */,
 				1769005A2BD6201600F5F81E /* signInBack.swift */,
+				174C2D062BD629D200945401 /* loginScreen.swift */,
 				176900272BD2A94700F5F81E /* Assets.xcassets */,
 				176900292BD2A94700F5F81E /* Preview Content */,
 			);
@@ -285,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				176900262BD2A94500F5F81E /* ContentView.swift in Sources */,
+				174C2D072BD629D300945401 /* loginScreen.swift in Sources */,
 				1769005B2BD6201600F5F81E /* signInBack.swift in Sources */,
 				176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */,
 			);

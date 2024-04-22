@@ -9,17 +9,13 @@ import SwiftUI
 
 struct signInBack: View {
     var body: some View {
-        ZStack {
-            Circle()
-                .fill(Color(#colorLiteral(red: 0.021709632128477097, green: 0.013090278021991253, blue: 0.12083332985639572, alpha: 1)))
-            .frame(width: 44, height: 44)
-            
-            //Iconly/Light-Outline/Arrow - Right
-            Rectangle()
-                .fill(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-            .frame(width: 22, height: 22)
-            .rotationEffect(.degrees(-179.29))
-        }
+        //image 8
+        Image(uiImage: #imageLiteral(resourceName: "Arrow"))
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 20, height: 20)
+            .clipped()
+        .frame(width: 20, height: 20)
     }
     
 }
