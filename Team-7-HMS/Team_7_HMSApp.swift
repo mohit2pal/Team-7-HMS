@@ -18,7 +18,7 @@ struct Team_7_HMSApp: App {
       var body: some Scene {
         WindowGroup {
           NavigationView {
-            ContentView()
+            DoctorLoginScreenView()
           }
         }
       }

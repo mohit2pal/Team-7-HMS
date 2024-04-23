@@ -167,7 +167,7 @@ struct AddDoctorDetails: View {
                             
                             FirebaseHelperFunctions().addDoctorDetails(name : name , email : email , dateOfJoining : dateOfJoining , experience : experience , selectedGenderIndex : selectedGenderIndex , selectedSpecialtyIndex : selectedSpecialtyIndex, medicalDegree: selectedMedicalIndex , phoneNumber :  phoneNumber, docId: docId )
                             
-                            var emailTemplate = """
+                            let emailTemplate = """
                                                 Dear Dr. \(name),
                                                 
                                                 We are delighted to welcome you to the UrHealth team! As part of your onboarding process, we're providing you with your account credentials.
