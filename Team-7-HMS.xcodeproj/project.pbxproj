@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13EF0E332BD620650015FDDA /* PatientLogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF0E322BD620650015FDDA /* PatientLogInView.swift */; };
+		13EF0E352BD624860015FDDA /* OnBoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF0E342BD624860015FDDA /* OnBoardingScreen.swift */; };
 		176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */; };
 		176900262BD2A94500F5F81E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176900252BD2A94500F5F81E /* ContentView.swift */; };
 		176900282BD2A94700F5F81E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 176900272BD2A94700F5F81E /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		13EF0E322BD620650015FDDA /* PatientLogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientLogInView.swift; sourceTree = "<group>"; };
+		13EF0E342BD624860015FDDA /* OnBoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScreen.swift; sourceTree = "<group>"; };
 		176900202BD2A94500F5F81E /* Team-7-HMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team-7-HMS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team_7_HMSApp.swift; sourceTree = "<group>"; };
 		176900252BD2A94500F5F81E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,7 +100,9 @@
 			children = (
 				176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */,
 				176900252BD2A94500F5F81E /* ContentView.swift */,
+				13EF0E322BD620650015FDDA /* PatientLogInView.swift */,
 				176900272BD2A94700F5F81E /* Assets.xcassets */,
+				13EF0E342BD624860015FDDA /* OnBoardingScreen.swift */,
 				176900292BD2A94700F5F81E /* Preview Content */,
 			);
 			path = "Team-7-HMS";
@@ -257,8 +263,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13EF0E352BD624860015FDDA /* OnBoardingScreen.swift in Sources */,
 				176900262BD2A94500F5F81E /* ContentView.swift in Sources */,
 				176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */,
+				13EF0E332BD620650015FDDA /* PatientLogInView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
