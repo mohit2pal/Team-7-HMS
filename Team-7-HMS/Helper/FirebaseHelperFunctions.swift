@@ -32,6 +32,8 @@ struct FirebaseHelperFunctions {
     
     
     
+    // add doctor details to firebase
+    
     func addDoctorDetails(name : String , email : String , dateOfJoining : Date , experience : Int , selectedGenderIndex : Int , selectedSpecialtyIndex : Int , medicalDegree : Int , phoneNumber :  String ,docId : String) {
         // Convert Date to Timestamp
         let db = Firestore.firestore()
@@ -61,6 +63,8 @@ struct FirebaseHelperFunctions {
         }
     }
     
+    
+    // register user with email and password authentication
     func registerUser(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
@@ -77,6 +81,8 @@ struct FirebaseHelperFunctions {
         }
     }
     
+    
+    // login authentication for doctor
     func authenticateDoctor(email: String, password: String, onSuccess: @escaping (String) -> Void ,  onFail: @escaping () -> Void ){
         let db = Firestore.firestore()
         
@@ -111,5 +117,35 @@ struct FirebaseHelperFunctions {
                 }
             }
         }
+    }
+    
+    
+    // Add patient details to firebase from google sign in
+    
+    func addPatientDetails(email: String, name : String , uuid : String , phoneNumber : String, completion: @escaping (Result<String, Error>) -> Void){
+        let db = Firestore.firestore()
+        let dateTimestamp = Timestamp(date: Date())
+        
+        
+        // Create a dictionary to represent the data
+        let data: [String: Any] = [
+            "name" : name ,
+            "email" : email,
+            "gender" : "",
+            "dateOfJoining" : dateTimestamp,
+            "phoneNumber" : phoneNumber
+        ]
+        
+        // Add data to Firestore
+        db.collection("patient_details").document(uuid).setData(data) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added successfully!")
+            }
+        }
+        
+        
+        
     }
 }

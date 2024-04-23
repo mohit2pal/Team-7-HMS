@@ -53,7 +53,7 @@ struct AddDoctorDetails: View {
                 Spacer()
             }
             //            List{
-            Section("Add Doctor Details") {
+            Section() {
                 TextField("Full Name", text: $name)
                 
                 TextField("Email Address", text: $email)

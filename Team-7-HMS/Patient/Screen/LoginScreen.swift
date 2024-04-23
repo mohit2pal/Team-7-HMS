@@ -106,6 +106,16 @@ struct LoginScreen: View {
                                 print("User's email: \(user.email ?? "No email")")
                                 print("User's number: \(user.phoneNumber ?? "No Number")")
                                 print("UUID: \(user.uid)")
+                                
+                                let email = user.email ?? ""
+                                let uuid = user.uid
+                                let phoneNumber = user.phoneNumber ?? ""
+                                let name = user.displayName ?? ""
+                            
+                                FirebaseHelperFunctions().addPatientDetails(email: email, name: name, uuid: uuid, phoneNumber: phoneNumber) { _ in
+                                    print("Patient Details  added")
+                                }
+                                
                                 // You can access more user information here
                             }
                         }
