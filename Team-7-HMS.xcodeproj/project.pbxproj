@@ -48,6 +48,10 @@
 		17F63AEA2BD636610089511F /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 17F63AE92BD636610089511F /* GoogleSignInSwift */; };
 		17F63AED2BD63E440089511F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AEC2BD63E440089511F /* AppDelegate.swift */; };
 		17F63AF02BD671080089511F /* +View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AEF2BD671080089511F /* +View.swift */; };
+		17F63AF72BD7A1750089511F /* AddDoctorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AF62BD7A1750089511F /* AddDoctorDetails.swift */; };
+		17F63AF92BD7A1BF0089511F /* FirebaseHelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AF82BD7A1BF0089511F /* FirebaseHelperFunctions.swift */; };
+		17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AFC2BD7A27E0089511F /* GeneratePassword.swift */; };
+		17F63AFF2BD7A2A20089511F /* SendCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AFE2BD7A2A20089511F /* SendCredentials.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +88,10 @@
 		17F63AEC2BD63E440089511F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17F63AEE2BD640570089511F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		17F63AEF2BD671080089511F /* +View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+View.swift"; sourceTree = "<group>"; };
+		17F63AF62BD7A1750089511F /* AddDoctorDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDoctorDetails.swift; sourceTree = "<group>"; };
+		17F63AF82BD7A1BF0089511F /* FirebaseHelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelperFunctions.swift; sourceTree = "<group>"; };
+		17F63AFC2BD7A27E0089511F /* GeneratePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePassword.swift; sourceTree = "<group>"; };
+		17F63AFE2BD7A2A20089511F /* SendCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCredentials.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,10 +173,13 @@
 			children = (
 				176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */,
 				176900252BD2A94500F5F81E /* ContentView.swift */,
+				17F63AFA2BD7A2420089511F /* ViewModel */,
+				17F63AF42BD7A10E0089511F /* Doctors */,
 				17F63AF32BD7998F0089511F /* Patient */,
-				176900272BD2A94700F5F81E /* Assets.xcassets */,
-				17F63AEE2BD640570089511F /* Info.plist */,
+				17F63AEB2BD63E380089511F /* Helper */,
 				17F63AB92BD6340D0089511F /* GoogleService-Info.plist */,
+				17F63AEE2BD640570089511F /* Info.plist */,
+				176900272BD2A94700F5F81E /* Assets.xcassets */,
 				176900292BD2A94700F5F81E /* Preview Content */,
 			);
 			path = "Team-7-HMS";
@@ -203,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				17F63AEC2BD63E440089511F /* AppDelegate.swift */,
+				17F63AF82BD7A1BF0089511F /* FirebaseHelperFunctions.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -227,11 +239,43 @@
 		17F63AF32BD7998F0089511F /* Patient */ = {
 			isa = PBXGroup;
 			children = (
-				17F63AEB2BD63E380089511F /* Helper */,
 				17F63AF12BD799660089511F /* Components */,
 				17F63AF22BD799830089511F /* Screen */,
 			);
 			path = Patient;
+			sourceTree = "<group>";
+		};
+		17F63AF42BD7A10E0089511F /* Doctors */ = {
+			isa = PBXGroup;
+			children = (
+				17F63AF52BD7A1380089511F /* Screen */,
+			);
+			path = Doctors;
+			sourceTree = "<group>";
+		};
+		17F63AF52BD7A1380089511F /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				17F63AF62BD7A1750089511F /* AddDoctorDetails.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		17F63AFA2BD7A2420089511F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				17F63AFB2BD7A24D0089511F /* Doctor */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		17F63AFB2BD7A24D0089511F /* Doctor */ = {
+			isa = PBXGroup;
+			children = (
+				17F63AFC2BD7A27E0089511F /* GeneratePassword.swift */,
+				17F63AFE2BD7A2A20089511F /* SendCredentials.swift */,
+			);
+			path = Doctor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,11 +444,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17F63AF72BD7A1750089511F /* AddDoctorDetails.swift in Sources */,
 				176900262BD2A94500F5F81E /* ContentView.swift in Sources */,
+				17F63AFF2BD7A2A20089511F /* SendCredentials.swift in Sources */,
+				17F63AF92BD7A1BF0089511F /* FirebaseHelperFunctions.swift in Sources */,
 				174C2D072BD629D300945401 /* loginScreen.swift in Sources */,
 				17F63AF02BD671080089511F /* +View.swift in Sources */,
 				17F63AED2BD63E440089511F /* AppDelegate.swift in Sources */,
 				1769005B2BD6201600F5F81E /* signInBack.swift in Sources */,
+				17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */,
 				176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
