@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "appointment-circled-icon-vector-7357845-removebg-preview-2.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

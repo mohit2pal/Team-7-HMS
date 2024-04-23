@@ -10,7 +10,7 @@ import FirebaseAuth
 import GoogleSignIn
 import Firebase
 
-struct loginScreen: View {
+struct LoginScreen: View {
     var body: some View {
         ZStack{
             Color("PrimaryColor")
@@ -128,5 +128,5 @@ struct loginScreen: View {
 }
 
 #Preview{
-    loginScreen()
+    LoginScreen()
 }
