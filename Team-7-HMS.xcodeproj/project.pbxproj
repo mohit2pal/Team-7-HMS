@@ -158,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				176900222BD2A94500F5F81E /* Team-7-HMS */,
-				176900332BD2A94700F5F81E /* Team-7-HMSTests */,
 				1769003D2BD2A94700F5F81E /* Team-7-HMSUITests */,
 				176900212BD2A94500F5F81E /* Products */,
 			);
@@ -194,6 +193,7 @@
 		176900292BD2A94700F5F81E /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				176900332BD2A94700F5F81E /* Team-7-HMSTests */,
 				1769002A2BD2A94700F5F81E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
