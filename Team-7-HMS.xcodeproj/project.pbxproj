@@ -55,6 +55,7 @@
 		17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AFC2BD7A27E0089511F /* GeneratePassword.swift */; };
 		17F63AFF2BD7A2A20089511F /* SendCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AFE2BD7A2A20089511F /* SendCredentials.swift */; };
 		360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */; };
+		3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763784E2BD7D15900CB6198 /* PatientHistory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		17F63AFC2BD7A27E0089511F /* GeneratePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePassword.swift; sourceTree = "<group>"; };
 		17F63AFE2BD7A2A20089511F /* SendCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCredentials.swift; sourceTree = "<group>"; };
 		360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorLoginScreenView.swift; sourceTree = "<group>"; };
+		3763784E2BD7D15900CB6198 /* PatientHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHistory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 				174C2D062BD629D200945401 /* LoginScreen.swift */,
 				13FA586A2BD7BDCC00AC8CA4 /* SignUpScreen.swift */,
 				17F63AEF2BD671080089511F /* +View.swift */,
+				3763784E2BD7D15900CB6198 /* PatientHistory.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */,
 				13EF0E372BD7A4A80015FDDA /* OnBoardingScreen.swift in Sources */,
 				176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */,
+				3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */,
 				13FA586B2BD7BDCC00AC8CA4 /* SignUpScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
