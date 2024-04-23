@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct patientAppointmentCard: View {
-    var appointmentData: appointmentCardDataM
+    var appointmentData: AppointmentCardData
     
     var body: some View {
         HStack{
