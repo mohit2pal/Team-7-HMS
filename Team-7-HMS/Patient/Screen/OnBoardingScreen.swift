@@ -14,14 +14,14 @@ struct OnBoardingScreen: View {
         NavigationView {
             ZStack {
                 
-                Color("PrimaryColor").ignoresSafeArea()
+                Color("PrimaryColor").opacity(0.83).ignoresSafeArea()
                 
                 VStack {
                     if(currentPage < 2) {
                         Button(action: {
                             // Action to perform when the button is tapped
                         }) {
-                            NavigationLink(destination: EmptyView()) {
+                            NavigationLink(destination: SignUpScreen()) {
                                 Text("Skip")
                                     .foregroundColor(Color("SecondaryColor"))
                                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -32,7 +32,7 @@ struct OnBoardingScreen: View {
                         Button(action: {
                             // Action to perform when the button is tapped
                         }) {
-                            NavigationLink(destination: EmptyView()) {
+                            NavigationLink(destination: SignUpScreen()) {
                                 Text("Get Started")
                                     .foregroundColor(Color("SecondaryColor"))
                                     .frame(maxWidth: .infinity, alignment: .trailing)
