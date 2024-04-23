@@ -6,27 +6,20 @@
 //
 
 import SwiftUI
-import Firebase
 import FirebaseCore
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
-}
+import FirebaseAuth
+import GoogleSignIn
 
 @main
 struct Team_7_HMSApp: App {
-  // register app delegate for Firebase setup
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @AppStorage("signIn") var isSignIn = false
 
-  var body: some Scene {
-    WindowGroup {
-      NavigationView {
-        ContentView()
+      var body: some Scene {
+        WindowGroup {
+          NavigationView {
+            ContentView()
+          }
+        }
       }
-    }
-  }
 }

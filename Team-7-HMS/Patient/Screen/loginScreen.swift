@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import GoogleSignIn
+import Firebase
 
 struct loginScreen: View {
     var body: some View {
@@ -67,7 +70,46 @@ struct loginScreen: View {
                     .frame(width: 88, height: 2)
                 }
                 Button {
-                    //action
+                    guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+                    // Create Google Sign In configuration object.
+                    let config = GIDConfiguration(clientID: clientID)
+                    GIDSignIn.sharedInstance.configuration = config
+
+                    // Start the sign in flow!
+                    GIDSignIn.sharedInstance.signIn(withPresenting: getRootViewController()) {result, error in
+                        guard error == nil else {
+                            // ...
+                            return
+                        }
+                        
+                        guard let user = result?.user,
+                              let idToken = user.idToken?.tokenString
+                        else {
+                            // ...
+                            return
+                        }
+                        
+                        let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                                       accessToken: user.accessToken.tokenString)
+                        
+                        Auth.auth().signIn(with: credential) { authResult, error in
+                            if let error = error {
+                                // Handle error
+                                print(error.localizedDescription)
+                                return
+                            }
+                            
+                            // User is signed in
+                            // Here you can access the authResult.user object to get user information
+                            if let user = authResult?.user {
+                                print("User's email: \(user.email ?? "No email")")
+                                print("User's number: \(user.phoneNumber ?? "No Number")")
+                                print("UUID: \(user.uid)")
+                                // You can access more user information here
+                            }
+                        }
+                    }
                 } label: {
                     Image(uiImage: #imageLiteral(resourceName: "Google-removebg-preview 2"))
                         .resizable()
