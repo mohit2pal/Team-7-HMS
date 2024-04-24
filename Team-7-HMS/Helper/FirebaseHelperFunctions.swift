@@ -122,30 +122,67 @@ struct FirebaseHelperFunctions {
     
     // Add patient details to firebase from google sign in
     
-    func addPatientDetails(email: String, name : String , uuid : String , phoneNumber : String, completion: @escaping (Result<String, Error>) -> Void){
+    func addPatientDetails(email: String, name: String, uuid: String, phoneNumber: String, completion: @escaping (Result<String, Error>) -> Void, present: @escaping () -> Void, added: @escaping () -> Void) {
         let db = Firestore.firestore()
         let dateTimestamp = Timestamp(date: Date())
         
+        let documentRef = db.collection("patient_details").document(uuid)
         
-        // Create a dictionary to represent the data
-        let data: [String: Any] = [
-            "name" : name ,
-            "email" : email,
-            "gender" : "",
-            "dateOfJoining" : dateTimestamp,
-            "phoneNumber" : phoneNumber
+        // Check if the document with the given UUID already exists
+        documentRef.getDocument { document, error in
+            if let document = document, document.exists {
+                // Document with UUID exists, call present()
+                present()
+            } else {
+                // Document with UUID doesn't exist, proceed to add the data
+                // Create a dictionary to represent the data
+                let data: [String: Any] = [
+                    "name": name,
+                    "email": email,
+                    "gender": "",
+                    "dateOfJoining": dateTimestamp,
+                    "phoneNumber": phoneNumber
+                ]
+                
+                // Add data to Firestore
+                db.collection("patient_details").document(uuid).setData(data) { error in
+                    if let error = error {
+                        print("Error adding document: \(error)")
+                        completion(.failure(error))
+                    } else {
+                        print("Document added successfully!")
+                        added()
+                        completion(.success("Document added successfully!"))
+                    }
+                }
+            }
+        }
+    }
+
+//        add patient medical records
+    
+    func addPatientsRecords( uuid : String ,dateOfBirth :Date , gender : String , bloodGroup : String , height : String , weight : String, phoneNumber : String , pastMedicalHistory : [String] , surgeries : [String] , alergies : [String]){
+        let db = Firestore.firestore()
+        
+        let data : [String : Any] = [
+            "dateOfBirth" : dateOfBirth,
+            "gender" : gender,
+            "bloodGroup": bloodGroup,
+            "height" : height,
+            "weight" : weight,
+            "phoneNumber" : phoneNumber,
+            "pastMedicalHistory" : pastMedicalHistory,
+            "surgeries" : surgeries,
+            "alergies" : alergies
         ]
         
-        // Add data to Firestore
-        db.collection("patient_details").document(uuid).setData(data) { error in
+        db.collection("patient_details").document(uuid).collection("patient_records").document("past_medical_history").setData(data) { error in
             if let error = error {
                 print("Error adding document: \(error)")
             } else {
                 print("Document added successfully!")
             }
         }
-        
-        
         
     }
 }

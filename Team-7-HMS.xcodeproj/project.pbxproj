@@ -55,6 +55,7 @@
 		17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AFC2BD7A27E0089511F /* GeneratePassword.swift */; };
 		17F63AFF2BD7A2A20089511F /* SendCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AFE2BD7A2A20089511F /* SendCredentials.swift */; };
 		360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */; };
+		360295FF2BD7DB92001C1397 /* medicalConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360295FE2BD7DB92001C1397 /* medicalConditions.swift */; };
 		3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763784E2BD7D15900CB6198 /* PatientHistory.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,7 @@
 		17F63AFC2BD7A27E0089511F /* GeneratePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePassword.swift; sourceTree = "<group>"; };
 		17F63AFE2BD7A2A20089511F /* SendCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCredentials.swift; sourceTree = "<group>"; };
 		360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorLoginScreenView.swift; sourceTree = "<group>"; };
+		360295FE2BD7DB92001C1397 /* medicalConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = medicalConditions.swift; sourceTree = "<group>"; };
 		3763784E2BD7D15900CB6198 /* PatientHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHistory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				17F63AFB2BD7A24D0089511F /* Doctor */,
+				360295FE2BD7DB92001C1397 /* medicalConditions.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				174C2D072BD629D300945401 /* LoginScreen.swift in Sources */,
 				17F63AF02BD671080089511F /* +View.swift in Sources */,
 				17F63AED2BD63E440089511F /* AppDelegate.swift in Sources */,
+				360295FF2BD7DB92001C1397 /* medicalConditions.swift in Sources */,
 				1769005B2BD6201600F5F81E /* signInBack.swift in Sources */,
 				17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */,
 				360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */,
