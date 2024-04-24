@@ -143,27 +143,26 @@ struct PatientHistory: View {
                                 phoneNumber = filtered
                             }
                         }
-                    TextField("Adhaar Number", text: $adhaarNumber)
-                        .keyboardType(.namePhonePad)
-                        .foregroundColor(height.isEmpty ? .gray.opacity(0.5) : .black)
-                        .padding(.vertical)
-                        .padding(.horizontal)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .border(Color.gray.opacity(0.2))
-                        .onChange(of: adhaarNumber) { newValue in
-                            // Check if the newValue contains only numbers
-                            let filtered = newValue.filter { "0123456789".contains($0) }
-                            // Limit the length of the filtered string to 12 characters
-                            if filtered.count > 12 {
-                                adhaarNumber = String(filtered.prefix(12))
-                            } else {
-                                adhaarNumber = filtered
-                            }
-                        }
                     
-                    
+//                    TextField("Adhaar Number", text: $adhaarNumber)
+//                        .keyboardType(.namePhonePad)
+//                        .foregroundColor(height.isEmpty ? .gray.opacity(0.5) : .black)
+//                        .padding(.vertical)
+//                        .padding(.horizontal)
+//                        .clipShape(RoundedRectangle(cornerRadius: 20))
+//                        .border(Color.gray.opacity(0.2))
+//                        .onChange(of: adhaarNumber) { newValue in
+//                            // Check if the newValue contains only numbers
+//                            let filtered = newValue.filter { "0123456789".contains($0) }
+//                            // Limit the length of the filtered string to 12 characters
+//                            if filtered.count > 12 {
+//                                adhaarNumber = String(filtered.prefix(12))
+//                            } else {
+//                                adhaarNumber = filtered
+//                            }
+//                        }
+//                    
 
-                    
                     Divider()
                     
                     Section(header: Text("Past Medical History")
@@ -187,8 +186,10 @@ struct PatientHistory: View {
                                     .padding(.vertical)
                                 Button(action: {
                                     
-                                    otherMedicalHistories.append(newMedicalProblem)
-                                    newMedicalProblem = ""
+                                    if !newMedicalProblem.isEmpty{
+                                        otherMedicalHistories.append(newMedicalProblem)
+                                        newMedicalProblem = ""
+                                    }
                                     print(otherMedicalHistories)
                                 }) {
                                     Image(systemName: "plus.circle.fill")
@@ -246,9 +247,10 @@ struct PatientHistory: View {
                             HStack {
                                 TextField("Add New Allergy", text: $newAllergy)
                                 Button(action: {
-                                    
-                                    allergies.append(newAllergy)
-                                    newAllergy = ""
+                                    if !newAllergy.isEmpty {
+                                        allergies.append(newAllergy)
+                                        newAllergy = ""
+                                    }
                                     print(allergies)
                                 }) {
                                     Image(systemName: "plus.circle.fill")
@@ -259,6 +261,37 @@ struct PatientHistory: View {
                     
                 }
                 
+                Divider()
+                    .padding(.vertical)
+                
+                Button(action: {
+                    collectMedicalHistories()
+                    
+                    print(selectedMedicalHistories)
+                    
+                    FirebaseHelperFunctions().addPatientsRecords(
+                                uuid: uid,
+                                dateOfBirth: dateOfBirth,
+                                gender: genders[selectedGenderIndex],
+                                bloodGroup: bloodGroup[selectedBloodGroupIndex],
+                                height: height,
+                                weight: weight,
+                                phoneNumber: phoneNumber,
+                                pastMedicalHistory: selectedMedicalHistories,
+                                surgeries: surgeries,
+                                alergies: allergies
+                            )
+                    
+                }, label: {
+                    Text("Submit")
+                        .frame(width: 100 , height: 30)
+                        .padding()
+                        .background(Color.accentColor)
+                        .foregroundStyle(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                })
+                .padding(.vertical)
+                
             }
             .padding(.vertical)
             .padding(.horizontal)
@@ -267,24 +300,12 @@ struct PatientHistory: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        collectMedicalHistories()
-                        
-                        print(selectedMedicalHistories)
-//                        FirebaseHelperFunctions().addPatientsRecords(
-//                                    uuid: uid,
-//                                    dateOfBirth: dateOfBirth,
-//                                    gender: genders[selectedGenderIndex],
-//                                    bloodGroup: bloodGroup[selectedBloodGroupIndex],
-//                                    height: height,
-//                                    weight: weight,
-//                                    phoneNumber: phoneNumber,
-//                                    pastMedicalHistory: selectedMedicalHistories,
-//                                    surgeries: surgeries,
-//                                    alergies: allergies
-//                                )
                         
                     }, label: {
-                        Text("Done")
+                        HStack{
+                            Text("Skip")
+                            Image(systemName: "chevron.right")
+                        }
                             .foregroundColor(Color.accentColor)
                     })
                 }
