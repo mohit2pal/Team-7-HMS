@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OnBoardingScreen: View {
     @State private var currentPage = 0
-    
+    @State private var goToLogin : Bool = false
     var body: some View {
         NavigationView {
             ZStack {
@@ -19,9 +19,10 @@ struct OnBoardingScreen: View {
                 VStack {
                     if(currentPage < 2) {
                         Button(action: {
-                            // Action to perform when the button is tapped
+                            
                         }) {
-                            NavigationLink(destination: SignUpScreen()) {
+                            NavigationLink(destination:
+                                            LoginScreen()) {
                                 Text("Skip")
                                     .foregroundColor(Color("SecondaryColor"))
                                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -31,8 +32,10 @@ struct OnBoardingScreen: View {
                     } else {
                         Button(action: {
                             // Action to perform when the button is tapped
+                            
+                            
                         }) {
-                            NavigationLink(destination: SignUpScreen()) {
+                            NavigationLink(destination: LoginScreen()) {
                                 Text("Get Started")
                                     .foregroundColor(Color("SecondaryColor"))
                                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -55,6 +58,8 @@ struct OnBoardingScreen: View {
             }
         }
         .navigationBarHidden(true)
+        
+
     
     }
 }
