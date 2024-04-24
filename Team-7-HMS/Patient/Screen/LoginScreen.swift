@@ -16,6 +16,8 @@ struct LoginScreen: View {
     @State private var isUserLoggedIn : Bool = false
     @State private var oldUserLoggedIn : Bool = false
     @State private var uuid : String = ""
+    
+    @State private var loginError : Bool = false
     var body: some View {
         
         ZStack{
@@ -122,6 +124,7 @@ struct LoginScreen: View {
                                 if let error = error {
                                     // Handle error
                                     print(error.localizedDescription)
+                                    loginError = true
                                     return
                                 }
                                 
@@ -168,7 +171,7 @@ struct LoginScreen: View {
                             .clipped()
                             .frame(width: 79, height: 79)
                     }
-                    
+                
                     if isUserLoggedIn {
                         NavigationLink(destination: PatientHistory(uid: uuid),
                             isActive: $isUserLoggedIn) {
@@ -178,7 +181,10 @@ struct LoginScreen: View {
                         .navigationBarBackButtonHidden(true)
                     }
                     
-                    
+                    if loginError {
+                        Text("Looks like there is an error, please try again")
+                            .foregroundStyle(Color.red)
+                    }
                     if oldUserLoggedIn {
                         
                         NavigationLink(destination: Text("hello Patient"),
