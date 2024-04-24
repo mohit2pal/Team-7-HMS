@@ -63,6 +63,8 @@
 		B1639D0F2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D0E2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift */; };
 		B1639D112BD8DA7700EAB15E /* SpecialitySwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D102BD8DA7700EAB15E /* SpecialitySwiftUIView.swift */; };
 		B1639D132BD8DA8200EAB15E /* SosCallSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D122BD8DA8200EAB15E /* SosCallSwiftUIView.swift */; };
+		B1639D152BD8E2AD00EAB15E /* patientAppointmentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D142BD8E2AD00EAB15E /* patientAppointmentCard.swift */; };
+		B1639D172BD8E31300EAB15E /* appointmentCardDataM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D162BD8E31300EAB15E /* appointmentCardDataM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +116,8 @@
 		B1639D0E2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookAppointmentSwiftUIView.swift; sourceTree = "<group>"; };
 		B1639D102BD8DA7700EAB15E /* SpecialitySwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialitySwiftUIView.swift; sourceTree = "<group>"; };
 		B1639D122BD8DA8200EAB15E /* SosCallSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SosCallSwiftUIView.swift; sourceTree = "<group>"; };
+		B1639D142BD8E2AD00EAB15E /* patientAppointmentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientAppointmentCard.swift; sourceTree = "<group>"; };
+		B1639D162BD8E31300EAB15E /* appointmentCardDataM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appointmentCardDataM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,6 +315,8 @@
 			children = (
 				B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */,
 				B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */,
+				B1639D162BD8E31300EAB15E /* appointmentCardDataM.swift */,
+				B1639D142BD8E2AD00EAB15E /* patientAppointmentCard.swift */,
 				B1639D0C2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift */,
 				B1639D0E2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift */,
 				B1639D102BD8DA7700EAB15E /* SpecialitySwiftUIView.swift */,
@@ -485,9 +491,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1639D172BD8E31300EAB15E /* appointmentCardDataM.swift in Sources */,
 				B1639D0F2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift in Sources */,
 				B1639D0B2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift in Sources */,
 				17F63AF72BD7A1750089511F /* AddDoctorDetails.swift in Sources */,
+				B1639D152BD8E2AD00EAB15E /* patientAppointmentCard.swift in Sources */,
 				176900262BD2A94500F5F81E /* ContentView.swift in Sources */,
 				17F63AFF2BD7A2A20089511F /* SendCredentials.swift in Sources */,
 				17F63AF92BD7A1BF0089511F /* FirebaseHelperFunctions.swift in Sources */,
