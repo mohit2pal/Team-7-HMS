@@ -49,9 +49,9 @@ struct SignUpScreen: View {
                             .frame(width: 312, height: 41)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(.white)
-                                    .shadow(color: Color(.gray).opacity(0.2), radius: 20, x: 2, y: 0)
-                            )
+                                    .fill(.white))
+                            .shadow(color: Color(.gray).opacity(0.2), radius: 20, x: 2, y: 0)
+                        
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color("SecondaryColor").opacity(0.1), lineWidth: 0.5)
@@ -63,9 +63,9 @@ struct SignUpScreen: View {
                             .frame(width: 312, height: 41)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(.white)
-                                    .shadow(color: Color(.gray).opacity(0.2), radius: 20, x: 2, y: 0)
-                            )
+                                    .fill(.white))
+                            .shadow(color: Color(.gray).opacity(0.2), radius: 20, x: 2, y: 0)
+                        
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color("SecondaryColor").opacity(0.1), lineWidth: 0.5)
