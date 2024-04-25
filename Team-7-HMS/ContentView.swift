@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var healthkit = HealthKitManager()
     var body: some View {
         VStack {
             OnBoardingScreen()
+                
+        }
+        .onAppear{
+            healthkit.startObservingHeartRate()
         }
     }
 }
