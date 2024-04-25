@@ -1,30 +1,6 @@
 import SwiftUI
 import FirebaseFirestore
 
-//func displayDoctorsNames(speciality: String) {
-//    // Call the fetchDoctorsBySpeciality function
-//    fetchDoctorsBySpeciality(speciality: speciality) { (names, error) in
-//        // Check if there's an error
-//        if let error = error {
-//            print("Error fetching doctor names: \(error)")
-//        } else {
-//            // Print or display the retrieved names
-//            if let names = names {
-//                print("Doctors' Names:")
-//                // Create a VStack to hold the DoctorNameUIView instances
-//                VStack {
-//                    ForEach(names, id: \.self) { name in
-//                        // Use DoctorNameUIView inside the loop
-//                        DoctorNameUIView(doctorName: name)
-//                    }
-//                }
-//            } else {
-//                print("No names found.")
-//            }
-//        }
-//    }
-//}
-
 // Example function to fetch documents from a Firestore collection
 func fetchDoctorsBySpeciality(speciality: String, completion: @escaping ([String]?, Error?) -> Void) {
     let db = Firestore.firestore()

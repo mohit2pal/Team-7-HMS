@@ -36,10 +36,17 @@ struct OnBoardingScreen: View {
                             
                         }) {
                             NavigationLink(destination: LoginScreen()) {
-                                Text("Get Started")
-                                    .foregroundColor(Color("SecondaryColor"))
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                                    .padding([.leading, .trailing])
+                                HStack{
+                                    Spacer()
+                                    Text("Get Started")
+                                        .foregroundColor(Color("SecondaryColor"))
+                                        .padding(10)
+                                        .padding(.horizontal)
+                                        .background(Color.white)
+                                        .cornerRadius(20)
+                                        .padding()
+                                        .customShadow()
+                                }
                             }
                         }
                     }
