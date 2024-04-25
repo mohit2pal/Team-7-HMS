@@ -26,8 +26,8 @@ struct Team_7_HMSApp: App {
         
         let sampleTypesToRead = Set([
             HKObjectType.quantityType(forIdentifier: .heartRate)!,
-            HKObjectType.quantityType(forIdentifier: .stepCount)!,
-            HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!,
+            HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic)!,
+            HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic)!,
         ])
         
         healthStore.requestAuthorization(toShare: nil, read: sampleTypesToRead) { (success, error) in

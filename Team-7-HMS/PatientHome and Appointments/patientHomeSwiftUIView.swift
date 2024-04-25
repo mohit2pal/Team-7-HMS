@@ -100,7 +100,7 @@ struct patientHomeSwiftUIView: View {
                     .frame(width: 2, height: 33)
                 Spacer()
                 
-                if healthkit.isWatchConnected {
+                if !healthkit.isWatchConnected {
                     VStack(alignment: .center){
                         Text("heart")
                             .font(CentFont.smallReg)
