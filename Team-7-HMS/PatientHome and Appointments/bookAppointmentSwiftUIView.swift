@@ -43,76 +43,78 @@ struct bookAppointmentSwiftUIView: View {
     
     
     var body: some View {
-        VStack{
-            HStack{
-                Text("Book Appointment")
-                    .font(CentFont.largeSemiBold)
+        NavigationView{
+            VStack{
+                HStack{
+                    Text("Book Appointment")
+                        .font(CentFont.largeSemiBold)
+                    Spacer()
+                }
+                
                 Spacer()
-            }
-            
-            Spacer()
-                .frame(height: 30)
-            
-            HStack{
-                Text("Search by Specialities")
-                    .font(CentFont.mediumReg)
-                Spacer()
-            }
-            
-            //list of specialities
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4), spacing: 20) {
-                ForEach(buttons.indices, id: \.self) { index in
-                    NavigationLink(destination: SpecialitySwiftUIView(speciality: buttons[index].title)) {
-                        VStack {
-                            Image(buttons[index].image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 50, height: 50)
-                                .padding(10)
-                                .background(Color.lightAccentBG)
-                                .cornerRadius(50)
-                            Text(buttons[index].title)
-                                .font(bookAppFont.smallest)
-                                .foregroundStyle(.gray)
+                    .frame(height: 30)
+                
+                HStack{
+                    Text("Search by Specialities")
+                        .font(CentFont.mediumReg)
+                    Spacer()
+                }
+                
+                //list of specialities
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4), spacing: 20) {
+                    ForEach(buttons.indices, id: \.self) { index in
+                        NavigationLink(destination: SpecialitySwiftUIView(speciality: buttons[index].title, icon: buttons[index].image)) {
+                            VStack {
+                                Image(buttons[index].image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 50, height: 50)
+                                    .padding(10)
+                                    .background(Color.lightAccentBG)
+                                    .cornerRadius(50)
+                                Text(buttons[index].title)
+                                    .font(bookAppFont.smallest)
+                                    .foregroundStyle(.gray)
+                            }
                         }
                     }
                 }
-            }
-            
-            Spacer()
-                .frame(height: 30)
-            
-            HStack{
-                Text("Search by symptoms")
-                    .font(CentFont.mediumReg)
+                
                 Spacer()
-            }
-            
-            //list of symptoms
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4), spacing: 20) {
-                ForEach(buttons.indices, id: \.self) { index in
-                    NavigationLink(destination: SpecialitySwiftUIView(speciality: buttons2[index].title)) {
-                        VStack {
-                            Image(buttons2[index].image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(15)
-                            Text(buttons2[index].title)
-                                .font(bookAppFont.smallest)
-                                .foregroundStyle(.gray)
+                    .frame(height: 30)
+                
+                HStack{
+                    Text("Search by symptoms")
+                        .font(CentFont.mediumReg)
+                    Spacer()
+                }
+                
+                //list of symptoms
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4), spacing: 20) {
+                    ForEach(buttons.indices, id: \.self) { index in
+                        NavigationLink(destination: SpecialitySwiftUIView(speciality: buttons[index].title, icon: buttons[index].image)) {
+                            VStack {
+                                Image(buttons2[index].image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40)
+                                    .padding()
+                                    .background(Color.white)
+                                    .cornerRadius(15)
+                                Text(buttons2[index].title)
+                                    .font(bookAppFont.smallest)
+                                    .foregroundStyle(.gray)
+                            }
+                            .customShadow()
                         }
-                        .customShadow()
                     }
                 }
+                
+                Spacer()
             }
-            
-            Spacer()
+            .padding()
+            .background(Color.background)
         }
-        .padding()
-        .background(Color.background)
     }
 }
 

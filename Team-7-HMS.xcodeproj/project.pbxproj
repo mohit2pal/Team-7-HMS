@@ -66,6 +66,9 @@
 		B1639D132BD8DA8200EAB15E /* SosCallSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D122BD8DA8200EAB15E /* SosCallSwiftUIView.swift */; };
 		B1639D152BD8E2AD00EAB15E /* patientAppointmentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D142BD8E2AD00EAB15E /* patientAppointmentCard.swift */; };
 		B1639D172BD8E31300EAB15E /* appointmentCardDataM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D162BD8E31300EAB15E /* appointmentCardDataM.swift */; };
+		B1639D192BD9219B00EAB15E /* DoctorsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D182BD9219B00EAB15E /* DoctorsList.swift */; };
+		B1639D1B2BD923F400EAB15E /* DoctorNameUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D1A2BD923F400EAB15E /* DoctorNameUIView.swift */; };
+		B1639D1D2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D1C2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +123,9 @@
 		B1639D122BD8DA8200EAB15E /* SosCallSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SosCallSwiftUIView.swift; sourceTree = "<group>"; };
 		B1639D142BD8E2AD00EAB15E /* patientAppointmentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientAppointmentCard.swift; sourceTree = "<group>"; };
 		B1639D162BD8E31300EAB15E /* appointmentCardDataM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appointmentCardDataM.swift; sourceTree = "<group>"; };
+		B1639D182BD9219B00EAB15E /* DoctorsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsList.swift; sourceTree = "<group>"; };
+		B1639D1A2BD923F400EAB15E /* DoctorNameUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorNameUIView.swift; sourceTree = "<group>"; };
+		B1639D1C2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = slotsAvailableSwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +329,9 @@
 				B1639D0C2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift */,
 				B1639D0E2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift */,
 				B1639D102BD8DA7700EAB15E /* SpecialitySwiftUIView.swift */,
+				B1639D182BD9219B00EAB15E /* DoctorsList.swift */,
+				B1639D1A2BD923F400EAB15E /* DoctorNameUIView.swift */,
+				B1639D1C2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift */,
 				B1639D122BD8DA8200EAB15E /* SosCallSwiftUIView.swift */,
 			);
 			path = "PatientHome and Appointments";
@@ -496,7 +505,9 @@
 			files = (
 				B1639D172BD8E31300EAB15E /* appointmentCardDataM.swift in Sources */,
 				B1639D0F2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift in Sources */,
+				B1639D1D2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift in Sources */,
 				B1639D0B2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift in Sources */,
+				B1639D1B2BD923F400EAB15E /* DoctorNameUIView.swift in Sources */,
 				17F63AF72BD7A1750089511F /* AddDoctorDetails.swift in Sources */,
 				B1639D152BD8E2AD00EAB15E /* patientAppointmentCard.swift in Sources */,
 				176900262BD2A94500F5F81E /* ContentView.swift in Sources */,
@@ -506,6 +517,7 @@
 				B1639D132BD8DA8200EAB15E /* SosCallSwiftUIView.swift in Sources */,
 				17F63AF02BD671080089511F /* +View.swift in Sources */,
 				B1639D0D2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift in Sources */,
+				B1639D192BD9219B00EAB15E /* DoctorsList.swift in Sources */,
 				17F63AED2BD63E440089511F /* AppDelegate.swift in Sources */,
 				360295FF2BD7DB92001C1397 /* medicalConditions.swift in Sources */,
 				B1639D112BD8DA7700EAB15E /* SpecialitySwiftUIView.swift in Sources */,

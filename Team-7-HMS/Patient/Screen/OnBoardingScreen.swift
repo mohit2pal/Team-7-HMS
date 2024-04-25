@@ -45,11 +45,11 @@ struct OnBoardingScreen: View {
                     }
                     
                     TabView(selection: $currentPage) {
-                        OnboardingStepView(imageName: "OnBoardScreen1", title: "Welcome to YourCare!", description: "Welcome to YourCare! Access your medical records, schedule appointments, and connect with your healthcare team—all in one place. Simplify your healthcare journey with YourCare today!").tag(0)
+                        OnboardingStepView(imageName: "hospitalLogo", title: "Welcome to\nYourCare!", description: "Access your medical records, schedule appointments, and connect with your healthcare team—all in one place\n\nSimplify your healthcare journey with YourCare").tag(0)
                         
-                        OnboardingStepView(imageName: "OnBoardScreen2", title: "Book an appointment!", description: "Book an appointment with hospital associated doctors by one tap.").tag(1)
+                        OnboardingStepView(imageName: "OnBoardScreen2", title: "Book Appointments\nEasily", description: "View available time slots, select preferred doctors, and receive appointment reminders to stay on track with your healthcare needs").tag(1)
                         
-                        OnboardingStepView(imageName: "OnBoardScreen3", title: "Lab Reports In One tap", description: "Avoid endless hussle to collect Lab Reports, now you can access them in one tap.").tag(2)
+                        OnboardingStepView(imageName: "OnBoardScreen3", title: "Lab Reports\nIn a tap", description: "Say goodbye to the hassle of collecting lab reports. With just a tap, access all your lab reports conveniently from anywhere").tag(2)
                         
                     }
                     .tabViewStyle(PageTabViewStyle())
@@ -75,23 +75,36 @@ struct OnboardingStepView: View {
             Image(imageName)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 300, height: 200)
+                .frame(width: 200, height: 200)
+//                .customShadow()
                 .shadow(color: Color.gray.opacity(0.3), radius: 5, x: 0, y: 2)
-            
-            Text(title)
-                .font(.title)
-                .fontWeight(.bold)
-                .shadow(color: Color.white.opacity(0.3), radius: 5, x: 0, y: 2)
-                .foregroundColor(Color("SecondaryColor"))
-            
-            Text(description)
-                .foregroundColor(Color("SecondaryColor"))
-                .font(.callout)
-                .multilineTextAlignment(.center)
-                .padding()
-            
+            Spacer().frame(height: 40)
+            VStack{
+                HStack{
+                    Text(title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("SecondaryColor"))
+                    Spacer()
+                }
+                .padding(.leading, 30)
+                .padding(.bottom)
+                //                .shadow(color: Color.white.opacity(0.3), radius: 5, x: 0, y: 2)
+                
+                HStack{
+                    Text(description)
+                        .foregroundColor(Color("SecondaryColor"))
+                        .font(.callout)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                }.padding(.leading, 30)
+            }
+            .padding().padding(.vertical)
+            .background(Color.white)
+            .cornerRadius(50)
         }
         .padding()
+        
     }
 }
 
