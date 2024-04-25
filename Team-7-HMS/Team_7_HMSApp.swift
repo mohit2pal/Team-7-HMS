@@ -14,11 +14,15 @@ import GoogleSignIn
 struct Team_7_HMSApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @AppStorage("signIn") var isSignIn = false
+    
+    @ObservedObject var appState = AppState()
 
       var body: some Scene {
         WindowGroup {
           NavigationStack {
-           LoginScreen()
+           ContentView()
+                  .environmentObject(appState)
+                  .id(appState.rootViewId)
           }
         }
       }

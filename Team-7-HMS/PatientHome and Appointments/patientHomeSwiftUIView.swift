@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct patientHomeSwiftUIView: View {
     @State var userName: String
@@ -17,11 +18,15 @@ struct patientHomeSwiftUIView: View {
         VStack{
             //header
             HStack(alignment: .top){
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .frame(width: 70, height: 70)
-                    .foregroundColor(.gray)
-                    .padding(.trailing)
+                Button {
+                    signOut()
+                } label: {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 70, height: 70)
+                        .foregroundColor(.gray)
+                        .padding(.trailing)
+                }
                 VStack(alignment: .leading){
                     Text("Hello 👋")
                         .font(CentFont.mediumReg)
@@ -165,6 +170,15 @@ struct patientHomeSwiftUIView: View {
         }//Vstack end
         .padding()
         .background(Color.background)
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            print("User signed out successfully")
+        } catch let signOutError as NSError {
+            print("Error signing out: \(signOutError.localizedDescription)")
+        }
     }
 }
 
