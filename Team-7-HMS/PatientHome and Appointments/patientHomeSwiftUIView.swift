@@ -105,7 +105,7 @@ struct patientHomeSwiftUIView: View {
                     .frame(width: 2, height: 33)
                 Spacer()
                 
-                if !healthkit.isWatchConnected {
+                if healthkit.isWatchConnected {
                     VStack(alignment: .center){
                         Text("heart")
                             .font(CentFont.smallReg)
@@ -118,10 +118,11 @@ struct patientHomeSwiftUIView: View {
                             .scaleEffect(1.1) // Initial scale
                             
                         HStack(alignment: .bottom){
-                            Text(String(format: "%.1f", healthkit.heartRate))
-                                .font(CentFont.mediumSemiBold)
+                            Text(String(format: "%.0f", healthkit.heartRate))
+                                .font(.title2)
+                                .bold()
                             Text("bpm")
-                                .font(CentFont.smallReg)
+                                .font(.caption2)
                                 .foregroundStyle(.gray)
                         }
                     }
@@ -132,19 +133,20 @@ struct patientHomeSwiftUIView: View {
                     Spacer()
                     
                     VStack(alignment: .center){
-                        Text("sleep")
+                        Text("blood Pressure")
+                            .frame(alignment: .center)
+                            .multilineTextAlignment(.center)
                             .font(CentFont.smallReg)
                             .foregroundStyle(.gray)
-                        Image(systemName: "zzz")
+                        Image(systemName: "waveform.path.ecg")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 30)
                             .foregroundStyle(.myAccent)
-                        HStack(alignment: .bottom){
-                            Text("\(userSleep)")
-                                .font(CentFont.mediumSemiBold)
-                            Text("hrs")
-                                .font(CentFont.smallReg)
+                        VStack(){
+                            Text("\(String(format: "%.0f", healthkit.bp_s))/\(String(format: "%.0f", healthkit.bp_d))")               .font(CentFont.mediumSemiBold)
+                            Text("mmHg")
+                                .font(.caption2)
                                 .foregroundStyle(.gray)
                         }
                     }
@@ -194,6 +196,8 @@ struct patientHomeSwiftUIView: View {
         }//Vstack end
         .onAppear{
             healthkit.startObservingHeartRate()
+            
+            healthkit.fetchBloodPressureData()
         }
         .padding()
         .background(Color.background)

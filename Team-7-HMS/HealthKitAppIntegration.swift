@@ -10,10 +10,14 @@ import HealthKit
 
 class HealthKitManager: NSObject, ObservableObject {
     
-    let healthStore: HKHealthStore
+    private let healthStore: HKHealthStore
     
     @Published var heartRate: Double = 0
     @Published var isWatchConnected = false
+    
+    @Published var bp_s : Double = 0
+    
+    @Published var bp_d : Double = 0
     
     private var heartRateQuery: HKQuery?
     
@@ -72,6 +76,46 @@ class HealthKitManager: NSObject, ObservableObject {
         heartRateQuery = sampleQuery
     }
 
+    func fetchBloodPressureData() {
+        guard let bloodPressureType = HKObjectType.correlationType(forIdentifier: .bloodPressure) else {
+            print("Blood pressure type not available in HealthKit")
+            return
+        }
+        
+        let query = HKSampleQuery(sampleType: bloodPressureType,
+                                  predicate: nil,
+                                  limit: HKObjectQueryNoLimit,
+                                  sortDescriptors: nil) { (query, samples, error) in
+            if let error = error {
+                print("Error fetching blood pressure samples: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let samples = samples as? [HKCorrelation], !samples.isEmpty else {
+                print("No blood pressure samples available")
+                return
+            }
+            
+            for sample in samples {
+                if let systolic = sample.objects(for: HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic)!).first as? HKQuantitySample,
+                   let diastolic = sample.objects(for: HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic)!).first as? HKQuantitySample {
+                    // Access systolic and diastolic values here
+                    let systolicValue = systolic.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
+                    let diastolicValue = diastolic.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
+                    print("Systolic: \(systolicValue), Diastolic: \(diastolicValue)")
+                    
+                    
+                    
+                    self.bp_d = diastolic.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
+                    self.bp_s = systolic.quantity.doubleValue(for: HKUnit.millimeterOfMercury())
+                }
+            }
+        }
+        
+        HKHealthStore().execute(query)
+    }
+
+        
     func readLatestHeartRate() {
         let quantityType = HKObjectType.quantityType(forIdentifier: .heartRate)!
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
