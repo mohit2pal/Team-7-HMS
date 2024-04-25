@@ -62,6 +62,9 @@
 		360295FF2BD7DB92001C1397 /* medicalConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360295FE2BD7DB92001C1397 /* medicalConditions.swift */; };
 		364631FB2BDA1E6600DD53CC /* HealthKitAppIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364631FA2BDA1E6600DD53CC /* HealthKitAppIntegration.swift */; };
 		3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763784E2BD7D15900CB6198 /* PatientHistory.swift */; };
+		37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */; };
+		37D3A1492BDA48EA00C04F35 /* DoctorAppointmentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A1482BDA48EA00C04F35 /* DoctorAppointmentCard.swift */; };
+		37D3A14B2BDA492000C04F35 /* DoctorHomeSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */; };
 		B1639D092BD8DA1700EAB15E /* CentralisedFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */; };
 		B1639D0B2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */; };
 		B1639D0D2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D0C2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift */; };
@@ -124,6 +127,9 @@
 		364631FA2BDA1E6600DD53CC /* HealthKitAppIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAppIntegration.swift; sourceTree = "<group>"; };
 		364631FC2BDA1E9500DD53CC /* Team-7-HMS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Team-7-HMS.entitlements"; sourceTree = "<group>"; };
 		3763784E2BD7D15900CB6198 /* PatientHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHistory.swift; sourceTree = "<group>"; };
+		37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorAppointmentCardData.swift; sourceTree = "<group>"; };
+		37D3A1482BDA48EA00C04F35 /* DoctorAppointmentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorAppointmentCard.swift; sourceTree = "<group>"; };
+		37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorHomeSwiftUI.swift; sourceTree = "<group>"; };
 		B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentralisedFonts.swift; sourceTree = "<group>"; };
 		B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientHomeSwiftUIView.swift; sourceTree = "<group>"; };
 		B1639D0C2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientNotificationSwiftUIView.swift; sourceTree = "<group>"; };
@@ -300,6 +306,7 @@
 		17F63AF42BD7A10E0089511F /* Doctors */ = {
 			isa = PBXGroup;
 			children = (
+				37D3A1452BDA486600C04F35 /* DoctorHomeScreen */,
 				17F63AF52BD7A1380089511F /* Screen */,
 			);
 			path = Doctors;
@@ -339,6 +346,16 @@
 				17F63B292BDA164F0089511F /* UserModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		37D3A1452BDA486600C04F35 /* DoctorHomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */,
+				37D3A1482BDA48EA00C04F35 /* DoctorAppointmentCard.swift */,
+				37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */,
+			);
+			path = DoctorHomeScreen;
 			sourceTree = "<group>";
 		};
 		B1639D072BD8D9DD00EAB15E /* PatientHome and Appointments */ = {
@@ -533,6 +550,7 @@
 				B1639D0B2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift in Sources */,
 				B1639D1B2BD923F400EAB15E /* DoctorNameUIView.swift in Sources */,
 				17F63AF72BD7A1750089511F /* AddDoctorDetails.swift in Sources */,
+				37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */,
 				B1639D152BD8E2AD00EAB15E /* patientAppointmentCard.swift in Sources */,
 				176900262BD2A94500F5F81E /* ContentView.swift in Sources */,
 				17F63AFF2BD7A2A20089511F /* SendCredentials.swift in Sources */,
@@ -541,6 +559,7 @@
 				B1639D132BD8DA8200EAB15E /* SosCallSwiftUIView.swift in Sources */,
 				17F63AF02BD671080089511F /* +View.swift in Sources */,
 				B1639D0D2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift in Sources */,
+				37D3A1492BDA48EA00C04F35 /* DoctorAppointmentCard.swift in Sources */,
 				B1639D192BD9219B00EAB15E /* DoctorsList.swift in Sources */,
 				17F63AED2BD63E440089511F /* AppDelegate.swift in Sources */,
 				360295FF2BD7DB92001C1397 /* medicalConditions.swift in Sources */,
@@ -556,6 +575,7 @@
 				13FA586B2BD7BDCC00AC8CA4 /* SignUpScreen.swift in Sources */,
 				13D816D12BD901EE00D36A9C /* OnBoardingDoctor.swift in Sources */,
 				364631FB2BDA1E6600DD53CC /* HealthKitAppIntegration.swift in Sources */,
+				37D3A14B2BDA492000C04F35 /* DoctorHomeSwiftUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
