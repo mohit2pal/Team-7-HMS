@@ -175,10 +175,9 @@ struct PatientHistory: View {
                         }
                     
                     Section() {
-                            ForEach(otherMedicalHistories, id: \.self) { allergy in
+                            ForEach(otherMedicalHistories, id: \.self) { medicine in
                                 HStack{
-                                    Text(allergy)
-                                    Spacer()
+                                    Toggle(medicine , isOn: .constant(true))
                                 }
                             }
                             HStack {
@@ -238,10 +237,11 @@ struct PatientHistory: View {
                         .font(.headline)
                         .frame(alignment: .leading)
                         .multilineTextAlignment(.leading)) {
-                            ForEach(allergies, id: \.self) { allergy in
+                            ForEach(allergies, id: \.self) {
+                                
+                                allergy in
                                 HStack{
-                                    Text(allergy)
-                                    Spacer()
+                                    Toggle(allergy , isOn: .constant(true))
                                 }
                             }
                             HStack {
@@ -284,7 +284,7 @@ struct PatientHistory: View {
                     
                 }, label: {
                     Text("Submit")
-                        .frame(width: 100 , height: 30)
+                        .frame(width: 330 , height: 25)
                         .padding()
                         .background(Color.accentColor)
                         .foregroundStyle(Color.white)
