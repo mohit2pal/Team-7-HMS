@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct patientHomeSwiftUIView: View {
+    @ObservedObject var healthkit = HealthKitManager()
     @State var userName: String
     @State var userHeight: Int
     @State var userWeight: Int
@@ -98,45 +99,68 @@ struct patientHomeSwiftUIView: View {
                     .foregroundStyle(.gray)
                     .frame(width: 2, height: 33)
                 Spacer()
-                VStack(alignment: .center){
-                    Text("heart")
-                        .font(CentFont.smallReg)
-                        .foregroundStyle(.gray)
-                    Image(systemName: "heart.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 30)
-                        .foregroundStyle(.myAccent)
-                    HStack(alignment: .bottom){
-                        Text("\(userHeart)")
-                            .font(CentFont.mediumSemiBold)
-                        Text("bpm")
+                
+                if healthkit.isWatchConnected {
+                    VStack(alignment: .center){
+                        Text("heart")
                             .font(CentFont.smallReg)
                             .foregroundStyle(.gray)
+                        Image(systemName: "heart.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 30)
+                            .foregroundStyle(Color.red)
+                            .scaleEffect(1.1) // Initial scale
+                            
+                        HStack(alignment: .bottom){
+                            Text(String(format: "%.1f", healthkit.heartRate))
+                                .font(CentFont.mediumSemiBold)
+                            Text("bpm")
+                                .font(CentFont.smallReg)
+                                .foregroundStyle(.gray)
+                        }
                     }
-                }
-                Spacer()
-                RoundedRectangle(cornerRadius: 50)
-                    .foregroundStyle(.gray)
-                    .frame(width: 2, height: 33)
-                Spacer()
-                VStack(alignment: .center){
-                    Text("sleep")
-                        .font(CentFont.smallReg)
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 50)
                         .foregroundStyle(.gray)
-                    Image(systemName: "zzz")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 30)
-                        .foregroundStyle(.myAccent)
-                    HStack(alignment: .bottom){
-                        Text("\(userSleep)")
-                            .font(CentFont.mediumSemiBold)
-                        Text("hrs")
+                        .frame(width: 2, height: 33)
+                    Spacer()
+                    
+                    VStack(alignment: .center){
+                        Text("sleep")
                             .font(CentFont.smallReg)
                             .foregroundStyle(.gray)
+                        Image(systemName: "zzz")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 30)
+                            .foregroundStyle(.myAccent)
+                        HStack(alignment: .bottom){
+                            Text("\(userSleep)")
+                                .font(CentFont.mediumSemiBold)
+                            Text("hrs")
+                                .font(CentFont.smallReg)
+                                .foregroundStyle(.gray)
+                        }
                     }
                 }
+                
+                else{
+                    VStack{
+                        HStack{
+                            Spacer()
+                            Image(systemName: "applewatch")
+                                .resizable()
+                                .frame(width: 30 , height: 36)
+                            Spacer()
+                        }
+                        Text("Disconnected")
+                    }
+                    .foregroundStyle(Color.red)
+                }
+                
+               
+                
             }
             .padding()
             .background(Color.white)
@@ -163,6 +187,9 @@ struct patientHomeSwiftUIView: View {
             
             Spacer()
         }//Vstack end
+        .onAppear{
+            healthkit.startObservingHeartRate()
+        }
         .padding()
         .background(Color.background)
     }

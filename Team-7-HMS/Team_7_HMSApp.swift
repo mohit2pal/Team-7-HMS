@@ -42,7 +42,10 @@ struct Team_7_HMSApp: App {
       var body: some Scene {
         WindowGroup {
           NavigationStack {
-           ContentView()
+    
+                  patientHomeSwiftUIView(userName: "Rajesh", userHeight: 165, userWeight: 65, userHeart: 98, userSleep: 6)
+                      .navigationBarHidden(true)
+                      .navigationBarBackButtonHidden(true)
           }
         }
       }
