@@ -19,7 +19,7 @@ struct LoginScreen: View {
     
     @State private var loginError : Bool = false
     var body: some View {
-        NavigationStack {
+        NavigationView{
             ZStack{
                 Color("PrimaryColor")
                     .opacity(0.83)
@@ -171,14 +171,18 @@ struct LoginScreen: View {
                                 .clipped()
                                 .frame(width: 79, height: 79)
                         }
-                        
+                    
                         if isUserLoggedIn {
-                            NavigationLink(destination: PatientHistory(uid: uuid),
-                                           isActive: $isUserLoggedIn) {
-                                EmptyView()
+                            
+                            
+    
+                            navigationDestination(isPresented: $isUserLoggedIn) {
+                                PatientHistory(uid: uuid)
+                                    .navigationBarHidden(true)
+                                    .navigationBarBackButtonHidden(true)
                             }
-                                           .navigationBarHidden(true)
-                                           .navigationBarBackButtonHidden(true)
+                            
+                            
                         }
                         
                         if loginError {
@@ -187,12 +191,13 @@ struct LoginScreen: View {
                         }
                         if oldUserLoggedIn {
                             
-                            NavigationLink(destination: Text("hello Patient"),
-                                           isActive: $oldUserLoggedIn) {
-                                EmptyView()
-                            }
-                                           .navigationBarHidden(true)
-                                           .navigationBarBackButtonHidden(true)
+                            navigationDestination(isPresented: $oldUserLoggedIn, destination: {
+                                patientHomeSwiftUIView(userName: "Rajesh", userHeight: 165, userWeight: 65, userHeart: 98, userSleep: 6)
+                                    .navigationBarHidden(true)
+                                    .navigationBarBackButtonHidden(true)
+                                    
+                            })
+                            
                         }
                         
                         
