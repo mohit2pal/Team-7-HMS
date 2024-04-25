@@ -192,7 +192,7 @@ struct LoginScreen: View {
                         if oldUserLoggedIn {
                             
                             navigationDestination(isPresented: $oldUserLoggedIn, destination: {
-                                patientHomeSwiftUIView(userName: "Rajesh", userHeight: 165, userWeight: 65, userHeart: 98, userSleep: 6)
+                                patientTabItems()
                                     .navigationBarHidden(true)
                                     .navigationBarBackButtonHidden(true)
                                     

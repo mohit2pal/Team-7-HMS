@@ -43,7 +43,7 @@ struct bookAppointmentSwiftUIView: View {
     
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             VStack{
                 HStack{
                     Text("Book Appointment")
@@ -51,8 +51,7 @@ struct bookAppointmentSwiftUIView: View {
                     Spacer()
                 }
                 
-                Spacer()
-                    .frame(height: 30)
+                Spacer().frame(height: 30)
                 
                 HStack{
                     Text("Search by Specialities")
@@ -114,6 +113,8 @@ struct bookAppointmentSwiftUIView: View {
             }
             .padding()
             .background(Color.background)
+            .navigationTitle("") // Set an empty title
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

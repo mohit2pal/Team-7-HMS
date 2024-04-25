@@ -27,7 +27,7 @@ struct DoctorNameUIView: View {
                     .foregroundStyle(.gray)
             }
             Spacer()
-            NavigationLink(destination: slotsAvailableSwiftUIView()){
+            NavigationLink(destination: slotsAvailableSwiftUIView(doctorName: doctorName)){
                 Image("Arrow")
                     .rotationEffect(.degrees(180))
             }
