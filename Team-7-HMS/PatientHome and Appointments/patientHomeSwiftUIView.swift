@@ -51,61 +51,41 @@ struct patientHomeSwiftUIView: View {
             
             Spacer()
                 .frame(height: 30)
-            
-            
+        
             //vitals
             HStack{
                 Text("Vitals")
-                    .font(CentFont.mediumReg)
+                    .bold()
+                    .font(.title2)
                 Spacer()
             }
+            
             HStack{
-                VStack(alignment: .center){
-                    Text("height")
-                        .font(CentFont.smallReg)
-                        .foregroundStyle(.gray)
-                    Image(systemName: "figure.stand")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 30)
-                        .foregroundStyle(.myAccent)
-                    HStack(alignment: .bottom){
-                        Text("\(userHeight)")
-                            .font(CentFont.mediumSemiBold)
-                        Text("cm")
-                            .font(CentFont.smallReg)
-                            .foregroundStyle(.gray)
-                    }
-                }
-                Spacer()
-                RoundedRectangle(cornerRadius: 50)
-                    .foregroundStyle(.gray)
-                    .frame(width: 2, height: 33)
-                Spacer()
-                VStack(alignment: .center){
-                    Text("weight")
-                        .font(CentFont.smallReg)
-                        .foregroundStyle(.gray)
-                    Image(systemName: "figure")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 30)
-                        .foregroundStyle(.myAccent)
-                    HStack(alignment: .bottom){
-                        Text("\(userWeight)")
-                            .font(CentFont.mediumSemiBold)
-                        Text("kg")
-                            .font(CentFont.smallReg)
-                            .foregroundStyle(.gray)
-                    }
-                }
-                Spacer()
-                RoundedRectangle(cornerRadius: 50)
-                    .foregroundStyle(.gray)
-                    .frame(width: 2, height: 33)
-                Spacer()
-                
                 if healthkit.isWatchConnected {
+                
+                    VStack(alignment: .center){
+                        Text("sp O2")
+                            .font(CentFont.smallReg)
+                            .foregroundStyle(.gray)
+                        Image(systemName: "drop.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 30)
+                            .foregroundStyle(.myAccent)
+                        HStack(alignment: .bottom){
+                            Text(String(format: "%.0f", healthkit.spo2))
+                                .font(CentFont.mediumSemiBold)
+                            Text("%")
+                                .font(CentFont.smallReg)
+                                .foregroundStyle(.gray)
+                        }
+                    }
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 50)
+                        .foregroundStyle(.gray)
+                        .frame(width: 2, height: 33)
+                    Spacer()
+                    
                     VStack(alignment: .center){
                         Text("heart")
                             .font(CentFont.smallReg)
@@ -169,6 +149,7 @@ struct patientHomeSwiftUIView: View {
                
                 
             }
+            
             .padding()
             .background(Color.white)
             .cornerRadius(20)

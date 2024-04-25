@@ -16,8 +16,9 @@ class HealthKitManager: NSObject, ObservableObject {
     @Published var isWatchConnected = false
     
     @Published var bp_s : Double = 0
-    
+    @Published var spo2: Double = 0
     @Published var bp_d : Double = 0
+    @Published var ecgData: Double = 0
     
     private var heartRateQuery: HKQuery?
     
@@ -27,7 +28,70 @@ class HealthKitManager: NSObject, ObservableObject {
         
         checkWatchConnection()
         startObservingHeartRate()
+        fetchSpO2Data()
+        fetchECGData()
     }
+    
+    
+    func fetchSpO2Data() {
+        guard let spo2Type = HKObjectType.quantityType(forIdentifier: .oxygenSaturation) else {
+            print("SpO2 type not available in HealthKit")
+            return
+        }
+        
+        let query = HKSampleQuery(sampleType: spo2Type, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
+            if let error = error {
+                print("Error fetching SpO2 data: \(error.localizedDescription)")
+                return
+            }
+            
+            if let samples = samples as? [HKQuantitySample] {
+                for sample in samples {
+                    // Process SpO2 data as needed
+                    self.spo2 = sample.quantity.doubleValue(for: HKUnit.percent()) * 100
+                    
+                    print("Spo2 : \(self.spo2)")
+                }
+            }
+        }
+        
+        healthStore.execute(query)
+    }
+
+    
+    func fetchECGData() {
+        let ecgType = HKObjectType.electrocardiogramType()
+
+        // Query for electrocardiogram samples
+        let ecgQuery = HKSampleQuery(sampleType: ecgType,
+                                     predicate: nil,
+                                     limit: HKObjectQueryNoLimit,
+                                     sortDescriptors: nil) { (query, samples, error) in
+            if let error = error {
+                // Handle the error here.
+                fatalError("*** An error occurred \(error.localizedDescription) ***")
+            }
+            
+            guard let ecgSamples = samples as? [HKElectrocardiogram] else {
+                fatalError("*** Unable to convert \(String(describing: samples)) to [HKElectrocardiogram] ***")
+            }
+            
+            for sample in ecgSamples {
+                // Handle the samples here.
+                print("This is one sample")
+                print(sample)
+                
+                
+            }
+        }
+
+
+        // Execute the query.
+        healthStore.execute(ecgQuery)
+        
+        
+    }
+
     
     func checkWatchConnection() {
         let workoutType = HKObjectType.workoutType()

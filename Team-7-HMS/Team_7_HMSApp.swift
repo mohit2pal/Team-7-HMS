@@ -28,7 +28,9 @@ struct Team_7_HMSApp: App {
             HKObjectType.quantityType(forIdentifier: .heartRate)!,
             HKObjectType.quantityType(forIdentifier: .bloodPressureSystolic)!,
             HKObjectType.quantityType(forIdentifier: .bloodPressureDiastolic)!,
-        ])
+            HKQuantityType.quantityType(forIdentifier: .oxygenSaturation)!,
+            HKSampleType.electrocardiogramType()
+           ])
         
         healthStore.requestAuthorization(toShare: nil, read: sampleTypesToRead) { (success, error) in
             print("Request Authorization -- Success: ", success, " Error: ", error ?? "nil")
