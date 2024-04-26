@@ -64,6 +64,45 @@ struct FirebaseHelperFunctions {
     }
     
     
+    
+    
+    //register patient
+    
+    func registerPatientDetails(email: String, name: String, password: String, added: @escaping (String) -> Void){
+        
+        let db = Firestore.firestore()
+        let dateTimeStamp = Timestamp(date: Date())
+        
+        registerUser(email: email, password: password) {  result in
+            switch result {
+            case .success(let uid):
+                print("User registered successfully. UID: \(uid)")
+                let documentRef = db.collection("patient_details").document(uid)
+                
+                let data : [String : Any] = [
+                    "name":name,
+                    "email":email,
+                    "dateOfJoining":dateTimeStamp
+                ]
+                
+                documentRef.setData(data) { error in
+                    if let error = error {
+                        print("Error adding document: \(error)")
+                    } else {
+                        print("Document added successfully!")
+                        added(uid)
+                    }
+                }
+                
+                
+                
+            case .failure(let error):
+                print("Error registering user: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
     // register user with email and password authentication
     func registerUser(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
