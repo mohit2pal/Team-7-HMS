@@ -55,9 +55,16 @@
 		17F63AF92BD7A1BF0089511F /* FirebaseHelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AF82BD7A1BF0089511F /* FirebaseHelperFunctions.swift */; };
 		17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AFC2BD7A27E0089511F /* GeneratePassword.swift */; };
 		17F63AFF2BD7A2A20089511F /* SendCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63AFE2BD7A2A20089511F /* SendCredentials.swift */; };
+		17F63B272BDA127D0089511F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63B262BDA127D0089511F /* AppState.swift */; };
+		17F63B2A2BDA164F0089511F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63B292BDA164F0089511F /* UserModel.swift */; };
+		17F63B2C2BDA1AFB0089511F /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63B2B2BDA1AFB0089511F /* SplashScreen.swift */; };
 		360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */; };
 		360295FF2BD7DB92001C1397 /* medicalConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360295FE2BD7DB92001C1397 /* medicalConditions.swift */; };
+		364631FB2BDA1E6600DD53CC /* HealthKitAppIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364631FA2BDA1E6600DD53CC /* HealthKitAppIntegration.swift */; };
 		3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763784E2BD7D15900CB6198 /* PatientHistory.swift */; };
+		37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */; };
+		37D3A1492BDA48EA00C04F35 /* DoctorAppointmentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A1482BDA48EA00C04F35 /* DoctorAppointmentCard.swift */; };
+		37D3A14B2BDA492000C04F35 /* DoctorHomeSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */; };
 		B1639D092BD8DA1700EAB15E /* CentralisedFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */; };
 		B1639D0B2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */; };
 		B1639D0D2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D0C2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift */; };
@@ -113,9 +120,17 @@
 		17F63AF82BD7A1BF0089511F /* FirebaseHelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelperFunctions.swift; sourceTree = "<group>"; };
 		17F63AFC2BD7A27E0089511F /* GeneratePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePassword.swift; sourceTree = "<group>"; };
 		17F63AFE2BD7A2A20089511F /* SendCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCredentials.swift; sourceTree = "<group>"; };
+		17F63B262BDA127D0089511F /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		17F63B292BDA164F0089511F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		17F63B2B2BDA1AFB0089511F /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorLoginScreenView.swift; sourceTree = "<group>"; };
 		360295FE2BD7DB92001C1397 /* medicalConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = medicalConditions.swift; sourceTree = "<group>"; };
+		364631FA2BDA1E6600DD53CC /* HealthKitAppIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAppIntegration.swift; sourceTree = "<group>"; };
+		364631FC2BDA1E9500DD53CC /* Team-7-HMS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Team-7-HMS.entitlements"; sourceTree = "<group>"; };
 		3763784E2BD7D15900CB6198 /* PatientHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHistory.swift; sourceTree = "<group>"; };
+		37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorAppointmentCardData.swift; sourceTree = "<group>"; };
+		37D3A1482BDA48EA00C04F35 /* DoctorAppointmentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorAppointmentCard.swift; sourceTree = "<group>"; };
+		37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorHomeSwiftUI.swift; sourceTree = "<group>"; };
 		B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentralisedFonts.swift; sourceTree = "<group>"; };
 		B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientHomeSwiftUIView.swift; sourceTree = "<group>"; };
 		B1639D0C2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientNotificationSwiftUIView.swift; sourceTree = "<group>"; };
@@ -206,8 +221,11 @@
 		176900222BD2A94500F5F81E /* Team-7-HMS */ = {
 			isa = PBXGroup;
 			children = (
+				364631FC2BDA1E9500DD53CC /* Team-7-HMS.entitlements */,
 				176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */,
+				364631FA2BDA1E6600DD53CC /* HealthKitAppIntegration.swift */,
 				176900252BD2A94500F5F81E /* ContentView.swift */,
+				17F63B282BDA16440089511F /* Model */,
 				B1639D1E2BDA465500EAB15E /* patientTabItems.swift */,
 				17F63AFA2BD7A2420089511F /* ViewModel */,
 				17F63AF42BD7A10E0089511F /* Doctors */,
@@ -253,6 +271,7 @@
 			children = (
 				17F63AEC2BD63E440089511F /* AppDelegate.swift */,
 				17F63AF82BD7A1BF0089511F /* FirebaseHelperFunctions.swift */,
+				17F63B262BDA127D0089511F /* AppState.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -269,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				13EF0E362BD7A4A80015FDDA /* OnBoardingScreen.swift */,
+				17F63B2B2BDA1AFB0089511F /* SplashScreen.swift */,
 				174C2D062BD629D200945401 /* LoginScreen.swift */,
 				13FA586A2BD7BDCC00AC8CA4 /* SignUpScreen.swift */,
 				17F63AEF2BD671080089511F /* +View.swift */,
@@ -289,6 +309,7 @@
 		17F63AF42BD7A10E0089511F /* Doctors */ = {
 			isa = PBXGroup;
 			children = (
+				37D3A1452BDA486600C04F35 /* DoctorHomeScreen */,
 				17F63AF52BD7A1380089511F /* Screen */,
 			);
 			path = Doctors;
@@ -320,6 +341,24 @@
 				17F63AFE2BD7A2A20089511F /* SendCredentials.swift */,
 			);
 			path = Doctor;
+			sourceTree = "<group>";
+		};
+		17F63B282BDA16440089511F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				17F63B292BDA164F0089511F /* UserModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		37D3A1452BDA486600C04F35 /* DoctorHomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */,
+				37D3A1482BDA48EA00C04F35 /* DoctorAppointmentCard.swift */,
+				37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */,
+			);
+			path = DoctorHomeScreen;
 			sourceTree = "<group>";
 		};
 		B1639D072BD8D9DD00EAB15E /* PatientHome and Appointments */ = {
@@ -506,12 +545,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17F63B2C2BDA1AFB0089511F /* SplashScreen.swift in Sources */,
 				B1639D172BD8E31300EAB15E /* appointmentCardDataM.swift in Sources */,
 				B1639D0F2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift in Sources */,
 				B1639D1D2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift in Sources */,
+				17F63B2A2BDA164F0089511F /* UserModel.swift in Sources */,
 				B1639D0B2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift in Sources */,
 				B1639D1B2BD923F400EAB15E /* DoctorNameUIView.swift in Sources */,
 				17F63AF72BD7A1750089511F /* AddDoctorDetails.swift in Sources */,
+				37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */,
 				B1639D152BD8E2AD00EAB15E /* patientAppointmentCard.swift in Sources */,
 				176900262BD2A94500F5F81E /* ContentView.swift in Sources */,
 				17F63AFF2BD7A2A20089511F /* SendCredentials.swift in Sources */,
@@ -530,10 +572,13 @@
 				17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */,
 				360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */,
 				13EF0E372BD7A4A80015FDDA /* OnBoardingScreen.swift in Sources */,
+				17F63B272BDA127D0089511F /* AppState.swift in Sources */,
 				176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */,
 				3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */,
 				13FA586B2BD7BDCC00AC8CA4 /* SignUpScreen.swift in Sources */,
 				13D816D12BD901EE00D36A9C /* OnBoardingDoctor.swift in Sources */,
+				364631FB2BDA1E6600DD53CC /* HealthKitAppIntegration.swift in Sources */,
+				37D3A14B2BDA492000C04F35 /* DoctorHomeSwiftUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,6 +739,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Team-7-HMS/Team-7-HMS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Team-7-HMS/Preview Content\"";
@@ -701,6 +747,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Team-7-HMS/Info.plist";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "I want to share the health details of the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -724,6 +771,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Team-7-HMS/Team-7-HMS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Team-7-HMS/Preview Content\"";
@@ -731,6 +779,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Team-7-HMS/Info.plist";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "I want to share the health details of the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

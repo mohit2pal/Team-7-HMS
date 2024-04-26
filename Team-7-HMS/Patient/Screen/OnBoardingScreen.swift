@@ -35,7 +35,7 @@ struct OnBoardingScreen: View {
                             
                             
                         }) {
-                            NavigationLink(destination: LoginScreen()) {
+                            NavigationLink(destination: SignUpScreen()) {
                                 HStack{
                                     Spacer()
                                     Text("Get Started")

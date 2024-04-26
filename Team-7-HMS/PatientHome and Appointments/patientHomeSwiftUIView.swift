@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct patientHomeSwiftUIView: View {
+    @ObservedObject var healthkit = HealthKitManager()
     @State var userName: String
     @State var userHeight: Int
     @State var userWeight: Int
@@ -17,11 +19,15 @@ struct patientHomeSwiftUIView: View {
         VStack{
             //header
             HStack(alignment: .top){
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .frame(width: 70, height: 70)
-                    .foregroundColor(.gray)
-                    .padding(.trailing)
+                Button {
+                    signOut()
+                } label: {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 70, height: 70)
+                        .foregroundColor(.gray)
+                        .padding(.trailing)
+                }
                 VStack(alignment: .leading){
                     Text("Hello 👋")
                         .font(CentFont.mediumReg)
@@ -45,99 +51,105 @@ struct patientHomeSwiftUIView: View {
             
             Spacer()
                 .frame(height: 30)
-            
-            
+        
             //vitals
             HStack{
                 Text("Vitals")
-                    .font(CentFont.mediumReg)
+                    .bold()
+                    .font(.title2)
                 Spacer()
             }
+            
             HStack{
-                VStack(alignment: .center){
-                    Text("height")
-                        .font(CentFont.smallReg)
-                        .foregroundStyle(.gray)
-                    Image(systemName: "figure.stand")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 30)
-                        .foregroundStyle(.myAccent)
-                    HStack(alignment: .bottom){
-                        Text("\(userHeight)")
-                            .font(CentFont.mediumSemiBold)
-                        Text("cm")
+                if healthkit.isWatchConnected {
+                
+                    VStack(alignment: .center){
+                        Text("sp O2")
                             .font(CentFont.smallReg)
                             .foregroundStyle(.gray)
+                        Image(systemName: "drop.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 30)
+                            .foregroundStyle(.myAccent)
+                        HStack(alignment: .bottom){
+                            Text(String(format: "%.0f", healthkit.spo2))
+                                .font(CentFont.mediumSemiBold)
+                            Text("%")
+                                .font(CentFont.smallReg)
+                                .foregroundStyle(.gray)
+                        }
                     }
-                }
-                Spacer()
-                RoundedRectangle(cornerRadius: 50)
-                    .foregroundStyle(.gray)
-                    .frame(width: 2, height: 33)
-                Spacer()
-                VStack(alignment: .center){
-                    Text("weight")
-                        .font(CentFont.smallReg)
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 50)
                         .foregroundStyle(.gray)
-                    Image(systemName: "figure")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 30)
-                        .foregroundStyle(.myAccent)
-                    HStack(alignment: .bottom){
-                        Text("\(userWeight)")
-                            .font(CentFont.mediumSemiBold)
-                        Text("kg")
+                        .frame(width: 2, height: 33)
+                    Spacer()
+                    
+                    VStack(alignment: .center){
+                        Text("heart")
                             .font(CentFont.smallReg)
                             .foregroundStyle(.gray)
+                        Image(systemName: "heart.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 30)
+                            .foregroundStyle(Color.red)
+                            .scaleEffect(1.1) // Initial scale
+                            
+                        HStack(alignment: .bottom){
+                            Text(String(format: "%.0f", healthkit.heartRate))
+                                .font(.title2)
+                                .bold()
+                            Text("bpm")
+                                .font(.caption2)
+                                .foregroundStyle(.gray)
+                        }
                     }
-                }
-                Spacer()
-                RoundedRectangle(cornerRadius: 50)
-                    .foregroundStyle(.gray)
-                    .frame(width: 2, height: 33)
-                Spacer()
-                VStack(alignment: .center){
-                    Text("heart")
-                        .font(CentFont.smallReg)
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 50)
                         .foregroundStyle(.gray)
-                    Image(systemName: "heart.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 30)
-                        .foregroundStyle(.myAccent)
-                    HStack(alignment: .bottom){
-                        Text("\(userHeart)")
-                            .font(CentFont.mediumSemiBold)
-                        Text("bpm")
+                        .frame(width: 2, height: 33)
+                    Spacer()
+                    
+                    VStack(alignment: .center){
+                        Text("blood Pressure")
+                            .frame(alignment: .center)
+                            .multilineTextAlignment(.center)
                             .font(CentFont.smallReg)
                             .foregroundStyle(.gray)
+                        Image(systemName: "waveform.path.ecg")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 30)
+                            .foregroundStyle(.myAccent)
+                        VStack(){
+                            Text("\(String(format: "%.0f", healthkit.bp_s))/\(String(format: "%.0f", healthkit.bp_d))")               .font(CentFont.mediumSemiBold)
+                            Text("mmHg")
+                                .font(.caption2)
+                                .foregroundStyle(.gray)
+                        }
                     }
                 }
-                Spacer()
-                RoundedRectangle(cornerRadius: 50)
-                    .foregroundStyle(.gray)
-                    .frame(width: 2, height: 33)
-                Spacer()
-                VStack(alignment: .center){
-                    Text("sleep")
-                        .font(CentFont.smallReg)
-                        .foregroundStyle(.gray)
-                    Image(systemName: "zzz")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 30)
-                        .foregroundStyle(.myAccent)
-                    HStack(alignment: .bottom){
-                        Text("\(userSleep)")
-                            .font(CentFont.mediumSemiBold)
-                        Text("hrs")
-                            .font(CentFont.smallReg)
-                            .foregroundStyle(.gray)
+                
+                else{
+                    VStack{
+                        HStack{
+                            Spacer()
+                            Image(systemName: "applewatch")
+                                .resizable()
+                                .frame(width: 30 , height: 36)
+                            Spacer()
+                        }
+                        Text("Disconnected")
                     }
+                    .foregroundStyle(Color.red)
                 }
+                
+               
+                
             }
+            
             .padding()
             .background(Color.white)
             .cornerRadius(20)
@@ -163,8 +175,22 @@ struct patientHomeSwiftUIView: View {
             
             Spacer()
         }//Vstack end
+        .onAppear{
+            healthkit.startObservingHeartRate()
+            
+            healthkit.fetchBloodPressureData()
+        }
         .padding()
         .background(Color.background)
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            print("User signed out successfully")
+        } catch let signOutError as NSError {
+            print("Error signing out: \(signOutError.localizedDescription)")
+        }
     }
 }
 
