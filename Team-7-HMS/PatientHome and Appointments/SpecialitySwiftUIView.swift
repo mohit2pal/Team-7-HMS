@@ -11,8 +11,7 @@ struct SpecialitySwiftUIView: View {
     @State var speciality: String
     @State var icon: String
     @State private var selectedDayIndex: Int?
-    @State private var names: [String] = []
-    
+    @State private var doctorNames: [String] = []
     var body: some View {
         VStack{
             VStack {
@@ -49,35 +48,43 @@ struct SpecialitySwiftUIView: View {
                 }
                 //FOR SAMPLE VIEW OF CARDS
                 ScrollView(.vertical) {
-                            VStack(spacing: 15) {
-                                // Display the DoctorNameUIView instances using fetched names
-                                ForEach(names, id: \.self) { name in
-                                    DoctorNameUIView(doctorName: name)
-                                }
-                            }
-                            .padding()
-                            .onAppear {
-                                // Fetch doctors' names when the view appears
-                                fetchDoctorsBySpeciality(speciality: speciality) { fetchedNames, error in
-                                    if let error = error {
-                                        print("Error fetching doctor names: \(error)")
-                                    } else {
-                                        if let fetchedNames = fetchedNames {
-                                            // Update the @State variable with fetched names
-                                            self.names = fetchedNames
-                                        } else {
-                                            print("No names found.")
-                                        }
-                                    }
-                                }
+                    VStack(spacing: 15) {
+                        // Display the DoctorNameUIView instances using fetched names
+                        ForEach(doctorNames, id: \.self) { name in
+                            DoctorNameUIView(doctorName: name)
+                        }
+                    }
+                    .onAppear {
+                        fetchDoctorsNames(forSpeciality: speciality) { names, error in
+                            if let error = error {
+                                print("Error: \(error)")
+                            } else if let names = names {
+                                self.doctorNames = names
+                            } else {
+                                print("No doctors found with the specified speciality.")
                             }
                         }
+                    }
+//                    .onAppear {
+//                        fetchDoctorsBySpeciality(speciality: speciality) { fetchedNames, error in
+//                            if let error = error {
+//                                print("Error fetching doctor names: \(error)")
+//                            } else {
+//                                if let fetchedNames = fetchedNames {
+//                                    self.names = fetchedNames
+//                                } else {
+//                                    print("No names found.")
+//                                }
+//                            }
+//                        }
+//                    }
+                }
             }
             Spacer()
         }
         .padding()
         .background(Color.background)
-        .navigationTitle("Book Appointment")
+        .navigationBarTitle("Book Appointment", displayMode: .inline)
     }
     
     func daysInCurrentWeek() -> [String] {

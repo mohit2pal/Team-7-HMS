@@ -11,6 +11,13 @@ struct SosCallSwiftUIView: View {
     var body: some View {
         NavigationStack{
             VStack{
+                HStack{
+                    Text("Call Help")
+                        .font(CentFont.largeSemiBold)
+                    Spacer()
+                }
+                
+                Spacer().frame(height: 30)
                 
                 Image("AmbulanceImage")
                     .resizable()
@@ -48,7 +55,7 @@ struct SosCallSwiftUIView: View {
                     .foregroundStyle(.gray)
             }
             .padding()
-            .navigationTitle("Call Help")
+            .background(Color.background)
         }
     }
 }

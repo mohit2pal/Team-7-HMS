@@ -76,6 +76,7 @@
 		B1639D192BD9219B00EAB15E /* DoctorsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D182BD9219B00EAB15E /* DoctorsList.swift */; };
 		B1639D1B2BD923F400EAB15E /* DoctorNameUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D1A2BD923F400EAB15E /* DoctorNameUIView.swift */; };
 		B1639D1D2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D1C2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift */; };
+		B1639D1F2BDA465500EAB15E /* patientTabItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D1E2BDA465500EAB15E /* patientTabItems.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		B1639D182BD9219B00EAB15E /* DoctorsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsList.swift; sourceTree = "<group>"; };
 		B1639D1A2BD923F400EAB15E /* DoctorNameUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorNameUIView.swift; sourceTree = "<group>"; };
 		B1639D1C2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = slotsAvailableSwiftUIView.swift; sourceTree = "<group>"; };
+		B1639D1E2BDA465500EAB15E /* patientTabItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientTabItems.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				364631FA2BDA1E6600DD53CC /* HealthKitAppIntegration.swift */,
 				176900252BD2A94500F5F81E /* ContentView.swift */,
 				17F63B282BDA16440089511F /* Model */,
+				B1639D1E2BDA465500EAB15E /* patientTabItems.swift */,
 				17F63AFA2BD7A2420089511F /* ViewModel */,
 				17F63AF42BD7A10E0089511F /* Doctors */,
 				B1639D072BD8D9DD00EAB15E /* PatientHome and Appointments */,
@@ -368,8 +371,8 @@
 				B1639D0C2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift */,
 				B1639D0E2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift */,
 				B1639D102BD8DA7700EAB15E /* SpecialitySwiftUIView.swift */,
-				B1639D182BD9219B00EAB15E /* DoctorsList.swift */,
 				B1639D1A2BD923F400EAB15E /* DoctorNameUIView.swift */,
+				B1639D182BD9219B00EAB15E /* DoctorsList.swift */,
 				B1639D1C2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift */,
 				B1639D122BD8DA8200EAB15E /* SosCallSwiftUIView.swift */,
 			);
@@ -559,7 +562,7 @@
 				B1639D132BD8DA8200EAB15E /* SosCallSwiftUIView.swift in Sources */,
 				17F63AF02BD671080089511F /* +View.swift in Sources */,
 				B1639D0D2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift in Sources */,
-				37D3A1492BDA48EA00C04F35 /* DoctorAppointmentCard.swift in Sources */,
+				B1639D1F2BDA465500EAB15E /* patientTabItems.swift in Sources */,
 				B1639D192BD9219B00EAB15E /* DoctorsList.swift in Sources */,
 				17F63AED2BD63E440089511F /* AppDelegate.swift in Sources */,
 				360295FF2BD7DB92001C1397 /* medicalConditions.swift in Sources */,
