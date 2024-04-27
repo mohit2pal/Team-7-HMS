@@ -20,7 +20,15 @@ struct AddDoctorDetails: View {
     @State private var phoneNumber : String = ""
     @State private var password : String = ""
     let genders = ["Male", "Female", "Other"]
-    let specialties = ["Cardiology", "Dermatology", "Endocrinology", "Gastroenterology", "Hematology", "Nephrology", "Neurology", "Oncology", "Pediatrics", "Psychiatry", "Rheumatology", "Urology"]
+    let specialties = [
+        "General Physician",
+        "Obstetrics & Gynaecology",
+        "Orthopaedics",
+        "Urology",
+        "Paediatrics",
+        "Cardiology",
+        "Dermatology"
+    ]
     
     let medicalDegrees = [
         "MD (Doctor of Medicine)",

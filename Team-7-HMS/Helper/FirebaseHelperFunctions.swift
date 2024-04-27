@@ -15,7 +15,15 @@ import FirebaseAuth
 struct FirebaseHelperFunctions {
     
     let genders = ["Male", "Female", "Other"]
-    let specialties = ["Cardiology", "Dermatology", "Endocrinology", "Gastroenterology", "Hematology", "Nephrology", "Neurology", "Oncology", "Pediatrics " ]
+    let specialties = [
+        "General Physician",
+        "Obstetrics & Gynaecology",
+        "Orthopaedics",
+        "Urology",
+        "Paediatrics",
+        "Cardiology",
+        "Dermatology"
+    ]
     
     let medicalDegrees = [
         "MD (Doctor of Medicine)",
@@ -197,8 +205,63 @@ struct FirebaseHelperFunctions {
             }
         }
     }
+    
+    
+    // Function to create slots for each day for each doctor ID
+    func createSlotsForDoctors(completion: @escaping (Error?) -> Void) {
+        let db = Firestore.firestore()
+        let calendar = Calendar.current
+        let today = Date()
+        var dates = [Date]()
+        
+        // Generate dates for the next 7 days
+        for i in 0..<7 {
+            if let date = calendar.date(byAdding: .day, value: i, to: today) {
+                dates.append(date)
+            }
+        }
+        
+        // Format dates to get day names
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd_MM_yyyy"
+        let days = dates.map { dateFormatter.string(from: $0) }
+        
+        // Reference to the doctors collection
+        let doctorsCollection = db.collection("doctors")
+        
+        // Fetch all documents in the collection
+        doctorsCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                // Handle error
+                completion(error)
+            } else {
+                // Loop through the documents
+                for document in querySnapshot!.documents {
+                    let doctorID = document.documentID
+                    
+                    // Create slots for each day for the current doctor
+                    for (index, day) in days.enumerated() {
+                        var slots = [String: String]()
+                        for i in 1...6 {
+                            slots["slot \(i)"] = "empty"
+                        }
+                        
+                        // Set slots data for the current day and doctor
+                        doctorsCollection.document(doctorID).collection(day).document("slots").setData(slots) { error in
+                            if let error = error {
+                                print("Error setting slots data: \(error.localizedDescription)")
+                            }
+                        }
+                    }
+                }
+                // Call completion handler after creating slots for all doctors
+                completion(nil)
+            }
+        }
+    }
+    
 
-//        add patient medical records
+//  add patient medical records
     
     func addPatientsRecords( uuid : String ,dateOfBirth :Date , gender : String , bloodGroup : String , height : String , weight : String, phoneNumber : String , pastMedicalHistory : [String] , surgeries : [String] , alergies : [String]){
         let db = Firestore.firestore()

@@ -17,7 +17,9 @@ struct patientTabItems: View {
                             .padding(.top)
                     }
 
-                bookAppointmentSwiftUIView()
+                NavigationStack{
+                    bookAppointmentSwiftUIView()
+                }
                     .tabItem {
                         Label("Book" , systemImage: "plus.circle.fill")
                     }

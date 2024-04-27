@@ -44,7 +44,7 @@ struct ContentView: View {
                     }
             } else {
                 if isLogin == true {
-                    patientHomeSwiftUIView(userName: "ME Testet")
+                    patientTabItems()
                 } else if isLogin == false {
                     LoginScreen()
                 }

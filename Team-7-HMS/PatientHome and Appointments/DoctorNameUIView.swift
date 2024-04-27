@@ -11,25 +11,28 @@ import SwiftUI
 
 struct DoctorNameUIView: View {
     @State var doctorName: String
+    @State var date : String
     var body: some View {
-        HStack{
-            Image(systemName: "person.circle.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 80)
-                .foregroundStyle(.gray)
-            Spacer().frame(width: 30)
-            VStack(alignment: .leading){
-                Text(doctorName)
-                    .font(CentFont.mediumSemiBold)
-                Text("Available from: ")
-                    .font(CentFont.smallReg)
-                    .foregroundStyle(.gray)
-            }
-            Spacer()
-            NavigationLink(destination: slotsAvailableSwiftUIView(doctorName: doctorName)){
-                Image("Arrow")
-                    .rotationEffect(.degrees(180))
+        VStack{
+            NavigationLink(destination: slotsAvailableSwiftUIView(doctorName: doctorName , date : date)){
+                HStack{
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 80)
+                        .foregroundStyle(.gray)
+                    Spacer().frame(width: 30)
+                    VStack(alignment: .leading){
+                        Text(doctorName)
+                            .font(CentFont.mediumSemiBold)
+                        Text("Available from: ")
+                            .font(CentFont.smallReg)
+                            .foregroundStyle(.gray)
+                    }
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                }
             }
         }
         .padding()
@@ -40,5 +43,7 @@ struct DoctorNameUIView: View {
 }
 
 #Preview {
-    DoctorNameUIView(doctorName: "Dr. Harry Potter")
+    NavigationStack{
+        DoctorNameUIView(doctorName: "Nithin Vakalapudi", date: "15 April 2024")
+    }
 }
