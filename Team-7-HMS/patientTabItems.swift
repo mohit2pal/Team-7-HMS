@@ -11,7 +11,7 @@ struct patientTabItems: View {
     var body: some View {
         NavigationStack {
             TabView {
-                patientHomeSwiftUIView(userName: "Person", userHeight: 123, userWeight: 32, userHeart: 12, userSleep: 8)
+                patientHomeSwiftUIView(userName: "Person")
                     .tabItem {
                         Label("Home", systemImage: "house")
                             .padding(.top)

@@ -29,7 +29,6 @@ class HealthKitManager: NSObject, ObservableObject {
         checkWatchConnection()
         startObservingHeartRate()
         fetchSpO2Data()
-        fetchECGData()
     }
     
     
@@ -56,43 +55,7 @@ class HealthKitManager: NSObject, ObservableObject {
         }
         
         healthStore.execute(query)
-    }
-
-    
-    func fetchECGData() {
-        let ecgType = HKObjectType.electrocardiogramType()
-
-        // Query for electrocardiogram samples
-        let ecgQuery = HKSampleQuery(sampleType: ecgType,
-                                     predicate: nil,
-                                     limit: HKObjectQueryNoLimit,
-                                     sortDescriptors: nil) { (query, samples, error) in
-            if let error = error {
-                // Handle the error here.
-                fatalError("*** An error occurred \(error.localizedDescription) ***")
-            }
-            
-            guard let ecgSamples = samples as? [HKElectrocardiogram] else {
-                fatalError("*** Unable to convert \(String(describing: samples)) to [HKElectrocardiogram] ***")
-            }
-            
-            for sample in ecgSamples {
-                // Handle the samples here.
-                print("This is one sample")
-                print(sample)
-                
-                
-            }
-        }
-
-
-        // Execute the query.
-        healthStore.execute(ecgQuery)
-        
-        
-    }
-
-    
+    }    
     func checkWatchConnection() {
         let workoutType = HKObjectType.workoutType()
         let authorizationStatus = healthStore.authorizationStatus(for: workoutType)

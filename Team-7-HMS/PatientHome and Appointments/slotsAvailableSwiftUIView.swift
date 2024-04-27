@@ -90,5 +90,5 @@ struct doctorInfoCard: View{
 }
 
 #Preview {
-    slotsAvailableSwiftUIView(doctorName: "Dr. Harry Potter")
+    slotsAvailableSwiftUIView(doctorName: "Meghs")
 }

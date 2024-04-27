@@ -65,19 +65,7 @@ struct SpecialitySwiftUIView: View {
                             }
                         }
                     }
-//                    .onAppear {
-//                        fetchDoctorsBySpeciality(speciality: speciality) { fetchedNames, error in
-//                            if let error = error {
-//                                print("Error fetching doctor names: \(error)")
-//                            } else {
-//                                if let fetchedNames = fetchedNames {
-//                                    self.names = fetchedNames
-//                                } else {
-//                                    print("No names found.")
-//                                }
-//                            }
-//                        }
-//                    }
+                    
                 }
             }
             Spacer()
@@ -88,24 +76,24 @@ struct SpecialitySwiftUIView: View {
     }
     
     func daysInCurrentWeek() -> [String] {
-            var days = [String]()
-            let calendar = Calendar.current
-            let currentDate = Date()
-            let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate))!
-            
-            for dayOffset in 0..<7 {
-                if let date = calendar.date(byAdding: .day, value: dayOffset, to: startOfWeek) {
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "EE\nd"
-                    let dateString = dateFormatter.string(from: date)
-                    days.append(dateString)
-                }
+        var days = [String]()
+        let calendar = Calendar.current
+        let currentDate = Date()
+        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate))!
+        
+        for dayOffset in 0..<7 {
+            if let date = calendar.date(byAdding: .day, value: dayOffset, to: startOfWeek) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "EE\nd"
+                let dateString = dateFormatter.string(from: date)
+                days.append(dateString)
             }
-            return days
         }
+        return days
+    }
 }
 
 
 #Preview {
-    SpecialitySwiftUIView(speciality: "ENT", icon: "Ent-icon")
+    SpecialitySwiftUIView(speciality: "Cardiology", icon: "Ent-icon")
 }

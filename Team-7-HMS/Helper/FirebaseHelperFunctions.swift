@@ -203,7 +203,8 @@ struct FirebaseHelperFunctions {
     func addPatientsRecords( uuid : String ,dateOfBirth :Date , gender : String , bloodGroup : String , height : String , weight : String, phoneNumber : String , pastMedicalHistory : [String] , surgeries : [String] , alergies : [String]){
         let db = Firestore.firestore()
         
-        let data : [String : Any] = [
+        let data : [String : Any] =
+        [ "medicalRecords": [
             "dateOfBirth" : dateOfBirth,
             "gender" : gender,
             "bloodGroup": bloodGroup,
@@ -214,14 +215,33 @@ struct FirebaseHelperFunctions {
             "surgeries" : surgeries,
             "alergies" : alergies
         ]
-        
-        db.collection("patient_details").document(uuid).collection("patient_records").document("past_medical_history").setData(data) { error in
-            if let error = error {
-                print("Error adding document: \(error)")
-            } else {
-                print("Document added successfully!")
-            }
-        }
-        
+        ]
+        let patientRecordsRef = db.collection("patient_details").document(uuid)
+           
+           patientRecordsRef.getDocument { snapshot, error in
+               if let error = error {
+                   print("Error fetching document: \(error)")
+                   return
+               }
+               
+               guard let existingData = snapshot?.data() else {
+                   print("Snapshot is nil")
+                   return
+               }
+               
+               // Merge the existing data with the new data
+               var newData = existingData
+               newData.merge(data) { _, new in new }
+               
+               // Update the document with the merged data
+               patientRecordsRef.setData(newData) { error in
+                   if let error = error {
+                       print("Error updating document: \(error)")
+                   } else {
+                       print("Document updated successfully!")
+                   }
+               }
+           }
+       }
     }
-}
+

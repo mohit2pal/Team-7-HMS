@@ -21,7 +21,7 @@ struct patientAppointmentCard: View {
             }
             .foregroundColor(.white)
             .padding()
-            .frame(width: 90, height: 90)
+            .frame(width: 70, height: 70)
             .background(Color.myAccent)
             .cornerRadius(50)
             
@@ -38,6 +38,8 @@ struct patientAppointmentCard: View {
                     .font(CentFont.mediumReg)
             }
             Spacer()
+            
+            Image(systemName: "chevron.right")
         }
         .padding()
 //        .padding(.vertical, 10)
@@ -48,6 +50,6 @@ struct patientAppointmentCard: View {
         
 }
 
-//#Preview {
-//    patientAppointmentCard(appointmentData: appointmentMockData.appointmentMockDatas)
-//}
+#Preview {
+    patientAppointmentCard(appointmentData: AppointmentMockData.appointmentDataArray[0])
+}

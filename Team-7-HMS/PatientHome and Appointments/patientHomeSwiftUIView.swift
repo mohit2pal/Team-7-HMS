@@ -11,10 +11,7 @@ import FirebaseAuth
 struct patientHomeSwiftUIView: View {
     @ObservedObject var healthkit = HealthKitManager()
     @State var userName: String
-    @State var userHeight: Int
-    @State var userWeight: Int
-    @State var userHeart: Int
-    @State var userSleep: Int
+
     var body: some View {
         VStack{
             //header
@@ -145,9 +142,6 @@ struct patientHomeSwiftUIView: View {
                     }
                     .foregroundStyle(Color.red)
                 }
-                
-               
-                
             }
             
             .padding()
@@ -177,8 +171,8 @@ struct patientHomeSwiftUIView: View {
         }//Vstack end
         .onAppear{
             healthkit.startObservingHeartRate()
-            
             healthkit.fetchBloodPressureData()
+            healthkit.fetchSpO2Data()
         }
         .padding()
         .background(Color.background)
@@ -195,5 +189,5 @@ struct patientHomeSwiftUIView: View {
 }
 
 #Preview {
-    patientHomeSwiftUIView(userName: "Bose", userHeight: 160, userWeight: 60, userHeart: 77, userSleep: 8)
+    patientHomeSwiftUIView(userName: "Bose")
 }

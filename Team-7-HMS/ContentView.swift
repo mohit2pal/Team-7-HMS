@@ -19,6 +19,7 @@ func fetchUserData(userId: String) {
                let username = userData["name"] as? String {
                 // Update UI with user data
                 print("Username: \(username)")
+                
             }
         } else {
             return
@@ -43,7 +44,7 @@ struct ContentView: View {
                     }
             } else {
                 if isLogin == true {
-                    patientHomeSwiftUIView(userName: "ME Testet", userHeight: 76, userWeight: 34, userHeart: 34, userSleep: 45)
+                    patientHomeSwiftUIView(userName: "ME Testet")
                 } else if isLogin == false {
                     LoginScreen()
                 }
