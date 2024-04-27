@@ -7,4 +7,7 @@
 
 import Foundation
 
-
+struct Patient: Codable {
+    var name: String
+    var email: String
+}

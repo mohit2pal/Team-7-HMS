@@ -14,8 +14,16 @@ struct LoginScreen: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isUserLoggedIn : Bool = false
-    @State private var oldUserLoggedIn : Bool = false
+    @State private var oldUserLoggedIn : Bool = false {
+        didSet {
+            if oldUserLoggedIn {
+                fetchCurrentUserAndData()
+            }
+        }
+    }
     @State private var uuid : String = ""
+    @State private var currentUser: User? = nil
+    @State private var patient: Patient? = nil // Add this line to store fetched patient data
     
     @State private var loginError : Bool = false
     var body: some View {
@@ -190,16 +198,14 @@ struct LoginScreen: View {
                                 .foregroundStyle(Color.red)
                         }
                         if oldUserLoggedIn {
-                            
-                            navigationDestination(isPresented: $oldUserLoggedIn, destination: {
-                                patientTabItems()
-                                    .navigationBarHidden(true)
-                                    .navigationBarBackButtonHidden(true)
-                                    
-                            })
-                            
+                            if let patient = patient {
+                                navigationDestination(isPresented: $oldUserLoggedIn, destination: {
+                                    patientHomeSwiftUIView(userName: patient.name)
+                                        .navigationBarHidden(true)
+                                        .navigationBarBackButtonHidden(true)
+                                })
+                            }
                         }
-                        
                         
                         
                         //Don’t have an account? Sign up
@@ -215,11 +221,34 @@ struct LoginScreen: View {
                         .stroke(Color("SecondaryColor").opacity(0.1), lineWidth: 0.5)
                 )
             }
+            .onChange(of: oldUserLoggedIn) { newValue in
+                if newValue {
+                    fetchCurrentUserAndData()
+                }
+            }
         }
         .navigationBarBackButtonHidden()
         .navigationBarHidden(true)
         
 
+    }
+    
+    func fetchCurrentUserAndData() {
+        if let user = Auth.auth().currentUser {
+            self.currentUser = user
+            print(self.currentUser?.uid)
+            // Fetch patient data using the user's UID
+            FirebaseHelperFunctions.fetchPatientData(by: user.uid) { patient, error in
+                if let patient = patient {
+                    self.patient = patient // Store fetched patient data
+                    print(self.patient)
+                } else {
+                    print(error?.localizedDescription ?? "Failed to fetch patient data")
+                }
+            }
+        } else {
+            self.currentUser = nil
+        }
     }
 }
 
