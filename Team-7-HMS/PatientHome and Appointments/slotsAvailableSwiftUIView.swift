@@ -10,9 +10,11 @@ import SwiftUI
 struct slotsAvailableSwiftUIView: View {
     @State private var doctorDetails: [String: Any]? // Optional dictionary
     let doctorName: String
-    
+    let date : String
     var body: some View {
         VStack {
+          
+            
             if doctorDetails != nil && !doctorDetails!.isEmpty { // Check if doctorDetails is not nil and not empty
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 12){
@@ -27,6 +29,7 @@ struct slotsAvailableSwiftUIView: View {
                         .font(.subheadline)
                     }
                     Spacer()
+                    
                     Image(systemName: "person.circle.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -39,9 +42,13 @@ struct slotsAvailableSwiftUIView: View {
                 .cornerRadius(28)
                 .customShadow()
             } else {
-                Text("Loading...")
+                ProgressView()
             }
+            
+            Text(date)
             Spacer()
+            
+            
         }
         .padding()
         .background(Color.background)
@@ -83,12 +90,16 @@ struct doctorInfoCard: View{
         .background(Color.myAccent)
         .cornerRadius(28)
         .customShadow()
+        
+        
     }
+    
+    
 }
 #Preview {
     doctorInfoCard()
 }
 
 #Preview {
-    slotsAvailableSwiftUIView(doctorName: "Meghs")
+    slotsAvailableSwiftUIView(doctorName: "Meghs", date: "15 April")
 }

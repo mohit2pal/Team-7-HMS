@@ -12,8 +12,10 @@ struct SpecialitySwiftUIView: View {
     @State var icon: String
     @State private var selectedDayIndex: Int?
     @State private var doctorNames: [String] = []
+    @State private var shouldReloadScrollView = false // New state variable
+
     var body: some View {
-        VStack{
+        VStack {
             VStack {
                 Image(icon)
                     .resizable()
@@ -25,47 +27,34 @@ struct SpecialitySwiftUIView: View {
                 Text(speciality)
                     .font(bookAppFont.smallest)
                     .foregroundStyle(.gray)
-                
+
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 10) {
-                        HStack(spacing: 25) {
-                            ForEach(daysInCurrentWeek().indices, id: \.self) { index in
-                                let day = daysInCurrentWeek()[index]
-                                Text(day)
-                                    .multilineTextAlignment(.center)
-                                    .frame(width: 75, height: 75)
-                                    .background(selectedDayIndex == index ? Color.myAccent : Color.white)
-                                    .foregroundColor(selectedDayIndex == index ? .white : .black)
-                                    .cornerRadius(50)
-                                    .customShadow()
-                                    .onTapGesture {
-                                        selectedDayIndex = index
-                                    }
-                            }
+                        ForEach(daysInCurrentWeek().indices, id: \.self) { index in
+                            let day = daysInCurrentWeek()[index]
+                            Text(day)
+                                .multilineTextAlignment(.center)
+                                .frame(width: 75, height: 75)
+                                .background(selectedDayIndex == index ? Color.myAccent : Color.white)
+                                .foregroundColor(selectedDayIndex == index ? .white : .black)
+                                .cornerRadius(50)
+                                .customShadow()
+                                .onTapGesture {
+                                    self.selectedDayIndex = index
+                                    self.shouldReloadScrollView.toggle() // Toggle state variable
+                                }
                         }
                     }
                     .padding()
                 }
-                //FOR SAMPLE VIEW OF CARDS
+                
                 ScrollView(.vertical) {
                     VStack(spacing: 15) {
-                        // Display the DoctorNameUIView instances using fetched names
                         ForEach(doctorNames, id: \.self) { name in
-                            DoctorNameUIView(doctorName: name)
+                            DoctorNameUIView(doctorName: name, date: selectedDate())
                         }
                     }
-                    .onAppear {
-                        fetchDoctorsNames(forSpeciality: speciality) { names, error in
-                            if let error = error {
-                                print("Error: \(error)")
-                            } else if let names = names {
-                                self.doctorNames = names
-                            } else {
-                                print("No doctors found with the specified speciality.")
-                            }
-                        }
-                    }
-                    
+                    .id(shouldReloadScrollView) // Reload ScrollView when state changes
                 }
             }
             Spacer()
@@ -73,16 +62,55 @@ struct SpecialitySwiftUIView: View {
         .padding()
         .background(Color.background)
         .navigationBarTitle("Book Appointment", displayMode: .inline)
+        .onAppear {
+            // Select today's date index when the view appears
+            selectedDayIndex = daysInCurrentWeek().firstIndex(of: currentDayString())
+            // Fetch doctors' names for today's date
+            fetchDoctorsNames(forSpeciality: speciality) { names, error in
+                if let error = error {
+                    print("Error: \(error)")
+                } else if let names = names {
+                    self.doctorNames = names
+                } else {
+                    print("No doctors found with the specified speciality.")
+                }
+            }
+        }
+        .onChange(of: selectedDayIndex) { _ in
+            print("day changed")
+            // Fetch doctors' names for the newly selected date
+            fetchDoctorsNames(forSpeciality: speciality) { names, error in
+                if let error = error {
+                    print("Error: \(error)")
+                } else if let names = names {
+                    self.doctorNames = names
+                } else {
+                    print("No doctors found with the specified speciality.")
+                }
+            }
+        }
+    }
+
+    // Function to get the current day string (e.g., "Mon")
+    func currentDayString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EE\nd"
+        return dateFormatter.string(from: Date())
+    }
+
+    // Function to get the selected date based on the selectedDayIndex
+    func selectedDate() -> String {
+        guard let selectedDayIndex = selectedDayIndex else { return "" }
+        return daysInCurrentWeek()[selectedDayIndex]
     }
     
+    // Function to get the days of the current week as strings (e.g., ["Mon", "Tue", ...])
     func daysInCurrentWeek() -> [String] {
         var days = [String]()
         let calendar = Calendar.current
         let currentDate = Date()
-        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate))!
-        
         for dayOffset in 0..<7 {
-            if let date = calendar.date(byAdding: .day, value: dayOffset, to: startOfWeek) {
+            if let date = calendar.date(byAdding: .day, value: dayOffset, to:  currentDate) {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "EE\nd"
                 let dateString = dateFormatter.string(from: date)
@@ -93,7 +121,8 @@ struct SpecialitySwiftUIView: View {
     }
 }
 
-
 #Preview {
-    SpecialitySwiftUIView(speciality: "Cardiology", icon: "Ent-icon")
+    NavigationStack{
+        SpecialitySwiftUIView(speciality: "Pediatrics", icon: "Ent-icon")
+    }
 }

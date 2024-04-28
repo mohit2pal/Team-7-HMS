@@ -15,7 +15,16 @@ import FirebaseAuth
 class FirebaseHelperFunctions {
     
     let genders = ["Male", "Female", "Other"]
-    let specialties = ["Cardiology", "Dermatology", "Endocrinology", "Gastroenterology", "Hematology", "Nephrology", "Neurology", "Oncology", "Pediatrics " ]
+    let specialties = [
+        "General Physician",
+        "Obstetrics & Gynaecology",
+        "Orthopaedics",
+        "Urology",
+        "Paediatrics",
+        "Cardiology",
+        "Dermatology",
+        "ENT"
+    ]
     
     let medicalDegrees = [
         "MD (Doctor of Medicine)",

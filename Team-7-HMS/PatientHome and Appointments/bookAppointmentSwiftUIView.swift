@@ -11,6 +11,7 @@ enum bookAppFont {
     static let smallest: Font = .system(size: 12, weight: .regular)
 }
 
+
 struct bookAppointmentSwiftUIView: View {
     struct ButtonData{
         let image: String
@@ -21,10 +22,10 @@ struct bookAppointmentSwiftUIView: View {
     let buttons: [ButtonData] = [
         ButtonData(image: "Doctor-icon", title: "General Physician"),
         ButtonData(image: "gynaecology-icon", title: "Obstetrics & Gynaecology"),
-        ButtonData(image: "Orthopaedics-icon", title: "Orthopaedics\n"),
-        ButtonData(image: "Ent-icon", title: "ENT\n"),
+        ButtonData(image: "Orthopaedics-icon", title: "Orthopaedics"),
+        ButtonData(image: "Ent-icon", title: "ENT"),
         ButtonData(image: "Urology-icon", title: "Urology"),
-        ButtonData(image: "Paediatrics-icon", title: "Paediatrics"),
+        ButtonData(image: "Paediatrics-icon", title: "Pediatrics"),
         ButtonData(image: "Cardiology-icon", title: "Cardiology"),
         ButtonData(image: "Dermatology-icon", title: "Dermatology")
     ]
@@ -43,6 +44,7 @@ struct bookAppointmentSwiftUIView: View {
     
     
     var body: some View {
+        
         NavigationView {
             ZStack {
                 Color.background.ignoresSafeArea()
@@ -52,6 +54,7 @@ struct bookAppointmentSwiftUIView: View {
                         HStack {
                             Text("Search by Specialities")
                                 .font(CentFont.mediumReg)
+                                .bold()
                             Spacer()
                         }
                         //list of specialities
