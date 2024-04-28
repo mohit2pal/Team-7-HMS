@@ -3,16 +3,19 @@ import FirebaseAuth
 import Firebase
 
 struct DoctorLoginScreenView: View {
+    
     @State var emailAddress : String = ""
     @State var password : String = ""
     @State var isLoggedIn = false // State variable to track login status
     @State var authFail = false
+    @State var isAdmin = false
     
     @State var isLoading = false
     var body: some View {
         NavigationStack {
             ZStack{
                 Color("PrimaryColor")
+                    .opacity(0.83)
                     .ignoresSafeArea()
                 
                 //Rectangle 2626
@@ -44,21 +47,37 @@ struct DoctorLoginScreenView: View {
                         
                         
                         //Submit Button
-                        NavigationLink(destination: DoctorHomePage(), isActive: $isLoggedIn) { // NavigationLink to DoctorHomePage
+                        NavigationLink(destination: DoctorHomePage(), isActive: $isLoggedIn){
+                            EmptyView()
+                        }
+                        
+                        NavigationLink(destination: AddDoctorDetails(), isActive: $isAdmin) {
+                            EmptyView()
+                        }
+                        
+                        // NavigationLink to DoctorHomePage
                             Button(action: {
                                 
                                 isLoading = true
-                                
-                                FirebaseHelperFunctions().authenticateDoctor(email: emailAddress, password: password,
-                                    onSuccess: { _ in
-                                    isLoggedIn = true
-                                    isLoading = false
                                     
-                                }, onFail: {
-                                    authFail = true
-                                    isLoading = false
-                                    
-                                })
+                                    // Check if credentials are for admin
+                                    if emailAddress == "admin" && password == "admin" {
+                                        isLoggedIn = false
+                                        isLoading = false
+                                        // Additional state to differentiate between admin and doctor login
+                                        isAdmin = true // You need to declare this @State var isAdmin = false at the top with other @State variables
+                                    } else {
+                                        // Proceed with the regular authentication process
+                                        FirebaseHelperFunctions().authenticateDoctor(email: emailAddress, password: password,
+                                            onSuccess: { _ in
+                                                isLoggedIn = true
+                                                isLoading = false
+                                                isAdmin = false
+                                            }, onFail: {
+                                                authFail = true
+                                                isLoading = false
+                                            })
+                                    }
                                 
                             }, label: {
                                 if isLoading {
@@ -73,7 +92,6 @@ struct DoctorLoginScreenView: View {
                                         .clipShape(RoundedRectangle(cornerRadius: 15))
                                 }
                             })
-                        }
                         
                         
                         if authFail {
@@ -83,7 +101,6 @@ struct DoctorLoginScreenView: View {
                     }
                 }
             }
-            .navigationBarHidden(true)
         }
     }
 }
@@ -93,7 +110,6 @@ struct DoctorHomePage: View {
         NavigationStack {
             Text("Doctor Home Page")
         }
-        .navigationBarBackButtonHidden()
     }
 }
 

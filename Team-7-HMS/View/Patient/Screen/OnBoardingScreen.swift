@@ -14,7 +14,9 @@ struct OnBoardingScreen: View {
         NavigationView {
             ZStack {
                 
-                Color("PrimaryColor").opacity(0.83).ignoresSafeArea()
+                Color("PrimaryColor")
+                    .opacity(0.83)
+                    .ignoresSafeArea()
                 
                 VStack {
                     if(currentPage < 2) {
@@ -22,7 +24,8 @@ struct OnBoardingScreen: View {
                             
                         }) {
                             NavigationLink(destination:
-                                            LoginScreen()) {
+                                            LoginScreen()
+                                .navigationBarBackButtonHidden(true)) {
                                 Text("Skip")
                                     .foregroundColor(Color("SecondaryColor"))
                                     .frame(maxWidth: .infinity, alignment: .trailing)

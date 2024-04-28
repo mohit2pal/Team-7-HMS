@@ -209,7 +209,7 @@ struct SignUpScreen: View {
                         }
                         
                         // Already have an account? Log in
-                        NavigationLink(destination: LoginScreen()) {
+                        NavigationLink(destination: LoginScreen().navigationBarBackButtonHidden(true)) {
                             Text("Already have an account? ")
                                 .font(.system(size: 16, weight: .regular))
                                 .foregroundColor(Color("SecondaryColor"))

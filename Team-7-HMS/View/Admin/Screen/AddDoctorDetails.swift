@@ -184,10 +184,7 @@ struct AddDoctorDetails: View {
                                                 Best regards,
                                                 """
                             
-                            MailHelper.shared.sendEmail(
-                                subject: "Welcome to UrHealth",
-                                body:emailTemplate,
-                                to: email)
+                            EmailFunction.sendEmail(subject: "Welcome To UrHealth", body: emailTemplate, to: email)
                             
                         case .failure(let error):
                             print("Error registering user: \(error.localizedDescription)")
