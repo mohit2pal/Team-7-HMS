@@ -47,135 +47,135 @@ struct PatientHistory: View {
     }
     
     var body: some View {
-        
-        ScrollView {
-            LazyVStack {
-                Spacer()
-                HStack {
+        NavigationStack{
+            ScrollView {
+                VStack {
                     Spacer()
-                    Image(systemName: "person.circle")
-                        .resizable()
-                        .frame(width: 130 , height: 130)
-                    Spacer()
-                }
-                
-                Section() {
-                    HStack{
-                        DatePicker("Date of Birth", selection: $dateOfBirth, displayedComponents: .date)
-                            .foregroundColor(Color.gray)
-                    }
-                    .padding(.horizontal)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .border(Color.gray.opacity(0.2))
-                    
-                    Picker("Gender", selection: $selectedGenderIndex) {
-                        ForEach(0..<genders.count, id: \.self) {
-                            Text(genders[$0])
-                        }
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .padding(.vertical)
-                    
                     HStack {
-                        Text("Blood Group")
-                            .foregroundColor(Color.gray)
                         Spacer()
-                        Picker("", selection: $selectedBloodGroupIndex) {
-                            ForEach(0..<bloodGroup.count, id: \.self) {
-                                Text(bloodGroup[$0])
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle()) // Dropdown style
-                        .padding(.vertical)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .frame(width: 130 , height: 130)
+                        Spacer()
                     }
-                    .padding(.horizontal)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .border(Color.gray.opacity(0.2))
-                    
-                    TextField("Height(in cm)", text: $height)
-                        .foregroundColor(height.isEmpty ? .gray.opacity(0.5) : .black)
-                        .padding(.vertical)
-                        .padding(.horizontal)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .border(Color.gray.opacity(0.2))
-                        .onChange(of: height) { newValue in
-                            // Check if the newValue contains only numbers
-                            let filtered = newValue.filter { "0123456789".contains($0) }
-                            // Limit the length of the filtered string to 10 characters
-                            if filtered.count > 3 {
-                                height = String(filtered.prefix(3))
-                            } else {
-                                height = filtered
-                            }
-                        }
-                    
-                    TextField("Weight(in Kg)", text: $weight)
-                        .foregroundColor(height.isEmpty ? .gray.opacity(0.5) : .black)
-                        .padding(.vertical)
-                        .padding(.horizontal)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .border(Color.gray.opacity(0.2))
-                        .onChange(of: weight) { newValue in
-                            // Check if the newValue contains only numbers
-                            let filtered = newValue.filter { "0123456789".contains($0) }
-                            // Limit the length of the filtered string to 10 characters
-                            if filtered.count > 3 {
-                                weight = String(filtered.prefix(3))
-                            } else {
-                                weight = filtered
-                            }
-                        }
-                    
-                    TextField("Phone Number", text: $phoneNumber)
-                        .keyboardType(.namePhonePad)
-                        .foregroundColor(height.isEmpty ? .gray.opacity(0.5) : .black)
-                        .padding(.vertical)
-                        .padding(.horizontal)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .border(Color.gray.opacity(0.2))
-                        .onChange(of: phoneNumber) { newValue in
-                            // Check if the newValue contains only numbers
-                            let filtered = newValue.filter { "0123456789".contains($0) }
-                            // Limit the length of the filtered string to 10 characters
-                            if filtered.count > 10 {
-                                phoneNumber = String(filtered.prefix(10))
-                            } else {
-                                phoneNumber = filtered
-                            }
-                        }
-                    
-//                    TextField("Adhaar Number", text: $adhaarNumber)
-//                        .keyboardType(.namePhonePad)
-//                        .foregroundColor(height.isEmpty ? .gray.opacity(0.5) : .black)
-//                        .padding(.vertical)
-//                        .padding(.horizontal)
-//                        .clipShape(RoundedRectangle(cornerRadius: 20))
-//                        .border(Color.gray.opacity(0.2))
-//                        .onChange(of: adhaarNumber) { newValue in
-//                            // Check if the newValue contains only numbers
-//                            let filtered = newValue.filter { "0123456789".contains($0) }
-//                            // Limit the length of the filtered string to 12 characters
-//                            if filtered.count > 12 {
-//                                adhaarNumber = String(filtered.prefix(12))
-//                            } else {
-//                                adhaarNumber = filtered
-//                            }
-//                        }
-//                    
-
-                    Divider()
-                    
-                    Section(header: Text("Past Medical History")
-                        .font(.headline)
-                        .frame(alignment: .leading)
-                        .multilineTextAlignment(.leading)) {
-                            ForEach(medicalConditions.indices, id: \.self) { index in
-                                Toggle(medicalConditions[index], isOn: $medicalConditionStatus[index])
-                            }
-                        }
                     
                     Section() {
+                        HStack{
+                            DatePicker("Date of Birth", selection: $dateOfBirth, displayedComponents: .date)
+                                .foregroundColor(Color.gray)
+                        }
+                        .padding(.horizontal)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .border(Color.gray.opacity(0.2))
+                        
+                        Picker("Gender", selection: $selectedGenderIndex) {
+                            ForEach(0..<genders.count, id: \.self) {
+                                Text(genders[$0])
+                            }
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding(.vertical)
+                        
+                        HStack {
+                            Text("Blood Group")
+                                .foregroundColor(Color.gray)
+                            Spacer()
+                            Picker("", selection: $selectedBloodGroupIndex) {
+                                ForEach(0..<bloodGroup.count, id: \.self) {
+                                    Text(bloodGroup[$0])
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle()) // Dropdown style
+                            .padding(.vertical)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                        .padding(.horizontal)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .border(Color.gray.opacity(0.2))
+                        
+                        TextField("Height(in cm)", text: $height)
+                            .foregroundColor(height.isEmpty ? .gray.opacity(0.5) : .black)
+                            .padding(.vertical)
+                            .padding(.horizontal)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .border(Color.gray.opacity(0.2))
+                            .onChange(of: height) { newValue in
+                                // Check if the newValue contains only numbers
+                                let filtered = newValue.filter { "0123456789".contains($0) }
+                                // Limit the length of the filtered string to 10 characters
+                                if filtered.count > 3 {
+                                    height = String(filtered.prefix(3))
+                                } else {
+                                    height = filtered
+                                }
+                            }
+                        
+                        TextField("Weight(in Kg)", text: $weight)
+                            .foregroundColor(height.isEmpty ? .gray.opacity(0.5) : .black)
+                            .padding(.vertical)
+                            .padding(.horizontal)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .border(Color.gray.opacity(0.2))
+                            .onChange(of: weight) { newValue in
+                                // Check if the newValue contains only numbers
+                                let filtered = newValue.filter { "0123456789".contains($0) }
+                                // Limit the length of the filtered string to 10 characters
+                                if filtered.count > 3 {
+                                    weight = String(filtered.prefix(3))
+                                } else {
+                                    weight = filtered
+                                }
+                            }
+                        
+                        TextField("Phone Number", text: $phoneNumber)
+                            .keyboardType(.namePhonePad)
+                            .foregroundColor(height.isEmpty ? .gray.opacity(0.5) : .black)
+                            .padding(.vertical)
+                            .padding(.horizontal)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .border(Color.gray.opacity(0.2))
+                            .onChange(of: phoneNumber) { newValue in
+                                // Check if the newValue contains only numbers
+                                let filtered = newValue.filter { "0123456789".contains($0) }
+                                // Limit the length of the filtered string to 10 characters
+                                if filtered.count > 10 {
+                                    phoneNumber = String(filtered.prefix(10))
+                                } else {
+                                    phoneNumber = filtered
+                                }
+                            }
+                        
+                        //                    TextField("Adhaar Number", text: $adhaarNumber)
+                        //                        .keyboardType(.namePhonePad)
+                        //                        .foregroundColor(height.isEmpty ? .gray.opacity(0.5) : .black)
+                        //                        .padding(.vertical)
+                        //                        .padding(.horizontal)
+                        //                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        //                        .border(Color.gray.opacity(0.2))
+                        //                        .onChange(of: adhaarNumber) { newValue in
+                        //                            // Check if the newValue contains only numbers
+                        //                            let filtered = newValue.filter { "0123456789".contains($0) }
+                        //                            // Limit the length of the filtered string to 12 characters
+                        //                            if filtered.count > 12 {
+                        //                                adhaarNumber = String(filtered.prefix(12))
+                        //                            } else {
+                        //                                adhaarNumber = filtered
+                        //                            }
+                        //                        }
+                        //
+                        
+                        Divider()
+                        
+                        Section(header: Text("Past Medical History")
+                            .font(.headline)
+                            .frame(alignment: .leading)
+                            .multilineTextAlignment(.leading)) {
+                                ForEach(medicalConditions.indices, id: \.self) { index in
+                                    Toggle(medicalConditions[index], isOn: $medicalConditionStatus[index])
+                                }
+                            }
+                        
+                        Section() {
                             ForEach(otherMedicalHistories, id: \.self) { medicine in
                                 HStack{
                                     Toggle(medicine , isOn: .constant(true))
@@ -197,126 +197,125 @@ struct PatientHistory: View {
                                 }
                             }
                         }
-                    
-                    Divider()
-                    
-                    Section(header: Text("Past Surgical History")
-                        .font(.headline)
-                        .frame(alignment: .leading)
-                        .multilineTextAlignment(.leading)) {
-                            Toggle("Have you ever had Surgery ? ", isOn: $hadSurgery)
-                            
-                            
-                            if hadSurgery {
+                        
+                        Divider()
+                        
+                        Section(header: Text("Past Surgical History")
+                            .font(.headline)
+                            .frame(alignment: .leading)
+                            .multilineTextAlignment(.leading)) {
+                                Toggle("Have you ever had Surgery ? ", isOn: $hadSurgery)
                                 
-                                ForEach(surgeries, id: \.self) { surgery in
+                                
+                                if hadSurgery {
+                                    
+                                    ForEach(surgeries, id: \.self) { surgery in
+                                        HStack{
+                                            Text(surgery)
+                                            Spacer()
+                                        }
+                                    }
+                                    
+                                    HStack {
+                                        TextField("Add New Surgery", text: $newSurgery)
+                                        Button(action: {
+                                            if !newSurgery.isEmpty {
+                                                surgeries.append(newSurgery)
+                                                newSurgery = ""
+                                            }
+                                        }) {
+                                            Image(systemName: "plus.circle.fill")
+                                                .foregroundColor(.blue)
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                        
+                        Divider()
+                        
+                        Section(header: Text("Allergies to Medications")
+                            .font(.headline)
+                            .frame(alignment: .leading)
+                            .multilineTextAlignment(.leading)) {
+                                ForEach(allergies, id: \.self) {
+                                    
+                                    allergy in
                                     HStack{
-                                        Text(surgery)
-                                        Spacer()
+                                        Toggle(allergy , isOn: .constant(true))
                                     }
                                 }
-                                
                                 HStack {
-                                    TextField("Add New Surgery", text: $newSurgery)
+                                    TextField("Add New Allergy", text: $newAllergy)
                                     Button(action: {
-                                        if !newSurgery.isEmpty {
-                                            surgeries.append(newSurgery)
-                                            newSurgery = ""
+                                        if !newAllergy.isEmpty {
+                                            allergies.append(newAllergy)
+                                            newAllergy = ""
                                         }
+                                        print(allergies)
                                     }) {
                                         Image(systemName: "plus.circle.fill")
                                             .foregroundColor(.blue)
                                     }
                                 }
-                                
                             }
-                        }
+                        
+                    }
                     
                     Divider()
+                        .padding(.vertical)
                     
-                    Section(header: Text("Allergies to Medications")
-                        .font(.headline)
-                        .frame(alignment: .leading)
-                        .multilineTextAlignment(.leading)) {
-                            ForEach(allergies, id: \.self) {
-                                
-                                allergy in
-                                HStack{
-                                    Toggle(allergy , isOn: .constant(true))
-                                }
-                            }
-                            HStack {
-                                TextField("Add New Allergy", text: $newAllergy)
-                                Button(action: {
-                                    if !newAllergy.isEmpty {
-                                        allergies.append(newAllergy)
-                                        newAllergy = ""
-                                    }
-                                    print(allergies)
-                                }) {
-                                    Image(systemName: "plus.circle.fill")
-                                        .foregroundColor(.blue)
-                                }
-                            }
-                        }
-                    
-                }
-                
-                Divider()
-                    .padding(.vertical)
-                
-                Button(action: {
-                    collectMedicalHistories()
-                    
-                    print(selectedMedicalHistories)
-                    
-                    FirebaseHelperFunctions().addPatientsRecords(
-                                uuid: uid,
-                                dateOfBirth: dateOfBirth,
-                                gender: genders[selectedGenderIndex],
-                                bloodGroup: bloodGroup[selectedBloodGroupIndex],
-                                height: height,
-                                weight: weight,
-                                phoneNumber: phoneNumber,
-                                pastMedicalHistory: selectedMedicalHistories,
-                                surgeries: surgeries,
-                                alergies: allergies
-                            )
-                    isPresented.toggle()
-                    
-                }, label: {
-                    Text("Submit")
-                        .frame(width: 330 , height: 25)
-                        .padding()
-                        .background(Color.accentColor)
-                        .foregroundStyle(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                })
-                .padding(.vertical)
-                
-            }
-            .padding(.vertical)
-            .padding(.horizontal)
-            .navigationTitle("Patients Medical History")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
+                        collectMedicalHistories()
+                        
+                        print(selectedMedicalHistories)
+                        
+                        FirebaseHelperFunctions().addPatientsRecords(
+                            uuid: uid,
+                            dateOfBirth: dateOfBirth,
+                            gender: genders[selectedGenderIndex],
+                            bloodGroup: bloodGroup[selectedBloodGroupIndex],
+                            height: height,
+                            weight: weight,
+                            phoneNumber: phoneNumber,
+                            pastMedicalHistory: selectedMedicalHistories,
+                            surgeries: surgeries,
+                            alergies: allergies
+                        )
+                        isPresented.toggle()
                         
                     }, label: {
-                        HStack{
-                            Text("Skip")
-                            Image(systemName: "chevron.right")
-                        }
-                            .foregroundColor(Color.accentColor)
+                        Text("Submit")
+                            .frame(width: 330 , height: 25)
+                            .padding()
+                            .background(Color.accentColor)
+                            .foregroundStyle(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
                     })
+                    .padding(.vertical)
+                    
+                }
+                .navigationBarBackButtonHidden()
+                .padding(.vertical)
+                .padding(.horizontal)
+                .navigationTitle("Patients Medical History")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            
+                        }, label: {
+                            HStack{
+                                Text("Skip")
+                                Image(systemName: "chevron.right")
+                            }
+                            .foregroundColor(Color.accentColor)
+                        })
+                    }
                 }
             }
         }
-        .navigationBarBackButtonHidden()
-        .navigationBarHidden(true)
     }
-    
 
     private func collectMedicalHistories() {
         selectedMedicalHistories = medicalConditions.enumerated().compactMap { index, condition in
