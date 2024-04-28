@@ -9,25 +9,6 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 
-func fetchUserData(userId: String) {
-    // Example: Fetch user data from Firestore
-    let db = Firestore.firestore()
-    db.collection("users").document(userId).getDocument { document, error in
-        if let document = document, document.exists {
-            // Document exists, extract user data
-            if let userData = document.data(),
-               let username = userData["name"] as? String {
-                // Update UI with user data
-                print("Username: \(username)")
-                
-            }
-        } else {
-            return
-        }
-    }
-}
-
-
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @State private var currentUser: User? = nil
@@ -35,23 +16,25 @@ struct ContentView: View {
     
     @State private var isShowingSplash = true
     var body: some View {
-        ZStack {
-            if isShowingSplash {
-                SplashScreen()
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            isShowingSplash = false
-                            fetchCurrentUserAndData()
+        NavigationStack {
+            ZStack {
+                if isShowingSplash {
+                    SplashScreen()
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                isShowingSplash = false
+                                fetchCurrentUserAndData()
+                            }
                         }
-                    }
-            } else {
-                if let patient = patient {
-                    patientHomeSwiftUIView(userName: patient.name)
                 } else {
-                    LoginScreen()
+                    if let patient = patient {
+                        PatientView(patientName: patient.name)
+                    } else {
+                        OnBoardingScreen()
+                    }
                 }
+                
             }
-            
         }
     }
     
