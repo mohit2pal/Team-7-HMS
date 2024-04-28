@@ -13,7 +13,7 @@ struct slotsAvailableSwiftUIView: View {
     @State private var selectedSlot: String?
     let doctorName: String
     let date : String
-    let doctorId : String
+    @State var doctorId : String
     var body: some View {
         VStack {
           
@@ -65,6 +65,7 @@ struct slotsAvailableSwiftUIView: View {
                                             // Handle slot selection
                                             selectedSlot = time
                                             print(selectedSlot!)
+                                            print(self.doctorId)
                                         }
                                     
                                 }
@@ -78,6 +79,36 @@ struct slotsAvailableSwiftUIView: View {
             }
 
             Spacer()
+            
+            Button {
+                // Ensure a slot is selected before attempting to book
+                guard let selectedSlot = selectedSlot else {
+                    print("No slot selected")
+                    return
+                }
+                
+                // Call the bookSlot function
+                FirebaseHelperFunctions.bookSlot(doctorUID: doctorId, date: date, slotTime: selectedSlot, patientUID: "YourPatientUID") { result in
+                    switch result {
+                    case .success(let successMessage):
+                        print(successMessage)
+                        // Handle successful booking, e.g., show an alert or update the UI
+                        
+                    case .failure(let error):
+                        print("Failed to book slot: \(error)")
+                        // Handle failure, e.g., show an error message
+                    }
+                }
+            } label: {
+                ZStack {
+                    //Rectangle 2646
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color(#colorLiteral(red: 0.48627451062202454, green: 0.5882353186607361, blue: 1, alpha: 1)))
+                        .frame(width: 296, height: 44)
+                    //PATIENT
+                    Text("Book Selected Slots").font(.system(size: 20, weight: .regular)).foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).tracking(0.4).multilineTextAlignment(.center)
+                }
+            }
             
             
         }
@@ -150,9 +181,6 @@ struct doctorInfoCard: View{
     }
     
     
-}
-#Preview {
-    doctorInfoCard()
 }
 
 #Preview {

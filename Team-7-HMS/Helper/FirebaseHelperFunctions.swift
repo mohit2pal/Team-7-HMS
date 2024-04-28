@@ -401,6 +401,64 @@ class FirebaseHelperFunctions {
             }
         }
     }
+    
+    
+    static func bookSlot(doctorUID: String, date: String, slotTime: String, patientUID: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let db = Firestore.firestore()
+        
+        // Reference to the slots document for the given doctor
+        let slotsDocRef = db.collection("slots").document(doctorUID)
+        
+        // Fetch the document to get the current slots
+        slotsDocRef.getDocument { document, error in
+            if let error = error {
+                print("Error fetching document: \(error)")
+                completion(.failure(error))
+                return
+            }
+            
+            guard let document = document, document.exists, var slotsData = document.data() as? [String: [[String: String]]] else {
+                print("Document does not exist or data format is incorrect.")
+                completion(.failure(NSError(domain: "DocumentNotFoundError", code: -1, userInfo: nil)))
+                return
+            }
+            
+            // Check if there are slots for the specified date and modify the slot if found
+            if var slotsForDate = slotsData[date] {
+                var slotFound = false
+                for i in 0..<slotsForDate.count {
+                    if slotsForDate[i].keys.contains(slotTime), slotsForDate[i][slotTime] == "Empty" {
+                        // Mark the slot as booked by changing its value
+                        slotsForDate[i][slotTime] = patientUID // Or "Booked" if you prefer not to use patientUID
+                        slotFound = true
+                        break
+                    }
+                }
+                
+                if slotFound {
+                    // Update the slots data with the modified slots for the date
+                    slotsData[date] = slotsForDate
+                    
+                    // Update the document with the new slots data
+                    slotsDocRef.setData(slotsData) { error in
+                        if let error = error {
+                            print("Error updating document: \(error)")
+                            completion(.failure(error))
+                        } else {
+                            print("Slot booked successfully!")
+                            completion(.success("Slot booked successfully!"))
+                        }
+                    }
+                } else {
+                    print("Slot not found or already booked.")
+                    completion(.failure(NSError(domain: "SlotNotFoundError", code: -1, userInfo: nil)))
+                }
+            } else {
+                print("No slots available for the specified date.")
+                completion(.failure(NSError(domain: "NoSlotsError", code: -1, userInfo: nil)))
+            }
+        }
+    }
 
 }
 

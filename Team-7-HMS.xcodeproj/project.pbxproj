@@ -238,13 +238,13 @@
 				176900252BD2A94500F5F81E /* ContentView.swift */,
 				17F7C6612BDD2B8A00720B5E /* View */,
 				17F63B282BDA16440089511F /* Model */,
-				B1639D1E2BDA465500EAB15E /* patientTabItems.swift */,
 				17F63AFA2BD7A2420089511F /* ViewModel */,
 				B1639D072BD8D9DD00EAB15E /* PatientHome and Appointments */,
 				17F63AEB2BD63E380089511F /* Helper */,
 				17F63AB92BD6340D0089511F /* GoogleService-Info.plist */,
 				17F63AEE2BD640570089511F /* Info.plist */,
 				176900272BD2A94700F5F81E /* Assets.xcassets */,
+				17F7C66D2BDE887800720B5E /* Redundant */,
 				176900292BD2A94700F5F81E /* Preview Content */,
 			);
 			path = "Team-7-HMS";
@@ -392,6 +392,14 @@
 				17F63AF62BD7A1750089511F /* AddDoctorDetails.swift */,
 			);
 			path = Screen;
+			sourceTree = "<group>";
+		};
+		17F7C66D2BDE887800720B5E /* Redundant */ = {
+			isa = PBXGroup;
+			children = (
+				B1639D1E2BDA465500EAB15E /* patientTabItems.swift */,
+			);
+			path = Redundant;
 			sourceTree = "<group>";
 		};
 		37D3A1452BDA486600C04F35 /* DoctorHomeScreen */ = {
