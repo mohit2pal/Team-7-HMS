@@ -12,7 +12,7 @@ struct DoctorLoginScreenView: View {
     
     @State var isLoading = false
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack{
                 Color("PrimaryColor")
                     .opacity(0.83)
@@ -51,7 +51,7 @@ struct DoctorLoginScreenView: View {
                             EmptyView()
                         }
                         
-                        NavigationLink(destination: AdminHomeView(), isActive: $isAdmin) {
+                        NavigationLink(destination: AdminHomeView().navigationBarBackButtonHidden(true), isActive: $isAdmin) {
                             EmptyView()
                         }
                         
