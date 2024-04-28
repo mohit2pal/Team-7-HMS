@@ -51,7 +51,7 @@ struct DoctorLoginScreenView: View {
                             EmptyView()
                         }
                         
-                        NavigationLink(destination: AddDoctorDetails(), isActive: $isAdmin) {
+                        NavigationLink(destination: AdminHomeView(), isActive: $isAdmin) {
                             EmptyView()
                         }
                         

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct tester: View {
+struct AddingSlots: View {
     @State private var doctors: [DoctorInfo] = []
     @State private var selectedDoctor: DoctorInfo? = nil
     @State private var selectedDate = Date()
@@ -107,6 +107,7 @@ struct tester: View {
         }
     }
 }
+
 #Preview {
-    tester()
+    AddingSlots()
 }

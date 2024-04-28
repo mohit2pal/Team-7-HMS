@@ -161,7 +161,7 @@ struct AddDoctorDetails: View {
         .navigationTitle("Add Doctors")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     password = generateRandomPassword(length: 10)
                     FirebaseHelperFunctions().registerUser(email: email, password: password ) { result in
@@ -201,7 +201,9 @@ struct AddDoctorDetails: View {
                     }
                     
                 }, label: {
-                    Text("Done")
+                    HStack{
+                        Text("Done")
+                    }
                         .foregroundStyle(Color.accentColor)
                 })
             }
