@@ -14,9 +14,10 @@ struct LoginScreen: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isUserLoggedIn : Bool = false
-    @State private var oldUserLoggedIn : Bool = false {
+    @State private var oldUserLoggedIn: Bool = false
+    @State private var doFetchData : Bool = false {
         didSet {
-            if oldUserLoggedIn {
+            if doFetchData {
                 fetchCurrentUserAndData()
             }
         }
@@ -164,10 +165,12 @@ struct LoginScreen: View {
                                                     // Handle failure
                                                 }
                                             } present: {
+                                                self.doFetchData = true
                                                 self.oldUserLoggedIn = true
                                                 print("UUID exists")
                                                 
                                             } added: {
+                                                self.doFetchData = true
                                                 self.isUserLoggedIn = true
                                                 print("Data added successfully")
                                             }
@@ -185,15 +188,13 @@ struct LoginScreen: View {
                             
                             if isUserLoggedIn {
                                 
-                                
-                                
-                                navigationDestination(isPresented: $isUserLoggedIn) {
-                                    PatientHistory(uid: uuid)
-                                        .navigationBarHidden(true)
-                                        .navigationBarBackButtonHidden(true)
+                                if let patient = patient {
+                                    navigationDestination(isPresented: $isUserLoggedIn, destination: {
+                                        PatientView(patientName: patient.name, showPatientHistory: true, patientUid: uuid)
+                                            .navigationBarHidden(true)
+                                            .navigationBarBackButtonHidden(true)
+                                    })
                                 }
-                                
-                                
                             }
                             
                             if loginError {
@@ -203,7 +204,7 @@ struct LoginScreen: View {
                             if oldUserLoggedIn {
                                 if let patient = patient {
                                     navigationDestination(isPresented: $oldUserLoggedIn, destination: {
-                                        patientHomeSwiftUIView(userName: patient.name)
+                                        PatientView(patientName: patient.name, showPatientHistory: false, patientUid: uuid)
                                             .navigationBarHidden(true)
                                             .navigationBarBackButtonHidden(true)
                                     })
@@ -239,7 +240,7 @@ struct LoginScreen: View {
                     })
                                         
                 }
-                .onChange(of: oldUserLoggedIn) { newValue in
+                .onChange(of: doFetchData) { newValue in
                     if newValue {
                         fetchCurrentUserAndData()
                     }
@@ -253,12 +254,10 @@ struct LoginScreen: View {
     func fetchCurrentUserAndData() {
         if let user = Auth.auth().currentUser {
             self.currentUser = user
-            print(self.currentUser?.uid)
             // Fetch patient data using the user's UID
             FirebaseHelperFunctions.fetchPatientData(by: user.uid) { patient, error in
                 if let patient = patient {
                     self.patient = patient // Store fetched patient data
-                    print(self.patient)
                 } else {
                     print(error?.localizedDescription ?? "Failed to fetch patient data")
                 }

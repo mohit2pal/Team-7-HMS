@@ -129,7 +129,7 @@ struct SignUpScreen: View {
                         })
                         
                         NavigationLink(destination: HStack {
-                            PatientHistory(uid: patientUID)
+                            PatientView(patientName: name, showPatientHistory: true, patientUid: patientUID)
                         }, isActive: $navigatePatientDetails) {
                             EmptyView()
                         }

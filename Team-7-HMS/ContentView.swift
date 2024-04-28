@@ -28,7 +28,7 @@ struct ContentView: View {
                         }
                 } else {
                     if let patient = patient {
-                        PatientView(patientName: patient.name)
+                        PatientView(patientName: patient.name, showPatientHistory: false, patientUid: self.currentUser?.uid ?? "Not fetched")
                     } else {
                         OnBoardingScreen()
                     }

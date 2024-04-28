@@ -58,7 +58,6 @@
 		17F63B272BDA127D0089511F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63B262BDA127D0089511F /* AppState.swift */; };
 		17F63B2A2BDA164F0089511F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63B292BDA164F0089511F /* UserModel.swift */; };
 		17F63B2C2BDA1AFB0089511F /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63B2B2BDA1AFB0089511F /* SplashScreen.swift */; };
-		17F7C6632BDD2E1D00720B5E /* Fuck-it.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F7C6622BDD2E1D00720B5E /* Fuck-it.swift */; };
 		17F7C6672BDE177C00720B5E /* EmailFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F7C6662BDE177C00720B5E /* EmailFunctions.swift */; };
 		17F7C6692BDE42C600720B5E /* PatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F7C6682BDE42C600720B5E /* PatientView.swift */; };
 		17F7C66B2BDE528300720B5E /* BookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F7C66A2BDE528300720B5E /* BookingView.swift */; };
@@ -129,7 +128,6 @@
 		17F63B262BDA127D0089511F /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		17F63B292BDA164F0089511F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		17F63B2B2BDA1AFB0089511F /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
-		17F7C6622BDD2E1D00720B5E /* Fuck-it.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fuck-it.swift"; sourceTree = "<group>"; };
 		17F7C6662BDE177C00720B5E /* EmailFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFunctions.swift; sourceTree = "<group>"; };
 		17F7C6682BDE42C600720B5E /* PatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientView.swift; sourceTree = "<group>"; };
 		17F7C66A2BDE528300720B5E /* BookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingView.swift; sourceTree = "<group>"; };
