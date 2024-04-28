@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct tester: View {
-    @State var doctors: [DoctorInfo] = []
-    @State var selectedDoctor: DoctorInfo? = nil
+    @State private var doctors: [DoctorInfo] = []
+    @State private var selectedDoctor: DoctorInfo? = nil
+    @State private var selectedDate = Date()
     let firebaseHelper = FirebaseHelperFunctions()
     
-    @State var selectedSlots: [String] = []
+    @State private var selectedSlots: [String] = []
     
     // Generate time slots from 9 am to 4 pm
     let timeSlots: [String] = {
@@ -30,7 +31,7 @@ struct tester: View {
     }()
     
     var body: some View {
-        VStack{
+        VStack {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(doctors, id: \.id) { doctor in
@@ -50,6 +51,10 @@ struct tester: View {
                     }
                 }
             }
+            
+            // Date picker
+            DatePicker("Select Date", selection: $selectedDate, displayedComponents: .date)
+                .padding()
             
             // Display time slots when a doctor is selected
             if let selectedDoctor = selectedDoctor {
@@ -80,10 +85,7 @@ struct tester: View {
             Button(action: {
                 // Print details of the selected doctor
                 if let selectedDoctor = selectedDoctor {
-                    print("Selected Doctor Details:")
-                    print("Name: \(selectedDoctor.name)")
-                    print("Specialty: \(selectedDoctor.specialty)")
-                    print("ID: \(selectedDoctor.id)")
+                    firebaseHelper.createSlots(doctorName: selectedDoctor.name, doctorID: selectedDoctor.id, date: selectedDate, slots: selectedSlots)
                 } else {
                     print("No doctor selected.")
                 }
@@ -105,7 +107,6 @@ struct tester: View {
         }
     }
 }
-
 #Preview {
     tester()
 }

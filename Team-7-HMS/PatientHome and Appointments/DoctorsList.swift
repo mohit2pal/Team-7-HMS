@@ -28,6 +28,7 @@ func fetchDoctorsDetails(name: String, completion: @escaping ([String: Any]?, Er
                     doctorDetails["speciality"] = speciality
                     doctorDetails["education"] = education
                     doctorDetails["phoneNumber"] = phoneNumber
+                    doctorDetails["docId"] = document.documentID
                 }
             }
             // Return the doctorDetails dictionary in the completion handler
@@ -38,11 +39,11 @@ func fetchDoctorsDetails(name: String, completion: @escaping ([String: Any]?, Er
 
 
 
-func fetchDoctorsNames(forSpeciality speciality: String, completion: @escaping ([String]?, Error?) -> Void) {
+func fetchDoctorsNames(forSpecialty specialty: String, completion: @escaping ([[String: String]]?, Error?) -> Void) {
     let db = Firestore.firestore()
     
-    // Construct the query to filter documents where "speciality" field matches the provided speciality
-    let query = db.collection("doctor_details").whereField("specialty", isEqualTo: speciality)
+    // Construct the query to filter documents where "specialty" field matches the provided specialty
+    let query = db.collection("doctor_details").whereField("specialty", isEqualTo: specialty)
     
     // Perform the query
     query.getDocuments { (querySnapshot, error) in
@@ -50,16 +51,17 @@ func fetchDoctorsNames(forSpeciality speciality: String, completion: @escaping (
             print("Error fetching documents: \(error)")
             completion(nil, error)
         } else {
-            var doctorNames = [String]()
+            var doctors = [[String: String]]()
             for document in querySnapshot!.documents {
-                // Extract the "name" field from each document and add it to the doctorNames array
-                if let name = document.get("name") as? String {
-                    doctorNames.append(name)
+                // Extract the "name" and "id" fields from each document and add them to the doctors array
+                if let name = document.get("name") as? String,
+                   let id = document.documentID as? String  {
+                    let doctorInfo = ["name": name, "id": id]
+                    doctors.append(doctorInfo)
                 }
             }
-            // Return the doctorNames array in the completion handler
-            completion(doctorNames.isEmpty ? nil : doctorNames, nil)
+            // Return the doctors array in the completion handler
+            completion(doctors.isEmpty ? nil : doctors, nil)
         }
     }
 }
-

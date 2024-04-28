@@ -310,5 +310,98 @@ class FirebaseHelperFunctions {
             }
         }
     }
+    
+    
+    // Function to create slots for doctor's appointments
+    func createSlots(doctorName: String, doctorID: String, date: Date, slots: [String]) {
+        let db = Firestore.firestore()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd_MM_yyyy"
+        let dateString = dateFormatter.string(from: date)
+        
+        // Mapping slots to the availability
+        let formattedSlots = slots.map { ["\($0)": "Empty"] }
+        
+        // Reference to the document for the given doctor and date
+        let slotsDocRef = db.collection("slots").document(doctorID)
+        
+        slotsDocRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // Document exists, update the existing slots with new slots
+                if var existingData = document.data() {
+                    // Check if slots for the date already exist
+                    if var slotsData = existingData[dateString] as? [[String: String]] {
+                        // Append new slots to the existing slots for the date
+                        slotsData.append(contentsOf: formattedSlots)
+                        existingData[dateString] = slotsData
+                    } else {
+                        // Create a new entry for the date with the new slots
+                        existingData[dateString] = formattedSlots
+                    }
+                    
+                    // Update the document with the merged data
+                    slotsDocRef.setData(existingData) { error in
+                        if let error = error {
+                            print("Error updating document: \(error)")
+                        } else {
+                            print("Slots updated successfully!")
+                        }
+                    }
+                } else {
+                    print("Error: Unable to parse existing slots data.")
+                }
+            } else {
+                // Document does not exist, add a new document with the slots
+                var data: [String: Any] = [:]
+                data[dateString] = formattedSlots
+                
+                slotsDocRef.setData(data) { error in
+                    if let error = error {
+                        print("Error adding document: \(error)")
+                    } else {
+                        print("Slots added successfully!")
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    //fetch the slots for doctors
+    func fetchSlots(doctorID: String, date: String, completion: @escaping ([String: [[String: String]]]?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        // Reference to the document for the given doctor
+        let slotsDocRef = db.collection("slots").document(doctorID)
+        
+        // Fetch the document
+        slotsDocRef.getDocument { document, error in
+            if let error = error {
+                print("Error fetching document: \(error)")
+                completion(nil, error)
+            } else if let document = document, document.exists {
+                // Document exists, extract slots data
+                if let slotsData = document.data() as? [String: [[String: String]]] {
+                    // Filter out slots with value "Empty" for the specified date
+                    if let slotsForDate = slotsData[date] {
+                        let filteredSlots = slotsForDate.filter { $0.values.first == "Empty" }
+                        completion([date: filteredSlots], nil)
+                    } else {
+                        print("No slots available for the specified date.")
+                        completion(nil, NSError(domain: "NoSlotsError", code: -1, userInfo: nil))
+                    }
+                } else {
+                    print("Error: Unable to parse slots data.")
+                    completion(nil, NSError(domain: "ParsingError", code: -1, userInfo: nil))
+                }
+            } else {
+                // Document does not exist
+                print("Document does not exist.")
+                completion(nil, NSError(domain: "DocumentNotFoundError", code: -1, userInfo: nil))
+            }
+        }
+    }
+
 }
+
 

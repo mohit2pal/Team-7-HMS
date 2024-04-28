@@ -41,12 +41,12 @@ struct ContentView: View {
     func fetchCurrentUserAndData() {
             if let user = Auth.auth().currentUser {
                 self.currentUser = user
-                print(self.currentUser?.uid)
+                print(self.currentUser?.uid ?? "")
                 // Fetch patient data using the user's UID
                 FirebaseHelperFunctions.fetchPatientData(by: user.uid) { patient, error in
                     if let patient = patient {
                         self.patient = patient // Store fetched patient data
-                        print(self.patient)
+                        print(self.patient!)
                     } else {
                         print(error?.localizedDescription ?? "Failed to fetch patient data")
                     }

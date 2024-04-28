@@ -11,9 +11,9 @@ struct SpecialitySwiftUIView: View {
     @State var speciality: String
     @State var icon: String
     @State private var selectedDayIndex: Int?
-    @State private var doctorNames: [String] = []
+    @State private var doctors: [[String: String]] = []
     @State private var shouldReloadScrollView = false // New state variable
-
+    
     var body: some View {
         VStack {
             VStack {
@@ -27,7 +27,7 @@ struct SpecialitySwiftUIView: View {
                 Text(speciality)
                     .font(bookAppFont.smallest)
                     .foregroundStyle(.gray)
-
+                
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 10) {
                         ForEach(daysInCurrentWeek().indices, id: \.self) { index in
@@ -50,8 +50,8 @@ struct SpecialitySwiftUIView: View {
                 
                 ScrollView(.vertical) {
                     VStack(spacing: 15) {
-                        ForEach(doctorNames, id: \.self) { name in
-                            DoctorNameUIView(doctorName: name, date: selectedDate())
+                        ForEach(doctors, id: \.self) { doctor in
+                            DoctorNameUIView(doctorName:  doctor["name"] ?? "", date: selectedDate(), id: doctor["id"] ?? "")
                         }
                     }
                     .id(shouldReloadScrollView) // Reload ScrollView when state changes
@@ -66,42 +66,69 @@ struct SpecialitySwiftUIView: View {
             // Select today's date index when the view appears
             selectedDayIndex = daysInCurrentWeek().firstIndex(of: currentDayString())
             // Fetch doctors' names for today's date
-            fetchDoctorsNames(forSpeciality: speciality) { names, error in
+            fetchDoctorsNames(forSpecialty: speciality) { doctors, error in
                 if let error = error {
                     print("Error: \(error)")
-                } else if let names = names {
-                    self.doctorNames = names
+                } else if let doctors = doctors {
+                    self.doctors = doctors
                 } else {
-                    print("No doctors found with the specified speciality.")
+                    print("No doctors found with the specified specialty.")
                 }
+                // Set shouldReloadScrollView to trigger the ScrollView reload
+                self.shouldReloadScrollView.toggle()
             }
+            
         }
         .onChange(of: selectedDayIndex) { _ in
             print("day changed")
             // Fetch doctors' names for the newly selected date
-            fetchDoctorsNames(forSpeciality: speciality) { names, error in
+            fetchDoctorsNames(forSpecialty: speciality) { doctors, error in
                 if let error = error {
                     print("Error: \(error)")
-                } else if let names = names {
-                    self.doctorNames = names
+                } else if let doctors = doctors {
+                    self.doctors = doctors
                 } else {
-                    print("No doctors found with the specified speciality.")
+                    print("No doctors found with the specified specialty.")
                 }
+                // Set shouldReloadScrollView to trigger the ScrollView reload
+                self.shouldReloadScrollView.toggle()
             }
         }
     }
-
+    
     // Function to get the current day string (e.g., "Mon")
     func currentDayString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EE\nd"
         return dateFormatter.string(from: Date())
     }
-
+    
     // Function to get the selected date based on the selectedDayIndex
     func selectedDate() -> String {
+        
         guard let selectedDayIndex = selectedDayIndex else { return "" }
-        return daysInCurrentWeek()[selectedDayIndex]
+        
+        //get todays date
+        let calendar = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd_MM_yyyy"
+        
+        // Get today's date
+        var currentDate = Date()
+        
+        // Iterate to the specified index
+        for _ in 0..<selectedDayIndex {
+            // Move to the next day
+            if let nextDate = calendar.date(byAdding: .day, value: 1, to: currentDate) {
+                currentDate = nextDate
+            } else {
+                // Error occurred while adding days
+                return ""
+            }
+        }
+        
+        // Convert the final date to the desired format
+        return dateFormatter.string(from: currentDate)
     }
     
     // Function to get the days of the current week as strings (e.g., ["Mon", "Tue", ...])
@@ -123,6 +150,6 @@ struct SpecialitySwiftUIView: View {
 
 #Preview {
     NavigationStack{
-        SpecialitySwiftUIView(speciality: "Pediatrics", icon: "Ent-icon")
+        SpecialitySwiftUIView(speciality: "Cardiology", icon: "Ent-icon")
     }
 }
