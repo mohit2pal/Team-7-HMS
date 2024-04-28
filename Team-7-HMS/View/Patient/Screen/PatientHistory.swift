@@ -303,7 +303,7 @@ struct PatientHistory: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            
+                            isPresented.toggle()
                         }, label: {
                             HStack{
                                 Text("Skip")
