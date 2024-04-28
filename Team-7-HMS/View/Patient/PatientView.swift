@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PatientView: View {
     @State var patientName: String
+    @State var showPatientHistory: Bool
+    @State var patientUid: String
     
     var body: some View {
         TabView {
@@ -25,10 +27,13 @@ struct PatientView: View {
                     Label("", systemImage: "calendar.badge.plus")
                 }
         }
+        .sheet(isPresented: $showPatientHistory, content: {
+            PatientHistory(isPresented: $showPatientHistory, uid: patientUid)
+        })
         
     }
 }
 
 #Preview {
-    PatientView(patientName: "Patient Name")
+    PatientView(patientName: "Patient Name", showPatientHistory: true, patientUid: "hi")
 }

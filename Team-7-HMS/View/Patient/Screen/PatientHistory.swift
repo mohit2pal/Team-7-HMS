@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PatientHistory: View {
+    @Binding var isPresented: Bool
     
     @State var uid : String
     @State private var dateOfBirth = Date()
@@ -281,6 +282,7 @@ struct PatientHistory: View {
                                 surgeries: surgeries,
                                 alergies: allergies
                             )
+                    isPresented.toggle()
                     
                 }, label: {
                     Text("Submit")
@@ -312,6 +314,7 @@ struct PatientHistory: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .navigationBarHidden(true)
     }
     
 
@@ -327,7 +330,7 @@ struct PatientHistory: View {
 struct PatientHistory_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PatientHistory( uid : "hi")
+            PatientHistory( isPresented: .constant(true), uid : "hi")
         }
     }
 }

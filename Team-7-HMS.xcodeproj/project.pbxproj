@@ -58,7 +58,6 @@
 		17F63B272BDA127D0089511F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63B262BDA127D0089511F /* AppState.swift */; };
 		17F63B2A2BDA164F0089511F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63B292BDA164F0089511F /* UserModel.swift */; };
 		17F63B2C2BDA1AFB0089511F /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F63B2B2BDA1AFB0089511F /* SplashScreen.swift */; };
-		17F7C6632BDD2E1D00720B5E /* Fuck-it.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F7C6622BDD2E1D00720B5E /* Fuck-it.swift */; };
 		17F7C6672BDE177C00720B5E /* EmailFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F7C6662BDE177C00720B5E /* EmailFunctions.swift */; };
 		17F7C6692BDE42C600720B5E /* PatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F7C6682BDE42C600720B5E /* PatientView.swift */; };
 		17F7C66B2BDE528300720B5E /* BookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F7C66A2BDE528300720B5E /* BookingView.swift */; };
@@ -128,7 +127,6 @@
 		17F63B262BDA127D0089511F /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		17F63B292BDA164F0089511F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		17F63B2B2BDA1AFB0089511F /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
-		17F7C6622BDD2E1D00720B5E /* Fuck-it.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fuck-it.swift"; sourceTree = "<group>"; };
 		17F7C6662BDE177C00720B5E /* EmailFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailFunctions.swift; sourceTree = "<group>"; };
 		17F7C6682BDE42C600720B5E /* PatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientView.swift; sourceTree = "<group>"; };
 		17F7C66A2BDE528300720B5E /* BookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingView.swift; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 				176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */,
 				364631FA2BDA1E6600DD53CC /* HealthKitAppIntegration.swift */,
 				176900252BD2A94500F5F81E /* ContentView.swift */,
-				17F7C6622BDD2E1D00720B5E /* Fuck-it.swift */,
 				17F7C6612BDD2B8A00720B5E /* View */,
 				17F63B282BDA16440089511F /* Model */,
 				B1639D1E2BDA465500EAB15E /* patientTabItems.swift */,
@@ -617,7 +614,6 @@
 				B1639D092BD8DA1700EAB15E /* CentralisedFonts.swift in Sources */,
 				17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */,
 				360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */,
-				17F7C6632BDD2E1D00720B5E /* Fuck-it.swift in Sources */,
 				13EF0E372BD7A4A80015FDDA /* OnBoardingScreen.swift in Sources */,
 				17F63B272BDA127D0089511F /* AppState.swift in Sources */,
 				176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */,

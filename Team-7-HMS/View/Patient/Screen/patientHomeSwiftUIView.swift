@@ -10,6 +10,8 @@ import FirebaseAuth
 
 struct patientHomeSwiftUIView: View {
     @ObservedObject var healthkit = HealthKitManager()
+    @State private var shouldNavigateToLogin = false
+    
     @State var userName: String
 
     var body: some View {
@@ -25,6 +27,11 @@ struct patientHomeSwiftUIView: View {
                         .foregroundColor(.gray)
                         .padding(.trailing)
                 }
+                
+                NavigationLink(destination: LoginScreen().navigationBarBackButtonHidden(true), isActive: $shouldNavigateToLogin) {
+                    EmptyView()
+                }
+                
                 VStack(alignment: .leading){
                     Text("Hello 👋")
                         .font(CentFont.mediumReg)
@@ -181,6 +188,7 @@ struct patientHomeSwiftUIView: View {
     func signOut() {
         do {
             try Auth.auth().signOut()
+            self.shouldNavigateToLogin = true
             print("User signed out successfully")
         } catch let signOutError as NSError {
             print("Error signing out: \(signOutError.localizedDescription)")
