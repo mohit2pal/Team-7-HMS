@@ -45,7 +45,7 @@ struct Team_7_HMSApp: App {
       var body: some Scene {
         WindowGroup {
           NavigationStack {
-           ContentView()
+              ContentView()
                   .environmentObject(appState)
                   .id(appState.rootViewId)
           }

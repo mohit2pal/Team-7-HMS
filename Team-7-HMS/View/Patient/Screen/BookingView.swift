@@ -30,13 +30,12 @@ struct BookingView: View {
                 Spacer()
                 
                 if selectedView == 0 {
-                    bookAppointmentSwiftUIView(patientUID: appState.patientUID!)
+                    bookAppointmentSwiftUIView(patientUID : appState.patientUID ?? "")
                         
                 } else {
                     EmptyView()
                 }
                 Spacer()
-                
             }
             .padding()
         }
