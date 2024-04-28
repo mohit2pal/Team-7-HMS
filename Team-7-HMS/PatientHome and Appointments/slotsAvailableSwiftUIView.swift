@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct slotsAvailableSwiftUIView: View {
+    
+    @State private var isBooking = false
+    @State private var bookingCompleted = false
+    
     var patientUID : String
     @State private var doctorDetails: [String: Any]? // Optional dictionary
     @State private var slotDetails : [String : Any]?
@@ -82,6 +86,7 @@ struct slotsAvailableSwiftUIView: View {
             Spacer()
             
             Button {
+                isBooking = true
                 // Ensure a slot is selected before attempting to book
                 guard let selectedSlot = selectedSlot else {
                     print("No slot selected")
@@ -100,14 +105,29 @@ struct slotsAvailableSwiftUIView: View {
                         // Handle failure, e.g., show an error message
                     }
                 }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // 2 seconds delay
+                    self.isBooking = false
+                    self.bookingCompleted = true
+                }
             } label: {
                 ZStack {
-                    //Rectangle 2646
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color(#colorLiteral(red: 0.48627451062202454, green: 0.5882353186607361, blue: 1, alpha: 1)))
                         .frame(width: 296, height: 44)
-                    //PATIENT
-                    Text("Book Selected Slots").font(.system(size: 20, weight: .regular)).foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).tracking(0.4).multilineTextAlignment(.center)
+                    
+                    if isBooking {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            .scaleEffect(0.5)
+                    } else if bookingCompleted {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.green)
+                            .scaleEffect(1.5)
+                            .transition(.scale)
+                    } else {
+                            //PATIENT
+                            Text("Book Selected Slots").font(.system(size: 20, weight: .regular)).foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).tracking(0.4).multilineTextAlignment(.center)
+                    }
                 }
             }
             

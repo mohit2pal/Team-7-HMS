@@ -11,6 +11,7 @@ import GoogleSignIn
 import Firebase
 
 struct LoginScreen: View {
+    @EnvironmentObject var appState: AppState
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isUserLoggedIn : Bool = false
@@ -254,6 +255,8 @@ struct LoginScreen: View {
     func fetchCurrentUserAndData() {
         if let user = Auth.auth().currentUser {
             self.currentUser = user
+            
+            appState.patientUID = user.uid
             // Fetch patient data using the user's UID
             FirebaseHelperFunctions.fetchPatientData(by: user.uid) { patient, error in
                 if let patient = patient {

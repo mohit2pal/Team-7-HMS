@@ -47,7 +47,7 @@ struct DoctorLoginScreenView: View {
                         
                         
                         //Submit Button
-                        NavigationLink(destination: DoctorHomePage(), isActive: $isLoggedIn){
+                        NavigationLink(destination: DoctorHomeSwiftUI(doctorName: "Currently Static").navigationBarBackButtonHidden(true), isActive: $isLoggedIn){
                             EmptyView()
                         }
                         
@@ -101,14 +101,6 @@ struct DoctorLoginScreenView: View {
                     }
                 }
             }
-        }
-    }
-}
-
-struct DoctorHomePage: View {
-    var body: some View {
-        NavigationStack {
-            Text("Doctor Home Page")
         }
     }
 }

@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct DoctorHomeSwiftUI: View {
+    @State private var shouldNavigateToLogin = false
+    
     @State var doctorName: String
     @State var selectedAppointmentTypeIndex: Int = 0
     @State var selectedDate: String? = nil
@@ -47,11 +50,20 @@ struct DoctorHomeSwiftUI: View {
         VStack(alignment: .leading) {
             // Header
             HStack(alignment: .top) {
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .frame(width: 70, height: 70)
-                    .foregroundColor(.gray)
-                    .padding(.trailing)
+                Button {
+                    signOut()
+                } label: {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 70, height: 70)
+                        .foregroundColor(.gray)
+                        .padding(.trailing)
+                }
+                
+                NavigationLink(destination: LoginScreen().navigationBarBackButtonHidden(true), isActive: $shouldNavigateToLogin) {
+                    EmptyView()
+                }
+                
                 VStack(alignment: .leading) {
                     Text("Hello 👋")
                         .font(CentFont.mediumReg)
@@ -122,6 +134,16 @@ struct DoctorHomeSwiftUI: View {
                         }
                     }
         .padding()
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            self.shouldNavigateToLogin = true
+            print("User signed out successfully")
+        } catch let signOutError as NSError {
+            print("Error signing out: \(signOutError.localizedDescription)")
+        }
     }
 }
 

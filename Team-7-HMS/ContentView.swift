@@ -14,6 +14,8 @@ struct ContentView: View {
     @State private var currentUser: User? = nil
     @State private var patient: Patient? = nil // Add this line to store fetched patient data
     @State private var isShowingSplash = true
+    @State var role: String?
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -26,8 +28,12 @@ struct ContentView: View {
                             }
                         }
                 } else {
-                    if let patient = patient {
-                        PatientView(patientName: patient.name, showPatientHistory: false, patientUid: self.currentUser?.uid ?? "Not fetched")
+                    if role == "patient" {
+                        if let patient = patient {
+                            PatientView(patientName: patient.name, showPatientHistory: false, patientUid: self.currentUser?.uid ?? "Not fetched")
+                        }
+                    } else if role == "doctor" {
+                        DoctorHomeSwiftUI(doctorName: "Currently Static")
                     } else {
                         OnBoardingScreen()
                     }
@@ -37,11 +43,39 @@ struct ContentView: View {
         }
     }
     
+//    func fetchCurrentUserAndData() {
+//            if let user = Auth.auth().currentUser {
+//                self.currentUser = user
+//                
+//                appState.patientUID = user.uid
+//                // Fetch patient data using the user's UID
+//                FirebaseHelperFunctions.fetchPatientData(by: user.uid) { patient, error in
+//                    if let patient = patient {
+//                        self.patient = patient // Store fetched patient data
+//                        print(self.patient!)
+//                    } else {
+//                        print(error?.localizedDescription ?? "Failed to fetch patient data")
+//                    }
+//                }
+//            } else {
+//                self.currentUser = nil
+//            }
+//        }
+
     func fetchCurrentUserAndData() {
-            if let user = Auth.auth().currentUser {
-                self.currentUser = user
-                
-                appState.patientUID = user.uid
+        guard let user = Auth.auth().currentUser else {
+            self.currentUser = nil
+            return
+        }
+        self.currentUser = user
+        appState.patientUID = user.uid
+        
+        // First, check the patient_details collection
+        let patientRef = Firestore.firestore().collection("patient_details").document(user.uid)
+        patientRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // User UID is in the patient_details collection
+                self.role = "patient"
                 // Fetch patient data using the user's UID
                 FirebaseHelperFunctions.fetchPatientData(by: user.uid) { patient, error in
                     if let patient = patient {
@@ -52,9 +86,21 @@ struct ContentView: View {
                     }
                 }
             } else {
-                self.currentUser = nil
+                // If not found in patient_details, check the doctor_details collection
+                let doctorRef = Firestore.firestore().collection("doctor_details").document(user.uid)
+                doctorRef.getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        // User UID is in the doctor_details collection
+                        self.role = "doctor"
+                        // Here, you might want to fetch doctor-specific data similarly
+                    } else {
+                        // Handle case where user is neither in patient_details nor doctor_details
+                        print("User is not found in patient_details or doctor_details")
+                    }
+                }
             }
         }
+    }
 }
 
 #Preview {
