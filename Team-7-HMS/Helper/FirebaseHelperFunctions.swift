@@ -12,7 +12,7 @@ import Firebase
 import FirebaseAuth
 
 
-struct FirebaseHelperFunctions {
+class FirebaseHelperFunctions {
     
     let genders = ["Male", "Female", "Other"]
     let specialties = [
@@ -207,7 +207,7 @@ struct FirebaseHelperFunctions {
         }
     }
     
-//  add patient medical records
+    //        add patient medical records
     
     func addPatientsRecords( uuid : String ,dateOfBirth :Date , gender : String , bloodGroup : String , height : String , weight : String, phoneNumber : String , pastMedicalHistory : [String] , surgeries : [String] , alergies : [String]){
         let db = Firestore.firestore()
@@ -226,31 +226,58 @@ struct FirebaseHelperFunctions {
         ]
         ]
         let patientRecordsRef = db.collection("patient_details").document(uuid)
-           
-           patientRecordsRef.getDocument { snapshot, error in
-               if let error = error {
-                   print("Error fetching document: \(error)")
-                   return
-               }
-               
-               guard let existingData = snapshot?.data() else {
-                   print("Snapshot is nil")
-                   return
-               }
-               
-               // Merge the existing data with the new data
-               var newData = existingData
-               newData.merge(data) { _, new in new }
-               
-               // Update the document with the merged data
-               patientRecordsRef.setData(newData) { error in
-                   if let error = error {
-                       print("Error updating document: \(error)")
-                   } else {
-                       print("Document updated successfully!")
-                   }
-               }
-           }
-       }
+        
+        patientRecordsRef.getDocument { snapshot, error in
+            if let error = error {
+                print("Error fetching document: \(error)")
+                return
+            }
+            
+            guard let existingData = snapshot?.data() else {
+                print("Snapshot is nil")
+                return
+            }
+            
+            // Merge the existing data with the new data
+            var newData = existingData
+            newData.merge(data) { _, new in new }
+            
+            // Update the document with the merged data
+            patientRecordsRef.setData(newData) { error in
+                if let error = error {
+                    print("Error updating document: \(error)")
+                } else {
+                    print("Document updated successfully!")
+                }
+            }
+        }
     }
+    
+    
+    // Function to fetch patient data by UUID
+    static func fetchPatientData(by uuid: String, completion: @escaping (Patient?, Error?) -> Void) {
+        // Reference to the Firestore database
+        let db = Firestore.firestore()
+        
+        // Reference to the specific patient document using the UUID
+        let patientDocRef = db.collection("patient_details").document(uuid)
+        
+        // Fetch the document for the specified UUID
+        patientDocRef.getDocument { (document, error) in
+            if let error = error {
+                // If there's an error fetching the document, pass the error to the completion handler
+                completion(nil, error)
+            } else {
+                // If the document is fetched successfully, try to map it to a Patient struct
+                if let document = document, document.exists, let patient = try? document.data(as: Patient.self) {
+                    // Pass the patient to the completion handler
+                    completion(patient, nil)
+                } else {
+                    // If the document does not exist or cannot be mapped to a Patient, pass nil
+                    completion(nil, nil)
+                }
+            }
+        }
+    }
+}
 
