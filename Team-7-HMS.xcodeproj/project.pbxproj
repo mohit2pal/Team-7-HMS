@@ -406,6 +406,7 @@
 		17F7C66D2BDE887800720B5E /* Redundant */ = {
 			isa = PBXGroup;
 			children = (
+				B1639D0C2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift */,
 				B1639D1E2BDA465500EAB15E /* patientTabItems.swift */,
 			);
 			path = Redundant;
@@ -428,7 +429,6 @@
 				B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */,
 				B1639D162BD8E31300EAB15E /* appointmentCardDataM.swift */,
 				B1639D142BD8E2AD00EAB15E /* patientAppointmentCard.swift */,
-				B1639D0C2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift */,
 				B1639D102BD8DA7700EAB15E /* SpecialitySwiftUIView.swift */,
 				B1639D1A2BD923F400EAB15E /* DoctorNameUIView.swift */,
 				B1639D182BD9219B00EAB15E /* DoctorsList.swift */,

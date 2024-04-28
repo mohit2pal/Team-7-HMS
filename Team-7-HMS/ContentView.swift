@@ -68,7 +68,6 @@ struct ContentView: View {
             return
         }
         self.currentUser = user
-        appState.patientUID = user.uid
         
         // First, check the patient_details collection
         let patientRef = Firestore.firestore().collection("patient_details").document(user.uid)

@@ -22,7 +22,7 @@ struct PatientView: View {
                 .tabItem {
                     Label("", systemImage: "sos")
                 }
-            BookingView()
+            BookingView(patientID: patientUid)
                 .tabItem {
                     Label("", systemImage: "calendar.badge.plus")
                 }
