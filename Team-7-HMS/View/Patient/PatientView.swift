@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct PatientView: View {
-    @State var patient: Patient
+    @State var patientName: String
     
     var body: some View {
         TabView {
-            patientHomeSwiftUIView(userName: patient.name)
+            patientHomeSwiftUIView(userName: patientName)
                 .tabItem {
                     Label("", systemImage: "house.fill")
                 }
@@ -20,12 +20,15 @@ struct PatientView: View {
                 .tabItem {
                     Label("", systemImage: "sos")
                 }
-            
+            BookingView()
+                .tabItem {
+                    Label("", systemImage: "calendar.badge.plus")
+                }
         }
         
     }
 }
 
 #Preview {
-    PatientView(patient: Patient(name: "Patient", email: "patient@team7.com"))
+    PatientView(patientName: "Patient Name")
 }

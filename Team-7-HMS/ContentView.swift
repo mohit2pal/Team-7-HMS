@@ -28,7 +28,7 @@ struct ContentView: View {
                         }
                 } else {
                     if let patient = patient {
-                        patientHomeSwiftUIView(userName: patient.name)
+                        PatientView(patientName: patient.name)
                     } else {
                         OnBoardingScreen()
                     }
