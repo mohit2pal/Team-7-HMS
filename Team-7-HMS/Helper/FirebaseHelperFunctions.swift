@@ -12,6 +12,12 @@ import Firebase
 import FirebaseAuth
 
 
+struct DoctorInfo {
+    let name: String
+    let specialty: String
+    let id: String
+}
+
 class FirebaseHelperFunctions {
     
     let genders = ["Male", "Female", "Other"]
@@ -276,6 +282,31 @@ class FirebaseHelperFunctions {
                     // If the document does not exist or cannot be mapped to a Patient, pass nil
                     completion(nil, nil)
                 }
+            }
+        }
+    }
+    // Function to fetch only the doctor name, specialty, and document ID from Firestore
+    func fetchAllDoctors(completion: @escaping (Result<[DoctorInfo], Error>) -> Void) {
+        let db = Firestore.firestore()
+        
+        // Fetch all documents from the "doctor_details" collection
+        db.collection("doctor_details").getDocuments { snapshot, error in
+            if let error = error {
+                // If there's an error, pass it to the completion handler
+                completion(.failure(error))
+            } else if let snapshot = snapshot {
+                // If the query is successful, parse the documents into DoctorInfo objects along with their document IDs
+                var doctorsInfo: [DoctorInfo] = []
+                for document in snapshot.documents {
+                    if let doctorName = document.data()["name"] as? String,
+                       let specialty = document.data()["specialty"] as? String {
+                        let doctorID = document.documentID
+                        let doctorInfo = DoctorInfo(name: doctorName, specialty: specialty, id: doctorID)
+                        doctorsInfo.append(doctorInfo)
+                    }
+                }
+                // Pass the array of doctor information to the completion handler
+                completion(.success(doctorsInfo))
             }
         }
     }
