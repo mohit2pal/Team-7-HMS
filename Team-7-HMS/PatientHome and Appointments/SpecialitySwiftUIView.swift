@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SpecialitySwiftUIView: View {
+    var patientUID : String
+    @EnvironmentObject var appState : AppState
     @State var speciality: String
     @State var icon: String
     @State private var selectedDayIndex: Int?
@@ -51,7 +53,7 @@ struct SpecialitySwiftUIView: View {
                 ScrollView(.vertical) {
                     VStack(spacing: 15) {
                         ForEach(doctors, id: \.self) { doctor in
-                            DoctorNameUIView(doctorName:  doctor["name"] ?? "", date: selectedDate(), id: doctor["id"] ?? "")
+                            DoctorNameUIView(patientUID: patientUID, doctorName:  doctor["name"] ?? "", date: selectedDate(), id: doctor["id"] ?? "")
                         }
                     }
                     .id(shouldReloadScrollView) // Reload ScrollView when state changes
@@ -150,6 +152,7 @@ struct SpecialitySwiftUIView: View {
 
 #Preview {
     NavigationStack{
-        SpecialitySwiftUIView(speciality: "Cardiology", icon: "Ent-icon")
+        SpecialitySwiftUIView(patientUID: "", speciality: "Cardiology", icon: "Ent-icon")
     }
+    .environmentObject(AppState())
 }

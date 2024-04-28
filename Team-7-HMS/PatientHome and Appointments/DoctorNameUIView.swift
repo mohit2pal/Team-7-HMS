@@ -10,12 +10,13 @@ import SwiftUI
 
 
 struct DoctorNameUIView: View {
+    var patientUID : String
     @State var doctorName: String
     @State var date : String
     @State var id : String
     var body: some View {
         VStack{
-            NavigationLink(destination: slotsAvailableSwiftUIView(doctorName: doctorName , date : date, doctorId: id)){
+            NavigationLink(destination: slotsAvailableSwiftUIView(patientUID: patientUID ,doctorName: doctorName , date : date, doctorId: id)){
                 HStack{
                     Image(systemName: "person.circle.fill")
                         .resizable()
@@ -45,6 +46,6 @@ struct DoctorNameUIView: View {
 
 #Preview {
     NavigationStack{
-        DoctorNameUIView(doctorName: "Nithin Vakalapudi", date: "15 April 2024", id: "id")
+        DoctorNameUIView(patientUID: "", doctorName: "Nithin Vakalapudi", date: "15 April 2024", id: "id")
     }
 }

@@ -13,7 +13,6 @@ struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @State private var currentUser: User? = nil
     @State private var patient: Patient? = nil // Add this line to store fetched patient data
-    
     @State private var isShowingSplash = true
     var body: some View {
         NavigationStack {
@@ -41,7 +40,8 @@ struct ContentView: View {
     func fetchCurrentUserAndData() {
             if let user = Auth.auth().currentUser {
                 self.currentUser = user
-                print(self.currentUser?.uid ?? "")
+                
+                appState.patientUID = user.uid
                 // Fetch patient data using the user's UID
                 FirebaseHelperFunctions.fetchPatientData(by: user.uid) { patient, error in
                     if let patient = patient {
@@ -59,4 +59,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(AppState())
 }
