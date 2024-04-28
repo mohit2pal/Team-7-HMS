@@ -27,7 +27,8 @@ struct AddDoctorDetails: View {
         "Urology",
         "Paediatrics",
         "Cardiology",
-        "Dermatology"
+        "Dermatology",
+        "ENT"
     ]
     
     let medicalDegrees = [
