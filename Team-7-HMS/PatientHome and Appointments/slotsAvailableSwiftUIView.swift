@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct slotsAvailableSwiftUIView: View {
+    var patientUID : String
     @State private var doctorDetails: [String: Any]? // Optional dictionary
     @State private var slotDetails : [String : Any]?
     @State private var selectedSlot: String?
@@ -88,7 +89,7 @@ struct slotsAvailableSwiftUIView: View {
                 }
                 
                 // Call the bookSlot function
-                FirebaseHelperFunctions.bookSlot(doctorUID: doctorId, date: date, slotTime: selectedSlot, patientUID: "YourPatientUID") { result in
+                FirebaseHelperFunctions.bookSlot(doctorUID: doctorId, date: date, slotTime: selectedSlot, patientUID: patientUID) { result in
                     switch result {
                     case .success(let successMessage):
                         print(successMessage)
@@ -184,5 +185,6 @@ struct doctorInfoCard: View{
 }
 
 #Preview {
-    slotsAvailableSwiftUIView(doctorName: "Nithin Reddy", date: "28_04_2024", doctorId: "3npmgJzI3gSWiBpnTdTRTCEBPtX2")
+    slotsAvailableSwiftUIView(patientUID: "", doctorName: "Nithin Reddy", date: "28_04_2024", doctorId: "3npmgJzI3gSWiBpnTdTRTCEBPtX2")
+
 }

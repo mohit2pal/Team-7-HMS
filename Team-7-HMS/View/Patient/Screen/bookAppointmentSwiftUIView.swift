@@ -13,6 +13,7 @@ enum bookAppFont {
 
 
 struct bookAppointmentSwiftUIView: View {
+    let patientUID : String
     struct ButtonData{
         let image: String
         let title: String
@@ -57,7 +58,7 @@ struct bookAppointmentSwiftUIView: View {
                 //list of specialities
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4), spacing: 20) {
                     ForEach(buttons.indices, id: \.self) { index in
-                        NavigationLink(destination: SpecialitySwiftUIView(speciality: buttons[index].title, icon: buttons[index].image)) {
+                        NavigationLink(destination: SpecialitySwiftUIView(patientUID: patientUID, speciality: buttons[index].title, icon: buttons[index].image)) {
                             VStack {
                                 Image(buttons[index].image)
                                     .resizable()
@@ -86,7 +87,7 @@ struct bookAppointmentSwiftUIView: View {
                 //list of symptoms
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4), spacing: 20) {
                     ForEach(buttons.indices, id: \.self) { index in
-                        NavigationLink(destination: SpecialitySwiftUIView(speciality: buttons[index].title, icon: buttons[index].image)) {
+                        NavigationLink(destination: SpecialitySwiftUIView(patientUID: patientUID, speciality: buttons[index].title, icon: buttons[index].image)) {
                             VStack {
                                 Image(buttons2[index].image)
                                     .resizable()
@@ -111,5 +112,6 @@ struct bookAppointmentSwiftUIView: View {
 }
 
 #Preview {
-    bookAppointmentSwiftUIView()
+    bookAppointmentSwiftUIView(patientUID: "")
+    
 }

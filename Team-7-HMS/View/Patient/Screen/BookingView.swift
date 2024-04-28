@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BookingView: View {
+    @EnvironmentObject var appState : AppState
     @State private var search: String = ""
     @State private var selectedView = 0
     var body: some View {
@@ -29,7 +30,8 @@ struct BookingView: View {
                 Spacer()
                 
                 if selectedView == 0 {
-                    bookAppointmentSwiftUIView()
+                    bookAppointmentSwiftUIView(patientUID: appState.patientUID!)
+                        
                 } else {
                     EmptyView()
                 }
@@ -43,4 +45,5 @@ struct BookingView: View {
 
 #Preview {
     BookingView()
+        .environmentObject(AppState())
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct patientTabItems: View {
+    @EnvironmentObject var appState : AppState
     var body: some View {
         NavigationStack {
             TabView {
@@ -18,7 +19,7 @@ struct patientTabItems: View {
                     }
 
                 NavigationStack{
-                    bookAppointmentSwiftUIView()
+                    bookAppointmentSwiftUIView(patientUID: appState.patientUID ?? "")
                 }
                     .tabItem {
                         Label("Book" , systemImage: "plus.circle.fill")
@@ -37,4 +38,5 @@ struct patientTabItems: View {
 
 #Preview {
     patientTabItems()
+        .environmentObject(AppState())
 }
