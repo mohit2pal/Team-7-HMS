@@ -40,15 +40,14 @@ struct DoctorAppointmentCard: View {
                                 }//VStack End
                                 Spacer() // Add Spacer to push the arrow to the right
         
-                                Image(systemName: "greaterthan")
-                                    .foregroundColor(.white) // Set arrow color to white
+                                Image("Arrow")
+                                    .rotationEffect(.degrees(180))
                                     .font(.headline)
                             }//Hstack End
                             .padding()
                         )
                 }
-                .padding()
-                .shadow(color: Color.gray.opacity(0.2), radius: 5, x: 0, y: 2)
+//                .customShadow()
     }
 }
 

@@ -39,7 +39,7 @@ struct patientHomeSwiftUIView: View {
                 VStack(alignment: .leading){
                     Text("Hello 👋")
                         .font(CentFont.mediumReg)
-                    Text(userName)
+                    Text(String(userName.prefix(20)))
                         .font(CentFont.largeSemiBold)
                 }
                 Spacer()
@@ -63,7 +63,6 @@ struct patientHomeSwiftUIView: View {
             //vitals
             HStack{
                 Text("Vitals")
-                    .bold()
                     .font(.title2)
                 Spacer()
             }
@@ -175,6 +174,7 @@ struct patientHomeSwiftUIView: View {
                 VStack(spacing: 10){
                     if appointments.isEmpty {
                         Text("There are no appointments scheduled")
+                            .foregroundStyle(Color.gray)
                     }
                     else{
                         ForEach(appointments) { appointment in patientAppointmentCard(appointmentData: appointment)

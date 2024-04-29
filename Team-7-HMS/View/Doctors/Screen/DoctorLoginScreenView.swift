@@ -29,16 +29,29 @@ struct DoctorLoginScreenView: View {
                         
                         TextField("Email Address", text: $emailAddress)
                             .foregroundColor(Color.gray)
-                            .textFieldStyle(.roundedBorder)
+//                            .textFieldStyle(.roundedBorder)
                             .textInputAutocapitalization(.never)
-                            .padding(.horizontal , 40)
+//                            .padding(.horizontal , 40)
+                            .textFieldStyle(.plain)
+                            .padding()
+                            .background(.white)
+                            .cornerRadius(10)
+                            .frame(width: 320)
+                            .customShadow()
                         
                         
                         SecureField("Password", text: $password)
-                            .frame(height: 45)
-                            .textFieldStyle(.roundedBorder)
+//                            .frame(height: 45)
+//                            .textFieldStyle(.roundedBorder)
                             .textInputAutocapitalization(.never)
-                            .padding(.horizontal , 40)
+                            .foregroundColor(Color.gray)
+                            .textInputAutocapitalization(.never)
+                            .textFieldStyle(.plain)
+                            .padding()
+                            .background(.white)
+                            .cornerRadius(10)
+                            .frame(width: 320)
+                            .customShadow()
                         
                         //Forgot password?
                         Text("Forgot password?")
@@ -54,6 +67,9 @@ struct DoctorLoginScreenView: View {
                         NavigationLink(destination: AdminHomeView().navigationBarBackButtonHidden(true), isActive: $isAdmin) {
                             EmptyView()
                         }
+                        
+                        Spacer()
+                            .frame(height: 30)
                         
                         // NavigationLink to DoctorHomePage
                             Button(action: {
@@ -86,7 +102,7 @@ struct DoctorLoginScreenView: View {
                                 else {
                                     Text("Log In ")
                                         .font(.system(size: 16, weight: .medium, design: .rounded))
-                                        .frame(width: 312, height: 41)
+                                        .frame(width: 312, height: 44)
                                         .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).tracking(-0.41).multilineTextAlignment(.center)
                                         .background((Color(#colorLiteral(red: 0.48627451062202454, green: 0.5882353186607361, blue: 1, alpha: 1))))
                                         .clipShape(RoundedRectangle(cornerRadius: 15))
