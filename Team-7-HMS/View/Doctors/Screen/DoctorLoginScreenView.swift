@@ -12,7 +12,7 @@ struct DoctorLoginScreenView: View {
     
     @State var isLoading = false
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack{
                 Color("PrimaryColor")
                     .opacity(0.83)
@@ -47,11 +47,11 @@ struct DoctorLoginScreenView: View {
                         
                         
                         //Submit Button
-                        NavigationLink(destination: DoctorHomePage(), isActive: $isLoggedIn){
+                        NavigationLink(destination: DoctorHomeSwiftUI(doctorName: "Currently Static").navigationBarBackButtonHidden(true), isActive: $isLoggedIn){
                             EmptyView()
                         }
                         
-                        NavigationLink(destination: AdminHomeView(), isActive: $isAdmin) {
+                        NavigationLink(destination: AdminHomeView().navigationBarBackButtonHidden(true), isActive: $isAdmin) {
                             EmptyView()
                         }
                         
@@ -101,14 +101,6 @@ struct DoctorLoginScreenView: View {
                     }
                 }
             }
-        }
-    }
-}
-
-struct DoctorHomePage: View {
-    var body: some View {
-        NavigationStack {
-            Text("Doctor Home Page")
         }
     }
 }

@@ -14,7 +14,7 @@ struct AdminHomeView: View {
                 .tabItem {
                     Label("Add Slots", systemImage: "calendar.badge.plus")
                 }
-            NavigationView {
+            NavigationView{
                 AddDoctorDetails()
             }
             .tabItem {

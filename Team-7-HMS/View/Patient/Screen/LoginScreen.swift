@@ -254,6 +254,7 @@ struct LoginScreen: View {
     func fetchCurrentUserAndData() {
         if let user = Auth.auth().currentUser {
             self.currentUser = user
+            
             // Fetch patient data using the user's UID
             FirebaseHelperFunctions.fetchPatientData(by: user.uid) { patient, error in
                 if let patient = patient {
