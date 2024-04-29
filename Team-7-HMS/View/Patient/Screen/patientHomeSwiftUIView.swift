@@ -14,6 +14,7 @@ struct patientHomeSwiftUIView: View {
     @State private var shouldNavigateToLogin = false
     @State private var appointments: [AppointmentCardData] = []
     var patientUID : String
+    @State var openDetailsView : Bool = false
 
     
     @State var userName: String
@@ -23,7 +24,7 @@ struct patientHomeSwiftUIView: View {
             //header
             HStack(alignment: .top){
                 Button {
-                    signOut()
+                    openDetailsView = true
                 } label: {
                     Image(systemName: "person.circle.fill")
                         .resizable()
@@ -185,6 +186,9 @@ struct patientHomeSwiftUIView: View {
             
             Spacer()
         }//Vstack end
+        .sheet(isPresented: $openDetailsView, content: {
+            PatientDetails(name: userName, flag: $shouldNavigateToLogin , closePage : $openDetailsView)
+        })
         .onAppear {
             print("this is my patientUID : \(patientUID)")
             FirebaseHelperFunctions().getAppointments(patientUID: patientUID) { appointments, error in

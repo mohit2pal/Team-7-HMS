@@ -65,6 +65,7 @@
 		17F7C6712BDEC8D400720B5E /* Just-Some.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F7C6702BDEC8D400720B5E /* Just-Some.swift */; };
 		360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */; };
 		360295FF2BD7DB92001C1397 /* medicalConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360295FE2BD7DB92001C1397 /* medicalConditions.swift */; };
+		3621E0A42BDF700400F22807 /* PatientDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3621E0A32BDF700400F22807 /* PatientDetails.swift */; };
 		364631FB2BDA1E6600DD53CC /* HealthKitAppIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364631FA2BDA1E6600DD53CC /* HealthKitAppIntegration.swift */; };
 		369ADAF02BDE1CB60062CFDD /* AddingSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369ADAEF2BDE1CB60062CFDD /* AddingSlots.swift */; };
 		369ADAF22BDE85200062CFDD /* navt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369ADAF12BDE85200062CFDD /* navt.swift */; };
@@ -138,6 +139,7 @@
 		17F7C6702BDEC8D400720B5E /* Just-Some.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Just-Some.swift"; sourceTree = "<group>"; };
 		360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorLoginScreenView.swift; sourceTree = "<group>"; };
 		360295FE2BD7DB92001C1397 /* medicalConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = medicalConditions.swift; sourceTree = "<group>"; };
+		3621E0A32BDF700400F22807 /* PatientDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetails.swift; sourceTree = "<group>"; };
 		364631FA2BDA1E6600DD53CC /* HealthKitAppIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAppIntegration.swift; sourceTree = "<group>"; };
 		364631FC2BDA1E9500DD53CC /* Team-7-HMS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Team-7-HMS.entitlements"; sourceTree = "<group>"; };
 		369ADAEF2BDE1CB60062CFDD /* AddingSlots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingSlots.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				B1639D0E2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift */,
+				3621E0A32BDF700400F22807 /* PatientDetails.swift */,
 				B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */,
 				17F7C66A2BDE528300720B5E /* BookingView.swift */,
 				B1639D122BD8DA8200EAB15E /* SosCallSwiftUIView.swift */,
@@ -605,6 +608,7 @@
 			files = (
 				17F63B2C2BDA1AFB0089511F /* SplashScreen.swift in Sources */,
 				B1639D172BD8E31300EAB15E /* appointmentCardDataM.swift in Sources */,
+				3621E0A42BDF700400F22807 /* PatientDetails.swift in Sources */,
 				369ADAF22BDE85200062CFDD /* navt.swift in Sources */,
 				B1639D0F2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift in Sources */,
 				B1639D1D2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift in Sources */,

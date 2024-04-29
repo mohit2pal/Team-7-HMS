@@ -261,7 +261,7 @@ class FirebaseHelperFunctions {
     
     
     // Function to fetch patient data by UUID
-    static func fetchPatientData(by uuid: String, completion: @escaping (Patient?, Error?) -> Void) {
+   func fetchPatientData(by uuid: String, completion: @escaping (Patient?, Error?) -> Void) {
         // Reference to the Firestore database
         let db = Firestore.firestore()
         
@@ -285,6 +285,27 @@ class FirebaseHelperFunctions {
             }
         }
     }
+    
+    
+    func fetchPatientInfo(by uuid: String, completion: @escaping ([String: Any]?, Error?) -> Void) {
+        // Reference to the Firestore database
+        let db = Firestore.firestore()
+        
+        // Reference to the specific patient document using the UUID
+        let patientDocRef = db.collection("patient_details").document(uuid)
+        
+        // Fetch the document for the specified UUID
+        patientDocRef.getDocument { (document, error) in
+            if let error = error {
+                // If there's an error fetching the document, pass the error to the completion handler
+                completion(nil, error)
+            } else {
+                // If the document is fetched successfully, pass the document data to the completion handler
+                completion(document?.data(), nil)
+            }
+        }
+    }
+
     // Function to fetch only the doctor name, specialty, and document ID from Firestore
     func fetchAllDoctors(completion: @escaping (Result<[DoctorInfo], Error>) -> Void) {
         let db = Firestore.firestore()

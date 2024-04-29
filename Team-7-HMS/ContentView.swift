@@ -77,7 +77,7 @@ struct ContentView: View {
                 // User UID is in the patient_details collection
                 self.role = "patient"
                 // Fetch patient data using the user's UID
-                FirebaseHelperFunctions.fetchPatientData(by: user.uid) { patient, error in
+                FirebaseHelperFunctions().fetchPatientData(by: user.uid) { patient, error in
                     if let patient = patient {
                         self.patient = patient // Store fetched patient data
                         print(self.patient!)

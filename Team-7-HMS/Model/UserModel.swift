@@ -11,3 +11,13 @@ struct Patient: Codable {
     var name: String
     var email: String
 }
+
+struct PatientInfo : Codable {
+    var name : String
+    var email : String
+    var height : String
+    var weight : String
+    var gender : String
+    var blood : String
+    
+}
