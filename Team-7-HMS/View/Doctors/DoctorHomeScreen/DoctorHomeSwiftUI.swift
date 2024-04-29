@@ -90,7 +90,6 @@ struct DoctorHomeSwiftUI: View {
                         .foregroundColor(.black)
                         .padding(.bottom, 1)
                 }
-                
                         
             // Display appointment dates as circular cards
             HStack(alignment: .top){
@@ -105,9 +104,10 @@ struct DoctorHomeSwiftUI: View {
                                     .font(.title3)
                                     .foregroundColor(selectedDate == date ? .white : .black)
                                     .padding(30)
-                                    .background(selectedDate == date ? Color.myAccent : Color.gray)
+                                    .background(selectedDate == date ? Color.myAccent : Color.white)
                                     .clipShape(Circle())
                                     .frame(width:100)
+                                    .customShadow()
                             }
                         }
                     }
@@ -133,7 +133,8 @@ struct DoctorHomeSwiftUI: View {
                             }
                         }
                     }
-        .padding()
+        .padding([.horizontal, .top])
+        .background(Color.background)
     }
     
     func signOut() {

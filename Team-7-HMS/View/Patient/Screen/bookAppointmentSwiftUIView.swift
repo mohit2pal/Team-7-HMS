@@ -45,14 +45,13 @@ struct bookAppointmentSwiftUIView: View {
     
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
+        ScrollView(showsIndicators: false) {
+            VStack {
                 //Book appointment
                 
                 HStack {
                     Text("Search by Specialities")
                         .font(CentFont.mediumReg)
-                        .bold()
                     Spacer()
                 }
                 //list of specialities
@@ -108,6 +107,7 @@ struct bookAppointmentSwiftUIView: View {
                 Spacer()
             }
         }
+        .background(Color.background)
     }
 }
 
