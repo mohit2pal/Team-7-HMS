@@ -26,6 +26,7 @@ struct DoctorNameUIView: View {
                     Spacer().frame(width: 30)
                     VStack(alignment: .leading){
                         Text(doctorName)
+                            .multilineTextAlignment(.leading)
                             .font(CentFont.mediumSemiBold)
                         Text("Available from: ")
                             .font(CentFont.smallReg)

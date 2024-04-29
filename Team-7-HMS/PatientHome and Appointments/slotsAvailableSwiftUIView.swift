@@ -56,8 +56,15 @@ struct slotsAvailableSwiftUIView: View {
             VStack {
                 if let slotDetails = slotDetails as? [String: [[String: String]]] {
                     ForEach(slotDetails.sorted(by: { $0.key < $1.key }), id: \.key) { date, slots in
-                        Text(date)
-                            .font(.headline)
+                        HStack{
+                            Text("Selected date: ")
+                                .font(.headline)
+                            Text(date)
+                                .foregroundStyle(Color.gray)
+                                .font(.headline)
+                        }
+                        .padding()
+
                         ScrollView(.horizontal) {
                             HStack {
                                 ForEach(slots, id: \.self) { slot in
@@ -80,6 +87,7 @@ struct slotsAvailableSwiftUIView: View {
                     }
                 } else {
                     Text("No slots available")
+                        .foregroundStyle(Color.gray)
                 }
             }
 
@@ -126,7 +134,9 @@ struct slotsAvailableSwiftUIView: View {
                             .transition(.scale)
                     } else {
                             //PATIENT
-                            Text("Book Selected Slots").font(.system(size: 20, weight: .regular)).foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).tracking(0.4).multilineTextAlignment(.center)
+                            Text("Book Selected Slots").font(.system(size: 20, weight: .regular))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
                     }
                 }
             }
