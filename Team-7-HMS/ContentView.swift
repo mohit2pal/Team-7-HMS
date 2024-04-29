@@ -13,6 +13,7 @@ struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @State private var currentUser: User? = nil
     @State private var patient: Patient? = nil // Add this line to store fetched patient data
+    @State var patientID : String?
     @State private var isShowingSplash = true
     @State var role: String?
     
@@ -80,6 +81,7 @@ struct ContentView: View {
                     if let patient = patient {
                         self.patient = patient // Store fetched patient data
                         print(self.patient!)
+                        
                     } else {
                         print(error?.localizedDescription ?? "Failed to fetch patient data")
                     }

@@ -14,7 +14,7 @@ struct PatientView: View {
     
     var body: some View {
         TabView {
-            patientHomeSwiftUIView(userName: patientName)
+            patientHomeSwiftUIView(patientUID: patientUid, userName: patientName)
                 .tabItem {
                     Label("", systemImage: "house.fill")
                 }
@@ -22,7 +22,10 @@ struct PatientView: View {
                 .tabItem {
                     Label("", systemImage: "sos")
                 }
+            
+
             BookingView(patientID: patientUid)
+            
                 .tabItem {
                     Label("", systemImage: "calendar.badge.plus")
                 }
@@ -35,5 +38,5 @@ struct PatientView: View {
 }
 
 #Preview {
-    PatientView(patientName: "Patient Name", showPatientHistory: true, patientUid: "hi")
+    PatientView(patientName: "Patient Name", showPatientHistory: true, patientUid: "Vzo9cLiS9fZTyzpzkeH0Vure5YP2")
 }

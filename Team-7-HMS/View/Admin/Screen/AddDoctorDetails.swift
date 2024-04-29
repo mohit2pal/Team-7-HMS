@@ -10,6 +10,8 @@ import Firebase
 import FirebaseFirestore
 
 struct AddDoctorDetails: View {
+    @State private var isValidPhoneNumber = true
+    
     @State private var name : String = ""
     @State private var email : String = ""
     @State private var dateOfJoining : Date = Date()
@@ -53,6 +55,7 @@ struct AddDoctorDetails: View {
     @State var docId : String = ""
     
     var body: some View {
+        ScrollView {
         VStack{
             HStack{
                 Spacer()
@@ -86,6 +89,11 @@ struct AddDoctorDetails: View {
                     .background(.white)
                     .cornerRadius(10)
                     .customShadow()
+                    .background(isValidPhoneNumber ? Color.white : Color.red)
+                    .cornerRadius(10)
+                    .onChange(of: phoneNumber) { newValue in
+                        isValidPhoneNumber = isValidPhone(testStr: newValue)
+                    }
                 
                 HStack{
                     //                    TextField("Date of Joining", text: Binding(
@@ -228,10 +236,17 @@ struct AddDoctorDetails: View {
                     HStack{
                         Text("Done")
                     }
-                        .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(Color.accentColor)
                 })
             }
         }
+        }
+    }
+    
+    func isValidPhone(testStr:String) -> Bool {
+        let phoneRegEx = "^\\d{3}-\\d{3}-\\d{4}$"
+        let phoneTest = NSPredicate(format:"SELF MATCHES %@", phoneRegEx)
+        return phoneTest.evaluate(with: testStr)
     }
 }
 
