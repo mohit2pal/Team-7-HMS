@@ -13,6 +13,7 @@ struct patientHomeSwiftUIView: View {
     @ObservedObject var healthkit = HealthKitManager()
     @State private var shouldNavigateToLogin = false
     @State private var appointments: [AppointmentCardData] = []
+    var patientUID : String
 
     
     @State var userName: String
@@ -185,12 +186,15 @@ struct patientHomeSwiftUIView: View {
             Spacer()
         }//Vstack end
         .onAppear {
-                 FirebaseHelperFunctions().getAppointments(patientUID: appState.patientUID ?? "") { appointments, error in
+            print("this is my patientUID : \(patientUID)")
+            FirebaseHelperFunctions().getAppointments(patientUID: patientUID) { appointments, error in
                      if let error = error {
                          print("Error retrieving appointments:", error)
                          // Handle error if needed
                      } else {
+                    
                          if let appointments = appointments {
+                             print(appointments)
                              self.appointments = appointments
                          }
                      }
@@ -216,6 +220,6 @@ struct patientHomeSwiftUIView: View {
 }
 
 #Preview {
-    patientHomeSwiftUIView(userName: "Bose")
+    patientHomeSwiftUIView(patientUID: "", userName: "Bose")
         .environmentObject(AppState())
 }

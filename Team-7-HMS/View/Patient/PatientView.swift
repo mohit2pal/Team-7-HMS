@@ -14,7 +14,7 @@ struct PatientView: View {
     
     var body: some View {
         TabView {
-            patientHomeSwiftUIView(userName: patientName)
+            patientHomeSwiftUIView(patientUID: patientUid, userName: patientName)
                 .tabItem {
                     Label("", systemImage: "house.fill")
                 }
