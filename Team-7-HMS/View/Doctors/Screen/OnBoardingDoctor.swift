@@ -33,16 +33,23 @@ struct OnBoardingDoctor: View {
                             // Action to perform when the button is tapped
                         }) {
                             NavigationLink(destination: EmptyView()) {
-                                Text("Get Started")
-                                    .foregroundColor(Color("SecondaryColor"))
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                                    .padding([.leading, .trailing])
+                                HStack{
+                                    Spacer()
+                                    Text("Get Started")
+                                        .foregroundColor(Color("SecondaryColor"))
+                                        .padding(10)
+                                        .padding(.horizontal)
+                                        .background(Color.white)
+                                        .cornerRadius(20)
+                                        .padding()
+                                        .customShadow()
+                                }
                             }
                         }
                     }
                     
                     TabView(selection: $currentPage) {
-                        OnboardingStepView(imageName: "OnBoardScreen1", title: "Welcome Staffs!", description: " Manage patient records, schedule consultations, and collaborate with your healthcare team—all in one intuitive platform. Streamline your practice and enhance patient care with YourCare today!").tag(0)
+                        OnboardingStepView(imageName: "hospitalLogo", title: "Welcome Staffs!", description: " Manage patient records, schedule consultations, and collaborate with your healthcare team—all in one intuitive platform. Streamline your practice and enhance patient care with YourCare today!").tag(0)
                         
                         OnboardingStepView(imageName: "OnBoardScreen2", title: "Reschedule your slot!", description: "View your slot duty as well request for a slot change/leave.").tag(1)
                         
