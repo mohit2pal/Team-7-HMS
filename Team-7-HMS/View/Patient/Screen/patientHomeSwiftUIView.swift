@@ -9,8 +9,11 @@ import SwiftUI
 import FirebaseAuth
 
 struct patientHomeSwiftUIView: View {
+    @EnvironmentObject var appState : AppState
     @ObservedObject var healthkit = HealthKitManager()
     @State private var shouldNavigateToLogin = false
+    @State private var appointments: [AppointmentCardData] = []
+
     
     @State var userName: String
 
@@ -169,14 +172,30 @@ struct patientHomeSwiftUIView: View {
             //Data modelling is done on appointmentCardDataM
             ScrollView(.vertical, showsIndicators: false){
                 VStack(spacing: 10){
-                    ForEach(AppointmentMockData.appointmentDataArray) { appointment in patientAppointmentCard(appointmentData: appointment)
+                    if appointments.isEmpty {
+                        Text("There are no appointments scheduled")
+                    }
+                    else{
+                        ForEach(appointments) { appointment in patientAppointmentCard(appointmentData: appointment)
+                        }
                     }
                 }
             }.customShadow()
             
             Spacer()
         }//Vstack end
-        .onAppear{
+        .onAppear {
+                 FirebaseHelperFunctions().getAppointments(patientUID: appState.patientUID ?? "") { appointments, error in
+                     if let error = error {
+                         print("Error retrieving appointments:", error)
+                         // Handle error if needed
+                     } else {
+                         if let appointments = appointments {
+                             self.appointments = appointments
+                         }
+                     }
+                 }
+            
             healthkit.startObservingHeartRate()
             healthkit.fetchBloodPressureData()
             healthkit.fetchSpO2Data()
@@ -198,4 +217,5 @@ struct patientHomeSwiftUIView: View {
 
 #Preview {
     patientHomeSwiftUIView(userName: "Bose")
+        .environmentObject(AppState())
 }

@@ -402,7 +402,56 @@ class FirebaseHelperFunctions {
         }
     }
     
+    // retrieving the slot data from patient end
     
+    func getAppointments(patientUID: String, completion: @escaping ([AppointmentCardData]?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        let appointmentDocRef = db.collection("appointments")
+        
+        let query = appointmentDocRef.whereField("patientID", isEqualTo: patientUID)
+        
+        query.getDocuments { [self] (querySnapshot, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            var appointments: [AppointmentCardData] = []
+            
+            for document in querySnapshot!.documents {
+                let doctorUID = document["doctorID"] as? String ?? ""
+                let dateString = document["date"] as? String ?? ""
+                
+                let day = getDayOfWeekFromDate(dateString: dateString)
+                let date = String(dateString.prefix(2))
+                let doctorInfoRef = db.collection("doctor_details").document(doctorUID)
+                
+                doctorInfoRef.getDocument { (doctorSnapshot, doctorError) in
+                    if let doctorError = doctorError {
+                        completion(nil, doctorError)
+                        return
+                    }
+                    
+                    if let doctorData = doctorSnapshot?.data(),
+                       let doctorName = doctorData["name"] as? String,
+                       let doctorSpeciality = doctorData["specialty"] as? String {
+                        let appointmentData = AppointmentCardData(date: date, day: day ?? "", time: document["slotTime"] as! String, doctorName: doctorName, doctorSpeciality: doctorSpeciality)
+                        
+                        appointments.append(appointmentData)
+                    }
+                    else{
+                        print("no data")
+                    }
+                    
+                    completion(appointments, nil)
+                }
+            }
+        }
+    }
+
+    
+   // booking slots for appointment
     static func bookSlot(doctorUID: String, date: String, slotTime: String, patientUID: String, completion: @escaping (Result<String, Error>) -> Void) {
         let db = Firestore.firestore()
         
@@ -502,6 +551,22 @@ class FirebaseHelperFunctions {
             }
         }
     }
+    
+    
+    func getDayOfWeekFromDate(dateString: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd_MM_yyyy" // Adjust the date format according to your input string
+        
+        if let date = dateFormatter.date(from: dateString) {
+            let dayOfWeekFormatter = DateFormatter()
+            dayOfWeekFormatter.dateFormat = "E" // "E" represents the abbreviated day of the week (e.g., Sun, Mon)
+            
+            return dayOfWeekFormatter.string(from: date)
+        } else {
+            return nil
+        }
+    }
+
     
 }
 
