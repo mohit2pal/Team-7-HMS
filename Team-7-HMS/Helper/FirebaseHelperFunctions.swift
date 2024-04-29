@@ -587,6 +587,58 @@ class FirebaseHelperFunctions {
             return nil
         }
     }
+    
+    
+    // get medical Records
+    func getMedicalRecords(patientUID: String, completion: @escaping (PatientMedicalRecords?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        let docRef = db.collection("patient_details").document(patientUID)
+        
+        docRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error fetching document: \(error)")
+                completion(nil, error)
+                return
+            }
+            
+            guard let document = document, document.exists else {
+                print("Document does not exist")
+                completion(nil, nil)
+                return
+            }
+            
+            if let data = document.data() {
+                // Assuming you have a field called "medicalRecords" which holds the medical records
+                if let medicalRecords = data["medicalRecords"] as? [String: Any] {
+                    // Extracting values from Firestore data and creating PatientMedicalRecords instance
+                    if let pastMedicalHistory = medicalRecords["pastMedicalHistory"] as? [String],
+                       let surgeries = medicalRecords["surgeries"] as? [String],
+                       let allergies = medicalRecords["alergies"] as? [String],
+                       let bloodGroup = medicalRecords["bloodGroup"] as? String,
+                       let gender = medicalRecords["gender"] as? String,
+                       let height = medicalRecords["height"] as? String,
+                       let weight = medicalRecords["weight"] as? String,
+                       let phoneNumber = medicalRecords["phoneNumber"] as? String {
+                        
+                        let patientMedicalRecord = PatientMedicalRecords(alergies: allergies, pastMedical: pastMedicalHistory, surgeries: surgeries, bloodGroup: bloodGroup, gender: gender, height: height, weight: weight, phoneNumber: phoneNumber)
+                        
+                        completion(patientMedicalRecord, nil)
+                    } else {
+                        print("Some fields are missing or have incorrect types")
+                        completion(nil, nil)
+                    }
+                } else {
+                    print("Medical records not found for this patient")
+                    completion(nil, nil)
+                }
+            } else {
+                print("Document data was empty.")
+                completion(nil, nil)
+            }
+        }
+    }
+
 
     
 }

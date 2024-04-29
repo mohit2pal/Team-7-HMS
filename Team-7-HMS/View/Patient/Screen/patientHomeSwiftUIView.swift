@@ -16,8 +16,8 @@ struct patientHomeSwiftUIView: View {
     var patientUID : String
     @State var openDetailsView : Bool = false
 
-    
     @State var userName: String
+    @State var patientMedicalRecords: PatientMedicalRecords?
 
     var body: some View {
         VStack{
@@ -41,7 +41,7 @@ struct patientHomeSwiftUIView: View {
                     Text("Hello 👋")
                         .font(CentFont.mediumReg)
                     Text(String(userName.prefix(20)))
-                        .font(CentFont.largeSemiBold)
+                        .font(.title2)
                 }
                 Spacer()
                 NavigationLink(destination: patientNotificationSwiftUIView()) {
@@ -56,8 +56,11 @@ struct patientHomeSwiftUIView: View {
                     }
                 }
             }
-            
-            
+            .onAppear{
+                FirebaseHelperFunctions().getMedicalRecords(patientUID: patientUID) { medicalRecord, error in
+                    self.patientMedicalRecords = medicalRecord
+                }
+            }
             Spacer()
                 .frame(height: 30)
         
@@ -187,7 +190,7 @@ struct patientHomeSwiftUIView: View {
             Spacer()
         }//Vstack end
         .sheet(isPresented: $openDetailsView, content: {
-            PatientDetails(name: userName, flag: $shouldNavigateToLogin , closePage : $openDetailsView)
+            PatientDetails(name: userName, flag: $shouldNavigateToLogin , closePage : $openDetailsView, medicalRecords: patientMedicalRecords ?? patientMedicalRecordStatic)
         })
         .onAppear {
             print("this is my patientUID : \(patientUID)")
@@ -198,12 +201,10 @@ struct patientHomeSwiftUIView: View {
                      } else {
                     
                          if let appointments = appointments {
-                             print(appointments)
                              self.appointments = appointments
                          }
                      }
                  }
-            
             healthkit.startObservingHeartRate()
             healthkit.fetchBloodPressureData()
             healthkit.fetchSpO2Data()

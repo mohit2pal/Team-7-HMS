@@ -21,3 +21,14 @@ struct PatientInfo : Codable {
     var blood : String
     
 }
+
+struct PatientMedicalRecords : Codable {
+    var alergies : [String]
+    var pastMedical : [String]
+    var surgeries : [String]
+    var bloodGroup : String
+    var gender : String
+    var height : String
+    var weight : String
+    var phoneNumber : String
+}
