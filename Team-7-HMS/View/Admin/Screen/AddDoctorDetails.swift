@@ -56,21 +56,36 @@ struct AddDoctorDetails: View {
         VStack{
             HStack{
                 Spacer()
-                Image(systemName: "person.circle")
+                Image(systemName: "person.circle.fill")
                     .resizable()
-                    .frame(width: 130 , height: 130)
+                    .foregroundStyle(Color.gray)
+                    .frame(width: 120 , height: 120)
                 Spacer()
             }
             //            List{
             Section() {
                 TextField("Full Name", text: $name)
-                
+                    .textFieldStyle(.plain)
+                    .padding()
+                    .background(.white)
+                    .cornerRadius(10)
+                    .customShadow()
                 TextField("Email Address", text: $email)
                     .keyboardType(.emailAddress)
                     .textInputAutocapitalization(.never)
-    
+                    .textFieldStyle(.plain)
+                    .padding()
+                    .background(.white)
+                    .cornerRadius(10)
+                    .customShadow()
+                
                 TextField("Phone Number", text: $phoneNumber)
                     .keyboardType(.namePhonePad)
+                    .textFieldStyle(.plain)
+                    .padding()
+                    .background(.white)
+                    .cornerRadius(10)
+                    .customShadow()
                 
                 HStack{
                     //                    TextField("Date of Joining", text: Binding(
@@ -87,10 +102,12 @@ struct AddDoctorDetails: View {
                         .foregroundStyle(Color.gray)
                 }
                 .foregroundStyle(Color.gray.opacity(0.5))
-                .padding(.vertical)
-                .padding(.horizontal)
+                .padding()
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .border(Color.gray.opacity(0.2))
+//                .border(Color.gray.opacity(0.2))
+                .background(Color.white)
+                .cornerRadius(10)
+                .customShadow()
                 
                 HStack{
                     Text("Select Speciality")
@@ -108,7 +125,10 @@ struct AddDoctorDetails: View {
                 }
                 .padding(.horizontal)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .border(Color.gray.opacity(0.2))
+//                .border(Color.gray.opacity(0.2))
+                .background(Color.white)
+                .cornerRadius(10)
+                .customShadow()
                 
                 Picker("Gender", selection: $selectedGenderIndex) {
                     ForEach(0..<genders.count, id: \.self) {
@@ -135,7 +155,10 @@ struct AddDoctorDetails: View {
                 }
                 .padding(.horizontal)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .border(Color.gray.opacity(0.2))
+//                .border(Color.gray.opacity(0.2))
+                .background(Color.white)
+                .cornerRadius(10)
+                .customShadow()
                 
                 
                 HStack {
@@ -149,15 +172,16 @@ struct AddDoctorDetails: View {
                 .foregroundStyle(Color.gray)
                 .padding(.horizontal)
                 .padding(.vertical)
-                .border(Color.gray.opacity(0.2))
-                
-                
-                
+                .background(Color.white)
+                .cornerRadius(10)
+                .customShadow()
+//                .border(Color.gray.opacity(0.2))
             }
             .textFieldStyle(.roundedBorder)
-            
             .padding(.horizontal)
+            Spacer()
         }
+        .background(Color.background)
         .navigationTitle("Add Doctors")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
