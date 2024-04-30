@@ -31,7 +31,11 @@ struct ViewPrescription: View {
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundStyle(Color.black)) {
                     HStack {
-                        Text("Allegra 180")
+                        VStack{
+                            Text("Allegra 180")
+                            Text("(AF for 10 days)").font(.system(size: 12))
+                        }
+                        
                         Spacer()
                         VStack{
                             HStack{
