@@ -177,7 +177,7 @@ struct slotsAvailableSwiftUIView: View {
     
     private func slotColor(_ slot: [String: String]) -> Color {
         let time = slot.keys.first ?? ""
-        return time == selectedSlot ? .green.opacity(0.5) : .gray.opacity(0.2)
+        return time == selectedSlot ? .myAccent : .gray.opacity(0.2)
     }
 }
 
