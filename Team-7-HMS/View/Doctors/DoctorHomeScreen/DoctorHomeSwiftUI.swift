@@ -68,89 +68,72 @@ struct DoctorHomeSwiftUI: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            // Header
-            HStack(alignment: .top) {
-                Button {
-                    signOut()
-                } label: {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .frame(width: 70, height: 70)
-                        .foregroundColor(.gray)
-                        .padding(.trailing)
-                }
-                
-                NavigationLink(destination: LoginScreen().navigationBarBackButtonHidden(true), isActive: $shouldNavigateToLogin) {
-                    EmptyView()
-                }
-                
-                VStack(alignment: .leading) {
-                    Text("Hello 👋")
-                        .font(CentFont.mediumReg)
-                    Text(doctorName)
-                        .font(.title2)
-                }
-                Spacer()
-                NavigationLink(destination: patientNotificationSwiftUIView()) {
-                    Button(action: {
-                        // Handle button action here if needed
-                    }) {
-                        Image(systemName: "bell.fill")
+        ZStack{
+            Color.background.ignoresSafeArea()
+            VStack(alignment: .leading) {
+                // Header
+                HStack(alignment: .top) {
+                    Button {
+                        signOut()
+                    } label: {
+                        Image(systemName: "person.circle.fill")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 24)
-                            .foregroundColor(.myAccent)
+                            .frame(width: 70, height: 70)
+                            .foregroundColor(.gray)
+                            .padding(.trailing)
+                    }
+                    
+                    NavigationLink(destination: LoginScreen().navigationBarBackButtonHidden(true), isActive: $shouldNavigateToLogin) {
+                        EmptyView()
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Text("Hello 👋")
+                            .font(CentFont.mediumReg)
+                        Text(doctorName)
+                            .font(.title)
+                            .bold()
+                    }
+                    Spacer()
+                    NavigationLink(destination: patientNotificationSwiftUIView()) {
+                        Button(action: {
+                            // Handle button action here if needed
+                        }) {
+                            Image(systemName: "bell.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 24)
+                                .foregroundColor(.myAccent)
+                        }
                     }
                 }
-            }
-            // Appointments heading
-            HStack(alignment: .top) {
+                // Appointments heading
+                HStack(alignment: .top) {
                     Text("Appointments")
                         .font(.title)
                         .foregroundColor(.black)
                         .padding(.bottom, 1)
+                        .bold()
                 }
-                        
-            // Display appointment dates as circular cards
-            HStack(alignment: .top){
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment:.top, spacing: 10) {
-                        ForEach(uniqueAppointmentDates, id: \.self) { date in
-                            Button(action: {
-                                selectedDate = date
-                            }) {
-                                Text(date)
-                                    .font(.callout)
-                                    .foregroundColor(selectedDate == date ? .white : .black)
-                                    .frame(width: 40 , height : 50)
-                                    .padding()
-                                    .background(selectedDate == date ? Color.myAccent : Color.white)
-                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                
+                // Display appointment dates as circular cards
+                HStack(alignment: .top){
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(alignment:.top, spacing: 10) {
+                            ForEach(uniqueAppointmentDates, id: \.self) { date in
+                                Button(action: {
+                                    selectedDate = date
+                                }) {
+                                    Text(date)
+                                        .font(.callout)
+                                        .foregroundColor(selectedDate == date ? .white : .black)
+                                        .frame(width: 40 , height : 50)
+                                        .padding()
+                                        .background(selectedDate == date ? Color.myAccent : Color.white)
+                                        .clipShape(RoundedRectangle(cornerRadius: 20))
                                     
-                                    .customShadow()
-                            }
-                        }
-                    }
-                    
-                }
-            }
-                        
-            Spacer().frame(height: 5)
-            
-            Picker("Appointment Type", selection: $selectedAppointmentTypeIndex) {
-                            ForEach(0..<appointmentType.count, id: \.self) {
-                                Text(appointmentType[$0])
-                            }
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
-                        .padding(.vertical)
-                        
-                        // Display appointments based on selected segment
-                        ScrollView {
-                            ForEach(displayedAppointments) { appointment in
-                                DoctorAppointmentCard(appointmentData: appointment)
-                                    
+                                        .customShadow()
+                                }
                             }
                         }
                     }

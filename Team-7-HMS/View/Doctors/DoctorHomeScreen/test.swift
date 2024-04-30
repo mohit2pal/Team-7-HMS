@@ -11,41 +11,40 @@ struct DoctorAppointmentCard: View {
     var appointmentData: DoctorAppointmentCardData
     var body: some View {
                 HStack(spacing: 10) {
-                    // Left Circular Card with Time
-                    Circle()
-                        .fill(Color.myAccent)
-                        .frame(width: 100, height: 100)
-                        .overlay(
-                            Text(appointmentData.time)
-                                .foregroundColor(.white)
-                                .font(.headline)
-                        )
-        
+                    
                     // Right Rectangular Card with Patient Information
                     RoundedRectangle(cornerRadius: 15)
-                        .fill(Color.myAccent)
-                        .frame(height: 100)
+                        .fill(Color.white)
+                        .frame(width: 290, height: 130)
                         .overlay(
                             HStack {
                                 VStack(alignment: .leading, spacing: 5){
                                     Text(appointmentData.patientName)
-                                        .foregroundColor(.white)
-                                        .font(.headline)
+                                        .foregroundColor(.black)
+                                        .font(.title2)
+                                        .padding(.init(top: 0, leading: 0, bottom: 1, trailing: 0))
                                     Text("\(appointmentData.gender), \(appointmentData.age)")
-                                        .foregroundColor(.white)
-                                        .font(.subheadline)
+                                        .foregroundColor(.black)
+                                        .font(.title3)
                                     Text("\(appointmentData.day), \(appointmentData.date), \(appointmentData.year)")
-                                        .foregroundColor(.white)
-                                        .font(.subheadline)
+                                        .foregroundColor(.black)
+                                        .font(.title3)
+                                    Text(appointmentData.time)
+                                        .foregroundColor(.black)
+                                        .font(.title3)
                                 }//VStack End
                                 Spacer() // Add Spacer to push the arrow to the right
-        
-                                Image("Arrow")
-                                    .rotationEffect(.degrees(180))
-                                    .font(.headline)
+                                VStack{
+                                    Image("Arrow")
+                                        .rotationEffect(.degrees(180))
+                                        .foregroundColor(Color("PrimaryColor"))
+                                    Spacer()
+                                    
+                                }
                             }//Hstack End
                             .padding()
                         )
+                        .shadow(color: Color("PrimaryColor").opacity(0.4), radius: 3, x: 0, y: 0)
                 }
 //                .customShadow()
     }
