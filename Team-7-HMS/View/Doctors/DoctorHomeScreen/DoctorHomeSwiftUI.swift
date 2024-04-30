@@ -18,17 +18,18 @@ struct DoctorHomeSwiftUI: View {
     @State var selectedDate: String? = nil
     let appointmentType = ["Upcoming", "Completed"]
     
+    @State var fetchedAppointments: [DoctorAppointmentCardData] = []
+    
     // Separate arrays for upcoming and completed appointments
     var displayedAppointments: [DoctorAppointmentCardData] {
-        let allAppointments = DoctorAppointmentMockData.doctorAppointmentDataArray
         switch selectedAppointmentTypeIndex {
         case 0:
-            return filterAppointments(appointments: allAppointments, date: selectedDate, status: "Upcoming")
+            return filterAppointments(appointments: fetchedAppointments, date: selectedDate, status: "Upcoming")
         case 1:
             if let selectedDate = selectedDate {
-                return allAppointments.filter { $0.date == selectedDate && $0.status == "Completed" }
+                return fetchedAppointments.filter { $0.date == selectedDate && $0.status == "Completed" }
             } else {
-                return allAppointments.filter { $0.status == "Completed" }
+                return fetchedAppointments.filter { $0.status == "Completed" }
             }
         default:
             return []
@@ -67,94 +68,92 @@ struct DoctorHomeSwiftUI: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            // Header
-            HStack(alignment: .top) {
-                Button {
-                    signOut()
-                } label: {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .frame(width: 70, height: 70)
-                        .foregroundColor(.gray)
-                        .padding(.trailing)
-                }
-                
-                NavigationLink(destination: LoginScreen().navigationBarBackButtonHidden(true), isActive: $shouldNavigateToLogin) {
-                    EmptyView()
-                }
-                
-                VStack(alignment: .leading) {
-                    Text("Hello 👋")
-                        .font(CentFont.mediumReg)
-                    Text(doctorName)
-                        .font(.title2)
-                }
-                Spacer()
-                NavigationLink(destination: patientNotificationSwiftUIView()) {
-                    Button(action: {
-                        // Handle button action here if needed
-                    }) {
-                        Image(systemName: "bell.fill")
+        ZStack{
+            Color.background.ignoresSafeArea()
+            VStack(alignment: .leading) {
+                // Header
+                HStack(alignment: .top) {
+                    Button {
+                        signOut()
+                    } label: {
+                        Image(systemName: "person.circle.fill")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 24)
-                            .foregroundColor(.myAccent)
+                            .frame(width: 70, height: 70)
+                            .foregroundColor(.gray)
+                            .padding(.trailing)
+                    }
+                    
+                    NavigationLink(destination: LoginScreen().navigationBarBackButtonHidden(true), isActive: $shouldNavigateToLogin) {
+                        EmptyView()
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Text("Hello 👋")
+                            .font(CentFont.mediumReg)
+                        Text(doctorName)
+                            .font(.title)
+                            .bold()
+                    }
+                    Spacer()
+                    NavigationLink(destination: patientNotificationSwiftUIView()) {
+                        Button(action: {
+                            // Handle button action here if needed
+                        }) {
+                            Image(systemName: "bell.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 24)
+                                .foregroundColor(.myAccent)
+                        }
                     }
                 }
-            }
-            // Appointments heading
-            HStack(alignment: .top) {
+                // Appointments heading
+                HStack(alignment: .top) {
                     Text("Appointments")
                         .font(.title)
                         .foregroundColor(.black)
                         .padding(.bottom, 1)
+                        .bold()
                 }
-                        
-            // Display appointment dates as circular cards
-            HStack(alignment: .top){
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment:.top, spacing: 10) {
-                        ForEach(uniqueAppointmentDates, id: \.self) { date in
-                            Button(action: {
-                                selectedDate = date
-                            }) {
-                                Text(date)
-                                    .font(.callout)
-                                    .foregroundColor(selectedDate == date ? .white : .black)
-                                    .frame(width: 40 , height : 50)
-                                    .padding()
-                                    .background(selectedDate == date ? Color.myAccent : Color.white)
-                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                
+                // Display appointment dates as circular cards
+                HStack(alignment: .top){
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(alignment:.top, spacing: 10) {
+                            ForEach(uniqueAppointmentDates, id: \.self) { date in
+                                Button(action: {
+                                    selectedDate = date
+                                }) {
+                                    Text(date)
+                                        .font(.callout)
+                                        .foregroundColor(selectedDate == date ? .white : .black)
+                                        .frame(width: 40 , height : 50)
+                                        .padding()
+                                        .background(selectedDate == date ? Color.myAccent : Color.white)
+                                        .clipShape(RoundedRectangle(cornerRadius: 20))
                                     
-                                    .customShadow()
-                            }
-                        }
-                    }
-                    
-                }
-            }
-                        
-            Spacer().frame(height: 5)
-            
-            Picker("Appointment Type", selection: $selectedAppointmentTypeIndex) {
-                            ForEach(0..<appointmentType.count, id: \.self) {
-                                Text(appointmentType[$0])
-                            }
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
-                        .padding(.vertical)
-                        
-                        // Display appointments based on selected segment
-                        ScrollView {
-                            ForEach(displayedAppointments) { appointment in
-                                DoctorAppointmentCard(appointmentData: appointment)
-                                    
+                                        .customShadow()
+                                }
                             }
                         }
                     }
         .padding([.horizontal, .top])
         .background(Color.background)
+        .onAppear{
+            print("this is my doctorUID : \(doctorUid)")
+            FirebaseHelperFunctions.getAppointmentsForDoctor(doctorUID: doctorUid) { appointments, error in
+                     if let error = error {
+                         print("Error retrieving appointments:", error)
+                         // Handle error if needed
+                     } else {
+                    
+                         if let appointments = appointments {
+                             self.fetchedAppointments = appointments
+                             print(appointments)
+                         }
+                     }
+                 }
+        }
     }
     
     func signOut() {
@@ -166,6 +165,22 @@ struct DoctorHomeSwiftUI: View {
             print("Error signing out: \(signOutError.localizedDescription)")
         }
     }
+    
+//    func fetchAppointments() {
+//        // Assuming FirebaseHelperFunctions.getAppointmentsForDoctor is a static method
+//        // Adjust this call according to your actual implementation
+//        print(doctorUid)
+//        FirebaseHelperFunctions.getAppointmentsForDoctor(doctorUID: doctorUid) { appointments, error in
+//            if let error = error {
+//                print("Error fetching appointments: \(error.localizedDescription)")
+//            } else if let appointments = appointments {
+//                DispatchQueue.main.async {
+//                    self.fetchedAppointments = appointments
+//                    //print(appointments)
+//                }
+//            }
+//        }
+//    }
 }
 
 
