@@ -249,6 +249,7 @@ struct LoginScreen: View {
             
             
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     func fetchCurrentUserAndData() {
@@ -256,7 +257,7 @@ struct LoginScreen: View {
             self.currentUser = user
             
             // Fetch patient data using the user's UID
-            FirebaseHelperFunctions.fetchPatientData(by: user.uid) { patient, error in
+            FirebaseHelperFunctions().fetchPatientData(by: user.uid) { patient, error in
                 if let patient = patient {
                     self.patient = patient // Store fetched patient data
                 } else {

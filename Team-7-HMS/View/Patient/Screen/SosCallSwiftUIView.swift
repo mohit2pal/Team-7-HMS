@@ -17,22 +17,31 @@ struct SosCallSwiftUIView: View {
                     Spacer()
                 }
                 
-                Spacer().frame(height: 30)
+                Spacer().frame(height: 100)
                 
                 Image("AmbulanceImage")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 325)
+                    .frame(width: 400)
                 
                 Spacer()
-                    .frame(height: 30)
+                    .frame(height: 40)
                 
-                Text("In case of emergency\nTap the button below to call now")
+                Text("Get Instant Ambulance \n by Calling the following number.")
                     .multilineTextAlignment(.center)
                     .font(CentFont.smallReg)
                 
                 Spacer()
-                    .frame(height: 30)
+                    .frame(height: 60)
+                
+                
+    
+                Text("+91 98765 43210\n+91 98765 43210")
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.gray)
+                
+                Spacer()
+                    .frame(height: 60)
                 
                 Button(action: {
                     guard let phoneURL = URL(string: "tel://9237498273") else { return }
@@ -48,15 +57,10 @@ struct SosCallSwiftUIView: View {
                 .padding(.horizontal)
                 .background(Color.red)
                 .cornerRadius(20)
-                
-                Spacer()
-                Text("+91 98765 43210\n+91 98765 43210")
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.gray)
             }
             .padding()
-            .background(Color.background)
         }
+        .background(Color.background)
     }
 }
 

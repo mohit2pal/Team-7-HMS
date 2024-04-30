@@ -1,24 +1,15 @@
-//import SwiftUI
+//import FirebaseFirestore
 //
-//struct ContentView: View {
-//    @State private var phoneNumber = ""
-//    @State private var isValidPhoneNumber = true
-//
-//    var body: some View {
-//        TextField("Phone Number", text: $phoneNumber)
-//            .keyboardType(.namePhonePad)
-//            .textFieldStyle(.plain)
-//            .padding()
-//            .background(isValidPhoneNumber ? Color.white : Color.red)
-//            .cornerRadius(10)
-//            .onChange(of: phoneNumber) { newValue in
-//                isValidPhoneNumber = isValidPhone(testStr: newValue)
-//            }
-//    }
-//
-//    func isValidPhone(testStr:String) -> Bool {
-//        let phoneRegEx = "^\\d{3}-\\d{3}-\\d{4}$"
-//        let phoneTest = NSPredicate(format:"SELF MATCHES %@", phoneRegEx)
-//        return phoneTest.evaluate(with: testStr)
-//    }
+//// Initialize an instance of DoctorDetails with the mock data
+//if let mockDoctorDetails = DoctorDetails(dictionary: mockDoctorData) {
+//    print("Doctor Name: \(mockDoctorDetails.name)")
+//    print("Email: \(mockDoctorDetails.email)")
+//    print("Specialty: \(mockDoctorDetails.specialty)")
+//    print("Experience: \(mockDoctorDetails.experience) years")
+//    print("Gender: \(mockDoctorDetails.gender)")
+//    print("Education: \(mockDoctorDetails.education)")
+//    print("Phone Number: \(mockDoctorDetails.phoneNumber)")
+//    print("Date of Joining: \(mockDoctorDetails.dateOfJoining)")
+//} else {
+//    print("Failed to initialize DoctorDetails with mock data.")
 //}

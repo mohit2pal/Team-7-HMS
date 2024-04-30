@@ -9,6 +9,8 @@ import SwiftUI
 import FirebaseAuth
 
 struct DoctorHomeSwiftUI: View {
+    @State var doctorUid: String
+    @State var doctor: DoctorDetails
     @State private var shouldNavigateToLogin = false
     
     @State var doctorName: String
@@ -150,5 +152,5 @@ struct DoctorHomeSwiftUI: View {
 
 
 #Preview {
-    DoctorHomeSwiftUI(doctorName: "Dr.Prakash")
+    DoctorHomeSwiftUI(doctorUid: "hi", doctor: DoctorDetails(dictionary: mockDoctorData)!, doctorName: "Dr.Prakash")
 }

@@ -261,7 +261,7 @@ class FirebaseHelperFunctions {
     
     
     // Function to fetch patient data by UUID
-    static func fetchPatientData(by uuid: String, completion: @escaping (Patient?, Error?) -> Void) {
+   func fetchPatientData(by uuid: String, completion: @escaping (Patient?, Error?) -> Void) {
         // Reference to the Firestore database
         let db = Firestore.firestore()
         
@@ -285,6 +285,27 @@ class FirebaseHelperFunctions {
             }
         }
     }
+    
+    
+    func fetchPatientInfo(by uuid: String, completion: @escaping ([String: Any]?, Error?) -> Void) {
+        // Reference to the Firestore database
+        let db = Firestore.firestore()
+        
+        // Reference to the specific patient document using the UUID
+        let patientDocRef = db.collection("patient_details").document(uuid)
+        
+        // Fetch the document for the specified UUID
+        patientDocRef.getDocument { (document, error) in
+            if let error = error {
+                // If there's an error fetching the document, pass the error to the completion handler
+                completion(nil, error)
+            } else {
+                // If the document is fetched successfully, pass the document data to the completion handler
+                completion(document?.data(), nil)
+            }
+        }
+    }
+
     // Function to fetch only the doctor name, specialty, and document ID from Firestore
     func fetchAllDoctors(completion: @escaping (Result<[DoctorInfo], Error>) -> Void) {
         let db = Firestore.firestore()
@@ -566,7 +587,76 @@ class FirebaseHelperFunctions {
             return nil
         }
     }
-
+    
+    
+    // get medical Records
+    func getMedicalRecords(patientUID: String, completion: @escaping (PatientMedicalRecords?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        let docRef = db.collection("patient_details").document(patientUID)
+        
+        docRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error fetching document: \(error)")
+                completion(nil, error)
+                return
+            }
+            
+            guard let document = document, document.exists else {
+                print("Document does not exist")
+                completion(nil, nil)
+                return
+            }
+            
+            if let data = document.data() {
+                // Assuming you have a field called "medicalRecords" which holds the medical records
+                if let medicalRecords = data["medicalRecords"] as? [String: Any] {
+                    // Extracting values from Firestore data and creating PatientMedicalRecords instance
+                    if let pastMedicalHistory = medicalRecords["pastMedicalHistory"] as? [String],
+                       let surgeries = medicalRecords["surgeries"] as? [String],
+                       let allergies = medicalRecords["alergies"] as? [String],
+                       let bloodGroup = medicalRecords["bloodGroup"] as? String,
+                       let gender = medicalRecords["gender"] as? String,
+                       let height = medicalRecords["height"] as? String,
+                       let weight = medicalRecords["weight"] as? String,
+                       let phoneNumber = medicalRecords["phoneNumber"] as? String {
+                        
+                        let patientMedicalRecord = PatientMedicalRecords(alergies: allergies, pastMedical: pastMedicalHistory, surgeries: surgeries, bloodGroup: bloodGroup, gender: gender, height: height, weight: weight, phoneNumber: phoneNumber)
+                        
+                        completion(patientMedicalRecord, nil)
+                    } else {
+                        print("Some fields are missing or have incorrect types")
+                        completion(nil, nil)
+                    }
+                } else {
+                    print("Medical records not found for this patient")
+                    completion(nil, nil)
+                }
+            } else {
+                print("Document data was empty.")
+                completion(nil, nil)
+            }
+        }
+    }
+    
+    func fetchDoctorDetails(by docId: String, completion: @escaping (DoctorDetails?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("doctor_details").document(docId)
+        
+        docRef.getDocument { (document, error) in
+            if let error = error {
+                completion(nil, error)
+            } else if let document = document, document.exists, let data = document.data() {
+                if let doctorDetails = DoctorDetails(dictionary: data) {
+                    completion(doctorDetails, nil)
+                } else {
+                    completion(nil, NSError(domain: "DataModelingError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to model doctor data."]))
+                }
+            } else {
+                completion(nil, NSError(domain: "DocumentNotFoundError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Document does not exist."]))
+            }
+        }
+    }
     
 }
 
