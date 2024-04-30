@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		095E99AA2BDF711F00BF9CAE /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095E99A92BDF711E00BF9CAE /* PickerView.swift */; };
+		095E99AC2BE0E4E300BF9CAE /* ViewPrescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095E99AB2BE0E4E300BF9CAE /* ViewPrescription.swift */; };
 		096DA7CB2BDA0AF800241449 /* BookAppointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DA7CA2BDA0AF800241449 /* BookAppointment.swift */; };
 		096DA7CD2BDA457800241449 /* BookLab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DA7CC2BDA457800241449 /* BookLab.swift */; };
 		133642742BDF77B000926989 /* LabReportUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133642732BDF77B000926989 /* LabReportUploadView.swift */; };
@@ -112,6 +113,7 @@
 
 /* Begin PBXFileReference section */
 		095E99A92BDF711E00BF9CAE /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		095E99AB2BE0E4E300BF9CAE /* ViewPrescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPrescription.swift; sourceTree = "<group>"; };
 		096DA7CA2BDA0AF800241449 /* BookAppointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAppointment.swift; sourceTree = "<group>"; };
 		096DA7CC2BDA457800241449 /* BookLab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookLab.swift; sourceTree = "<group>"; };
 		133642732BDF77B000926989 /* LabReportUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReportUploadView.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				3763784E2BD7D15900CB6198 /* PatientHistory.swift */,
 				369ADAF12BDE85200062CFDD /* navt.swift */,
 				174C2D062BD629D200945401 /* LoginScreen.swift */,
+				095E99AB2BE0E4E300BF9CAE /* ViewPrescription.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */,
 				13FA586B2BD7BDCC00AC8CA4 /* SignUpScreen.swift in Sources */,
 				096DA7CD2BDA457800241449 /* BookLab.swift in Sources */,
+				095E99AC2BE0E4E300BF9CAE /* ViewPrescription.swift in Sources */,
 				13D816D12BD901EE00D36A9C /* OnBoardingDoctor.swift in Sources */,
 				364631FB2BDA1E6600DD53CC /* HealthKitAppIntegration.swift in Sources */,
 				37D3A14B2BDA492000C04F35 /* DoctorHomeSwiftUI.swift in Sources */,
