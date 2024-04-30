@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		095E99AA2BDF711F00BF9CAE /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095E99A92BDF711E00BF9CAE /* PickerView.swift */; };
+		096DA7CB2BDA0AF800241449 /* BookAppointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DA7CA2BDA0AF800241449 /* BookAppointment.swift */; };
+		096DA7CD2BDA457800241449 /* BookLab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DA7CC2BDA457800241449 /* BookLab.swift */; };
 		133642742BDF77B000926989 /* LabReportUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133642732BDF77B000926989 /* LabReportUploadView.swift */; };
 		13D816D12BD901EE00D36A9C /* OnBoardingDoctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D816D02BD901ED00D36A9C /* OnBoardingDoctor.swift */; };
 		13EF0E372BD7A4A80015FDDA /* OnBoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF0E362BD7A4A80015FDDA /* OnBoardingScreen.swift */; };
@@ -108,6 +111,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		095E99A92BDF711E00BF9CAE /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		096DA7CA2BDA0AF800241449 /* BookAppointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAppointment.swift; sourceTree = "<group>"; };
+		096DA7CC2BDA457800241449 /* BookLab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookLab.swift; sourceTree = "<group>"; };
 		133642732BDF77B000926989 /* LabReportUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReportUploadView.swift; sourceTree = "<group>"; };
 		13D816D02BD901ED00D36A9C /* OnBoardingDoctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingDoctor.swift; sourceTree = "<group>"; };
 		13EF0E362BD7A4A80015FDDA /* OnBoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScreen.swift; sourceTree = "<group>"; };
@@ -222,6 +228,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		096DA7C92BDA0AD800241449 /* LabReports */ = {
+			isa = PBXGroup;
+			children = (
+				096DA7CA2BDA0AF800241449 /* BookAppointment.swift */,
+				096DA7CC2BDA457800241449 /* BookLab.swift */,
+				095E99A92BDF711E00BF9CAE /* PickerView.swift */,
+			);
+			path = LabReports;
+			sourceTree = "<group>";
+		};
 		176900172BD2A94500F5F81E = {
 			isa = PBXGroup;
 			children = (
@@ -435,6 +451,7 @@
 		B1639D072BD8D9DD00EAB15E /* PatientHome and Appointments */ = {
 			isa = PBXGroup;
 			children = (
+				096DA7C92BDA0AD800241449 /* LabReports */,
 				B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */,
 				B1639D162BD8E31300EAB15E /* appointmentCardDataM.swift */,
 				B1639D142BD8E2AD00EAB15E /* patientAppointmentCard.swift */,
@@ -632,6 +649,7 @@
 				36B1F1762BDCB3BF00D5A9DF /* test.swift in Sources */,
 				174C2D072BD629D300945401 /* LoginScreen.swift in Sources */,
 				B1639D132BD8DA8200EAB15E /* SosCallSwiftUIView.swift in Sources */,
+				096DA7CB2BDA0AF800241449 /* BookAppointment.swift in Sources */,
 				133642742BDF77B000926989 /* LabReportUploadView.swift in Sources */,
 				17F63AF02BD671080089511F /* +View.swift in Sources */,
 				17F7C66F2BDEC37A00720B5E /* AdminHomeView.swift in Sources */,
@@ -650,11 +668,13 @@
 				B1639D092BD8DA1700EAB15E /* CentralisedFonts.swift in Sources */,
 				17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */,
 				360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */,
+				095E99AA2BDF711F00BF9CAE /* PickerView.swift in Sources */,
 				13EF0E372BD7A4A80015FDDA /* OnBoardingScreen.swift in Sources */,
 				17F63B272BDA127D0089511F /* AppState.swift in Sources */,
 				176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */,
 				3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */,
 				13FA586B2BD7BDCC00AC8CA4 /* SignUpScreen.swift in Sources */,
+				096DA7CD2BDA457800241449 /* BookLab.swift in Sources */,
 				13D816D12BD901EE00D36A9C /* OnBoardingDoctor.swift in Sources */,
 				364631FB2BDA1E6600DD53CC /* HealthKitAppIntegration.swift in Sources */,
 				37D3A14B2BDA492000C04F35 /* DoctorHomeSwiftUI.swift in Sources */,
