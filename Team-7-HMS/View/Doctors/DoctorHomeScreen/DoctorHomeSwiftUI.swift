@@ -42,11 +42,29 @@ struct DoctorHomeSwiftUI: View {
                 return appointments.filter { $0.status == status }
             }
         }
+    
+    func generateDateList() -> [String] {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd EE"
         
-        var uniqueAppointmentDates: [String] {
-            let allDates = DoctorAppointmentMockData.doctorAppointmentDataArray.map { $0.date }
-            return Array(Set(allDates))
+        var dateList = [String]()
+        let today = Date()
+        let calendar = Calendar.current
+        
+        for i in 0..<7 {
+            if let nextDate = calendar.date(byAdding: .day, value: i, to: today) {
+                let dateString = dateFormatter.string(from: nextDate)
+                dateList.append(dateString)
+
+            }
         }
+        
+        return dateList
+    }
+
+    var uniqueAppointmentDates: [String] {
+        generateDateList()
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -70,7 +88,7 @@ struct DoctorHomeSwiftUI: View {
                     Text("Hello 👋")
                         .font(CentFont.mediumReg)
                     Text(doctorName)
-                        .font(CentFont.largeSemiBold)
+                        .font(.title2)
                 }
                 Spacer()
                 NavigationLink(destination: patientNotificationSwiftUIView()) {
@@ -97,18 +115,18 @@ struct DoctorHomeSwiftUI: View {
             HStack(alignment: .top){
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment:.top, spacing: 10) {
-                        ForEach(uniqueAppointmentDates.sorted(), id: \.self) { date in
+                        ForEach(uniqueAppointmentDates, id: \.self) { date in
                             Button(action: {
-                                // Set selectedDate to filter appointments by this date
                                 selectedDate = date
                             }) {
                                 Text(date)
-                                    .font(.title3)
+                                    .font(.callout)
                                     .foregroundColor(selectedDate == date ? .white : .black)
-                                    .padding(30)
+                                    .frame(width: 40 , height : 50)
+                                    .padding()
                                     .background(selectedDate == date ? Color.myAccent : Color.white)
-                                    .clipShape(Circle())
-                                    .frame(width:100)
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    
                                     .customShadow()
                             }
                         }

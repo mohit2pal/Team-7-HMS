@@ -15,6 +15,7 @@
 		13D816D12BD901EE00D36A9C /* OnBoardingDoctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D816D02BD901ED00D36A9C /* OnBoardingDoctor.swift */; };
 		13EF0E372BD7A4A80015FDDA /* OnBoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF0E362BD7A4A80015FDDA /* OnBoardingScreen.swift */; };
 		13FA586B2BD7BDCC00AC8CA4 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FA586A2BD7BDCC00AC8CA4 /* SignUpScreen.swift */; };
+		171925562BE0DC8B0012E54D /* DoctorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171925552BE0DC8B0012E54D /* DoctorView.swift */; };
 		174C2D072BD629D300945401 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C2D062BD629D200945401 /* LoginScreen.swift */; };
 		176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */; };
 		176900262BD2A94500F5F81E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176900252BD2A94500F5F81E /* ContentView.swift */; };
@@ -120,6 +121,7 @@
 		13D816D02BD901ED00D36A9C /* OnBoardingDoctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingDoctor.swift; sourceTree = "<group>"; };
 		13EF0E362BD7A4A80015FDDA /* OnBoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScreen.swift; sourceTree = "<group>"; };
 		13FA586A2BD7BDCC00AC8CA4 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		171925552BE0DC8B0012E54D /* DoctorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorView.swift; sourceTree = "<group>"; };
 		174C2D062BD629D200945401 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		176900202BD2A94500F5F81E /* Team-7-HMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team-7-HMS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team_7_HMSApp.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */,
 				13D816D02BD901ED00D36A9C /* OnBoardingDoctor.swift */,
 				133642732BDF77B000926989 /* LabReportUploadView.swift */,
+				171925552BE0DC8B0012E54D /* DoctorView.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -682,6 +685,7 @@
 				13D816D12BD901EE00D36A9C /* OnBoardingDoctor.swift in Sources */,
 				364631FB2BDA1E6600DD53CC /* HealthKitAppIntegration.swift in Sources */,
 				37D3A14B2BDA492000C04F35 /* DoctorHomeSwiftUI.swift in Sources */,
+				171925562BE0DC8B0012E54D /* DoctorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
