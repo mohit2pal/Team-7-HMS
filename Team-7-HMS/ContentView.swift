@@ -36,7 +36,7 @@ struct ContentView: View {
                         }
                     } else if role == "doctor" {
                         if let doctor = doctor {
-                            DoctorHomeSwiftUI(doctorUid: self.currentUser?.uid ?? "Not Fetched", doctor: doctor, doctorName: doctor.name)
+                            DoctorView(doctorUid: self.currentUser?.uid ?? "Not Fetched", doctorDetails: doctor, doctorName: doctor.name)
                         }
                     } else {
                         OnBoardingScreen()

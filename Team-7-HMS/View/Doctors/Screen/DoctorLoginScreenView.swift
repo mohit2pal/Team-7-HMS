@@ -71,7 +71,7 @@ struct DoctorLoginScreenView: View {
                                 
                                 if let doctor = doctor {
                                     navigationDestination(isPresented: $isLoggedIn, destination: {
-                                        DoctorHomeSwiftUI(doctorUid: uuid, doctor: doctor, doctorName: doctor.name)
+                                        DoctorView(doctorUid: uuid, doctorDetails: doctor, doctorName: doctor.name)
                                             .navigationBarBackButtonHidden(true)
                                     })
                                 }
