@@ -638,8 +638,25 @@ class FirebaseHelperFunctions {
             }
         }
     }
-
-
+    
+    func fetchDoctorDetails(by docId: String, completion: @escaping (DoctorDetails?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("doctor_details").document(docId)
+        
+        docRef.getDocument { (document, error) in
+            if let error = error {
+                completion(nil, error)
+            } else if let document = document, document.exists, let data = document.data() {
+                if let doctorDetails = DoctorDetails(dictionary: data) {
+                    completion(doctorDetails, nil)
+                } else {
+                    completion(nil, NSError(domain: "DataModelingError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to model doctor data."]))
+                }
+            } else {
+                completion(nil, NSError(domain: "DocumentNotFoundError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Document does not exist."]))
+            }
+        }
+    }
     
 }
 

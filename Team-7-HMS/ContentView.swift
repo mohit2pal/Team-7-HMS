@@ -13,6 +13,7 @@ struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @State private var currentUser: User? = nil
     @State private var patient: Patient? = nil // Add this line to store fetched patient data
+    @State private var doctor: DoctorDetails? = nil
     @State var patientID : String?
     @State private var isShowingSplash = true
     @State var role: String?
@@ -31,10 +32,12 @@ struct ContentView: View {
                 } else {
                     if role == "patient" {
                         if let patient = patient {
-                            PatientView(patientName: patient.name, showPatientHistory: false, patientUid: self.currentUser?.uid ?? "Not fetched")
+                            PatientView(patientName: patient.name, showPatientHistory: false, patientUid: self.currentUser?.uid ?? "Not Fetched")
                         }
                     } else if role == "doctor" {
-                        DoctorHomeSwiftUI(doctorName: "Currently Static")
+                        if let doctor = doctor {
+                            DoctorHomeSwiftUI(doctorUid: self.currentUser?.uid ?? "Not Fetched", doctor: doctor, doctorName: doctor.name)
+                        }
                     } else {
                         OnBoardingScreen()
                     }
@@ -94,6 +97,14 @@ struct ContentView: View {
                         // User UID is in the doctor_details collection
                         self.role = "doctor"
                         // Here, you might want to fetch doctor-specific data similarly
+                        FirebaseHelperFunctions().fetchDoctorDetails(by: user.uid) { doctor, error in
+                            if let doctor = doctor {
+                                self.doctor = doctor
+                                print(self.doctor!)
+                            } else {
+                                print(error?.localizedDescription ?? "Failed to fetch doctor data")
+                            }
+                        }
                     } else {
                         // Handle case where user is neither in patient_details nor doctor_details
                         print("User is not found in patient_details or doctor_details")

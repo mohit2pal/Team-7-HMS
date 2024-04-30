@@ -249,6 +249,7 @@ struct LoginScreen: View {
             
             
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     func fetchCurrentUserAndData() {

@@ -5,7 +5,7 @@
 //  Created by Ritwatz on 24/04/24.
 //
 
-import SwiftUI
+import Foundation
 
 struct DoctorAppointmentCardData : Identifiable {
     var id = UUID()
