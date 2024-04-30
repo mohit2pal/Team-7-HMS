@@ -18,17 +18,18 @@ struct DoctorHomeSwiftUI: View {
     @State var selectedDate: String? = nil
     let appointmentType = ["Upcoming", "Completed"]
     
+    @State var fetchedAppointments: [DoctorAppointmentCardData] = []
+    
     // Separate arrays for upcoming and completed appointments
     var displayedAppointments: [DoctorAppointmentCardData] {
-        let allAppointments = DoctorAppointmentMockData.doctorAppointmentDataArray
         switch selectedAppointmentTypeIndex {
         case 0:
-            return filterAppointments(appointments: allAppointments, date: selectedDate, status: "Upcoming")
+            return filterAppointments(appointments: fetchedAppointments, date: selectedDate, status: "Upcoming")
         case 1:
             if let selectedDate = selectedDate {
-                return allAppointments.filter { $0.date == selectedDate && $0.status == "Completed" }
+                return fetchedAppointments.filter { $0.date == selectedDate && $0.status == "Completed" }
             } else {
-                return allAppointments.filter { $0.status == "Completed" }
+                return fetchedAppointments.filter { $0.status == "Completed" }
             }
         default:
             return []
@@ -155,6 +156,21 @@ struct DoctorHomeSwiftUI: View {
                     }
         .padding([.horizontal, .top])
         .background(Color.background)
+        .onAppear{
+            print("this is my doctorUID : \(doctorUid)")
+            FirebaseHelperFunctions.getAppointmentsForDoctor(doctorUID: doctorUid) { appointments, error in
+                     if let error = error {
+                         print("Error retrieving appointments:", error)
+                         // Handle error if needed
+                     } else {
+                    
+                         if let appointments = appointments {
+                             self.fetchedAppointments = appointments
+                             print(appointments)
+                         }
+                     }
+                 }
+        }
     }
     
     func signOut() {
@@ -166,6 +182,22 @@ struct DoctorHomeSwiftUI: View {
             print("Error signing out: \(signOutError.localizedDescription)")
         }
     }
+    
+//    func fetchAppointments() {
+//        // Assuming FirebaseHelperFunctions.getAppointmentsForDoctor is a static method
+//        // Adjust this call according to your actual implementation
+//        print(doctorUid)
+//        FirebaseHelperFunctions.getAppointmentsForDoctor(doctorUID: doctorUid) { appointments, error in
+//            if let error = error {
+//                print("Error fetching appointments: \(error.localizedDescription)")
+//            } else if let appointments = appointments {
+//                DispatchQueue.main.async {
+//                    self.fetchedAppointments = appointments
+//                    //print(appointments)
+//                }
+//            }
+//        }
+//    }
 }
 
 

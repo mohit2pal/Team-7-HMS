@@ -362,6 +362,7 @@
 			children = (
 				37D3A1452BDA486600C04F35 /* DoctorHomeScreen */,
 				17F63AF52BD7A1380089511F /* Screen */,
+				171925552BE0DC8B0012E54D /* DoctorView.swift */,
 			);
 			path = Doctors;
 			sourceTree = "<group>";
@@ -372,7 +373,6 @@
 				360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */,
 				13D816D02BD901ED00D36A9C /* OnBoardingDoctor.swift */,
 				133642732BDF77B000926989 /* LabReportUploadView.swift */,
-				171925552BE0DC8B0012E54D /* DoctorView.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -400,7 +400,9 @@
 			isa = PBXGroup;
 			children = (
 				17F63B292BDA164F0089511F /* UserModel.swift */,
+				37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */,
 				17F7C6722BE00E8100720B5E /* DoctorDetails.swift */,
+				B1639D162BD8E31300EAB15E /* appointmentCardDataM.swift */,
 				36B1F1772BDD2C3000D5A9DF /* AppointmentModel.swift */,
 			);
 			path = Model;
@@ -446,7 +448,6 @@
 		37D3A1452BDA486600C04F35 /* DoctorHomeScreen */ = {
 			isa = PBXGroup;
 			children = (
-				37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */,
 				37D3A1482BDA48EA00C04F35 /* DoctorAppointmentCard.swift */,
 				36B1F1752BDCB3BF00D5A9DF /* test.swift */,
 				37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */,
@@ -459,7 +460,6 @@
 			children = (
 				096DA7C92BDA0AD800241449 /* LabReports */,
 				B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */,
-				B1639D162BD8E31300EAB15E /* appointmentCardDataM.swift */,
 				B1639D142BD8E2AD00EAB15E /* patientAppointmentCard.swift */,
 				B1639D102BD8DA7700EAB15E /* SpecialitySwiftUIView.swift */,
 				B1639D1A2BD923F400EAB15E /* DoctorNameUIView.swift */,
