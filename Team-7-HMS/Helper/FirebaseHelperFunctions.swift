@@ -444,7 +444,7 @@ class FirebaseHelperFunctions {
                 let doctorUID = document["doctorID"] as? String ?? ""
                 let dateString = document["date"] as? String ?? ""
                 
-                let day = getDayOfWeekFromDate(dateString: dateString)
+                let day = FirebaseHelperFunctions.getDayOfWeekFromDate(dateString: dateString)
                 let date = String(dateString.prefix(2))
                 let doctorInfoRef = db.collection("doctor_details").document(doctorUID)
                 
@@ -574,7 +574,7 @@ class FirebaseHelperFunctions {
     }
     
     
-    func getDayOfWeekFromDate(dateString: String) -> String? {
+    static func getDayOfWeekFromDate(dateString: String) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd_MM_yyyy" // Adjust the date format according to your input string
         
@@ -654,6 +654,81 @@ class FirebaseHelperFunctions {
                 }
             } else {
                 completion(nil, NSError(domain: "DocumentNotFoundError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Document does not exist."]))
+            }
+        }
+    }
+    
+    
+    static func getAppointmentsForDoctor(doctorUID: String, completion: @escaping ([DoctorAppointmentCardData]?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        // Reference to the appointments collection
+        let appointmentDocRef = db.collection("appointments")
+        
+        // Create a query to fetch appointments where the doctorID matches the provided doctorUID
+        let query = appointmentDocRef.whereField("doctorID", isEqualTo: doctorUID)
+        
+        // DispatchGroup to synchronize the asynchronous calls
+        let group = DispatchGroup()
+        
+        // Execute the query
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                // If there's an error executing the query, pass the error to the completion handler
+                completion(nil, error)
+                return
+            }
+            
+            var appointments: [DoctorAppointmentCardData] = []
+            
+            // Check if there are documents
+            guard let documents = querySnapshot?.documents, !documents.isEmpty else {
+                completion([], nil) // No documents found, return an empty array
+                return
+            }
+            
+            // Iterate through the documents returned by the query
+            for document in documents {
+                let patientUID = document["patientID"] as? String ?? ""
+                let dateString = document["date"] as? String ?? ""
+                let slotTime = document["slotTime"] as? String ?? ""
+                
+                // Enter the group before starting the asynchronous call
+                group.enter()
+                
+                // Fetch additional details about the patient
+                let patientDocRef = db.collection("patient_details").document(patientUID)
+                patientDocRef.getDocument { (patientDocument, patientError) in
+                    defer {
+                        group.leave() // Leave the group after the asynchronous call is completed
+                    }
+                    
+                    if let patientDocument = patientDocument, patientDocument.exists {
+                        let patientName = patientDocument["name"] as? String ?? "Unknown"
+                        let gender = patientDocument["gender"] as? String ?? "Unknown"
+                        let age = patientDocument["age"] as? Int ?? 0 // Assuming age is stored as an Int
+                        
+                        // Extract year from the date string
+                        let year = Calendar.current.component(.year, from: Date())
+                        
+                        // Assuming you have a function to get the day from the date string
+                        let day = self.getDayOfWeekFromDate(dateString: dateString) ?? "Unknown"
+                        
+                        // Create a DoctorAppointmentCardData object for each appointment
+                        let appointmentData = DoctorAppointmentCardData(date: dateString, year: year, day: day, time: slotTime, patientName: patientName, gender: gender, age: age, status: "Upcoming")
+                        
+                        // Add the appointment data to the appointments array
+                        appointments.append(appointmentData)
+                    } else if let patientError = patientError {
+                        print("Error fetching patient details: \(patientError)")
+                    }
+                }
+            }
+            
+            // Wait for all the asynchronous calls to complete
+            group.notify(queue: .main) {
+                // Call the completion handler with the final appointments array
+                completion(appointments, nil)
             }
         }
     }

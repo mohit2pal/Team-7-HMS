@@ -225,6 +225,6 @@ struct patientHomeSwiftUIView: View {
 }
 
 #Preview {
-    patientHomeSwiftUIView(patientUID: "", userName: "Bose")
+    patientHomeSwiftUIView(patientUID: "Vzo9cLiS9fZTyzpzkeH0Vure5YP2", userName: "Bose")
         .environmentObject(AppState())
 }
