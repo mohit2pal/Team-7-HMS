@@ -715,7 +715,7 @@ class FirebaseHelperFunctions {
                         let day = self.getDayOfWeekFromDate(dateString: dateString) ?? "Unknown"
                         
                         // Create a DoctorAppointmentCardData object for each appointment
-                        let appointmentData = DoctorAppointmentCardData(date: dateString, year: year, day: day, time: slotTime, patientName: patientName, gender: gender, age: age, status: "Upcoming")
+                        let appointmentData = DoctorAppointmentCardData(date: dateString, year: year, day: day, time: slotTime, patientName: patientName, gender: gender, age: age, status: "Upcoming", patientID: patientUID)
                         
                         // Add the appointment data to the appointments array
                         appointments.append(appointmentData)

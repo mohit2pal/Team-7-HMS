@@ -59,7 +59,7 @@ struct slotsAvailableSwiftUIView: View {
                         HStack{
                             Text("Selected date: ")
                                 .font(.headline)
-                            Text(date)
+                            Text(date.replacingOccurrences(of: "_", with: "-"))
                                 .foregroundStyle(Color.gray)
                                 .font(.headline)
                         }

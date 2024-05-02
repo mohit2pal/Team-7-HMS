@@ -147,17 +147,16 @@ struct DoctorHomeSwiftUI: View {
                         .padding(.vertical)
                         
                         // Display appointments based on selected segment
-                        ScrollView {
-                            ForEach(displayedAppointments) { appointment in
-                                DoctorAppointmentCard(appointmentData: appointment)
-                                    
-                            }
-                        }
-                    }
+            ScrollView {
+                ForEach(displayedAppointments) { appointment in
+                    DoctorAppointmentCard(appointmentData: appointment)
+                }
+            }
+            }
         .padding([.horizontal, .top])
         .background(Color.background)
         .onAppear{
-            print("this is my doctorUID : \(doctorUid)")
+            
             FirebaseHelperFunctions.getAppointmentsForDoctor(doctorUID: doctorUid) { appointments, error in
                      if let error = error {
                          print("Error retrieving appointments:", error)
@@ -166,7 +165,6 @@ struct DoctorHomeSwiftUI: View {
                     
                          if let appointments = appointments {
                              self.fetchedAppointments = appointments
-                             print(appointments)
                          }
                      }
                  }
@@ -182,25 +180,11 @@ struct DoctorHomeSwiftUI: View {
             print("Error signing out: \(signOutError.localizedDescription)")
         }
     }
-    
-//    func fetchAppointments() {
-//        // Assuming FirebaseHelperFunctions.getAppointmentsForDoctor is a static method
-//        // Adjust this call according to your actual implementation
-//        print(doctorUid)
-//        FirebaseHelperFunctions.getAppointmentsForDoctor(doctorUID: doctorUid) { appointments, error in
-//            if let error = error {
-//                print("Error fetching appointments: \(error.localizedDescription)")
-//            } else if let appointments = appointments {
-//                DispatchQueue.main.async {
-//                    self.fetchedAppointments = appointments
-//                    //print(appointments)
-//                }
-//            }
-//        }
-//    }
 }
 
 
 #Preview {
-    DoctorHomeSwiftUI(doctorUid: "hi", doctor: DoctorDetails(dictionary: mockDoctorData)!, doctorName: "Dr.Prakash")
+    NavigationStack{
+        DoctorHomeSwiftUI(doctorUid: "3npmgJzI3gSWiBpnTdTRTCEBPtX2", doctor: DoctorDetails(dictionary: mockDoctorData)!, doctorName: "Dr.Prakash")
+    }
 }
