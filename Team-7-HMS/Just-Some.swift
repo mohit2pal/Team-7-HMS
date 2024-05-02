@@ -1,63 +1,75 @@
 //import SwiftUI
-//import FirebaseAuth
 //
-//struct DoctorHomeSwiftUI: View {
-//    @State var doctorUid: String
-//    @State var doctor: DoctorDetails
-//    @State private var shouldNavigateToLogin = false
-//    
-//    @State var doctorName: String
-//    @State var selectedAppointmentTypeIndex: Int = 0
-//    @State var selectedDate: String? = nil
-//    let appointmentType = ["Upcoming", "Completed"]
-//    
-//    // Updated to hold fetched appointments
-//    @State var fetchedAppointments: [DoctorAppointmentCardData] = []
-//    
-//    var displayedAppointments: [DoctorAppointmentCardData] {
-//        switch selectedAppointmentTypeIndex {
-//        case 0:
-//            return filterAppointments(appointments: fetchedAppointments, date: selectedDate, status: "Upcoming")
-//        case 1:
-//            if let selectedDate = selectedDate {
-//                return fetchedAppointments.filter { $0.date == selectedDate && $0.status == "Completed" }
-//            } else {
-//                return fetchedAppointments.filter { $0.status == "Completed" }
-//            }
-//        default:
-//            return []
+//struct AddingSlot: View {
+//    @State private var doctors: [DoctorInfo] = []
+//    @State private var selectedDoctor: DoctorInfo? = nil {
+//        didSet {
+//            fetchBookedSlots()
 //        }
 //    }
-//
-//    // Existing code for filterAppointments and generateDateList functions...
-//
-//    var body: some View {
-//        VStack(alignment: .leading) {
-//            // Existing UI code...
-//        }
-//        .padding([.horizontal, .top])
-//        .background(Color.background)
-//        .onAppear {
-//            fetchAppointments()
+//    @State private var selectedDate: Date? = nil {
+//        didSet{
+//            fetchBookedSlots()
 //        }
 //    }
+//    @State private var searchText = ""
+//    @State private var bookedSlots: [String] = []
+//    @State private var selectedSlots: [String] = []
+//    @State private var showSuccessAnimation = false // New state variable for showing the tick animation
 //    
-//    // Existing code for signOut function...
-//
-//    // New function to fetch appointments
-//    private func fetchAppointments() {
-//        // Assuming FirebaseHelperFunctions.getAppointmentsForDoctor is a static method
-//        // Adjust this call according to your actual implementation
-//        FirebaseHelperFunctions.getAppointmentsForDoctor(doctorUID: doctorUid) { appointments, error in
-//            if let error = error {
-//                print("Error fetching appointments: \(error.localizedDescription)")
-//            } else if let appointments = appointments {
-//                DispatchQueue.main.async {
-//                    self.fetchedAppointments = appointments
+//    let firebaseHelper = FirebaseHelperFunctions()
+//    
+//    // Existing code remains unchanged...
+//    
+//    // MARK: - Submit Button
+//    var submitButton: some View {
+//        Button(action: {
+//            if let selectedDoctor = selectedDoctor {
+//                firebaseHelper.createSlots(doctorName: selectedDoctor.name, doctorID: selectedDoctor.id, date: selectedDate ?? Date(), slots: selectedSlots) {
+//                    // Assuming createSlots has a completion handler to notify when done
+//                    self.showSuccessAnimation = true
+//                    
+//                    // Wait for 2 seconds to show the tick animation, then navigate back
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                        self.showSuccessAnimation = false
+//                        self.selectedDoctor = nil
+//                        self.selectedDate = nil
+//                        self.selectedSlots = []
+//                    }
 //                }
+//            } else {
+//                print("No doctor selected.")
 //            }
+//        }, label: {
+//            Text("Press here to submit")
+//        })
+//        .frame(width: 296, height: 44)
+//        .background(isSubmitButtonDisabled ? Color.gray : Color.myAccent)
+//        .foregroundColor(.white)
+//        .cornerRadius(20)
+//        .disabled(isSubmitButtonDisabled)
+//        .fullScreenCover(isPresented: $showSuccessAnimation) {
+//            // FullScreenCover for success animation
+//            SuccessAnimationView()
 //        }
 //    }
 //}
 //
-//// Existing code for Preview...
+//struct SuccessAnimationView: View {
+//    var body: some View {
+//        ZStack {
+//            Color.background.edgesIgnoringSafeArea(.all)
+//            Image(systemName: "checkmark.circle.fill") // Use a tick mark image or system symbol
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: 200, height: 200)
+//                .foregroundColor(.green)
+//        }
+//    }
+//}
+//
+//// Existing structs like SearchBar and DateButton remain unchanged
+//
+//// #Preview {
+////     AddingSlots()
+//// }

@@ -46,25 +46,6 @@ struct ContentView: View {
             }
         }
     }
-    
-//    func fetchCurrentUserAndData() {
-//            if let user = Auth.auth().currentUser {
-//                self.currentUser = user
-//                
-//                appState.patientUID = user.uid
-//                // Fetch patient data using the user's UID
-//                FirebaseHelperFunctions.fetchPatientData(by: user.uid) { patient, error in
-//                    if let patient = patient {
-//                        self.patient = patient // Store fetched patient data
-//                        print(self.patient!)
-//                    } else {
-//                        print(error?.localizedDescription ?? "Failed to fetch patient data")
-//                    }
-//                }
-//            } else {
-//                self.currentUser = nil
-//            }
-//        }
 
     func fetchCurrentUserAndData() {
         guard let user = Auth.auth().currentUser else {

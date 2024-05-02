@@ -12,7 +12,7 @@ import Firebase
 import FirebaseAuth
 
 
-struct DoctorInfo {
+struct DoctorInfo: Equatable {
     let name: String
     let specialty: String
     let id: String
