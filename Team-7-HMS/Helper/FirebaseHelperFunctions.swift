@@ -473,14 +473,15 @@ class FirebaseHelperFunctions {
 
     
    // booking slots for appointment
-    static func bookSlot(doctorUID: String, date: String, slotTime: String, patientUID: String, completion: @escaping (Result<String, Error>) -> Void) {
+    static func bookSlot(doctorUID: String, date: String, slotTime: String, patientUID: String, issues : [String], completion: @escaping (Result<String, Error>) -> Void) {
         let db = Firestore.firestore()
         
-        let data = [
+        let data : [String : Any] = [
             "patientID" : patientUID,
             "doctorID" : doctorUID,
             "date" : date,
-            "slotTime" : slotTime
+            "slotTime" : slotTime,
+            "issues" : issues
         ]
         
         let appointmentDocRef = db.collection("appointments")
