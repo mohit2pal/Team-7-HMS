@@ -230,7 +230,7 @@ struct AddingSlots: View {
         }, label: {
             Text("Press here to submit")
         })
-        .frame(width: 296, height: 44)
+        .frame(width: 300, height: 50)
         .background(isSubmitButtonDisabled ? Color.gray : Color.myAccent)
         .foregroundColor(.white)
         .cornerRadius(20)
