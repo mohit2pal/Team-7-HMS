@@ -423,8 +423,60 @@ class FirebaseHelperFunctions {
         }
     }
     
-    // retrieving the slot data from patient end
     
+    //retrieving appointment data from the appointment ID
+    func getAppointmentData(appointmentUID: String, completion: @escaping (AppointmentData?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        let appointmentDocRef = db.collection("appointments").document(appointmentUID)
+        
+        appointmentDocRef.getDocument { (documentSnapshot, error) in
+            if let error = error {
+                // Propagate the error to the completion handler
+                completion(nil, error)
+                return
+            }
+            
+            guard let documentData = documentSnapshot?.data() else {
+                // Document does not exist or does not contain data
+                completion(nil, nil)
+                return
+            }
+            
+            // Extract appointment data from document data
+            let doctorID = documentData["doctorID"] as? String ?? ""
+            let dateString = documentData["date"] as? String ?? ""
+            let slotTime = documentData["slotTime"] as? String ?? ""
+            let issues = documentData["issues"] as? [String] ?? []
+
+            // Fetch doctor details
+            let doctorInfoRef = db.collection("doctor_details").document(doctorID)
+            doctorInfoRef.getDocument { (doctorSnapshot, doctorError) in
+                if let doctorError = doctorError {
+                    // Propagate the doctor error to the completion handler
+                    completion(nil, doctorError)
+                    return
+                }
+                
+                guard let doctorData = doctorSnapshot?.data(),
+                      let doctorName = doctorData["name"] as? String,
+                      let doctorSpeciality = doctorData["specialty"] as? String else {
+                    // Handle missing doctor data or day calculation error
+                    completion(nil, nil)
+                    return
+                }
+                
+                // Create an instance of AppointmentData with the extracted data
+                let appointmentData = AppointmentData(appointmentID: appointmentUID, doctorName: doctorName, doctorSpeciality: doctorSpeciality, date: dateString.replacingOccurrences(of: "_", with: "-"), time: slotTime, issues: issues)
+                
+                // Call the completion handler with the appointment data
+                completion(appointmentData, nil)
+            }
+        }
+    }
+
+    
+    // retrieving the slot data from patient end
     func getAppointments(patientUID: String, completion: @escaping ([AppointmentCardData]?, Error?) -> Void) {
         let db = Firestore.firestore()
         
@@ -443,6 +495,7 @@ class FirebaseHelperFunctions {
             for document in querySnapshot!.documents {
                 let doctorUID = document["doctorID"] as? String ?? ""
                 let dateString = document["date"] as? String ?? ""
+                let appointmentID = document.documentID
                 
                 let day = FirebaseHelperFunctions.getDayOfWeekFromDate(dateString: dateString)
                 let date = String(dateString.prefix(2))
@@ -457,7 +510,7 @@ class FirebaseHelperFunctions {
                     if let doctorData = doctorSnapshot?.data(),
                        let doctorName = doctorData["name"] as? String,
                        let doctorSpeciality = doctorData["specialty"] as? String {
-                        let appointmentData = AppointmentCardData(date: date, day: day ?? "", time: document["slotTime"] as! String, doctorName: doctorName, doctorSpeciality: doctorSpeciality)
+                        let appointmentData = AppointmentCardData(date: date, day: day ?? "", time: document["slotTime"] as! String, doctorName: doctorName, doctorSpeciality: doctorSpeciality, appointmentID: appointmentID)
                         
                         appointments.append(appointmentData)
                     }
@@ -574,7 +627,93 @@ class FirebaseHelperFunctions {
         }
     }
     
-    
+    // delete an appointmemnt
+    func deleteAppointment(appointmentID: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let db = Firestore.firestore()
+        
+        // Reference to the appointment document
+        let appointmentDocRef = db.collection("appointments").document(appointmentID)
+        
+        // Get the data of the appointment document before deleting it
+        appointmentDocRef.getDocument { (documentSnapshot, error) in
+            if let error = error {
+                print("Error fetching appointment document: \(error)")
+                completion(.failure(error))
+                return
+            }
+            
+            guard let document = documentSnapshot, document.exists else {
+                print("Appointment document does not exist.")
+                completion(.failure(NSError(domain: "DocumentNotFoundError", code: -1, userInfo: nil)))
+                return
+            }
+            
+            // Get the doctor ID, date, and slot time from the appointment document
+            guard let doctorID = document["doctorID"] as? String,
+                  let date = document["date"] as? String,
+                  let slotTime = document["slotTime"] as? String else {
+                print("Error: Missing appointment data.")
+                completion(.failure(NSError(domain: "MissingDataError", code: -1, userInfo: nil)))
+                return
+            }
+            
+            // Delete the appointment document
+            appointmentDocRef.delete { error in
+                if let error = error {
+                    print("Error deleting appointment document: \(error)")
+                    completion(.failure(error))
+                    return
+                }
+                
+                // Reference to the slots document for the doctor
+                let slotsDocRef = db.collection("slots").document(doctorID)
+                
+                // Fetch the document to get the current slots
+                slotsDocRef.getDocument { document, error in
+                    if let error = error {
+                        print("Error fetching slots document: \(error)")
+                        completion(.failure(error))
+                        return
+                    }
+                    
+                    guard let document = document, document.exists, var slotsData = document.data() as? [String: [[String: String]]] else {
+                        print("Slots document does not exist or data format is incorrect.")
+                        completion(.failure(NSError(domain: "DocumentNotFoundError", code: -1, userInfo: nil)))
+                        return
+                    }
+                    
+                    // Check if there are slots for the specified date
+                    if var slotsForDate = slotsData[date] {
+                        // Mark the slot as available again by setting its value to "Empty"
+                        for i in 0..<slotsForDate.count {
+                            if slotsForDate[i].keys.contains(slotTime), slotsForDate[i][slotTime] == appointmentID {
+                                slotsForDate[i][slotTime] = "Empty"
+                                break
+                            }
+                        }
+                        
+                        // Update the slots data with the modified slots for the date
+                        slotsData[date] = slotsForDate
+                        
+                        // Update the document with the new slots data
+                        slotsDocRef.setData(slotsData) { error in
+                            if let error = error {
+                                print("Error updating slots document: \(error)")
+                                completion(.failure(error))
+                            } else {
+                                print("Appointment deleted successfully!")
+                                completion(.success("Appointment deleted successfully!"))
+                            }
+                        }
+                    } else {
+                        print("No slots available for the specified date.")
+                        completion(.failure(NSError(domain: "NoSlotsError", code: -1, userInfo: nil)))
+                    }
+                }
+            }
+        }
+    }
+
     static func getDayOfWeekFromDate(dateString: String) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd_MM_yyyy" // Adjust the date format according to your input string

@@ -24,7 +24,7 @@ struct bookAppointmentSwiftUIView: View {
         ButtonData(image: "Doctor-icon", title: "General Physician"),
         ButtonData(image: "gynaecology-icon", title: "Obstetrics & Gynaecology"),
         ButtonData(image: "Orthopaedics-icon", title: "Orthopaedics"),
-        ButtonData(image: "Ent-icon", title: "ENT"),
+        ButtonData(image: "ENT-icon", title: "ENT"),
         ButtonData(image: "Urology-icon", title: "Urology"),
         ButtonData(image: "Paediatrics-icon", title: "Pediatrics"),
         ButtonData(image: "Cardiology-icon", title: "Cardiology"),
