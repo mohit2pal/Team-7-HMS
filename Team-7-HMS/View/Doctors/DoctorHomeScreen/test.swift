@@ -15,7 +15,8 @@ struct DoctorAppointmentCard: View {
                     // Right Rectangular Card with Patient Information
                     RoundedRectangle(cornerRadius: 15)
                         .fill(Color.white)
-                        .frame(width: 290, height: 130)
+                        .frame(width: .infinity, height: 130)
+                        .shadow(color: Color("PrimaryColor").opacity(0.4), radius: 3, x: 0, y: 0)
                         .overlay(
                             HStack {
                                 VStack(alignment: .leading, spacing: 5){
@@ -44,7 +45,7 @@ struct DoctorAppointmentCard: View {
                             }//Hstack End
                             .padding()
                         )
-                        .shadow(color: Color("PrimaryColor").opacity(0.4), radius: 3, x: 0, y: 0)
+//
                 }
 //                .customShadow()
     }

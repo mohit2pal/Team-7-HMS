@@ -88,6 +88,7 @@ struct slotsAvailableSwiftUIView: View {
                 } else {
                     Text("No slots available")
                         .foregroundStyle(Color.gray)
+                        .padding()
                 }
             }
 
