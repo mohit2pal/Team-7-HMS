@@ -13,6 +13,7 @@ struct AppointmentDataView: View {
     @State var imageName : String = ""
     @State var isLoading : Bool  = false
     @State var deleted  :Bool = false
+    @State var showAlert: Bool = false
     var body: some View {
         VStack{
             
@@ -76,13 +77,7 @@ struct AppointmentDataView: View {
             Spacer()
             
             Button(action: {
-                
-                isLoading = true
-                FirebaseHelperFunctions().deleteAppointment(appointmentID: appointmentID) {_ in
-                    print("deleted")
-                    isLoading = false
-                    deleted = true
-                }
+                showAlert = true
             }, label: {
                 
                 if isLoading{
@@ -110,6 +105,18 @@ struct AppointmentDataView: View {
                 }
                     
             })
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Cancel Appointment"),
+                    message: Text("Are you sure you want to cancel this appointment?"),
+                    primaryButton: .destructive(Text("Cancel Appointment")) {
+                        // Handle cancellation
+                        cancelAppointment()
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
+        
         }
         .padding(.horizontal , 25)
         .onAppear{
@@ -128,6 +135,15 @@ struct AppointmentDataView: View {
             }
             
             
+        }
+    }
+    
+    func cancelAppointment() {
+        isLoading = true
+        FirebaseHelperFunctions().deleteAppointment(appointmentID: appointmentID) { _ in
+            print("deleted")
+            isLoading = false
+            deleted = true
         }
     }
 }
