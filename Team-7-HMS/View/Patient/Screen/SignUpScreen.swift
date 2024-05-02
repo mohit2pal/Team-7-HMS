@@ -22,8 +22,8 @@ struct SignUpScreen: View {
                 // Rectangle
                 ZStack {
                     RoundedRectangle(cornerRadius: 40)
-                        .fill(Color(.white))
-                        .frame(width: 361, height: 520) // Increased height to accommodate additional text field and space for "Forgot password?" text
+                        .fill(Color(.background))
+                        .frame(width: 361, height: 560) // Increased height to accommodate additional text field and space for "Forgot password?" text
                     // Sign Up
                     VStack {
                         
@@ -36,52 +36,46 @@ struct SignUpScreen: View {
                         
                         //name
                         TextField("Name", text: $name)
+                            .foregroundColor(Color.gray)
+                            .textInputAutocapitalization(.never)
+                            .textFieldStyle(.plain)
                             .padding(.horizontal)
-                            .frame(width: 312, height: 41)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(.white)
-                                    .shadow(color: Color(.gray).opacity(0.2), radius: 20, x: 2, y: 0)
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color("SecondaryColor").opacity(0.1), lineWidth: 0.5)
-                            )
+                            .padding(.vertical, 15)
+                            .background(.white)
+                            .cornerRadius(10)
+                            .frame(width: 320)
+                            .customShadow()
                         
                         
                         // Email TextField
                         TextField("Email", text: $email)
+                            .foregroundColor(Color.gray)
+                            .textInputAutocapitalization(.never)
+                            .textFieldStyle(.plain)
                             .padding(.horizontal)
-                            .frame(width: 312, height: 41)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(.white)
-                                    .shadow(color: Color(.gray).opacity(0.2), radius: 20, x: 2, y: 0)
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color("SecondaryColor").opacity(0.1), lineWidth: 0.5)
-                            )
+                            .padding(.vertical, 15)
+                            .background(.white)
+                            .cornerRadius(10)
+                            .frame(width: 320)
+                            .customShadow()
                         
                         
                         // Secure Text Field for Password
                         SecureField("Password", text: $password)
+                            .textInputAutocapitalization(.never)
+                            .foregroundColor(Color.gray)
+                            .textInputAutocapitalization(.never)
+                            .textFieldStyle(.plain)
                             .padding(.horizontal)
-                            .frame(width: 312, height: 41)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(.white))
-                            .shadow(color: Color(.gray).opacity(0.2), radius: 20, x: 2, y: 0)
-                        
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color("SecondaryColor").opacity(0.1), lineWidth: 0.5)
-                            )
+                            .padding(.vertical, 15)
+                            .background(.white)
+                            .cornerRadius(10)
+                            .frame(width: 320)
+                            .customShadow()
                         
                         // Secure Text Field for Confirm Password
                         HStack{
                             SecureField("Confirm Password", text: $confirmPassword)
-                                .padding(.horizontal)
                             if !password.isEmpty && (password == confirmPassword) {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundStyle(Color.green)
@@ -92,15 +86,20 @@ struct SignUpScreen: View {
                                     .foregroundStyle(.red)
                             }
                         }
-                        .frame(width: 312, height: 41)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(.white))
-                        .shadow(color: Color(.gray).opacity(0.2), radius: 20, x: 2, y: 0)
+                        .textInputAutocapitalization(.never)
+                        .foregroundColor(Color.gray)
+                        .textInputAutocapitalization(.never)
+                        .textFieldStyle(.plain)
+                        .padding(.horizontal)
+                        .padding(.vertical, 15)
+                        .background(.white)
+                        .cornerRadius(10)
+                        .frame(width: 320)
+                        .customShadow()
                         
+                        Spacer().frame(height: 30)
                         
                         // Sign Up Button
-                        
                         Button(action: {
                             StrongPassword = strongPassword(password)
                             showMessage = true
@@ -115,17 +114,16 @@ struct SignUpScreen: View {
                             }
                         }, label: {
                             ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .fill(Color("PrimaryColor").opacity(0.83))
-                                    .frame(width: 312, height: 41)
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color(.myAccent))
+                                    .frame(width: 310, height: 44)
                                 
                                 Text("Sign Up")
-                                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                                    .font(.headline)
                                     .foregroundColor(.white)
                                     .tracking(-0.41)
                                     .multilineTextAlignment(.center)
                             }
-                            
                         })
                         
                         NavigationLink(destination: HStack {
@@ -207,7 +205,7 @@ struct SignUpScreen: View {
                                 .fill(Color("SecondaryColor").opacity(0.6))
                                 .frame(width: 88, height: 2)
                         }
-                        
+                        Spacer().frame(height: 10)
                         // Already have an account? Log in
                         NavigationLink(destination: LoginScreen().navigationBarBackButtonHidden(true)) {
                             Text("Already have an account? ")
@@ -224,10 +222,6 @@ struct SignUpScreen: View {
                     }
                 }
                 .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color("SecondaryColor").opacity(0.1), lineWidth: 0.5)
-                )
             }
         }  .navigationBarBackButtonHidden()
             .navigationBarHidden(true)

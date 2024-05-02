@@ -29,7 +29,7 @@ struct DoctorLoginScreenView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 40)
                             .fill(Color(#colorLiteral(red: 0.9803921580314636, green: 0.9803921580314636, blue: 0.9960784316062927, alpha: 1)))
-                            .frame(width: 361, height: 433)
+                            .frame(width: 361, height: 400)
                         
                         VStack {
                             Text("Welcome back").font(.system(size: 32, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.49, green: 0.59, blue: 1, alpha: 1))).tracking(-0.41).multilineTextAlignment(.center)
@@ -40,7 +40,8 @@ struct DoctorLoginScreenView: View {
                                 .textInputAutocapitalization(.never)
                             //                            .padding(.horizontal , 40)
                                 .textFieldStyle(.plain)
-                                .padding()
+                                .padding(.horizontal)
+                                .padding(.vertical, 15)
                                 .background(.white)
                                 .cornerRadius(10)
                                 .frame(width: 320)
@@ -54,7 +55,8 @@ struct DoctorLoginScreenView: View {
                                 .foregroundColor(Color.gray)
                                 .textInputAutocapitalization(.never)
                                 .textFieldStyle(.plain)
-                                .padding()
+                                .padding(.horizontal)
+                                .padding(.vertical, 15)
                                 .background(.white)
                                 .cornerRadius(10)
                                 .frame(width: 320)
@@ -119,7 +121,7 @@ struct DoctorLoginScreenView: View {
                                         .frame(width: 312, height: 44)
                                         .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).tracking(-0.41).multilineTextAlignment(.center)
                                         .background((Color(#colorLiteral(red: 0.48627451062202454, green: 0.5882353186607361, blue: 1, alpha: 1))))
-                                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                                        .clipShape(RoundedRectangle(cornerRadius: 20))
                                 }
                             })
                             if authFail {
@@ -137,10 +139,10 @@ struct DoctorLoginScreenView: View {
                             //Rectangle 2645
                             RoundedRectangle(cornerRadius: 99)
                                 .fill(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                                .frame(width: 354, height: 61)
+                                .frame(width: 354, height: 60)
                             
                             //Doctor's Login
-                            Text("Patient's Login").font(.custom("Poppins Medium", size: 22))
+                            Text("Patient's Login").font(.title3)
                         }
                     })
                 }
