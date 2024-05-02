@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseStorage
 
 struct LabReportUploadView: View {
     @State private var labReportURL: URL?
@@ -13,7 +14,7 @@ struct LabReportUploadView: View {
     @State private var selectedPatientIndex = 0 // Default selected patient index
     
     let patients = ["John Doe", "Jane Smith", "Michael Johnson", "Emily Brown", "David Wilson"]
-    let fileName = "LabReport.pdf" // Assign the file name here
+    @State var fileName : String?// Assign the file name here
     
     var body: some View {
         VStack(spacing: 20) {
@@ -46,8 +47,9 @@ struct LabReportUploadView: View {
                 Image("OnBoardScreen3")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 250) // Adjust height as needed
+                    .frame(height: 150) // Adjust height as needed
                     .padding(.bottom, 10)
+                
                 
                 Text("Upload Lab Report")
                     .font(.title)
@@ -59,6 +61,8 @@ struct LabReportUploadView: View {
                     .font(.body)
                 
                 
+                Spacer()
+                
                 if labReportURL != nil {
                     HStack(spacing: 10) {
                         Image(systemName: "doc.text.fill")
@@ -66,7 +70,7 @@ struct LabReportUploadView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 20, height: 20) // Adjust size as needed
                             .foregroundColor(.blue) // Use blue color for consistency with buttons
-                        Text(fileName) // Use the assigned file name variable
+                        Text(fileName ?? "Lab report Name") // Use the assigned file name variable
                             .font(.body)
                             .foregroundColor(.black)
                             .lineLimit(1) // Limit text to one line
@@ -86,11 +90,7 @@ struct LabReportUploadView: View {
                 } // Added spacer for layout adjustment
             }
             .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.white) // Use a white background
-                    .shadow(radius: 3) // Add a shadow for depth
-            )
+            
             
             VStack(spacing: 10) {
                 
@@ -111,8 +111,9 @@ struct LabReportUploadView: View {
                 }
                 
                 Button(action: {
-                    if labReportURL != nil {
+                    if let reportURL = labReportURL {
                         // Forward report action
+                        uploadFileToFirebaseStorage(url: reportURL)
                     }
                 }) {
                     Text("Forward Report")
@@ -133,20 +134,48 @@ struct LabReportUploadView: View {
         .padding(.horizontal)
         .navigationBarTitle("Lab Report Upload", displayMode: .inline)
         .sheet(isPresented: $documentPickerIsPresented) {
-            DocumentPickerView(documentURL: $labReportURL)
+            DocumentPickerView(documentURL: $labReportURL, fileName: $fileName)
         }
     }
+    
+    func uploadFileToFirebaseStorage(url: URL) {
+        let fileName = url.lastPathComponent
+        let storageRef = Storage.storage().reference().child("lab_reports/\(fileName)")
+
+        storageRef.putFile(from: url, metadata: nil) { metadata, error in
+            guard let _ = metadata else {
+                // Error occurred. Handle error.
+                print("Error uploading file: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+
+            // File uploaded successfully.
+            storageRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Error occurred. Handle error.
+                    print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+                
+                // File URL retrieved successfully.
+                print("File uploaded successfully. URL: \(downloadURL)")
+                
+            }
+        }
+    }
+
 }
 
 struct DocumentPickerView: UIViewControllerRepresentable {
     @Binding var documentURL: URL?
+    @Binding var fileName : String?
     
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
     }
     
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.pdf], asCopy: true)
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.pdf , .image], asCopy: true)
         documentPicker.delegate = context.coordinator
         return documentPicker
     }
@@ -162,9 +191,15 @@ struct DocumentPickerView: UIViewControllerRepresentable {
         
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
             // For simplicity, we are assuming only one document is picked
-            parent.documentURL = urls.first
+            if let url = urls.first {
+                parent.documentURL = url
+                
+                // Update the fileName variable with the selected file name
+                parent.fileName = url.lastPathComponent
+            }
         }
     }
+    
 }
 
 struct LabReportUploadView_Previews: PreviewProvider {
