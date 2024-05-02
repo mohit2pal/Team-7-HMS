@@ -40,8 +40,8 @@ struct LoginScreen: View {
                     Spacer()
                     ZStack {
                         RoundedRectangle(cornerRadius: 40)
-                            .fill(Color(.white))
-                            .frame(width: 361, height: 433)
+                            .fill(Color(.background))
+                            .frame(width: 361, height: 463)
                         
                         
                         //Welcome back
@@ -51,47 +51,43 @@ struct LoginScreen: View {
                             
                             //Email TextField
                             TextField("Email", text: $email)
+                                .foregroundColor(Color.gray)
+                                .textInputAutocapitalization(.never)
+                                .textFieldStyle(.plain)
                                 .padding(.horizontal)
-                                .frame(width: 312, height: 41)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(.white)
-                                        .shadow(color: Color(.gray).opacity(0.2), radius: 20, x: 2, y: 0)
-                                    
-                                )
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color("SecondaryColor").opacity(0.1), lineWidth: 0.5)
-                                )
-                            
-                            
+                                .padding(.vertical, 15)
+                                .background(.white)
+                                .cornerRadius(10)
+                                .frame(width: 320)
+                                .customShadow()
                             
                             //Secure Text Field
                             SecureField("Password", text: $password)
+                                .textInputAutocapitalization(.never)
+                                .foregroundColor(Color.gray)
+                                .textInputAutocapitalization(.never)
+                                .textFieldStyle(.plain)
                                 .padding(.horizontal)
-                                .frame(width: 312, height: 41)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(.white))
-                                .shadow(color: Color(.gray).opacity(0.2), radius: 20, x: 2, y: 0)
+                                .padding(.vertical, 15)
+                                .background(.white)
+                                .cornerRadius(10)
+                                .frame(width: 320)
+                                .customShadow()
                             
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color("SecondaryColor").opacity(0.1), lineWidth: 0.5)
-                                )
                             
                             //Forgot password?
                             Text("Forgot password?").font(.system(size: 13, weight: .regular, design: .rounded)).foregroundColor(Color("SecondaryColor").opacity(0.6)).tracking(-0.41).multilineTextAlignment(.trailing)
                             
+                            Spacer().frame(height: 30)
                             //Rectangle 2638
                             ZStack {
-                                RoundedRectangle(cornerRadius: 15)
+                                RoundedRectangle(cornerRadius: 20)
                                     .fill(Color("PrimaryColor").opacity(0.83))
-                                    .frame(width: 312, height: 41)
+                                    .frame(width: 310, height: 44)
                                 
                                 
                                 //Log In
-                                Text("Log In ").font(.system(size: 16, weight: .medium, design: .rounded)).foregroundColor(.white).tracking(-0.41).multilineTextAlignment(.center)
+                                Text("Log In ").font(.headline).foregroundColor(.white).tracking(-0.41).multilineTextAlignment(.center)
                             }
                             
                             HStack{
@@ -232,10 +228,10 @@ struct LoginScreen: View {
                             //Rectangle 2645
                             RoundedRectangle(cornerRadius: 99)
                                 .fill(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                                .frame(width: 354, height: 61)
+                                .frame(width: 354, height: 60)
                             
                             //Doctor's Login
-                            Text("Doctor's Login").font(.custom("Poppins Medium", size: 22))
+                            Text("Doctor's Login").font(.title3)
                         }
                     })
                                         

@@ -46,7 +46,7 @@ struct DoctorHomeSwiftUI: View {
     
     func generateDateList() -> [String] {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd EE"
+        dateFormatter.dateFormat = "dd\nEE"
         
         var dateList = [String]()
         let today = Date()
@@ -76,7 +76,7 @@ struct DoctorHomeSwiftUI: View {
                 } label: {
                     Image(systemName: "person.circle.fill")
                         .resizable()
-                        .frame(width: 70, height: 70)
+                        .frame(width: 60, height: 60)
                         .foregroundColor(.gray)
                         .padding(.trailing)
                 }
@@ -89,7 +89,7 @@ struct DoctorHomeSwiftUI: View {
                     Text("Hello 👋")
                         .font(CentFont.mediumReg)
                     Text(doctorName)
-                        .font(.title2)
+                        .font(.title)
                 }
                 Spacer()
                 NavigationLink(destination: patientNotificationSwiftUIView()) {
@@ -104,11 +104,12 @@ struct DoctorHomeSwiftUI: View {
                     }
                 }
             }
+            
+            Spacer().frame(height: 30)
             // Appointments heading
             HStack(alignment: .top) {
                     Text("Appointments")
                         .font(.title)
-                        .foregroundColor(.black)
                         .padding(.bottom, 1)
                 }
                         
@@ -123,10 +124,10 @@ struct DoctorHomeSwiftUI: View {
                                 Text(date)
                                     .font(.callout)
                                     .foregroundColor(selectedDate == date ? .white : .black)
-                                    .frame(width: 40 , height : 50)
+                                    .frame(width: 50 , height : 50)
                                     .padding()
                                     .background(selectedDate == date ? Color.myAccent : Color.white)
-                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    .clipShape(RoundedRectangle(cornerRadius: 50))
                                     
                                     .customShadow()
                             }
@@ -147,17 +148,16 @@ struct DoctorHomeSwiftUI: View {
                         .padding(.vertical)
                         
                         // Display appointments based on selected segment
-                        ScrollView {
-                            ForEach(displayedAppointments) { appointment in
-                                DoctorAppointmentCard(appointmentData: appointment)
-                                    
-                            }
-                        }
-                    }
+            ScrollView {
+                ForEach(displayedAppointments) { appointment in
+                    DoctorAppointmentCard(appointmentData: appointment)
+                }
+            }
+            }
         .padding([.horizontal, .top])
         .background(Color.background)
         .onAppear{
-            print("this is my doctorUID : \(doctorUid)")
+            
             FirebaseHelperFunctions.getAppointmentsForDoctor(doctorUID: doctorUid) { appointments, error in
                      if let error = error {
                          print("Error retrieving appointments:", error)
@@ -166,7 +166,6 @@ struct DoctorHomeSwiftUI: View {
                     
                          if let appointments = appointments {
                              self.fetchedAppointments = appointments
-                             print(appointments)
                          }
                      }
                  }
@@ -182,25 +181,11 @@ struct DoctorHomeSwiftUI: View {
             print("Error signing out: \(signOutError.localizedDescription)")
         }
     }
-    
-//    func fetchAppointments() {
-//        // Assuming FirebaseHelperFunctions.getAppointmentsForDoctor is a static method
-//        // Adjust this call according to your actual implementation
-//        print(doctorUid)
-//        FirebaseHelperFunctions.getAppointmentsForDoctor(doctorUID: doctorUid) { appointments, error in
-//            if let error = error {
-//                print("Error fetching appointments: \(error.localizedDescription)")
-//            } else if let appointments = appointments {
-//                DispatchQueue.main.async {
-//                    self.fetchedAppointments = appointments
-//                    //print(appointments)
-//                }
-//            }
-//        }
-//    }
 }
 
 
 #Preview {
-    DoctorHomeSwiftUI(doctorUid: "hi", doctor: DoctorDetails(dictionary: mockDoctorData)!, doctorName: "Dr.Prakash")
+    NavigationStack{
+        DoctorHomeSwiftUI(doctorUid: "3npmgJzI3gSWiBpnTdTRTCEBPtX2", doctor: DoctorDetails(dictionary: mockDoctorData)!, doctorName: "Dr.Prakash")
+    }
 }

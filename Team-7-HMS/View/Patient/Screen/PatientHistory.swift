@@ -303,6 +303,19 @@ struct PatientHistory: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
+                            FirebaseHelperFunctions().addPatientsRecords(
+                                uuid: uid,
+                                dateOfBirth: dateOfBirth,
+                                gender: genders[selectedGenderIndex],
+                                bloodGroup: bloodGroup[selectedBloodGroupIndex],
+                                height: height,
+                                weight: weight,
+                                phoneNumber: phoneNumber,
+                                pastMedicalHistory: selectedMedicalHistories,
+                                surgeries: surgeries,
+                                alergies: allergies
+                            )
+                            
                             isPresented.toggle()
                         }, label: {
                             HStack{

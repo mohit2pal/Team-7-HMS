@@ -11,43 +11,52 @@ struct patientAppointmentCard: View {
     var appointmentData: AppointmentCardData
     
     var body: some View {
-        HStack{
-            //date day
-            VStack{
-                Text("\(appointmentData.date)")
-                    .font(CentFont.mediumBold)
-                Text(appointmentData.day)
-                    .font(CentFont.smallReg)
-            }
-            .foregroundColor(.white)
-            .padding()
-            .frame(width: 70, height: 70)
-            .background(Color.myAccent)
-            .cornerRadius(50)
-            
-            Spacer()
-                .frame(width: 30)
-            
-            //details
-            VStack(alignment: .leading){
-                Text(appointmentData.time)
-                    .font(CentFont.mediumReg)
-                Text(appointmentData.doctorName)
-                    .font(.system(size: 23, weight: .semibold))
-                Text(appointmentData.doctorSpeciality)
-                    .font(CentFont.mediumReg)
-            }
-            Spacer()
-            
-            Image(systemName: "chevron.right")
-        }
-        .padding()
-//        .padding(.vertical, 10)
-        .background(Color.white)
-        .cornerRadius(28)
-        .customShadow()
-    }
         
+        NavigationStack{
+            NavigationLink {
+                AppointmentDataView(appointmentID: appointmentData.appointmentID)
+            } label: {
+                HStack{
+                    VStack{
+                        Text("\(appointmentData.date)")
+                            .font(CentFont.mediumBold)
+                        Text(appointmentData.day)
+                            .font(CentFont.smallReg)
+                    }
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 70, height: 70)
+                    .background(Color.myAccent)
+                    .cornerRadius(50)
+                    
+                    Spacer()
+                        .frame(width: 30)
+                    
+                    //details
+                    VStack(alignment: .leading){
+                        Text(appointmentData.doctorName)
+                            .font(.system(size: 23, weight: .semibold))
+                        Text(appointmentData.doctorSpeciality)
+                            .font(CentFont.mediumReg)
+                        Text(appointmentData.time)
+                            .font(CentFont.mediumReg)
+                    }
+                    .foregroundStyle(Color.black)
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                }
+                .padding()
+                //        .padding(.vertical, 10)
+                .background(Color.white)
+                .cornerRadius(28)
+                .customShadow()
+
+            }
+
+        }
+        
+    }
 }
 
 #Preview {
