@@ -153,7 +153,7 @@ struct SpecialitySwiftUIView: View {
 #Preview {
     NavigationStack{
         SpecialitySwiftUIView(patientUID: "", speciality:
-                              "General Physician", icon: "Ent-icon")
+                              "Cardiology", icon: "Ent-icon")
     }
     .environmentObject(AppState())
 }
