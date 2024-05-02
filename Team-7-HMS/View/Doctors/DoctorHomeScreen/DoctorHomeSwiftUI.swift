@@ -46,7 +46,7 @@ struct DoctorHomeSwiftUI: View {
     
     func generateDateList() -> [String] {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd EE"
+        dateFormatter.dateFormat = "dd\nEE"
         
         var dateList = [String]()
         let today = Date()
@@ -76,7 +76,7 @@ struct DoctorHomeSwiftUI: View {
                 } label: {
                     Image(systemName: "person.circle.fill")
                         .resizable()
-                        .frame(width: 70, height: 70)
+                        .frame(width: 60, height: 60)
                         .foregroundColor(.gray)
                         .padding(.trailing)
                 }
@@ -89,7 +89,7 @@ struct DoctorHomeSwiftUI: View {
                     Text("Hello 👋")
                         .font(CentFont.mediumReg)
                     Text(doctorName)
-                        .font(.title2)
+                        .font(.title)
                 }
                 Spacer()
                 NavigationLink(destination: patientNotificationSwiftUIView()) {
@@ -104,11 +104,12 @@ struct DoctorHomeSwiftUI: View {
                     }
                 }
             }
+            
+            Spacer().frame(height: 30)
             // Appointments heading
             HStack(alignment: .top) {
                     Text("Appointments")
                         .font(.title)
-                        .foregroundColor(.black)
                         .padding(.bottom, 1)
                 }
                         
@@ -123,10 +124,10 @@ struct DoctorHomeSwiftUI: View {
                                 Text(date)
                                     .font(.callout)
                                     .foregroundColor(selectedDate == date ? .white : .black)
-                                    .frame(width: 40 , height : 50)
+                                    .frame(width: 50 , height : 50)
                                     .padding()
                                     .background(selectedDate == date ? Color.myAccent : Color.white)
-                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    .clipShape(RoundedRectangle(cornerRadius: 50))
                                     
                                     .customShadow()
                             }
