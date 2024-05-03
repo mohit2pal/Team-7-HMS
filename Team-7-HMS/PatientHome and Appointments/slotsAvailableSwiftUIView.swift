@@ -84,10 +84,8 @@ struct slotsAvailableSwiftUIView: View {
                                             }
                                     }
                                 }
-                                .padding()
-                                .scrollIndicators(.hidden)
                             }
-                            
+                        
                             VStack(alignment: .leading) {
                                 Text("Chief Complaints")
                                     .font(.title2)
@@ -112,8 +110,6 @@ struct slotsAvailableSwiftUIView: View {
                                 .listStyle(PlainListStyle())
                                 .background(Color.background)
                                 .frame(height: complaints.isEmpty ? 0 : CGFloat(complaints.count * 50))
-                                
-                                
                                 HStack {
                                     TextField("Add Complaint", text: $newComplaint)
                                         .padding()
@@ -263,6 +259,6 @@ struct doctorInfoCard: View{
 }
 
 #Preview {
-    slotsAvailableSwiftUIView(patientUID: "", doctorName: "Nithin Reddy", date: "28_04_2024", doctorId: "3npmgJzI3gSWiBpnTdTRTCEBPtX2")
+    slotsAvailableSwiftUIView(patientUID: "", doctorName: "Nithin Reddy", date: "02_05_2024", doctorId: "xh3HrIsjjxdrXzRZouDgxqTdLn92")
 
 }
