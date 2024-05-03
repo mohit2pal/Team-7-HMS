@@ -18,33 +18,42 @@ struct ContentView: View {
     @State private var isShowingSplash = true
     @State var role: String?
     
+    @StateObject private var networkMonitor = NetworkMonitor()
+    
     var body: some View {
-        NavigationStack {
-            ZStack {
-                if isShowingSplash {
-                    SplashScreen()
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                isShowingSplash = false
-                                fetchCurrentUserAndData()
+            NavigationStack {
+                ZStack {
+                    if isShowingSplash {
+                        SplashScreen()
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    isShowingSplash = false
+                                    fetchCurrentUserAndData()
+                                }
                             }
-                        }
-                } else {
-                    if role == "patient" {
-                        if let patient = patient {
-                            PatientView(patientName: patient.name, showPatientHistory: false, patientUid: self.currentUser?.uid ?? "Not Fetched")
-                        }
-                    } else if role == "doctor" {
-                        if let doctor = doctor {
-                            DoctorView(doctorUid: self.currentUser?.uid ?? "Not Fetched", doctorDetails: doctor, doctorName: doctor.name)
-                        }
                     } else {
-                        OnBoardingScreen()
+                        if networkMonitor.isConnected {
+                            if role == "patient" {
+                                if let patient = patient {
+                                    PatientView(patientName: patient.name, showPatientHistory: false, patientUid: self.currentUser?.uid ?? "Not Fetched")
+                                }
+                            } else if role == "doctor" {
+                                if let doctor = doctor {
+                                    DoctorView(doctorUid: self.currentUser?.uid ?? "Not Fetched", doctorDetails: doctor, doctorName: doctor.name)
+                                }
+                            } else {
+                                OnBoardingScreen()
+                            }
+                        } else {
+                            Image("NetworkNotConnected")
+                            Text("NOT CONNECTED TO THE INTERNET")
+                                .foregroundColor(.red)
+                                .bold()
+                        }
                     }
+                    
                 }
-                
             }
-        }
     }
 
     func fetchCurrentUserAndData() {

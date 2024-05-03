@@ -18,6 +18,7 @@
 		171925562BE0DC8B0012E54D /* DoctorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171925552BE0DC8B0012E54D /* DoctorView.swift */; };
 		174C2D072BD629D300945401 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C2D062BD629D200945401 /* LoginScreen.swift */; };
 		175AD9D22BE3973B006E3347 /* Some-Saves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175AD9D12BE3973B006E3347 /* Some-Saves.swift */; };
+		175AD9D62BE3B7B0006E3347 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175AD9D52BE3B7B0006E3347 /* NetworkMonitor.swift */; };
 		176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */; };
 		176900262BD2A94500F5F81E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176900252BD2A94500F5F81E /* ContentView.swift */; };
 		176900282BD2A94700F5F81E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 176900272BD2A94700F5F81E /* Assets.xcassets */; };
@@ -127,6 +128,7 @@
 		171925552BE0DC8B0012E54D /* DoctorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorView.swift; sourceTree = "<group>"; };
 		174C2D062BD629D200945401 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		175AD9D12BE3973B006E3347 /* Some-Saves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Some-Saves.swift"; sourceTree = "<group>"; };
+		175AD9D52BE3B7B0006E3347 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		176900202BD2A94500F5F81E /* Team-7-HMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team-7-HMS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		176900232BD2A94500F5F81E /* Team_7_HMSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team_7_HMSApp.swift; sourceTree = "<group>"; };
 		176900252BD2A94500F5F81E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				17F63AEC2BD63E440089511F /* AppDelegate.swift */,
 				17F63AF82BD7A1BF0089511F /* FirebaseHelperFunctions.swift */,
 				17F63B262BDA127D0089511F /* AppState.swift */,
+				175AD9D52BE3B7B0006E3347 /* NetworkMonitor.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -666,6 +669,7 @@
 				B1639D132BD8DA8200EAB15E /* SosCallSwiftUIView.swift in Sources */,
 				096DA7CB2BDA0AF800241449 /* BookAppointment.swift in Sources */,
 				133642742BDF77B000926989 /* LabReportUploadView.swift in Sources */,
+				175AD9D62BE3B7B0006E3347 /* NetworkMonitor.swift in Sources */,
 				17F63AF02BD671080089511F /* +View.swift in Sources */,
 				17F7C66F2BDEC37A00720B5E /* AdminHomeView.swift in Sources */,
 				17F7C6672BDE177C00720B5E /* EmailFunctions.swift in Sources */,
