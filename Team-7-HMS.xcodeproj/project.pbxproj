@@ -75,6 +75,8 @@
 		360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */; };
 		360295FF2BD7DB92001C1397 /* medicalConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360295FE2BD7DB92001C1397 /* medicalConditions.swift */; };
 		3621E0A42BDF700400F22807 /* PatientDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3621E0A32BDF700400F22807 /* PatientDetails.swift */; };
+		3626C4882BE4A69E00FA8C61 /* BookLabRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3626C4872BE4A69E00FA8C61 /* BookLabRecordsView.swift */; };
+		3626C48A2BE4AE0300FA8C61 /* MedicalTestsBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3626C4892BE4AE0300FA8C61 /* MedicalTestsBookingView.swift */; };
 		364631FB2BDA1E6600DD53CC /* HealthKitAppIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364631FA2BDA1E6600DD53CC /* HealthKitAppIntegration.swift */; };
 		367FFA5F2BE34F5F007A995D /* PatientDetailsAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367FFA5E2BE34F5F007A995D /* PatientDetailsAppointmentView.swift */; };
 		367FFA612BE38289007A995D /* AppointmentDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367FFA602BE38289007A995D /* AppointmentDataView.swift */; };
@@ -162,6 +164,8 @@
 		360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorLoginScreenView.swift; sourceTree = "<group>"; };
 		360295FE2BD7DB92001C1397 /* medicalConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = medicalConditions.swift; sourceTree = "<group>"; };
 		3621E0A32BDF700400F22807 /* PatientDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetails.swift; sourceTree = "<group>"; };
+		3626C4872BE4A69E00FA8C61 /* BookLabRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookLabRecordsView.swift; sourceTree = "<group>"; };
+		3626C4892BE4AE0300FA8C61 /* MedicalTestsBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalTestsBookingView.swift; sourceTree = "<group>"; };
 		364631FA2BDA1E6600DD53CC /* HealthKitAppIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAppIntegration.swift; sourceTree = "<group>"; };
 		364631FC2BDA1E9500DD53CC /* Team-7-HMS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Team-7-HMS.entitlements"; sourceTree = "<group>"; };
 		367FFA5E2BE34F5F007A995D /* PatientDetailsAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsAppointmentView.swift; sourceTree = "<group>"; };
@@ -345,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				B1639D0E2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift */,
+				3626C4872BE4A69E00FA8C61 /* BookLabRecordsView.swift */,
 				3621E0A32BDF700400F22807 /* PatientDetails.swift */,
 				B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */,
 				17F7C66A2BDE528300720B5E /* BookingView.swift */,
@@ -480,6 +485,7 @@
 				B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */,
 				B1639D142BD8E2AD00EAB15E /* patientAppointmentCard.swift */,
 				B1639D102BD8DA7700EAB15E /* SpecialitySwiftUIView.swift */,
+				3626C4892BE4AE0300FA8C61 /* MedicalTestsBookingView.swift */,
 				B1639D1A2BD923F400EAB15E /* DoctorNameUIView.swift */,
 				B1639D182BD9219B00EAB15E /* DoctorsList.swift */,
 				B1639D1C2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift */,
@@ -667,6 +673,7 @@
 				36B1F1782BDD2C3000D5A9DF /* AppointmentModel.swift in Sources */,
 				B1639D152BD8E2AD00EAB15E /* patientAppointmentCard.swift in Sources */,
 				17F7C6712BDEC8D400720B5E /* Just-Some.swift in Sources */,
+				3626C4882BE4A69E00FA8C61 /* BookLabRecordsView.swift in Sources */,
 				176900262BD2A94500F5F81E /* ContentView.swift in Sources */,
 				17F63AFF2BD7A2A20089511F /* SendCredentials.swift in Sources */,
 				17F63AF92BD7A1BF0089511F /* FirebaseHelperFunctions.swift in Sources */,
@@ -687,6 +694,7 @@
 				B1639D192BD9219B00EAB15E /* DoctorsList.swift in Sources */,
 				17F63AED2BD63E440089511F /* AppDelegate.swift in Sources */,
 				367FFA5F2BE34F5F007A995D /* PatientDetailsAppointmentView.swift in Sources */,
+				3626C48A2BE4AE0300FA8C61 /* MedicalTestsBookingView.swift in Sources */,
 				17F7C6692BDE42C600720B5E /* PatientView.swift in Sources */,
 				17F7C66B2BDE528300720B5E /* BookingView.swift in Sources */,
 				360295FF2BD7DB92001C1397 /* medicalConditions.swift in Sources */,

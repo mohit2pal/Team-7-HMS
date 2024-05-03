@@ -14,11 +14,7 @@ enum bookAppFont {
 
 struct bookAppointmentSwiftUIView: View {
     let patientUID : String
-    struct ButtonData{
-        let image: String
-        let title: String
-    }
-    
+
     //buttons by speciality
     let buttons: [ButtonData] = [
         ButtonData(image: "Doctor-icon", title: "General Physician"),
@@ -51,7 +47,8 @@ struct bookAppointmentSwiftUIView: View {
                 
                 HStack {
                     Text("Search by Specialities")
-                        .font(CentFont.mediumReg)
+                        .font(.title2)
+                        .bold()
                     Spacer()
                 }
                 //list of specialities
@@ -79,7 +76,8 @@ struct bookAppointmentSwiftUIView: View {
                 
                 HStack {
                     Text("Search by symptoms")
-                        .font(CentFont.mediumReg)
+                        .font(.title2)
+                        .bold()
                     Spacer()
                 }
                 

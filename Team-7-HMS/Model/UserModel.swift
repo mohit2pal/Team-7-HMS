@@ -32,3 +32,8 @@ struct PatientMedicalRecords : Codable {
     var weight : String
     var phoneNumber : String
 }
+
+struct ButtonData{
+    let image: String
+    let title: String
+}
