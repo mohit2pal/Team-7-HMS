@@ -10,6 +10,7 @@
 		095E99AA2BDF711F00BF9CAE /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095E99A92BDF711E00BF9CAE /* PickerView.swift */; };
 		095E99AC2BE0E4E300BF9CAE /* ViewPrescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095E99AB2BE0E4E300BF9CAE /* ViewPrescription.swift */; };
 		095E99B42BE4E1DF00BF9CAE /* LabTestCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095E99B32BE4E1DF00BF9CAE /* LabTestCard.swift */; };
+		095E99B62BE4E29200BF9CAE /* LabRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095E99B52BE4E29200BF9CAE /* LabRecords.swift */; };
 		096DA7CB2BDA0AF800241449 /* BookAppointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DA7CA2BDA0AF800241449 /* BookAppointment.swift */; };
 		096DA7CD2BDA457800241449 /* BookLab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DA7CC2BDA457800241449 /* BookLab.swift */; };
 		133642742BDF77B000926989 /* LabReportUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133642732BDF77B000926989 /* LabReportUploadView.swift */; };
@@ -129,6 +130,7 @@
 		095E99A92BDF711E00BF9CAE /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		095E99AB2BE0E4E300BF9CAE /* ViewPrescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPrescription.swift; sourceTree = "<group>"; };
 		095E99B32BE4E1DF00BF9CAE /* LabTestCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabTestCard.swift; sourceTree = "<group>"; };
+		095E99B52BE4E29200BF9CAE /* LabRecords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabRecords.swift; sourceTree = "<group>"; };
 		096DA7CA2BDA0AF800241449 /* BookAppointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAppointment.swift; sourceTree = "<group>"; };
 		096DA7CC2BDA457800241449 /* BookLab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookLab.swift; sourceTree = "<group>"; };
 		133642732BDF77B000926989 /* LabReportUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReportUploadView.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				096DA7CA2BDA0AF800241449 /* BookAppointment.swift */,
+				095E99B52BE4E29200BF9CAE /* LabRecords.swift */,
 				096DA7CC2BDA457800241449 /* BookLab.swift */,
 				095E99A92BDF711E00BF9CAE /* PickerView.swift */,
 			);
@@ -695,6 +698,7 @@
 				B1639D0B2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift in Sources */,
 				B1639D1B2BD923F400EAB15E /* DoctorNameUIView.swift in Sources */,
 				17F63AF72BD7A1750089511F /* AddDoctorDetails.swift in Sources */,
+				095E99B62BE4E29200BF9CAE /* LabRecords.swift in Sources */,
 				37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */,
 				36B1F1782BDD2C3000D5A9DF /* AppointmentModel.swift in Sources */,
 				B1639D152BD8E2AD00EAB15E /* patientAppointmentCard.swift in Sources */,
