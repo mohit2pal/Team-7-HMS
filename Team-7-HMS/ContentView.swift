@@ -45,10 +45,14 @@ struct ContentView: View {
                                 OnBoardingScreen()
                             }
                         } else {
-                            Image("NetworkNotConnected")
-                            Text("NOT CONNECTED TO THE INTERNET")
-                                .foregroundColor(.red)
-                                .bold()
+                            VStack{
+                                Image("NotConnected")
+                                    .resizable()
+                                    .frame(width: 250, height: 200)
+                                Text("NOT CONNECTED TO THE INTERNET")
+                                    .foregroundColor(.red)
+                                    .bold()
+                            }
                         }
                     }
                     
