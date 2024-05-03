@@ -29,7 +29,10 @@ class FirebaseHelperFunctions {
         "Paediatrics",
         "Cardiology",
         "Dermatology",
-        "ENT"
+        "ENT",
+        "Radiology",
+        "Phatology",
+        "Phlebotomy"
     ]
     
     let medicalDegrees = [

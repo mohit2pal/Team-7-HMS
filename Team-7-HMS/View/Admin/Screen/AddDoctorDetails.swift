@@ -30,7 +30,10 @@ struct AddDoctorDetails: View {
         "Paediatrics",
         "Cardiology",
         "Dermatology",
-        "ENT"
+        "ENT",
+        "Radiology",
+        "Phatology",
+        "Phlebotomy"
     ]
     
     let medicalDegrees = [
@@ -55,160 +58,164 @@ struct AddDoctorDetails: View {
     @State var docId : String = ""
     
     var body: some View {
-        ScrollView {
-        VStack{
-            HStack{
-                Spacer()
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .foregroundStyle(Color.gray)
-                    .frame(width: 120 , height: 120)
-                Spacer()
-            }
-            //            List{
-            Section() {
-                TextField("Full Name", text: $name)
-                    .textFieldStyle(.plain)
-                    .padding()
-                    .background(.white)
-                    .cornerRadius(10)
-                    .customShadow()
-                TextField("Email Address", text: $email)
-                    .keyboardType(.emailAddress)
-                    .textInputAutocapitalization(.never)
-                    .textFieldStyle(.plain)
-                    .padding()
-                    .background(.white)
-                    .cornerRadius(10)
-                    .customShadow()
-                
-                TextField("Phone Number", text: $phoneNumber)
-                    .keyboardType(.namePhonePad)
-                    .textFieldStyle(.plain)
-                    .padding()
-                    .background(.white)
-                    .cornerRadius(10)
-                    .customShadow()
-                    .background(isValidPhoneNumber ? Color.white : Color.red)
-                    .cornerRadius(10)
-                    .onChange(of: phoneNumber) { newValue in
-                        isValidPhoneNumber = isValidPhone(testStr: newValue)
+        
+        ZStack{
+            Color.background.ignoresSafeArea()
+            
+            ScrollView {
+                VStack{
+                    HStack{
+                        Spacer()
+                        Image(systemName: "person.circle.fill")
+                            .resizable()
+                            .foregroundStyle(Color.gray)
+                            .frame(width: 120 , height: 120)
+                        Spacer()
                     }
-                
-                HStack{
-                    //                    TextField("Date of Joining", text: Binding(
-                    //                        get: { dateFormatter.string(from: dateOfJoining) },
-                    //                        set: { newValue in
-                    //                            if let newDate = dateFormatter.date(from: newValue) {
-                    //                                dateOfJoining = newDate
-                    //                            }
-                    //                        })
-                    //                    )
-                    Text("Date of Joining")
-                    
-                    DatePicker("", selection: $dateOfJoining, displayedComponents: .date)
-                        .foregroundStyle(Color.gray)
-                }
-                .foregroundStyle(Color.gray.opacity(0.5))
-                .padding()
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-//                .border(Color.gray.opacity(0.2))
-                .background(Color.white)
-                .cornerRadius(10)
-                .customShadow()
-                
-                HStack{
-                    Text("Select Speciality")
-                        .foregroundStyle(Color.gray)
-                    
-                    Spacer()
-                    
-                    Picker("Speciality", selection: $selectedSpecialtyIndex) {
-                        ForEach(0..<specialties.count, id: \.self) {
-                            Text(specialties[$0])
+                    //            List{
+                    Section() {
+                        TextField("Full Name", text: $name)
+                            .textFieldStyle(.plain)
+                            .padding()
+                            .background(.white)
+                            .cornerRadius(10)
+                            .customShadow()
+                        TextField("Email Address", text: $email)
+                            .keyboardType(.emailAddress)
+                            .textInputAutocapitalization(.never)
+                            .textFieldStyle(.plain)
+                            .padding()
+                            .background(.white)
+                            .cornerRadius(10)
+                            .customShadow()
+                        
+                        TextField("Phone Number", text: $phoneNumber)
+                            .keyboardType(.namePhonePad)
+                            .textFieldStyle(.plain)
+                            .padding()
+                            .background(.white)
+                            .cornerRadius(10)
+                            .customShadow()
+                            .background(isValidPhoneNumber ? Color.white : Color.red)
+                            .cornerRadius(10)
+                            .onChange(of: phoneNumber) { newValue in
+                                isValidPhoneNumber = isValidPhone(testStr: newValue)
+                            }
+                        
+                        HStack{
+                            //                    TextField("Date of Joining", text: Binding(
+                            //                        get: { dateFormatter.string(from: dateOfJoining) },
+                            //                        set: { newValue in
+                            //                            if let newDate = dateFormatter.date(from: newValue) {
+                            //                                dateOfJoining = newDate
+                            //                            }
+                            //                        })
+                            //                    )
+                            Text("Date of Joining")
+                            
+                            DatePicker("", selection: $dateOfJoining, displayedComponents: .date)
+                                .foregroundStyle(Color.gray)
                         }
-                    }
-                    .pickerStyle(MenuPickerStyle()) // Dropdown style
-                    .padding(.vertical)  .clipShape(RoundedRectangle(cornerRadius: 10))
-                }
-                .padding(.horizontal)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-//                .border(Color.gray.opacity(0.2))
-                .background(Color.white)
-                .cornerRadius(10)
-                .customShadow()
-                
-                Picker("Gender", selection: $selectedGenderIndex) {
-                    ForEach(0..<genders.count, id: \.self) {
-                        Text(genders[$0])
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding(.vertical)
-                
-                
-                HStack{
-                    Text("Degree")
-                        .foregroundStyle(Color.gray)
-                    
-                    Spacer()
-                    
-                    Picker("", selection: $selectedMedicalIndex) {
-                        ForEach(0..<medicalDegrees.count, id: \.self) {
-                            Text(medicalDegrees[$0])
+                        .foregroundStyle(Color.gray.opacity(0.5))
+                        .padding()
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        //                .border(Color.gray.opacity(0.2))
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .customShadow()
+                        
+                        HStack{
+                            Text("Select Speciality")
+                                .foregroundStyle(Color.gray)
+                            
+                            Spacer()
+                            
+                            Picker("Speciality", selection: $selectedSpecialtyIndex) {
+                                ForEach(0..<specialties.count, id: \.self) {
+                                    Text(specialties[$0])
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle()) // Dropdown style
+                            .padding(.vertical)  .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
+                        .padding(.horizontal)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        //                .border(Color.gray.opacity(0.2))
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .customShadow()
+                        
+                        Picker("Gender", selection: $selectedGenderIndex) {
+                            ForEach(0..<genders.count, id: \.self) {
+                                Text(genders[$0])
+                            }
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding(.vertical)
+                        
+                        
+                        HStack{
+                            Text("Degree")
+                                .foregroundStyle(Color.gray)
+                            
+                            Spacer()
+                            
+                            Picker("", selection: $selectedMedicalIndex) {
+                                ForEach(0..<medicalDegrees.count, id: \.self) {
+                                    Text(medicalDegrees[$0])
+                                }
+                            }
+                            .pickerStyle(MenuPickerStyle())
+                            .padding(.vertical)  .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                        .padding(.horizontal)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        //                .border(Color.gray.opacity(0.2))
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .customShadow()
+                        
+                        
+                        HStack {
+                            Text("Experience")
+                            Spacer()
+                            Stepper(value: $experience, in: 0...100) {
+                                Text("\(experience) years")
+                                    .foregroundStyle(Color.black)
+                            }
+                        }
+                        .foregroundStyle(Color.gray)
+                        .padding(.horizontal)
+                        .padding(.vertical)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .customShadow()
+                        //                .border(Color.gray.opacity(0.2))
                     }
-                    .pickerStyle(MenuPickerStyle())
-                    .padding(.vertical)  .clipShape(RoundedRectangle(cornerRadius: 10))
-                }
-                .padding(.horizontal)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-//                .border(Color.gray.opacity(0.2))
-                .background(Color.white)
-                .cornerRadius(10)
-                .customShadow()
-                
-                
-                HStack {
-                    Text("Experience")
+                    .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal)
                     Spacer()
-                    Stepper(value: $experience, in: 0...100) {
-                        Text("\(experience) years")
-                            .foregroundStyle(Color.black)
-                    }
                 }
-                .foregroundStyle(Color.gray)
-                .padding(.horizontal)
-                .padding(.vertical)
-                .background(Color.white)
-                .cornerRadius(10)
-                .customShadow()
-//                .border(Color.gray.opacity(0.2))
-            }
-            .textFieldStyle(.roundedBorder)
-            .padding(.horizontal)
-            Spacer()
-        }
-        .background(Color.background)
-        .navigationTitle("Add Doctors")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar{
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    password = generateRandomPassword(length: 10)
-                    FirebaseHelperFunctions().registerUser(email: email, password: password ) { result in
-                        switch result {
-                        case .success(let uid):
-                            print("User registered successfully. UID: \(uid)")
-                            
-                            print(password)
-                            print(email)
-                            
-                            self.docId = uid
-                            
-                            FirebaseHelperFunctions().addDoctorDetails(name : name , email : email , dateOfJoining : dateOfJoining , experience : experience , selectedGenderIndex : selectedGenderIndex , selectedSpecialtyIndex : selectedSpecialtyIndex, medicalDegree: selectedMedicalIndex , phoneNumber :  phoneNumber, docId: docId )
-                            
-                            let emailTemplate = """
+                .background(Color.background)
+                .navigationTitle("Add Doctors")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar{
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            password = generateRandomPassword(length: 10)
+                            FirebaseHelperFunctions().registerUser(email: email, password: password ) { result in
+                                switch result {
+                                case .success(let uid):
+                                    print("User registered successfully. UID: \(uid)")
+                                    
+                                    print(password)
+                                    print(email)
+                                    
+                                    self.docId = uid
+                                    
+                                    FirebaseHelperFunctions().addDoctorDetails(name : name , email : email , dateOfJoining : dateOfJoining , experience : experience , selectedGenderIndex : selectedGenderIndex , selectedSpecialtyIndex : selectedSpecialtyIndex, medicalDegree: selectedMedicalIndex , phoneNumber :  phoneNumber, docId: docId )
+                                    
+                                    let emailTemplate = """
                                                 Dear Dr. \(name),
                                                 
                                                 We are delighted to welcome you to the UrHealth team! As part of your onboarding process, we're providing you with your account credentials.
@@ -224,22 +231,23 @@ struct AddDoctorDetails: View {
                                                 
                                                 Best regards,
                                                 """
+                                    
+                                    EmailFunction.sendEmail(subject: "Welcome To UrHealth", body: emailTemplate, to: email)
+                                    
+                                case .failure(let error):
+                                    print("Error registering user: \(error.localizedDescription)")
+                                }
+                            }
                             
-                            EmailFunction.sendEmail(subject: "Welcome To UrHealth", body: emailTemplate, to: email)
-                            
-                        case .failure(let error):
-                            print("Error registering user: \(error.localizedDescription)")
-                        }
+                        }, label: {
+                            HStack{
+                                Text("Done")
+                            }
+                            .foregroundStyle(Color.accentColor)
+                        })
                     }
-                    
-                }, label: {
-                    HStack{
-                        Text("Done")
-                    }
-                    .foregroundStyle(Color.accentColor)
-                })
+                }
             }
-        }
         }
     }
     

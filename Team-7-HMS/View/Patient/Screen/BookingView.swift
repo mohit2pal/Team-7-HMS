@@ -32,7 +32,7 @@ struct BookingView: View {
                         bookAppointmentSwiftUIView(patientUID: patientID)
                         
                     } else {
-                        EmptyView()
+                        BookLabRecordsView()
                     }
                     Spacer()
                 }
