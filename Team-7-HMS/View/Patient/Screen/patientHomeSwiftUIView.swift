@@ -28,7 +28,7 @@ struct patientHomeSwiftUIView: View {
                 } label: {
                     Image(systemName: "person.circle.fill")
                         .resizable()
-                        .frame(width: 70, height: 70)
+                        .frame(width: 60, height: 60)
                         .foregroundColor(.gray)
                         .padding(.trailing)
                 }
@@ -41,7 +41,7 @@ struct patientHomeSwiftUIView: View {
                     Text("Hello 👋")
                         .font(CentFont.mediumReg)
                     Text(String(userName.prefix(20)))
-                        .font(.title2)
+                        .font(.title)
                 }
                 Spacer()
                 NavigationLink(destination: patientNotificationSwiftUIView()) {

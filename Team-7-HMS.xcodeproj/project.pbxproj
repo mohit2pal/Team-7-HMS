@@ -96,6 +96,8 @@
 		B1639D1B2BD923F400EAB15E /* DoctorNameUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D1A2BD923F400EAB15E /* DoctorNameUIView.swift */; };
 		B1639D1D2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D1C2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift */; };
 		B1639D1F2BDA465500EAB15E /* patientTabItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D1E2BDA465500EAB15E /* patientTabItems.swift */; };
+		B164324B2BE49B150002227C /* viewLabReportSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164324A2BE49B150002227C /* viewLabReportSwiftUIView.swift */; };
+		B164324D2BE49B950002227C /* addPrescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164324C2BE49B950002227C /* addPrescription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +184,8 @@
 		B1639D1A2BD923F400EAB15E /* DoctorNameUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorNameUIView.swift; sourceTree = "<group>"; };
 		B1639D1C2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = slotsAvailableSwiftUIView.swift; sourceTree = "<group>"; };
 		B1639D1E2BDA465500EAB15E /* patientTabItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientTabItems.swift; sourceTree = "<group>"; };
+		B164324A2BE49B150002227C /* viewLabReportSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewLabReportSwiftUIView.swift; sourceTree = "<group>"; };
+		B164324C2BE49B950002227C /* addPrescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addPrescription.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,6 +385,8 @@
 				360295FA2BD7AD69001C1397 /* DoctorLoginScreenView.swift */,
 				13D816D02BD901ED00D36A9C /* OnBoardingDoctor.swift */,
 				133642732BDF77B000926989 /* LabReportUploadView.swift */,
+				B164324A2BE49B150002227C /* viewLabReportSwiftUIView.swift */,
+				B164324C2BE49B950002227C /* addPrescription.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -685,7 +691,9 @@
 				B1639D092BD8DA1700EAB15E /* CentralisedFonts.swift in Sources */,
 				367FFA612BE38289007A995D /* AppointmentDataView.swift in Sources */,
 				17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */,
+				B164324B2BE49B150002227C /* viewLabReportSwiftUIView.swift in Sources */,
 				360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */,
+				B164324D2BE49B950002227C /* addPrescription.swift in Sources */,
 				095E99AA2BDF711F00BF9CAE /* PickerView.swift in Sources */,
 				13EF0E372BD7A4A80015FDDA /* OnBoardingScreen.swift in Sources */,
 				17F63B272BDA127D0089511F /* AppState.swift in Sources */,

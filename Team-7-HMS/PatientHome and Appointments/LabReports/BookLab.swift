@@ -17,9 +17,7 @@ struct BookLab: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Color(red: 245 / 255, green: 245 / 255, blue: 245 / 255)
-                    .ignoresSafeArea()
+            VStack {
                 
                 ScrollView {
                     

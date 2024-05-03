@@ -38,12 +38,12 @@ struct LabReportUploadView: View {
                 }
                 .padding()
                 .background(
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 20)
                         .fill(Color.white) // Use a white background
-                        .shadow(radius: 1) // Add a shadow for depth
                         .frame(width: 320)
                 )
-                
+                .customShadow()
+                Spacer()
                 Image("OnBoardScreen3")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -98,16 +98,12 @@ struct LabReportUploadView: View {
                     documentPickerIsPresented.toggle()
                 }) {
                     Text("Select Lab Report")
+                        .font(.headline)
                         .padding()
                         .frame(width: 360)
                         .background(Color("PrimaryColor"))
                         .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray, lineWidth: 0.3)
-                                
-                        )
+                        .cornerRadius(20)
                 }
                 
                 Button(action: {
@@ -118,20 +114,18 @@ struct LabReportUploadView: View {
                 }) {
                     Text("Forward Report")
                         .padding()
+                        .font(.headline)
                         .frame(width: 360)
                         .background(labReportURL != nil ? Color("PrimaryColor") : Color.gray) // Change color based on document selection
                         .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray, lineWidth: 0.3)
-                        )
+                        .cornerRadius(20)
                         .disabled(labReportURL == nil) // Disable button if no document is selected
                 }
             }
             .padding()
         }
         .padding(.horizontal)
+        .background(Color.background)
         .navigationBarTitle("Lab Report Upload", displayMode: .inline)
         .sheet(isPresented: $documentPickerIsPresented) {
             DocumentPickerView(documentURL: $labReportURL, fileName: $fileName)

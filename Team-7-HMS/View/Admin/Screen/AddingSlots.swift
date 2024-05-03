@@ -260,13 +260,14 @@ struct SearchBar: View {
     
     var body: some View {
         HStack {
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(Color("PrimaryColor"))
+                .padding(.leading, 8)
             TextField("Search doctors by name", text: $text)
-                .padding(8)
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .padding(.horizontal, 8)
         }
-        .padding(.vertical, 8)
+        .padding(8)
+        .background(Color(.systemGray6))
+        .cornerRadius(8)
     }
 }
 struct DateButton: View {
