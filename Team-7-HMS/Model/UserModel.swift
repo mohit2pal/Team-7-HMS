@@ -37,3 +37,11 @@ struct ButtonData{
     let image: String
     let title: String
 }
+
+func addDaysToDate( days: Int ) -> String {
+    let date = Date()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "dd_MM_yyyy"
+    let newDate = Calendar.current.date(byAdding: .day, value: days, to: date) ?? date
+    return formatter.string(from: newDate)
+}

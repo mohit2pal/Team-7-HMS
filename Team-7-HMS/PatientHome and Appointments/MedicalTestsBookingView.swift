@@ -14,15 +14,20 @@ struct MedicalTestsBookingView: View {
     @State var icon: String
     @State private var selectedDayIndex: Int?
     @State private var shouldReloadScrollView = false
+    @State private var isLoading : Bool = false
+    @State private var booked : Bool = false
     
     let startTime = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date())!
        let endTime = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!
        let interval: TimeInterval = 30 * 60 // 30 minutes in seconds
     
+    @State private var selectedDateString : String = ""
     @State private var selectedTimeSlot : String = ""
+    @State private var colour : [Color] = []
     var presentTimeSlots : [String] {
         timeSlots()
     }
+    @State private var slotColors: [Color?] = []
     var body: some View {
         NavigationStack{
             VStack {
@@ -51,31 +56,39 @@ struct MedicalTestsBookingView: View {
                                     .customShadow()
                                     .onTapGesture {
                                         self.selectedDayIndex = index
-                                        self.shouldReloadScrollView.toggle() // Toggle state variable
+                                        self.shouldReloadScrollView.toggle()
+                                        self.selectedDateString = addDaysToDate(days: index)
                                     }
+
                             }
                         }
                         .padding()
+                    }
+                    .onAppear{
+                        self.selectedDateString = addDaysToDate(days: 0)
+
                     }
                 }
                
                             
                 VStack {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
-                        ForEach(presentTimeSlots, id: \.self) { timeSlot in
-                            Text(timeSlot)
+                        ForEach(presentTimeSlots.indices, id: \.self) { index in
+                            Text(presentTimeSlots[index])
                                 .onTapGesture {
-                                    selectedTimeSlot = timeSlot
+                                    selectedTimeSlot = presentTimeSlots[index]
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity)
                                 .padding()
-                                .background(getColor(timeSlot: timeSlot) ? Color.accentColor : Color.gray.opacity(0.3))
+                                .background(getColor(timeSlot: presentTimeSlots[index]) ? Color.accentColor : .gray.opacity(0.4))
                             
-                                .foregroundStyle(getColor(timeSlot: timeSlot) ? .white : .black)
+                            
+                                .foregroundStyle(getColor(timeSlot: presentTimeSlots[index]) ? .white : .black)
                                 .cornerRadius(10)
                         }
                     }
                 }
+                .id(shouldReloadScrollView)
                 
                 if selectedTimeSlot != "" {
                     Text("Please arrive 10-15 minutes before your selected time for easy testing.")
@@ -86,13 +99,40 @@ struct MedicalTestsBookingView: View {
                 Spacer()
                 
                 
-                Button(action: {}, label: {
-                    Text("Book Slot")
-                        .padding()
-                        .frame(width: 300)
-                        .background(Color.accentColor)
-                        .foregroundStyle(Color.white)
-                        .cornerRadius(15)
+                Button(action: {
+                    isLoading = true
+                    FirebaseHelperFunctions().bookMedicalTest(patientUID: patientUID, medicalTest: speciality, timeSlot: selectedTimeSlot, date: selectedDateString) {
+                        isLoading = false
+                        booked = true
+                    }
+                  
+                }, label: {
+                    if isLoading {
+                        ProgressView()
+                            .padding()
+                            .frame(width: 300)
+                            .background(Color.accentColor)
+                            .foregroundStyle(Color.white)
+                            .cornerRadius(15)
+                    }
+                    else {
+                        if booked{
+                            Image(systemName: "checkmark.circle.fill")
+                                .padding()
+                                .frame(width: 300)
+                                .background(Color.accentColor)
+                                .foregroundStyle(Color.green)
+                                .cornerRadius(15)
+                        }
+                        else {
+                            Text("Book Slot")
+                                .padding()
+                                .frame(width: 300)
+                                .background(Color.accentColor)
+                                .foregroundStyle(Color.white)
+                                .cornerRadius(15)
+                        }
+                    }
                     
                 })
             }
@@ -102,13 +142,21 @@ struct MedicalTestsBookingView: View {
             .onAppear {
                 // Select today's date index when the view appears
                 selectedDayIndex = daysInCurrentWeek().firstIndex(of: currentDayString())
+                fetchSlotColors()
+                self.shouldReloadScrollView.toggle()
+                
             }
             .onChange(of: selectedDayIndex) { _ in
                 selectedTimeSlot = ""
+                self.shouldReloadScrollView.toggle()
             }
         }
     }
     
+    
+
+
+
     // Function to get the current day string (e.g., "Mon")
     func currentDayString() -> String {
         let dateFormatter = DateFormatter()
@@ -116,6 +164,21 @@ struct MedicalTestsBookingView: View {
         return dateFormatter.string(from: Date())
     }
     
+    func fetchSlotColors() {
+            // Reset slotColors array
+            slotColors = Array(repeating: nil, count: presentTimeSlots.count)
+            
+            for (index, timeSlot) in presentTimeSlots.enumerated() {
+                FirebaseHelperFunctions().fetchSlotColorForDateAndTimeSlot(date: selectedDateString, timeSlot: timeSlot, medicalTest: speciality) { count in
+                    // Determine color based on count (or any other condition)
+                    let color: Color = count > 0 ? .accentColor : .gray.opacity(0.4)
+                    // Update slotColors array
+                    slotColors[index] = color
+                }
+            }
+        }
+    
+
     // Function to get the selected date based on the selectedDayIndex
     func selectedDate() -> String {
         
@@ -181,8 +244,6 @@ struct MedicalTestsBookingView: View {
         return false
     }
 }
-
-
 
 #Preview {
     MedicalTestsBookingView(patientUID: "", speciality:

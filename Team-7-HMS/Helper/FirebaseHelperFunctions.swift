@@ -49,7 +49,7 @@ class FirebaseHelperFunctions {
     ]
     
     
-    
+ 
     // add doctor details to firebase
     
     func addDoctorDetails(name : String , email : String , dateOfJoining : Date , experience : Int , selectedGenderIndex : Int , selectedSpecialtyIndex : Int , medicalDegree : Int , phoneNumber :  String ,docId : String) {
@@ -876,6 +876,96 @@ class FirebaseHelperFunctions {
         }
     }
     
+    //function to book a slot for medical tests
+    
+    func bookMedicalTest(patientUID: String, medicalTest: String, timeSlot: String, date: String , completion: @escaping () -> Void) {
+        let db = Firestore.firestore()
+        let medicalTestRef = db.collection("medicalTestsAppointments")
+        
+        let query = medicalTestRef
+            .whereField("medicalTest", isEqualTo: medicalTest)
+            .whereField("slot", isEqualTo: timeSlot)
+            .whereField("date", isEqualTo: date)
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                guard let querySnapshot = querySnapshot else {
+                    let data: [String: Any] = ["patientId": patientUID,
+                                               "medicalTest": medicalTest,
+                                               "date": date,
+                                               "slot": timeSlot]
+                    
+                    medicalTestRef.addDocument(data: data) { error in
+                        if let error = error {
+                            print("Error adding document: \(error)")
+                        } else {
+                            print("Appointment booked successfully!")
+                        }
+                    }
+                    return
+                }
+                
+                // Getting the count of matching documents
+                let count = querySnapshot.documents.count
+                if count < 2 {
+                    let data: [String: Any] = ["patientId": patientUID,
+                                                "medicalTest": medicalTest,
+                                                "date": date,
+                                                "slot": timeSlot]
+                    
+                    medicalTestRef.addDocument(data: data) { error in
+                        if let error = error {
+                            print("Error adding document: \(error)")
+                          
+                        } else {
+                            print("Appointment booked successfully!")
+                            completion()
+                        }
+                    }
+                } else {
+                    print("No available slots for \(medicalTest) at \(timeSlot) on \(date).")
+                    completion()
+                }
+            }
+        }
+    }
+    
+    //fetch the count
+    
+    func fetchSlotColorForDateAndTimeSlot(date: String, timeSlot: String, medicalTest  : String ,completion: @escaping (Int) -> Void) {
+        let db = Firestore.firestore()
+        let medicalTestRef = db.collection("medicalTestsAppointments")
+        
+        let query = medicalTestRef
+            .whereField("medicalTest", isEqualTo: medicalTest)
+            .whereField("slot", isEqualTo: timeSlot)
+            .whereField("date", isEqualTo: date)
+            
+        
+        print(medicalTest)
+        print(timeSlot)
+        print(date)
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                guard let querySnapshot = querySnapshot else {
+                    completion(0)
+                    return
+                }
+                
+                // Getting the count of matching documents
+                let count = querySnapshot.documents.count
+                print(count)
+                completion(count)
+            }
+        }
+
+    }
+
+
 }
 
 
