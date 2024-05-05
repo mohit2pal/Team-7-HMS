@@ -25,7 +25,6 @@ struct PatientDetailsAppointmentView: View {
                     Text(patientName)
                 }
                 .font(.title2)
-                .bold()
                 
                 HStack{
                     Text("Gender :")

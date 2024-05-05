@@ -12,89 +12,101 @@ struct ViewPrescription: View {
     
     var body: some View {
         NavigationView {
-            List {
-                
-                patientAppointmentCard(appointmentData: appointmentData).buttonBorderShape(.roundedRectangle).cornerRadius(30)
-                            
-                   .frame(maxWidth: .infinity, alignment: .center)
-                Section(header: Text("Symptoms")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(Color.black)) {
-                    Text("Rashes, Fever")
+            VStack{
+//                Spacer().frame(height: 30)
+                HStack{
+                    Text("Diagnosis").font(.headline)
+                    Spacer()
                 }
-                Section(header: Text("Diagnosis")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(Color.black)) {
-                    Text("Medicine Allergy")
+                HStack{
+                    Text("Might be srs")
+                    Spacer()
                 }
-                Section(header: Text("Prescribed Medicines")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(Color.black)) {
-                    HStack {
-                        VStack{
-                            Text("Allegra 180")
-                            Text("(AF for 10 days)").font(.system(size: 12))
+                .foregroundStyle(Color.white)
+                .padding()
+                .background(.myAccent)
+                .cornerRadius(20)
+                .customShadow()
+                Spacer().frame(height: 20)
+                HStack{
+                    Text("Symptoms").font(.headline)
+                    Spacer()
+                }
+                HStack{
+                    Text("Very very sick")
+                    Spacer()
+                }
+                .padding()
+                .background(.white)
+                .cornerRadius(20)
+                .customShadow()
+                Spacer().frame(height: 20)
+                HStack{
+                    Text("Prescribed Medicines").font(.headline)
+                    Spacer()
+                }
+                HStack {
+                    VStack{
+                        Text("Allegra 180")
+                        Text("(AF for 10 days)").font(.system(size: 12))
+                    }
+                    
+                    Spacer()
+                    VStack{
+                        HStack{
+                            Image(systemName: "sun.max.fill")
+                            Spacer()
+                            Image(systemName: "sun.horizon.fill")
+                            Spacer()
+                            Image(systemName: "cloud.moon")
                         }
-                        
-                        Spacer()
-                        VStack{
-                            HStack{
-                                Text("1")
-                                Spacer()
-                                Text("0")
-                                Spacer()
-                                Text("1")
-                            }
-                            .frame(width: 100)
-                            HStack{
-                                Text("M")
-                                Spacer()
-                                Text("A")
-                                Spacer()
-                                Text("N")
-                            }
-                            .frame(width: 100)
+                        .foregroundColor(.myAccent)
+                        .frame(width: 110)
+                        HStack{
+                            Text("1")
+                            Spacer()
+                            Text("0")
+                            Spacer()
+                            Text("1")
                         }
-                        
+                        .frame(width: 100)
                     }
                 }
-                Section(header: Text("Lab Tests")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(Color.black)) {
-                    Text("Serum IgE, CBC")
+                .padding()
+                .background(.white)
+                .cornerRadius(20)
+                .customShadow()
+                Spacer().frame(height: 20)
+                HStack{
+                    Text("Lab tests").font(.headline)
+                    Spacer()
                 }
-                Section(header: Text("Follow Up")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(Color.black)) {
-                    Text("After 10 days with the mentioned reports")
+                HStack{
+                    Text("Do this that blah blah")
+                    Spacer()
                 }
+                .padding()
+                .background(.white)
+                .cornerRadius(20)
+                .customShadow()
+                Spacer().frame(height: 20)
+                HStack{
+                    Text("Follow up").font(.headline)
+                    Spacer()
+                }
+                HStack{
+                    Text("Do this that blah blah")
+                    Spacer()
+                }
+                .padding()
+                .background(.white)
+                .cornerRadius(20)
+                .customShadow()
+                Spacer()
             }
-            .listStyle(GroupedListStyle())
+            .padding()
+            .background(Color.background)
             .navigationTitle("Prescription")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {}) {
-                        Image(systemName: "chevron.left")
-                    }
-                }
-            }
-        }
-        .tabViewStyle(DefaultTabViewStyle())
-        .tabItem {
-            Image(systemName: "house")
-            Text("Home")
-        }
-        .tabItem {
-            Image(systemName: "book")
-            Text("Booking")
-        }
-        .tabItem {
-            Image(systemName: "doc.text")
-            Text("Records")
-        }
-        .tabItem {
-            Image(systemName: "person")
-            Text("Profile")
         }
     }
 }

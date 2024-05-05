@@ -197,7 +197,7 @@ struct AddingSlots: View {
                                 .padding()
                                 .background(bookedSlots.contains(slot) ? Color.gray : (selectedSlots.contains(slot) ? Color.myAccent : Color.white))
                                 .foregroundStyle(bookedSlots.contains(slot) ? Color.white : (selectedSlots.contains(slot) ? Color.white : Color.black))
-                                .cornerRadius(8)
+                                .cornerRadius(12)
                                 .customShadow()
                                 .disabled(bookedSlots.contains(slot))
                         }
