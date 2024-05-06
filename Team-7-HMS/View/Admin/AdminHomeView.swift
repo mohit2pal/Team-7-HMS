@@ -10,6 +10,10 @@ import SwiftUI
 struct AdminHomeView: View {
     var body: some View {
         TabView {
+            AdminDashboard()
+                .tabItem {
+                    Label("Dashboard", systemImage: "list.number")
+                }
             AddingSlots()
                 .tabItem {
                     Label("Add Slots", systemImage: "calendar.badge.plus")

@@ -13,38 +13,32 @@ struct LabReportUploadView: View {
     @State private var documentPickerIsPresented = false
     @State private var selectedPatientIndex = 0 // Default selected patient index
     @State private var diagnosis : String = ""
-    let patients = ["John Doe", "Jane Smith", "Michael Johnson", "Emily Brown", "David Wilson"]
+
     @State var fileName : String?// Assign the file name here
     
+    @State var patientUID : String
+    @State var caseID : String
+    @State var medicalTest : String
     var body: some View {
         ZStack{
             Color.background.ignoresSafeArea()
             ScrollView{
                 VStack(spacing: 20) {
                     VStack(spacing: 20) {
+                        
                         HStack(spacing: 20) {
-                            Text("Patient Name")
-                                .font(.headline)
-                                .foregroundColor(.black)
-                                .padding(.leading)
-                            
-                            
-                            Picker(selection: $selectedPatientIndex, label: Text("")) {
-                                ForEach(0..<patients.count) { index in
-                                    Text(self.patients[index]).tag(index)
-                                }
+                            VStack
+                            {
+                                Text(medicalTest)
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                                    .padding(.leading)
+                                
+                                Text(caseID.suffix(5))
+                                
                             }
-                            .pickerStyle(DefaultPickerStyle())
-                            .frame(width: 150) // Adjust width to fit text and picker properly
-                            .clipped() // Prevents text from being cut off
-                            
                         }
                         .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color.white) // Use a white background
-                                .frame(width: 320)
-                        )
                         .customShadow()
                         Spacer()
                         Image("OnBoardScreen3")
@@ -85,15 +79,16 @@ struct LabReportUploadView: View {
                                     .bold()
                                
                             }
-                            TextField("Add Diagnosis", text: $diagnosis)
-                                       .padding()
-                                       .background(Color.gray.opacity(0.1))
-                                       .cornerRadius(10)
-                                       .padding(.horizontal)
-                                       .multilineTextAlignment(.leading)
-                                       .disableAutocorrection(true)
-                                       .frame(height : 250)
-                                       .autocapitalization(.sentences)
+                            TextEditor(text: $diagnosis)
+                                .padding()
+                                .frame(height : 250)
+                                
+                                .multilineTextAlignment(.leading)
+                                .disableAutocorrection(true)
+                                .autocapitalization(.sentences)
+                                .shadow(color: Color.black.opacity(0.2), radius: 1, x: 0, y: 2)
+                                .cornerRadius(15)
+                                       
                             
                         } else {
                             HStack(spacing: 10) {
@@ -129,7 +124,15 @@ struct LabReportUploadView: View {
                         Button(action: {
                             if let reportURL = labReportURL {
                                 // Forward report action
-                                uploadFileToFirebaseStorage(url: reportURL)
+                                uploadFileToFirebaseStorage(url: reportURL) { result in
+                                    switch result {
+                                    case .success(let url):
+                                        FirebaseHelperFunctions().updateMedicalRecord(for: caseID, pdf: url, analysis: diagnosis)
+                                    case .failure(let error):
+                                        print("Error uploading file to Firebase Storage: \(error.localizedDescription)")
+                                        // Handle error if necessary
+                                    }
+                                }
                             }
                         }) {
                             Text("Forward Report")
@@ -154,7 +157,7 @@ struct LabReportUploadView: View {
         }
     }
     
-    func uploadFileToFirebaseStorage(url: URL) {
+    func uploadFileToFirebaseStorage(url: URL,  completion: @escaping (Result<String, Error>) -> Void) {
         let fileName = url.lastPathComponent
         let storageRef = Storage.storage().reference().child("lab_reports/\(fileName)")
 
@@ -170,11 +173,14 @@ struct LabReportUploadView: View {
                 guard let downloadURL = url else {
                     // Error occurred. Handle error.
                     print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
+                    completion(.failure(error!))
                     return
                 }
                 
                 // File URL retrieved successfully.
                 print("File uploaded successfully. URL: \(downloadURL)")
+                completion(.success(downloadURL.absoluteString))
+                
                 
             }
         }
@@ -221,7 +227,7 @@ struct DocumentPickerView: UIViewControllerRepresentable {
 struct LabReportUploadView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LabReportUploadView()
+            LabReportUploadView(patientUID: "", caseID: "", medicalTest: "")
         }
     }
 }

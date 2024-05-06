@@ -1,34 +1,32 @@
-//// Function to fetch medical records for a given patient ID
-//func fetchMedicalRecord(for patientId: String, completion: @escaping (Result<PatientMedicalRecords?, Error>) -> Void) {
-//    let db = Firestore.firestore()
-//    let patientDocRef = db.collection("patient_details").document(patientId)
+//import SwiftUI
+//// Import Firebase if you're using Firestore directly in this file
+//// import Firebase
+//
+//struct addPrescription: View {
+//    @State var appointmentData: AppointmentCardData
 //    
-//    patientDocRef.getDocument { (document, error) in
-//        if let error = error {
-//            // If there's an error fetching the document, pass the error to the completion handler
-//            completion(.failure(error))
-//        } else if let document = document, document.exists, let data = document.data() {
-//            // If the document is fetched successfully and contains data, try to extract the medical records
-//            if let medicalRecordsData = data["medicalRecords"] as? [String: Any] {
-//                // Parse the data into a PatientMedicalRecords object
-//                let patientMedicalRecords = PatientMedicalRecords(dictionary: medicalRecordsData)
-//                
-//                if let patientMedicalRecords = patientMedicalRecords {
-//                    print("Successfully parsed patient medical records")
-//                    // Pass the successfully parsed medical records to the completion handler
-//                    completion(.success(patientMedicalRecords))
-//                } else {
-//                    print("Failed to parse patient medical records")
-//                    // If the data cannot be parsed into a PatientMedicalRecords object, pass nil
-//                    completion(.success(nil))
+//    @State private var diagnosis: String = ""
+//    @State private var symptoms: String = ""
+//    @State private var labTest: String = ""
+//    @State private var followUp: String = ""
+//    @State private var medicines: [Medicine] = []
+//    
+//    var body: some View {
+//        // Your existing view code
+//        
+//        Button("Submit Prescription") {
+//            // Call the addPrescription function here
+//            FirebaseHelperFunctions.addPrescription(appointmentData: appointmentData, diagnosis: diagnosis, symptoms: symptoms, labTest: labTest, followUp: followUp, medicines: medicines) { result in
+//                switch result {
+//                case .success():
+//                    print("Prescription added successfully")
+//                    // Handle success, e.g., show a success message or clear the form
+//                case .failure(let error):
+//                    print("Error adding prescription: \(error)")
+//                    // Handle failure, e.g., show an error message
 //                }
-//            } else {
-//                // If the document does not contain medical records, pass nil
-//                completion(.success(nil))
 //            }
-//        } else {
-//            // If the document does not exist, pass nil
-//            completion(.success(nil))
 //        }
+//        // Style your button as needed
 //    }
 //}

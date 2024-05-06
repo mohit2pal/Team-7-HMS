@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
 
 struct Medicine {
     var name: String
@@ -15,275 +17,118 @@ struct Medicine {
 }
 
 struct addPrescription: View {
+    @State var appointmentData: AppointmentDataModel
+    
+    @Binding var showPrescriptionSheet: Bool
+    
+    @State private var isShowingProgressView: Bool = false
+    
     @State private var diagnosis : String = ""
     @State private var symptoms : String = ""
     @State private var labTest : String = ""
     @State private var followUp : String = ""
     @State private var isPrescriptionOn = false
     @State private var isLabTestsOn = false
-    @State private var medicineName = ""
-    @State private var morningDose:Bool = false
-    @State private var eveningDose:Bool = false
-    @State private var nightDose:Bool = false
-    @State private var medicines: [Medicine] = []
+    @State var medicines: [Medicine] = []
+
     var body: some View {
-        NavigationView {
-            VStack{
-                HStack{
-                    Text("Diagnosis").font(.headline)
-                    Spacer()
-                }
-                TextField("Diagnosis", text: $diagnosis)
-                .padding()
-                .background(.white)
-                .cornerRadius(20)
-                .customShadow()
-                Spacer().frame(height: 20)
-                HStack{
-                    Text("Symptoms").font(.headline)
-                    Spacer()
-                }
-                TextField("Symptoms", text: $symptoms)
-                .padding()
-                .background(.white)
-                .cornerRadius(20)
-                .customShadow()
-                Spacer().frame(height: 20)
-                HStack{
-                    Text("Prescribe Medicines").font(.headline)
-                    Spacer()
-                }
-                
-                if !medicines.isEmpty{
-                    List{
-                        ForEach(medicines.indices , id: \.self){ index in
-                            HStack{
-                                Text(medicines[index].name)
-                                Spacer()
-                                
-                                //morning Dose
-                                VStack{
-                                    if medicines[index].morningDose{
-                                        VStack{
-                                            Image(systemName: "sun.max.fill")
-                                                .foregroundColor(.myAccent)
-                                            
-                                        }
-                                    }
-                                    else{
-                                        VStack{
-                                            Image(systemName: "sun.max.fill")
-                                                .foregroundColor(.gray)
-                                            
-                                        }
-                                    }
-                                }
-                                
-                                //afternoon dose
-                                
-                                VStack{
-                                    if medicines[index].eveningDose{
-                                        VStack{
-                                            Image(systemName: "sun.horizon.fill")
-                                                .foregroundColor(.myAccent)
-                                            
-                                        }
-                                    }
-                                    else{
-                                        VStack{
-                                            Image(systemName: "sun.horizon.fill")
-                                                .foregroundColor(.gray)
-                                            
-                                        }
-                                    }
-                                }
-                                
-                                //night Dose
-                                
-                                VStack{
-                                    if medicines[index].nightDose{
-                                        VStack{
-                                            Image(systemName: "cloud.moon")
-                                                .foregroundColor(.myAccent)
-                                            
-                                        }
-                                    }
-                                    else{
-                                        VStack{
-                                            Image(systemName: "cloud.moon")
-                                                .foregroundColor(.gray)
-                                            
-                                        }
-                                    }
-                                }
-                                
-                                //delete
-                                Button {
-                                    medicines.remove(at: index)
-                                } label: {
-                                    Image(systemName: "trash")
-                                        .foregroundStyle(Color.accentColor)
-                                        .padding(.leading)
-                                }
-                            }
-                        }
-                        .onDelete(perform: { indexSet in
-                            medicines.remove(atOffsets: indexSet)
-                        })
-                    }
-                    .listStyle(.plain)
-                    .background(Color.background)
-                    .cornerRadius(20)
-                    .frame(height : CGFloat(medicines.count * 50))
-                    
-                }
+            NavigationView {
+                ScrollView {
                 VStack{
                     HStack{
-                        TextField("Medicine Name", text: $medicineName)
+                        Text("Diagnosis").font(.headline)
                         Spacer()
-                        HStack {
-                            Button(action: {
-                                morningDose.toggle()
-                            }) {
-                                if morningDose{
-                                    VStack{
-                                        Image(systemName: "sun.max.fill")
-                                            .foregroundColor(.myAccent)
-                                        Text("1")
-                                            .foregroundColor(.black)
-                                    }
-                                }
-                                else{
-                                    VStack{
-                                        Image(systemName: "sun.max.fill")
-                                            .foregroundColor(.gray)
-                                        Text("0")
-                                            .foregroundColor(.black)
-                                    }
-                                }
-                            }
-                            Button(action: {
-                                eveningDose.toggle()
-                            }) {
-                                if eveningDose{
-                                    VStack{
-                                        VStack{
-                                            Image(systemName: "sun.horizon.fill")
-                                                .foregroundColor(.myAccent)
-                                            Text("1")
-                                                .foregroundColor(.black)
-                                        }
-                                    }
-                                }
-                                else{
-                                    VStack{
-                                        Image(systemName: "sun.horizon.fill")
-                                            .foregroundColor(.gray)
-                                        Text("0")
-                                            .foregroundColor(.black)
-                                    }
-                                    
-                                }
-                            }
-                            Button(action: {
-                                nightDose.toggle()
-                            }) {
-                                if nightDose {
-                                    VStack{
-                                        Image(systemName: "cloud.moon")
-                                            .foregroundColor(.blue)
-                                        Text("1")
-                                            .foregroundColor(.black)
-                                    }
-                                    
-                                } else {
-                                    VStack{
-                                        Image(systemName: "cloud.moon")
-                                            .foregroundColor(.gray)
-                                        Text("0")
-                                            .foregroundColor(.black)
-                                    }
-                                }
-                            }
-                            
-                            Button {
-                                if !medicineName.isEmpty{
-                                    let medicineData = Medicine(name: medicineName, morningDose: morningDose, eveningDose: eveningDose, nightDose: nightDose)
-                                    
-                                    medicines.append(medicineData)
-                                    
-                                    medicineName = ""
-                                    morningDose = false
-                                    eveningDose = false
-                                    nightDose = false
-                                }
-                            } label: {
-                                Image(systemName: "plus.circle")
-                                    .padding(.leading)
-                            }
-
-                        }
+                    }
+                    TextField("Diagnosis", text: $diagnosis)
+                        .padding()
+                        .background(.white)
+                        .cornerRadius(20)
+                        .customShadow()
+                    Spacer().frame(height: 20)
+                    HStack{
+                        Text("Symptoms").font(.headline)
+                        Spacer()
+                    }
+                    TextField("Symptoms", text: $symptoms)
+                        .padding()
+                        .background(.white)
+                        .cornerRadius(20)
+                        .customShadow()
+                    Spacer().frame(height: 20)
+                    HStack{
+                        Text("Prescribe Medicines").font(.headline)
+                        Spacer()
+                    }
+                    
+                    MedicineView(medicines: $medicines)
+                    
+                    Spacer().frame(height: 20)
+                    HStack{
+                        Text("Lab tests").font(.headline)
+                        Spacer()
+                    }
+                    HStack{
+                        TextField("Lab tests prescribed", text: $labTest)
+                        Spacer()
                     }
                     .padding()
-                    .background(Color.white)
+                    .background(.white)
                     .cornerRadius(20)
                     .customShadow()
-//                    Button(action: {
-//                        let newMedicine = Medicine(name: medicineName, morningDose: morningDose, eveningDose: eveningDose, nightDose: nightDose)
-//                        medicines.append(newMedicine)
-//                        // Reset fields
-//                        medicineName = ""
-//                        morningDose = false
-//                        eveningDose = false
-//                        nightDose = false
-//                    }) {
-//                        HStack{
-//                            Spacer()
-//                            Text("Done")
-//                                .frame(width: 100, height: 44)
-//                                .background(Color.myAccent)
-//                                .foregroundStyle(Color.white)
-//                                .cornerRadius(20)
-//                        }
-//                        
-//                    }
-                }
-                
-                Spacer().frame(height: 20)
-                HStack{
-                    Text("Lab tests").font(.headline)
+                    Spacer().frame(height: 20)
+                    HStack{
+                        Text("Follow up").font(.headline)
+                        Spacer()
+                    }
+                    HStack{
+                        TextField("Notes", text: $followUp)
+                        Spacer()
+                    }
+                    .padding()
+                    .background(.white)
+                    .cornerRadius(20)
+                    .customShadow()
                     Spacer()
-                }
-                HStack{
-                    TextField("Lab tests prescribed", text: $labTest)
-                    Spacer()
+                    
+                    Button(action: {
+                        isShowingProgressView = true // Show progress view
+                        
+                        // Call the addPrescription function here
+                        FirebaseHelperFunctions.addPrescription(appointmentData: appointmentData, diagnosis: diagnosis, symptoms: symptoms, labTest: labTest, followUp: followUp, medicines: medicines) { result in
+                            switch result {
+                            case .success():
+                                print("Prescription added successfully")
+                                // Handle success, e.g., show a success message or clear the form
+                            case .failure(let error):
+                                print("Error adding prescription: \(error)")
+                                // Handle failure, e.g., show an error message
+                            }
+                            
+                            // Wait for two seconds before hiding the progress view and toggling the sheet
+                            // This block should run regardless of the result
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                isShowingProgressView = false // Hide progress view
+                                showPrescriptionSheet.toggle() // Toggle the sheet
+                            }
+                        }
+                    }) {
+                        Text("Add Prescription")
+                            .frame(width: 300, height: 50)
+                            .foregroundStyle(Color.white)
+                            .background(Color.blue) // Assuming Color.myAccent is defined elsewhere, replace `Color.blue` with `Color.myAccent`
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                    }
+                    .disabled(isShowingProgressView) // Optionally disable the button while the progress view is showing
+                    
                 }
                 .padding()
-                .background(.white)
-                .cornerRadius(20)
-                .customShadow()
-                Spacer().frame(height: 20)
-                HStack{
-                    Text("Follow up").font(.headline)
-                    Spacer()
-                }
-                HStack{
-                    TextField("Notes", text: $followUp)
-                    Spacer()
-                }
-                .padding()
-                .background(.white)
-                .cornerRadius(20)
-                .customShadow()
-                Spacer()
+                .background(Color.background)
+                .navigationTitle("Prescription")
             }
-            .padding()
-            .background(Color.background)
-            .navigationTitle("Prescription")
         }
     }
 }
 
-#Preview{
-    addPrescription()
-}
+//#Preview{
+//    addPrescription(appointmentData: <#T##AppointmentDataModel#>)
+//}

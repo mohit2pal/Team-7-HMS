@@ -11,7 +11,7 @@ struct AppointmentDataModel {
     let appointmentID: String
     let date: String
     let doctorID: String
-    let issues: [String]
+    let issues: [String]?
     let patientID: String
     let slotTime: String
 
@@ -30,5 +30,24 @@ struct AppointmentDataModel {
         self.issues = issues
         self.patientID = patientID
         self.slotTime = slotTime
+    }
+}
+
+
+struct AppointmentDataModelMock {
+    static let shared = AppointmentDataModelMock()
+
+    func generateMockAppointmentData() -> [AppointmentDataModel] {
+        let mockAppointments = [
+            ["date": "2024-05-10", "doctorID": "doc123", "issues": ["Cough", "Cold"], "patientID": "pat456", "slotTime": "09:00 AM"],
+            ["date": "2024-05-12", "doctorID": "doc456", "issues": ["Headache"], "patientID": "pat789", "slotTime": "10:30 AM"],
+            ["date": "2024-05-15", "doctorID": "doc789", "issues": ["Back Pain"], "patientID": "pat012", "slotTime": "02:00 PM"]
+        ]
+
+        return mockAppointments.compactMap { dictionary in
+            // Assuming each dictionary has a unique identifier for the appointmentID, which in a real scenario, could be fetched from a database or generated.
+            let appointmentID = UUID().uuidString
+            return AppointmentDataModel(dictionary: dictionary, appointmentID: appointmentID)
+        }
     }
 }
