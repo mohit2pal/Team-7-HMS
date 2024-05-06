@@ -54,6 +54,7 @@ struct MedicalTest{
     let time : String
     let status : String
     let notifications : Bool
+    let pdfURL : String
 }
 
 let medicalTestInformation: [String: String] = [
