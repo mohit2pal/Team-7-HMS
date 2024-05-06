@@ -151,7 +151,7 @@ struct DoctorHomeSwiftUI: View {
                         // Display appointments based on selected segment
             ScrollView {
                 ForEach(displayedAppointments) { appointment in
-                    
+                    DoctorAppointmentCard(appointmentData: appointment)
                 }
             }
             }
