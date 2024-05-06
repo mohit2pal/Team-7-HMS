@@ -20,7 +20,6 @@ struct DoctorView : View {
                     }
                 
                 ReportsListView()
-                
                     .tabItem {
                         Label("Upload Reports", systemImage: "doc.text.magnifyingglass")
                     }

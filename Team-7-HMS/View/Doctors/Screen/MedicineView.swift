@@ -168,9 +168,11 @@ struct MedicineView: View {
                     
                     Button {
                         if !medicineName.isEmpty{
-                            let medicineData = Medicine(name: medicineName, morningDose: morningDose, eveningDose: eveningDose, nightDose: nightDose)
+                            let medicineData = Medicine(dictionary: ["name": medicineName, "morningDose": morningDose, "eveningDose": eveningDose, "nightDose": nightDose])
                             
-                            medicines.append(medicineData)
+                            if let medicineData = medicineData {
+                                medicines.append(medicineData)
+                            }
                             
                             medicineName = ""
                             morningDose = false

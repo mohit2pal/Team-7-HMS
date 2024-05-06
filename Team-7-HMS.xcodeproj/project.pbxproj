@@ -41,6 +41,8 @@
 		17B32FD12BE8996100ADAB3B /* PatientMedicalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B32FD02BE8996100ADAB3B /* PatientMedicalRecord.swift */; };
 		17B32FD32BE8B90300ADAB3B /* MedicineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B32FD22BE8B90300ADAB3B /* MedicineView.swift */; };
 		17B32FD52BE8D62600ADAB3B /* OldAppointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B32FD42BE8D62600ADAB3B /* OldAppointment.swift */; };
+		17B32FD72BE90F1400ADAB3B /* MedicineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B32FD62BE90F1400ADAB3B /* MedicineModel.swift */; };
+		17B32FD92BE93AA800ADAB3B /* PrescriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B32FD82BE93AA800ADAB3B /* PrescriptionModel.swift */; };
 		17F63ABA2BD6340D0089511F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17F63AB92BD6340D0089511F /* GoogleService-Info.plist */; };
 		17F63ABC2BD634EB0089511F /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 17F63ABB2BD634EB0089511F /* FirebaseAppDistribution-Beta */; };
 		17F63ABE2BD634EB0089511F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 17F63ABD2BD634EB0089511F /* FirebaseAuth */; };
@@ -170,6 +172,8 @@
 		17B32FD02BE8996100ADAB3B /* PatientMedicalRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientMedicalRecord.swift; sourceTree = "<group>"; };
 		17B32FD22BE8B90300ADAB3B /* MedicineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineView.swift; sourceTree = "<group>"; };
 		17B32FD42BE8D62600ADAB3B /* OldAppointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldAppointment.swift; sourceTree = "<group>"; };
+		17B32FD62BE90F1400ADAB3B /* MedicineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineModel.swift; sourceTree = "<group>"; };
+		17B32FD82BE93AA800ADAB3B /* PrescriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrescriptionModel.swift; sourceTree = "<group>"; };
 		17F63AB92BD6340D0089511F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		17F63AEC2BD63E440089511F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17F63AEE2BD640570089511F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -468,9 +472,11 @@
 				17B32FD02BE8996100ADAB3B /* PatientMedicalRecord.swift */,
 				37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */,
 				17F7C6722BE00E8100720B5E /* DoctorDetails.swift */,
+				17B32FD62BE90F1400ADAB3B /* MedicineModel.swift */,
 				B1639D162BD8E31300EAB15E /* appointmentCardDataM.swift */,
 				36B1F1772BDD2C3000D5A9DF /* AppointmentModel.swift */,
 				542545B42BE4B67700F02AF6 /* LabTestCardData.swift */,
+				17B32FD82BE93AA800ADAB3B /* PrescriptionModel.swift */,
 				17B32FC82BE88AF000ADAB3B /* AppointmentDataModel.swift */,
 			);
 			path = Model;
@@ -734,6 +740,7 @@
 				37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */,
 				36B1F1782BDD2C3000D5A9DF /* AppointmentModel.swift in Sources */,
 				B1639D152BD8E2AD00EAB15E /* patientAppointmentCard.swift in Sources */,
+				17B32FD72BE90F1400ADAB3B /* MedicineModel.swift in Sources */,
 				17F7C6712BDEC8D400720B5E /* Just-Some.swift in Sources */,
 				3626C4882BE4A69E00FA8C61 /* BookLabRecordsView.swift in Sources */,
 				176900262BD2A94500F5F81E /* ContentView.swift in Sources */,
@@ -766,6 +773,7 @@
 				17B32FD12BE8996100ADAB3B /* PatientMedicalRecord.swift in Sources */,
 				17F7C6692BDE42C600720B5E /* PatientView.swift in Sources */,
 				17F7C66B2BDE528300720B5E /* BookingView.swift in Sources */,
+				17B32FD92BE93AA800ADAB3B /* PrescriptionModel.swift in Sources */,
 				360295FF2BD7DB92001C1397 /* medicalConditions.swift in Sources */,
 				095E99B42BE4E1DF00BF9CAE /* LabTestCard.swift in Sources */,
 				B1639D112BD8DA7700EAB15E /* SpecialitySwiftUIView.swift in Sources */,
