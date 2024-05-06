@@ -66,3 +66,15 @@ let medicalTestInformation: [String: String] = [
     "Biopsy": "Inform your healthcare provider about any medications you're taking, as some may need to be temporarily stopped before a biopsy.",
     "Stool Test": "Follow any specific dietary or medication instructions provided by your healthcare provider before collecting the stool sample."
 ]
+
+
+let medicalTestDepartments: [String: String] = [
+    "XRay": "Radiology",
+    "CT Scan": "Radiology",
+    "PET Scan": "Radiology",
+    "Stool Test": "Pathology",
+    "Biopsy": "Pathology",
+    "Ultrasound": "Radiology",
+    "Blood Analysis": "Phlebotomy",
+    "MRI": "Radiology"
+]
