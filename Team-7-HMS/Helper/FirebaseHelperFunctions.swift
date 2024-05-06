@@ -1058,6 +1058,44 @@ class FirebaseHelperFunctions {
         
         return caseNumber
     }
+    
+
+    // Function to add a prescription to Firestore
+    static func addPrescription(appointmentData: AppointmentDataModel, diagnosis: String, symptoms: String, labTest: String, followUp: String, medicines: [Medicine], completion: @escaping (Result<Void, Error>) -> Void) {
+        let db = Firestore.firestore()
+        
+        // Convert medicines array to a format suitable for Firestore
+        let medicinesData = medicines.map { medicine -> [String: Any] in
+            return [
+                "name": medicine.name,
+                "morningDose": medicine.morningDose,
+                "eveningDose": medicine.eveningDose,
+                "nightDose": medicine.nightDose
+            ]
+        }
+        
+        // Create a dictionary to represent the prescription data
+        let prescriptionData: [String: Any] = [
+            "patientId": appointmentData.patientID, // Assuming AppointmentCardData has a patientId field
+            "appointmentId": appointmentData.appointmentID,
+            "diagnosis": diagnosis,
+            "symptoms": symptoms,
+            "labTest": labTest,
+            "followUp": followUp,
+            "medicines": medicinesData
+        ]
+        
+        // Add the prescription data to the "prescriptions" collection
+        db.collection("prescriptions").addDocument(data: prescriptionData) { error in
+            if let error = error {
+                print("Error adding prescription: \(error)")
+                completion(.failure(error))
+            } else {
+                print("Prescription added successfully")
+                completion(.success(()))
+            }
+        }
+    }
 }
 
 

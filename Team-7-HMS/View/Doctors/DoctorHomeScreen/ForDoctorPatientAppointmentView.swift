@@ -135,7 +135,11 @@ struct ForDoctorPatientAppointentView: View {
                     fetchAppointmentData()
                 }
                 .sheet(isPresented: $showPrescriptionSheet) {
-                    ViewPrescription(appointmentData: AppointmentMockData.appointmentDataArray[0])
+                    if let appointment = appointmentData {
+                        addPrescription(appointmentData: appointment, showPrescriptionSheet: $showPrescriptionSheet)
+                    } else {
+                        OldAppointment()
+                    }
                 }
                 .sheet(isPresented: $showMedicalHistorySheet) {
                     MedicalRecordView(patientId: doctorAppointmentData.patientID)
@@ -186,6 +190,7 @@ struct ForDoctorPatientAppointentView: View {
                     self.errorMessage = error.localizedDescription
                 } else if let appointmentDataModel = appointmentDataModel {
                     self.appointmentData = appointmentDataModel
+                    print(appointmentData)
                 } else {
                     self.errorMessage = "Failed to load appointment data."
                 }
