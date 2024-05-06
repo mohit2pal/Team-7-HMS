@@ -881,57 +881,129 @@ class FirebaseHelperFunctions {
         let db = Firestore.firestore()
         let medicalTestRef = db.collection("medicalTestsAppointments")
         
-        let query = medicalTestRef
+        var minCaseCount = Int.max
+        var selectedDoctorID: String?
+        
+        let mainQuery = medicalTestRef
             .whereField("medicalTest", isEqualTo: medicalTest)
             .whereField("slot", isEqualTo: timeSlot)
             .whereField("date", isEqualTo: date)
         
-        query.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                guard let querySnapshot = querySnapshot else {
-                    let data: [String: Any] = [
-                        "patientId": patientUID,
-                        "medicalTest": medicalTest,
-                        "date": date,
-                        "slot": timeSlot,
-                        "status" :  "In progress",
-                        "notification" : false
-                    ]
-                    medicalTestRef.addDocument(data: data) { error in
-                        if let error = error {
-                            print("Error adding document: \(error)")
-                        } else {
-                            print("Appointment booked successfully!")
+        let docRef = db.collection("doctor_details")
+        if let specialty = medicalTestDepartments[medicalTest] {
+            let query = docRef.whereField("specialty", isEqualTo: specialty)
+            
+            // Dispatch group to wait for asynchronous queries
+            let dispatchGroup = DispatchGroup()
+            
+            dispatchGroup.enter()
+            // Execute the query
+            query.getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    guard let documents = querySnapshot?.documents else {
+                        print("No documents found.")
+                        dispatchGroup.leave()
+                        return
+                    }
+                    
+                    for document in documents {
+                        let documentID = document.documentID
+                        let medicalRef = db.collection("medicalTestsAppointments")
+                        let queryInfo = medicalRef
+                            .whereField("date", isEqualTo: date)
+                            .whereField("doctorID", isEqualTo: documentID)
+                        
+                        dispatchGroup.enter()
+                        queryInfo.getDocuments { (querySnapshot, error) in
+                            if let error = error {
+                                print("Error getting documents: \(error)")
+                            } else {
+                                guard let documents = querySnapshot?.documents else {
+                                    print("No documents found.")
+                                    dispatchGroup.leave()
+                                    return
+                                }
+                                
+                                let count = documents.count
+                                if count <= minCaseCount && count <= 10 {
+                                    minCaseCount = count
+                                    selectedDoctorID = documentID
+                                }
+                            }
+                            dispatchGroup.leave()
                         }
                     }
-                    return
+                    dispatchGroup.leave()
                 }
-                // Getting the count of matching documents
-                let count = querySnapshot.documents.count
-                if count < 2 {
-                    let data: [String: Any] = ["patientId": patientUID,
-                                               "medicalTest": medicalTest,
-                                               "date": date,
-                                               "slot": timeSlot,
-                                               "status" :  "In progress",
-                                               "notification" : false]
+            }
+            
+            dispatchGroup.notify(queue: .main) {
+                // This code block is executed when all asynchronous tasks in the dispatch group have completed
+                
+                if let docID = selectedDoctorID{
+                    // Continue with booking appointment using the selected doctor ID
                     
-                    medicalTestRef.addDocument(data: data) { error in
+                    print("This")
+                    print(docID)
+                    mainQuery.getDocuments { (querySnapshot, error) in
                         if let error = error {
-                            print("Error adding document: \(error)")
-                            
+                            print("Error getting documents: \(error)")
                         } else {
-                            print("Appointment booked successfully!")
-                            completion()
+                            guard let querySnapshot = querySnapshot else {
+                                let data: [String: Any] = [
+                                    "patientId": patientUID,
+                                    "medicalTest": medicalTest,
+                                    "date": date,
+                                    "slot": timeSlot,
+                                    "status" :  "In progress",
+                                    "notification" : false,
+                                    "doctorID" : docID
+                                ]
+                                medicalTestRef.addDocument(data: data) { error in
+                                    if let error = error {
+                                        print("Error adding document: \(error)")
+                                    } else {
+                                        print("Appointment booked successfully!")
+                                    }
+                                }
+                                return
+                            }
+                            // Getting the count of matching documents
+                            let count = querySnapshot.documents.count
+                            if count < 2 {
+                                let data: [String: Any] = ["patientId": patientUID,
+                                                           "medicalTest": medicalTest,
+                                                           "date": date,
+                                                           "slot": timeSlot,
+                                                           "status" :  "In progress",
+                                                           "notification" : false,
+                                                           "doctorID" : docID]
+                                
+                                medicalTestRef.addDocument(data: data) { error in
+                                    if let error = error {
+                                        print("Error adding document: \(error)")
+                                        
+                                    } else {
+                                        print("Appointment booked successfully!")
+                                        completion()
+                                    }
+                                }
+                                
+                            } else {
+                                print("No available slots for \(medicalTest) at \(timeSlot) on \(date).")
+                                completion()
+                            }
                         }
                     }
                 } else {
-                    print("No available slots for \(medicalTest) at \(timeSlot) on \(date).")
-                    completion()
+                    print("No available doctors found.")
                 }
             }
+            
+        } else {
+            print("Medical test department not found.")
         }
     }
 
@@ -1038,6 +1110,38 @@ class FirebaseHelperFunctions {
         
         return caseNumber
     }
+    
+    func assignDoctorsforMedicalTests(caseId : String ,medicalTest : String, date : String , completion: @escaping () -> Void){
+        
+        let db = Firestore.firestore()
+        let docRef = db.collection("doctor_details")
+        
+        var doctorID : [String] = []
+        
+        if let specialty = medicalTestDepartments[medicalTest] {
+            let query = docRef.whereField("specialty", isEqualTo: specialty)
+
+            // Execute the query
+            query.getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    guard let documents = querySnapshot?.documents else {
+                        print("No documents found.")
+                        return
+                    }
+
+                    for document in documents {
+                        let documentID = document.documentID
+                        doctorID.append(documentID)
+                    }
+                }
+            }
+            
+            let medicalRef = db.collection("medicalTest")
+        } else {
+            print("Medical test department not found.")
+        }    }
 }
 
 
