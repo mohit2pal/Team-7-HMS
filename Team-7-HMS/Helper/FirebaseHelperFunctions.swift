@@ -49,7 +49,7 @@ class FirebaseHelperFunctions {
     ]
     
     
- 
+    
     // add doctor details to firebase
     
     func addDoctorDetails(name : String , email : String , dateOfJoining : Date , experience : Int , selectedGenderIndex : Int , selectedSpecialtyIndex : Int , medicalDegree : Int , phoneNumber :  String ,docId : String) {
@@ -264,7 +264,7 @@ class FirebaseHelperFunctions {
     
     
     // Function to fetch patient data by UUID
-   func fetchPatientData(by uuid: String, completion: @escaping (Patient?, Error?) -> Void) {
+    func fetchPatientData(by uuid: String, completion: @escaping (Patient?, Error?) -> Void) {
         // Reference to the Firestore database
         let db = Firestore.firestore()
         
@@ -308,7 +308,7 @@ class FirebaseHelperFunctions {
             }
         }
     }
-
+    
     // Function to fetch only the doctor name, specialty, and document ID from Firestore
     func fetchAllDoctors(completion: @escaping (Result<[DoctorInfo], Error>) -> Void) {
         let db = Firestore.firestore()
@@ -451,7 +451,7 @@ class FirebaseHelperFunctions {
             let dateString = documentData["date"] as? String ?? ""
             let slotTime = documentData["slotTime"] as? String ?? ""
             let issues = documentData["issues"] as? [String] ?? []
-
+            
             // Fetch doctor details
             let doctorInfoRef = db.collection("doctor_details").document(doctorID)
             doctorInfoRef.getDocument { (doctorSnapshot, doctorError) in
@@ -477,7 +477,7 @@ class FirebaseHelperFunctions {
             }
         }
     }
-
+    
     
     // retrieving the slot data from patient end
     func getAppointments(patientUID: String, completion: @escaping ([AppointmentCardData]?, Error?) -> Void) {
@@ -526,9 +526,9 @@ class FirebaseHelperFunctions {
             }
         }
     }
-
     
-   // booking slots for appointment
+    
+    // booking slots for appointment
     static func bookSlot(doctorUID: String, date: String, slotTime: String, patientUID: String, issues : [String], completion: @escaping (Result<String, Error>) -> Void) {
         let db = Firestore.firestore()
         
@@ -716,7 +716,7 @@ class FirebaseHelperFunctions {
             }
         }
     }
-
+    
     static func getDayOfWeekFromDate(dateString: String) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd_MM_yyyy" // Adjust the date format according to your input string
@@ -878,8 +878,7 @@ class FirebaseHelperFunctions {
     }
     
     //function to book a slot for medical tests
-    
-    func bookMedicalTest(patientUID: String, medicalTest: String, timeSlot: String, date: String , completion: @escaping () -> Void) {
+    func bookMedicalTest(patientUID: String, medicalTest: String, timeSlot: String, date: String, completion: @escaping () -> Void) {
         let db = Firestore.firestore()
         let medicalTestRef = db.collection("medicalTestsAppointments")
         
@@ -893,11 +892,14 @@ class FirebaseHelperFunctions {
                 print("Error getting documents: \(error)")
             } else {
                 guard let querySnapshot = querySnapshot else {
-                    let data: [String: Any] = ["patientId": patientUID,
-                                               "medicalTest": medicalTest,
-                                               "date": date,
-                                               "slot": timeSlot]
-                    
+                    let data: [String: Any] = [
+                        "patientId": patientUID,
+                        "medicalTest": medicalTest,
+                        "date": date,
+                        "slot": timeSlot,
+                        "status" :  "In progress",
+                        "notification" : false
+                    ]
                     medicalTestRef.addDocument(data: data) { error in
                         if let error = error {
                             print("Error adding document: \(error)")
@@ -907,19 +909,20 @@ class FirebaseHelperFunctions {
                     }
                     return
                 }
-                
                 // Getting the count of matching documents
                 let count = querySnapshot.documents.count
                 if count < 2 {
                     let data: [String: Any] = ["patientId": patientUID,
-                                                "medicalTest": medicalTest,
-                                                "date": date,
-                                                "slot": timeSlot]
+                                               "medicalTest": medicalTest,
+                                               "date": date,
+                                               "slot": timeSlot,
+                                               "status" :  "In progress",
+                                               "notification" : false]
                     
                     medicalTestRef.addDocument(data: data) { error in
                         if let error = error {
                             print("Error adding document: \(error)")
-                          
+                            
                         } else {
                             print("Appointment booked successfully!")
                             completion()
@@ -932,9 +935,9 @@ class FirebaseHelperFunctions {
             }
         }
     }
+
     
     //fetch the count
-    
     func fetchSlotColorForDateAndTimeSlot(date: String, timeSlot: String, medicalTest  : String ,completion: @escaping (Int) -> Void) {
         let db = Firestore.firestore()
         let medicalTestRef = db.collection("medicalTestsAppointments")
@@ -943,11 +946,7 @@ class FirebaseHelperFunctions {
             .whereField("medicalTest", isEqualTo: medicalTest)
             .whereField("slot", isEqualTo: timeSlot)
             .whereField("date", isEqualTo: date)
-            
         
-        print(medicalTest)
-        print(timeSlot)
-        print(date)
         query.getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
@@ -963,7 +962,51 @@ class FirebaseHelperFunctions {
                 completion(count)
             }
         }
-
+    }
+    
+    // fetch the medical tests data
+    func fetchMedicalTests(patientUID: String, completion: @escaping ([MedicalTest]) -> Void) {
+        let db = Firestore.firestore()
+        let medicalTestRef = db.collection("medicalTestsAppointments")
+        
+        let query = medicalTestRef.whereField("patientId", isEqualTo: patientUID)
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                // Handle error here
+                return
+            }
+            
+            var medicalTests: [MedicalTest] = []
+            
+            guard let querySnapshot = querySnapshot else {
+                // Handle nil snapshot
+                completion(medicalTests)
+                return
+            }
+            for document in querySnapshot.documents {
+                // Assuming MedicalTest has an initializer that takes a Firestore document
+                let medicalTest = MedicalTest(caseID: document.documentID, medicalTest: document["medicalTest"] as? String ?? "", date: document["date"] as? String ?? "", time: document["slot"] as? String ?? "", status: document["status"] as? String ?? "", notifications: document["notification"] as? Bool ?? false)
+                medicalTests.append(medicalTest)
+            }
+            completion(medicalTests)
+        }
+    }
+    
+    // updating notifications
+    func updateNotificationStatus(for caseID: String, isEnabled: Bool) {
+        let db = Firestore.firestore()
+        let medicalTestRef = db.collection("medicalTestsAppointments")
+        
+        // Update the notification field in the Firestore document with the matching caseID
+        medicalTestRef.document(caseID).updateData(["notification": isEnabled]) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
     }
     
     func fetchAppointmentData(appointmentID: String, completion: @escaping (AppointmentDataModel?, Error?) -> Void) {
@@ -985,7 +1028,36 @@ class FirebaseHelperFunctions {
         }
     }
 
-
+    //delete medical Test
+    func deleteMedicalTest(for caseID: String) {
+        let db = Firestore.firestore()
+        let medicalTestRef = db.collection("medicalTestsAppointments")
+        
+        // Update the notification field in the Firestore document with the matching caseID
+        medicalTestRef.document(caseID).delete() { error in
+            if let error = error {
+                print("Error deleting document: \(error)")
+            } else {
+                print("Document successfully deleted")
+            }
+        }
+    }
+    
+    func generateCaseNumber() -> String {
+        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        let numbers = "0123456789"
+        
+        // Generate 2 random letters
+        let randomLetters = String((0..<2).map{ _ in letters.randomElement()! })
+        
+        // Generate 3 random numbers
+        let randomNumbers = String((0..<3).map{ _ in numbers.randomElement()! })
+        
+        // Combine letters and numbers to form the case number
+        let caseNumber = randomLetters + randomNumbers
+        
+        return caseNumber
+    }
 }
 
 
