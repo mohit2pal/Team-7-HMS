@@ -13,33 +13,34 @@ struct PatientView: View {
     @State var patientUid: String
     
     var body: some View {
-        TabView {
-            patientHomeSwiftUIView(patientUID: patientUid, userName: patientName)
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
+        NavigationView{
+            TabView {
+                patientHomeSwiftUIView(patientUID: patientUid, userName: patientName)
+                    .tabItem {
+                        Label("Home", systemImage: "house.fill")
+                    }
+                SosCallSwiftUIView()
+                    .tabItem {
+                        Label("Call Help", systemImage: "sos")
+                    }
+                
+                
+                BookingView(patientID: patientUid)
+                
+                    .tabItem {
+                        Label("Book Appointment", systemImage: "calendar.badge.plus")
+                    }
+                NavigationStack{
+                    PatientMedicalRecordView()
                 }
-            SosCallSwiftUIView()
-                .tabItem {
-                    Label("Call Help", systemImage: "sos")
-                }
-            
-
-            BookingView(patientID: patientUid)
-            
-                .tabItem {
-                    Label("Book Appointment", systemImage: "calendar.badge.plus")
-                }
-            NavigationStack{
-                PatientMedicalRecordView()
-            }
                 .tabItem {
                     Label("Medical Tests" , systemImage:  "doc.fill")
                 }
+            }
+            .sheet(isPresented: $showPatientHistory, content: {
+                PatientHistory(isPresented: $showPatientHistory, uid: patientUid)
+            })
         }
-        .sheet(isPresented: $showPatientHistory, content: {
-            PatientHistory(isPresented: $showPatientHistory, uid: patientUid)
-        })
-        
     }
 }
 
