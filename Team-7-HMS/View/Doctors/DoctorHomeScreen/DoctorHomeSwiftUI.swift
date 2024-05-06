@@ -56,6 +56,7 @@ struct DoctorHomeSwiftUI: View {
             if let nextDate = calendar.date(byAdding: .day, value: i, to: today) {
                 let dateString = dateFormatter.string(from: nextDate)
                 dateList.append(dateString)
+                print(dateList)
 
             }
         }
@@ -150,7 +151,7 @@ struct DoctorHomeSwiftUI: View {
                         // Display appointments based on selected segment
             ScrollView {
                 ForEach(displayedAppointments) { appointment in
-                    DoctorAppointmentCard(appointmentData: appointment)
+                    
                 }
             }
             }
@@ -166,10 +167,19 @@ struct DoctorHomeSwiftUI: View {
                     
                          if let appointments = appointments {
                              self.fetchedAppointments = appointments
+                             print(self.fetchedAppointments)
                          }
                      }
                  }
         }
+    }
+    
+    private func extractDay(from dateString: String) -> String? {
+        let components = dateString.components(separatedBy: "_")
+        guard components.count >= 3, let day = components.first else {
+            return nil
+        }
+        return day
     }
     
     func signOut() {

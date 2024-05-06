@@ -832,6 +832,7 @@ class FirebaseHelperFunctions {
             
             // Iterate through the documents returned by the query
             for document in documents {
+                let appointmentID = document.documentID // Get the appointment ID
                 let patientUID = document["patientID"] as? String ?? ""
                 let dateString = document["date"] as? String ?? ""
                 let slotTime = document["slotTime"] as? String ?? ""
@@ -858,7 +859,7 @@ class FirebaseHelperFunctions {
                         let day = self.getDayOfWeekFromDate(dateString: dateString) ?? "Unknown"
                         
                         // Create a DoctorAppointmentCardData object for each appointment
-                        let appointmentData = DoctorAppointmentCardData(date: dateString, year: year, day: day, time: slotTime, patientName: patientName, gender: gender, age: age, status: "Upcoming", patientID: patientUID)
+                        let appointmentData = DoctorAppointmentCardData(appointmentID: appointmentID, date: dateString, year: year, day: day, time: slotTime, patientName: patientName, gender: gender, age: age, status: "Upcoming", patientID: patientUID)
                         
                         // Add the appointment data to the appointments array
                         appointments.append(appointmentData)
@@ -963,6 +964,25 @@ class FirebaseHelperFunctions {
             }
         }
 
+    }
+    
+    func fetchAppointmentData(appointmentID: String, completion: @escaping (AppointmentDataModel?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        let appointmentRef = db.collection("appointments").document(appointmentID)
+        
+        appointmentRef.getDocument { (document, error) in
+            if let error = error {
+                completion(nil, error)
+            } else if let document = document, document.exists, let data = document.data() {
+                if let appointmentDataModel = AppointmentDataModel(dictionary: data, appointmentID: appointmentID) {
+                    completion(appointmentDataModel, nil)
+                } else {
+                    completion(nil, NSError(domain: "DataParsingError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to parse appointment data."]))
+                }
+            } else {
+                completion(nil, NSError(domain: "DocumentNotFoundError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Appointment document does not exist."]))
+            }
+        }
     }
 
 
