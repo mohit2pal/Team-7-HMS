@@ -65,7 +65,7 @@ struct ForDoctorPatientAppointentView: View {
                     if let issues = appointmentData?.issues, !issues.isEmpty {
                         HStack{
                             VStack{
-                                Text("Problems Mentioned")
+                                Text("Symptoms")
                                     .bold()
                                     .font(.title2)
                                 
@@ -135,6 +135,9 @@ struct ForDoctorPatientAppointentView: View {
                 }
                 .sheet(isPresented: $showPrescriptionSheet) {
                     ViewPrescription(appointmentData: AppointmentMockData.appointmentDataArray[0])
+                }
+                .sheet(isPresented: $showMedicalHistorySheet) {
+                    MedicalRecordView(patientId: doctorAppointmentData.patientID)
                 }
             }
         }

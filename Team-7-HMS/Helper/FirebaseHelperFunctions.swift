@@ -733,7 +733,7 @@ class FirebaseHelperFunctions {
     
     
     // get medical Records
-    func getMedicalRecords(patientUID: String, completion: @escaping (PatientMedicalRecords?, Error?) -> Void) {
+    static func getMedicalRecords(patientUID: String, completion: @escaping (PatientMedicalRecords?, Error?) -> Void) {
         let db = Firestore.firestore()
         
         let docRef = db.collection("patient_details").document(patientUID)

@@ -87,7 +87,7 @@ struct slotsAvailableSwiftUIView: View {
                             }
                         
                             VStack(alignment: .leading) {
-                                Text("Chief Complaints")
+                                Text("Symptoms")
                                     .font(.title2)
                                     .bold()
                                 List{
