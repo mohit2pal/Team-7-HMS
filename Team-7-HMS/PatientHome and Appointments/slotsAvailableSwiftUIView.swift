@@ -73,15 +73,17 @@ struct slotsAvailableSwiftUIView: View {
                                     ForEach(slots, id: \.self) { slot in
                                         let time = slot.keys.first ?? ""
                                         Text(time)
-                                            .padding()
-                                            .background(slotColor(slot))
-                                            .cornerRadius(8)
                                             .onTapGesture {
                                                 // Handle slot selection
                                                 selectedSlot = time
                                                 print(selectedSlot!)
                                                 print(self.doctorId)
                                             }
+                                            .frame(minWidth: 0, maxWidth: .infinity)
+                                            .padding()
+                                            .background(slotColor(slot))
+                                            .cornerRadius(15)
+                                            
                                     }
                                 }
                             }
@@ -114,15 +116,16 @@ struct slotsAvailableSwiftUIView: View {
                                     TextField("Add Complaint", text: $newComplaint)
                                         .padding()
                                         .background(Color.white)
-                                    
+                                        .cornerRadius(10)
+                                        .customShadow()
                                     Button(action: {
                                         // Action to add complaint
                                         complaints.append(newComplaint)
                                         newComplaint = ""
                                     }, label: {
-                                        Image(systemName: "plus.circle.fill")
+                                        Image(systemName: "plus.circle")
                                             .foregroundColor(.blue)
-                                            .font(.title)
+                                            .font(.title3)
                                     })
                                 }
                             }
@@ -165,7 +168,7 @@ struct slotsAvailableSwiftUIView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color(#colorLiteral(red: 0.48627451062202454, green: 0.5882353186607361, blue: 1, alpha: 1)))
-                        .frame(width: 296, height: 44)
+                        .frame(width: 300, height: 50)
                     
                     if isBooking {
                         ProgressView()

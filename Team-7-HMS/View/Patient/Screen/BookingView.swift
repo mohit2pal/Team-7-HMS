@@ -15,10 +15,17 @@ struct BookingView: View {
         NavigationView{
             ZStack {
                 VStack(alignment: .leading) {
-                    TextField("Search for Doctors, Specialities or Symptoms", text: $search)
-                        .font(.system(size: 13, weight: .regular)).foregroundColor(Color(#colorLiteral(red: 0.11, green: 0.11, blue: 0.11, alpha: 0.6))).tracking(-0.41)
+                    HStack{
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(Color("PrimaryColor"))
+                            .padding(.leading, 8)
+                        TextField("Doctors, Specialities or Symptoms", text: $search)
+                    }
+                        .padding(8)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
                         .foregroundColor(Color.gray)
-                        .textFieldStyle(.roundedBorder)
+                        .textFieldStyle(.plain)
                         .textInputAutocapitalization(.never)
                     
                     Picker("Views", selection: $selectedView) {
@@ -30,9 +37,11 @@ struct BookingView: View {
                     
                     if selectedView == 0 {
                         bookAppointmentSwiftUIView(patientUID: patientID)
+//                            .navigationTitle("Book Appointment")
                         
                     } else {
                         BookLabRecordsView()
+//                            .navigationTitle("Book Labs")
                     }
                     Spacer()
                 }

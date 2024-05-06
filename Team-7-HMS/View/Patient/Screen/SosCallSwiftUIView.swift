@@ -13,10 +13,10 @@ struct SosCallSwiftUIView: View {
             VStack{
                 HStack{
                     Text("Call Help")
-                        .font(CentFont.largeSemiBold)
                     Spacer()
                 }
-                
+                .font(.largeTitle)
+                .bold()
                 Spacer().frame(height: 100)
                 
                 Image("AmbulanceImage")
@@ -35,14 +35,13 @@ struct SosCallSwiftUIView: View {
                     .frame(height: 60)
                 
                 
-    
+                
                 Text("+91 98765 43210\n+91 98765 43210")
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.gray)
                 
                 Spacer()
                     .frame(height: 60)
-                
                 Button(action: {
                     guard let phoneURL = URL(string: "tel://9237498273") else { return }
                     UIApplication.shared.open(phoneURL)
@@ -59,8 +58,8 @@ struct SosCallSwiftUIView: View {
                 .cornerRadius(20)
             }
             .padding()
+            .background(Color.background)
         }
-        .background(Color.background)
     }
 }
 
