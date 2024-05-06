@@ -12,15 +12,19 @@ struct DoctorView : View {
     @State var doctorDetails: DoctorDetails
     @State var doctorName: String
     var body: some View {
-        TabView {
-            DoctorHomeSwiftUI(doctorUid: doctorUid, doctor: doctorDetails, doctorName: doctorName)
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
-                }
-            LabReportUploadView()
-                .tabItem {
-                    Label("Upload Reports", systemImage: "doc.text.magnifyingglass")
-                }
+        NavigationView{
+            TabView {
+                DoctorHomeSwiftUI(doctorUid: doctorUid, doctor: doctorDetails, doctorName: doctorName)
+                    .tabItem {
+                        Label("Home", systemImage: "house.fill")
+                    }
+                
+                ReportsListView()
+                
+                    .tabItem {
+                        Label("Upload Reports", systemImage: "doc.text.magnifyingglass")
+                    }
+            }
         }
     }
 }

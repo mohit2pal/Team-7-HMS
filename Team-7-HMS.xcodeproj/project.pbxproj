@@ -96,6 +96,7 @@
 		36F93E452BE7E49800AC1EE8 /* UpcomingMedicalRecodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E442BE7E49800AC1EE8 /* UpcomingMedicalRecodsView.swift */; };
 		36F93E472BE7E77F00AC1EE8 /* CompletedMedicalTestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E462BE7E77F00AC1EE8 /* CompletedMedicalTestsView.swift */; };
 		36F93E492BE8004200AC1EE8 /* MedicalTestsReminderFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E482BE8004200AC1EE8 /* MedicalTestsReminderFunctions.swift */; };
+		36F93E4B2BE8BCC800AC1EE8 /* ReportsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E4A2BE8BCC800AC1EE8 /* ReportsListView.swift */; };
 		3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763784E2BD7D15900CB6198 /* PatientHistory.swift */; };
 		37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */; };
 		37D3A14B2BDA492000C04F35 /* DoctorHomeSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */; };
@@ -202,6 +203,7 @@
 		36F93E442BE7E49800AC1EE8 /* UpcomingMedicalRecodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingMedicalRecodsView.swift; sourceTree = "<group>"; };
 		36F93E462BE7E77F00AC1EE8 /* CompletedMedicalTestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedMedicalTestsView.swift; sourceTree = "<group>"; };
 		36F93E482BE8004200AC1EE8 /* MedicalTestsReminderFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalTestsReminderFunctions.swift; sourceTree = "<group>"; };
+		36F93E4A2BE8BCC800AC1EE8 /* ReportsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsListView.swift; sourceTree = "<group>"; };
 		3763784E2BD7D15900CB6198 /* PatientHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHistory.swift; sourceTree = "<group>"; };
 		37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorAppointmentCardData.swift; sourceTree = "<group>"; };
 		37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorHomeSwiftUI.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 				133642732BDF77B000926989 /* LabReportUploadView.swift */,
 				B164324A2BE49B150002227C /* viewLabReportSwiftUIView.swift */,
 				B164324C2BE49B950002227C /* addPrescription.swift */,
+				36F93E4A2BE8BCC800AC1EE8 /* ReportsListView.swift */,
 				17B32FD22BE8B90300ADAB3B /* MedicineView.swift */,
 			);
 			path = Screen;
@@ -769,6 +772,7 @@
 				1769005B2BD6201600F5F81E /* signInBack.swift in Sources */,
 				B1639D092BD8DA1700EAB15E /* CentralisedFonts.swift in Sources */,
 				367FFA612BE38289007A995D /* AppointmentDataView.swift in Sources */,
+				36F93E4B2BE8BCC800AC1EE8 /* ReportsListView.swift in Sources */,
 				17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */,
 				B164324B2BE49B150002227C /* viewLabReportSwiftUIView.swift in Sources */,
 				17B32FCD2BE8927100ADAB3B /* DoctorAppointmentCard.swift in Sources */,

@@ -1059,12 +1059,42 @@ class FirebaseHelperFunctions {
             }
             for document in querySnapshot.documents {
                 // Assuming MedicalTest has an initializer that takes a Firestore document
-                let medicalTest = MedicalTest(caseID: document.documentID, medicalTest: document["medicalTest"] as? String ?? "", date: document["date"] as? String ?? "", time: document["slot"] as? String ?? "", status: document["status"] as? String ?? "", notifications: document["notification"] as? Bool ?? false)
+                let medicalTest = MedicalTest(caseID: document.documentID, medicalTest: document["medicalTest"] as? String ?? "", date: document["date"] as? String ?? "", time: document["slot"] as? String ?? "", status: document["status"] as? String ?? "", notifications: document["notification"] as? Bool ?? false , pdfURL:  document["medicalTestLink"] as? String ?? "")
                 medicalTests.append(medicalTest)
             }
             completion(medicalTests)
         }
     }
+    
+    func fetchMedicalTestsDoc(doctorUID: String, completion: @escaping ([PatientReport]) -> Void) {
+        let db = Firestore.firestore()
+        let medicalTestRef = db.collection("medicalTestsAppointments")
+        
+        let query = medicalTestRef.whereField("doctorID", isEqualTo: doctorUID)
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                // Handle error here
+                return
+            }
+            
+            var medicalTests: [PatientReport] = []
+            
+            guard let querySnapshot = querySnapshot else {
+                // Handle nil snapshot
+                completion(medicalTests)
+                return
+            }
+            for document in querySnapshot.documents {
+                // Assuming MedicalTest has an initializer that takes a Firestore document
+                let medicalTest = PatientReport(testName: document["medicalTest"] as? String ?? "", patientID: document["patientId"] as? String ?? "", scheduledDate: document["date"] as? String ?? "", caseId: document.documentID)
+                medicalTests.append(medicalTest)
+            }
+            completion(medicalTests)
+        }
+    }
+
     
     // updating notifications
     func updateNotificationStatus(for caseID: String, isEnabled: Bool) {
@@ -1081,6 +1111,25 @@ class FirebaseHelperFunctions {
         }
     }
     
+    //update the pdf
+    
+    
+    func updateMedicalRecord(for caseID: String, pdf : String, analysis : String) {
+        let db = Firestore.firestore()
+        let medicalTestRef = db.collection("medicalTestsAppointments")
+        
+        // Update the notification field in the Firestore document with the matching caseID
+        medicalTestRef.document(caseID).updateData([    "medicalTestLink": pdf,
+                                                        "status": "finish" ,
+                                                        "analysis" : analysis
+                                                    ]) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+    }
     func fetchAppointmentData(appointmentID: String, completion: @escaping (AppointmentDataModel?, Error?) -> Void) {
         let db = Firestore.firestore()
         let appointmentRef = db.collection("appointments").document(appointmentID)
