@@ -116,7 +116,7 @@ struct SignUpScreen: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color(.myAccent))
-                                    .frame(width: 310, height: 44)
+                                    .frame(width: 300, height: 50)
                                 
                                 Text("Sign Up")
                                     .font(.headline)

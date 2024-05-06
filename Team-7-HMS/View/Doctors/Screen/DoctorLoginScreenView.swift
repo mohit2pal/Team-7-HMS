@@ -118,7 +118,7 @@ struct DoctorLoginScreenView: View {
                                 else {
                                     Text("Log In ")
                                         .font(.system(size: 16, weight: .medium, design: .rounded))
-                                        .frame(width: 312, height: 44)
+                                        .frame(width: 300, height: 50)
                                         .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).tracking(-0.41).multilineTextAlignment(.center)
                                         .background((Color(#colorLiteral(red: 0.48627451062202454, green: 0.5882353186607361, blue: 1, alpha: 1))))
                                         .clipShape(RoundedRectangle(cornerRadius: 20))

@@ -74,7 +74,7 @@ struct PatientDetailsAppointmentView: View {
                 Divider()
                 
                 VStack(alignment: .leading) {
-                                Text("Chief Complaints")
+                                Text("Symptoms")
                                     .font(.title2)
                                     .bold()
                                 
@@ -119,7 +119,7 @@ struct PatientDetailsAppointmentView: View {
                 }
             }
             .onAppear{
-                FirebaseHelperFunctions().getMedicalRecords(patientUID: patientUID) { medicalRecord, error in
+                FirebaseHelperFunctions.getMedicalRecords(patientUID: patientUID) { medicalRecord, error in
                     self.patientMedicalRecords = medicalRecord
                 }
                 FirebaseHelperFunctions().fetchPatientData(by: patientUID) { patientData, error in

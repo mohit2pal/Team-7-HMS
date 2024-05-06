@@ -80,11 +80,9 @@ struct MedicalTestsBookingView: View {
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity)
                                 .padding()
-                                .background(getColor(timeSlot: presentTimeSlots[index]) ? Color.accentColor : .gray.opacity(0.4))
-                            
-                            
+                                .background(getColor(timeSlot: presentTimeSlots[index]) ? Color.accentColor : .gray.opacity(0.2))
                                 .foregroundStyle(getColor(timeSlot: presentTimeSlots[index]) ? .white : .black)
-                                .cornerRadius(10)
+                                .cornerRadius(15)
                         }
                     }
                 }

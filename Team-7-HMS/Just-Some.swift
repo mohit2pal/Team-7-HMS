@@ -1,75 +1,34 @@
-//import SwiftUI
-//
-//struct AddingSlot: View {
-//    @State private var doctors: [DoctorInfo] = []
-//    @State private var selectedDoctor: DoctorInfo? = nil {
-//        didSet {
-//            fetchBookedSlots()
-//        }
-//    }
-//    @State private var selectedDate: Date? = nil {
-//        didSet{
-//            fetchBookedSlots()
-//        }
-//    }
-//    @State private var searchText = ""
-//    @State private var bookedSlots: [String] = []
-//    @State private var selectedSlots: [String] = []
-//    @State private var showSuccessAnimation = false // New state variable for showing the tick animation
+//// Function to fetch medical records for a given patient ID
+//func fetchMedicalRecord(for patientId: String, completion: @escaping (Result<PatientMedicalRecords?, Error>) -> Void) {
+//    let db = Firestore.firestore()
+//    let patientDocRef = db.collection("patient_details").document(patientId)
 //    
-//    let firebaseHelper = FirebaseHelperFunctions()
-//    
-//    // Existing code remains unchanged...
-//    
-//    // MARK: - Submit Button
-//    var submitButton: some View {
-//        Button(action: {
-//            if let selectedDoctor = selectedDoctor {
-//                firebaseHelper.createSlots(doctorName: selectedDoctor.name, doctorID: selectedDoctor.id, date: selectedDate ?? Date(), slots: selectedSlots) {
-//                    // Assuming createSlots has a completion handler to notify when done
-//                    self.showSuccessAnimation = true
-//                    
-//                    // Wait for 2 seconds to show the tick animation, then navigate back
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                        self.showSuccessAnimation = false
-//                        self.selectedDoctor = nil
-//                        self.selectedDate = nil
-//                        self.selectedSlots = []
-//                    }
+//    patientDocRef.getDocument { (document, error) in
+//        if let error = error {
+//            // If there's an error fetching the document, pass the error to the completion handler
+//            completion(.failure(error))
+//        } else if let document = document, document.exists, let data = document.data() {
+//            // If the document is fetched successfully and contains data, try to extract the medical records
+//            if let medicalRecordsData = data["medicalRecords"] as? [String: Any] {
+//                // Parse the data into a PatientMedicalRecords object
+//                let patientMedicalRecords = PatientMedicalRecords(dictionary: medicalRecordsData)
+//                
+//                if let patientMedicalRecords = patientMedicalRecords {
+//                    print("Successfully parsed patient medical records")
+//                    // Pass the successfully parsed medical records to the completion handler
+//                    completion(.success(patientMedicalRecords))
+//                } else {
+//                    print("Failed to parse patient medical records")
+//                    // If the data cannot be parsed into a PatientMedicalRecords object, pass nil
+//                    completion(.success(nil))
 //                }
 //            } else {
-//                print("No doctor selected.")
+//                // If the document does not contain medical records, pass nil
+//                completion(.success(nil))
 //            }
-//        }, label: {
-//            Text("Press here to submit")
-//        })
-//        .frame(width: 296, height: 44)
-//        .background(isSubmitButtonDisabled ? Color.gray : Color.myAccent)
-//        .foregroundColor(.white)
-//        .cornerRadius(20)
-//        .disabled(isSubmitButtonDisabled)
-//        .fullScreenCover(isPresented: $showSuccessAnimation) {
-//            // FullScreenCover for success animation
-//            SuccessAnimationView()
+//        } else {
+//            // If the document does not exist, pass nil
+//            completion(.success(nil))
 //        }
 //    }
 //}
-//
-//struct SuccessAnimationView: View {
-//    var body: some View {
-//        ZStack {
-//            Color.background.edgesIgnoringSafeArea(.all)
-//            Image(systemName: "checkmark.circle.fill") // Use a tick mark image or system symbol
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: 200, height: 200)
-//                .foregroundColor(.green)
-//        }
-//    }
-//}
-//
-//// Existing structs like SearchBar and DateButton remain unchanged
-//
-//// #Preview {
-////     AddingSlots()
-//// }

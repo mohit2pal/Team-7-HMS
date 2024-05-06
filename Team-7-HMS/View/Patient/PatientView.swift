@@ -20,7 +20,7 @@ struct PatientView: View {
                 }
             SosCallSwiftUIView()
                 .tabItem {
-                    Label("", systemImage: "sos")
+                    Label("Call Help", systemImage: "sos")
                 }
             
 

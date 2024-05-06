@@ -83,7 +83,7 @@ struct LoginScreen: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .fill(Color("PrimaryColor").opacity(0.83))
-                                    .frame(width: 310, height: 44)
+                                    .frame(width: 300, height: 50)
                                 
                                 
                                 //Log In

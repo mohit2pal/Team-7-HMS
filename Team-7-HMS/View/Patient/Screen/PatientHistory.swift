@@ -286,11 +286,10 @@ struct PatientHistory: View {
                         
                     }, label: {
                         Text("Submit")
-                            .frame(width: 330 , height: 25)
-                            .padding()
+                            .frame(width: 300 , height: 50)
                             .background(Color.accentColor)
                             .foregroundStyle(Color.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
                     })
                     .padding(.vertical)
                     

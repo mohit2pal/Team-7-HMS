@@ -67,7 +67,7 @@ struct AppointmentDataView: View {
                     if let issues = data?.issues, !issues.isEmpty {
                         HStack{
                             VStack{
-                                Text("Problems Mentioned")
+                                Text("Symptoms")
                                     .bold()
                                     .font(.title2)
                                 
@@ -88,7 +88,7 @@ struct AppointmentDataView: View {
                     }
                     else {
                         VStack{
-                            Text("Problems Mentioned")
+                            Text("Symptoms")
                                 .bold()
                                 .font(.title2)
                             

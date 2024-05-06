@@ -57,7 +57,7 @@ struct patientHomeSwiftUIView: View {
                 }
             }
             .onAppear{
-                FirebaseHelperFunctions().getMedicalRecords(patientUID: patientUID) { medicalRecord, error in
+                FirebaseHelperFunctions.getMedicalRecords(patientUID: patientUID) { medicalRecord, error in
                     self.patientMedicalRecords = medicalRecord
                 }
             }
