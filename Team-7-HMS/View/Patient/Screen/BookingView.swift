@@ -15,18 +15,18 @@ struct BookingView: View {
         NavigationView{
             ZStack {
                 VStack(alignment: .leading) {
-                    HStack{
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(Color("PrimaryColor"))
-                            .padding(.leading, 8)
-                        TextField("Doctors, Specialities or Symptoms", text: $search)
-                    }
-                        .padding(8)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(8)
-                        .foregroundColor(Color.gray)
-                        .textFieldStyle(.plain)
-                        .textInputAutocapitalization(.never)
+//                    HStack{
+//                        Image(systemName: "magnifyingglass")
+//                            .foregroundColor(Color("PrimaryColor"))
+//                            .padding(.leading, 8)
+//                        TextField("Doctors, Specialities or Symptoms", text: $search)
+//                    }
+//                        .padding(8)
+//                        .background(Color(.systemGray6))
+//                        .cornerRadius(8)
+//                        .foregroundColor(Color.gray)
+//                        .textFieldStyle(.plain)
+//                        .textInputAutocapitalization(.never)
                     
                     Picker("Views", selection: $selectedView) {
                         Text("Appointments").tag(0)
