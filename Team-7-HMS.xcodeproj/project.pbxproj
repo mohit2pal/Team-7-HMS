@@ -118,6 +118,7 @@
 		B1639D1F2BDA465500EAB15E /* patientTabItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D1E2BDA465500EAB15E /* patientTabItems.swift */; };
 		B164324B2BE49B150002227C /* viewLabReportSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164324A2BE49B150002227C /* viewLabReportSwiftUIView.swift */; };
 		B164324D2BE49B950002227C /* addPrescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164324C2BE49B950002227C /* addPrescription.swift */; };
+		B164324F2BE8D2D60002227C /* doctorLeaveApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164324E2BE8D2D60002227C /* doctorLeaveApplication.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,6 +225,7 @@
 		B1639D1E2BDA465500EAB15E /* patientTabItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientTabItems.swift; sourceTree = "<group>"; };
 		B164324A2BE49B150002227C /* viewLabReportSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewLabReportSwiftUIView.swift; sourceTree = "<group>"; };
 		B164324C2BE49B950002227C /* addPrescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addPrescription.swift; sourceTree = "<group>"; };
+		B164324E2BE8D2D60002227C /* doctorLeaveApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorLeaveApplication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,6 +438,7 @@
 				133642732BDF77B000926989 /* LabReportUploadView.swift */,
 				B164324A2BE49B150002227C /* viewLabReportSwiftUIView.swift */,
 				B164324C2BE49B950002227C /* addPrescription.swift */,
+				B164324E2BE8D2D60002227C /* doctorLeaveApplication.swift */,
 				36F93E4A2BE8BCC800AC1EE8 /* ReportsListView.swift */,
 				17B32FD22BE8B90300ADAB3B /* MedicineView.swift */,
 			);
@@ -776,6 +779,7 @@
 				17F63AFD2BD7A27E0089511F /* GeneratePassword.swift in Sources */,
 				B164324B2BE49B150002227C /* viewLabReportSwiftUIView.swift in Sources */,
 				17B32FCD2BE8927100ADAB3B /* DoctorAppointmentCard.swift in Sources */,
+				B164324F2BE8D2D60002227C /* doctorLeaveApplication.swift in Sources */,
 				360295FB2BD7AD69001C1397 /* DoctorLoginScreenView.swift in Sources */,
 				B164324D2BE49B950002227C /* addPrescription.swift in Sources */,
 				095E99AA2BDF711F00BF9CAE /* PickerView.swift in Sources */,
