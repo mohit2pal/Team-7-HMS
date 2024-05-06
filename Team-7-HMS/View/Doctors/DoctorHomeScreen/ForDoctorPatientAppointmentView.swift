@@ -47,11 +47,13 @@ struct ForDoctorPatientAppointentView: View {
                     
                     HStack{
                         Image(systemName: "calendar")
+                            .foregroundColor(Color.myAccent)
                         Text(convertDateFormat(inputDate: doctorAppointmentData.date))
                         
                         Spacer()
                         
                         Image(systemName: "clock")
+                            .foregroundColor(Color.myAccent)
                         Text(doctorAppointmentData.time)
                     }
                     .padding(.vertical)
@@ -77,6 +79,8 @@ struct ForDoctorPatientAppointentView: View {
                                 .frame(height: CGFloat(issues.count * 50))
                                 .listStyle(.plain)
                                 .background(Color.background)
+                                .cornerRadius(10)
+                                .customShadow()
                             }
                             .frame(alignment: .leading)
                             .multilineTextAlignment(.leading)
@@ -111,20 +115,17 @@ struct ForDoctorPatientAppointentView: View {
                                 .foregroundStyle(Color.black)
                             Spacer()
                         }
-                        .frame(width: 300)
-                        .padding()
+                        .frame(width: 300, height: 50)
                         .background(Color.white)
                         .cornerRadius(20)
                         .customShadow()
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
                     }
                     
                     Button(action: {}, label: {
                         Text("Appointment Done")
-                            .frame(width: 300)
-                            .padding()
+                            .frame(width: 300, height: 50)
                             .foregroundStyle(Color.white)
-                            .background(Color.green)
+                            .background(Color.myAccent)
                             .clipShape(RoundedRectangle(cornerRadius: 15))
                         
                     })
