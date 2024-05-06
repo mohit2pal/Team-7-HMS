@@ -78,21 +78,21 @@ struct viewLabReportSwiftUIView: View {
             
             Spacer()
             
-            NavigationLink(destination: addPrescription()){
-                HStack{
-                    Spacer()
-                    Image(systemName: "plus")
-                        .foregroundColor(.blue)
-                    Text("Write prescription")
-                        .font(.headline)
-                        .foregroundStyle(Color.black)
-                    Spacer()
-                }
-                .padding()
-                .background(Color.white)
-                .cornerRadius(20)
-                .customShadow()
-            }
+//            NavigationLink(destination: ViewPrescription){
+//                HStack{
+//                    Spacer()
+//                    Image(systemName: "plus")
+//                        .foregroundColor(.blue)
+//                    Text("Write prescription")
+//                        .font(.headline)
+//                        .foregroundStyle(Color.black)
+//                    Spacer()
+//                }
+//                .padding()
+//                .background(Color.white)
+//                .cornerRadius(20)
+//                .customShadow()
+//            }
             
             Button(action: {
                 if appointmentData.status == "Upcoming" {
