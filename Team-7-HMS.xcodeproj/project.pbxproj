@@ -298,6 +298,29 @@
 			path = LabReports;
 			sourceTree = "<group>";
 		};
+		131DDCF02BE9EB450022201E /* Leave Management */ = {
+			isa = PBXGroup;
+			children = (
+				131DDCF22BE9EB570022201E /* Staff */,
+				131DDCF12BE9EB510022201E /* Admin */,
+			);
+			path = "Leave Management";
+			sourceTree = "<group>";
+		};
+		131DDCF12BE9EB510022201E /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
+		131DDCF22BE9EB570022201E /* Staff */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Staff;
+			sourceTree = "<group>";
+		};
 		176900172BD2A94500F5F81E = {
 			isa = PBXGroup;
 			children = (
@@ -488,6 +511,7 @@
 		17F7C6612BDD2B8A00720B5E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				131DDCF02BE9EB450022201E /* Leave Management */,
 				17F7C6642BDE12DC00720B5E /* Admin */,
 				17F63AF42BD7A10E0089511F /* Doctors */,
 				17F63AF32BD7998F0089511F /* Patient */,
