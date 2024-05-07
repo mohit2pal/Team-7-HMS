@@ -30,6 +30,11 @@ struct LeaveCard: View {
                         Text("\(leaveData.status)")
                             .foregroundColor(.black)
                             .font(.title3)
+                            .padding(.init(top: 0, leading: 0, bottom: 1, trailing: 0))
+                        Text("\(leaveData.nodays) days of leave")
+                            .foregroundColor(.black)
+                            .font(.title3)
+                        
                     }
                     Spacer()
                     NavigationLink(destination: ForAdminLeaveView()) { // Remove the argument from here as well
