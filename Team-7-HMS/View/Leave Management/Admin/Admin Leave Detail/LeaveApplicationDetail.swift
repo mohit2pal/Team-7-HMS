@@ -132,10 +132,31 @@ struct LeaveApplicationDetail: View {
                         }
                         .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.gray.opacity(0.1)).frame(height: 50))
                     }
-                    Text("Subject: \(leaveApplication.subject)")
-                    Text("Description: \(leaveApplication.description)")
-                    Text("Leave From Date: \(formattedDate(leaveApplication.fromDate))")
-                    Text("Leave To Date: \(formattedDate(leaveApplication.toDate))")
+                    Spacer()
+                    
+                    Button(action: {}, label: {
+                        Text("Confirm")
+                            .frame(width: 300)
+                            .padding()
+                            .foregroundStyle(Color.white)
+                            .background(Color.myAccent)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                        
+                    })
+                    
+                    Button(action: {}, label: {
+                        Text("Reject")
+                            .frame(width: 300)
+                            .padding()
+                            .foregroundStyle(Color.white)
+                            .background(Color.myAccent)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                        
+                    })
+//                    Text("Subject: \(leaveApplication.subject)")
+//                    Text("Description: \(leaveApplication.description)")
+//                    Text("Leave From Date: \(formattedDate(leaveApplication.fromDate))")
+//                    Text("Leave To Date: \(formattedDate(leaveApplication.toDate))")
                 }
                 .padding()
                 .navigationTitle("Leave Approval")

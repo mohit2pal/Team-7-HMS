@@ -112,6 +112,10 @@
 		37D86AB42BE3655B0064DCE4 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 37D86AB32BE3655B0064DCE4 /* SwiftUICharts */; };
 		37D86ACA2BEA32960064DCE4 /* LeaveApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86AC92BEA32960064DCE4 /* LeaveApplication.swift */; };
 		37D86ACC2BEA32C50064DCE4 /* LeaveApplicationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86ACB2BEA32C50064DCE4 /* LeaveApplicationDetail.swift */; };
+		37D86ACE2BEA3E0B0064DCE4 /* LeaveCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86ACD2BEA3E0B0064DCE4 /* LeaveCardData.swift */; };
+		37D86AD02BEA3E200064DCE4 /* LeaveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86ACF2BEA3E200064DCE4 /* LeaveCard.swift */; };
+		37D86AD22BEA3E3F0064DCE4 /* ForAdminLeaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86AD12BEA3E3F0064DCE4 /* ForAdminLeaveView.swift */; };
+		37D86AD42BEA3E550064DCE4 /* AdminLeaveList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86AD32BEA3E550064DCE4 /* AdminLeaveList.swift */; };
 		542545B52BE4B67700F02AF6 /* LabTestCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542545B42BE4B67700F02AF6 /* LabTestCardData.swift */; };
 		B1639D092BD8DA1700EAB15E /* CentralisedFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */; };
 		B1639D0B2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */; };
@@ -226,6 +230,10 @@
 		37D86AB02BE362A90064DCE4 /* AdminDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDashboard.swift; sourceTree = "<group>"; };
 		37D86AC92BEA32960064DCE4 /* LeaveApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApplication.swift; sourceTree = "<group>"; };
 		37D86ACB2BEA32C50064DCE4 /* LeaveApplicationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApplicationDetail.swift; sourceTree = "<group>"; };
+		37D86ACD2BEA3E0B0064DCE4 /* LeaveCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveCardData.swift; sourceTree = "<group>"; };
+		37D86ACF2BEA3E200064DCE4 /* LeaveCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveCard.swift; sourceTree = "<group>"; };
+		37D86AD12BEA3E3F0064DCE4 /* ForAdminLeaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForAdminLeaveView.swift; sourceTree = "<group>"; };
+		37D86AD32BEA3E550064DCE4 /* AdminLeaveList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLeaveList.swift; sourceTree = "<group>"; };
 		542545B42BE4B67700F02AF6 /* LabTestCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabTestCardData.swift; sourceTree = "<group>"; };
 		B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentralisedFonts.swift; sourceTree = "<group>"; };
 		B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientHomeSwiftUIView.swift; sourceTree = "<group>"; };
@@ -589,6 +597,10 @@
 		37D86AC72BEA32150064DCE4 /* Admin Leave List */ = {
 			isa = PBXGroup;
 			children = (
+				37D86ACD2BEA3E0B0064DCE4 /* LeaveCardData.swift */,
+				37D86ACF2BEA3E200064DCE4 /* LeaveCard.swift */,
+				37D86AD12BEA3E3F0064DCE4 /* ForAdminLeaveView.swift */,
+				37D86AD32BEA3E550064DCE4 /* AdminLeaveList.swift */,
 			);
 			path = "Admin Leave List";
 			sourceTree = "<group>";
@@ -791,10 +803,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37D86AD02BEA3E200064DCE4 /* LeaveCard.swift in Sources */,
 				17F63B2C2BDA1AFB0089511F /* SplashScreen.swift in Sources */,
+				37D86ACE2BEA3E0B0064DCE4 /* LeaveCardData.swift in Sources */,
 				17B32FD32BE8B90300ADAB3B /* MedicineView.swift in Sources */,
 				37D86ACA2BEA32960064DCE4 /* LeaveApplication.swift in Sources */,
 				542545B52BE4B67700F02AF6 /* LabTestCardData.swift in Sources */,
+				37D86AD22BEA3E3F0064DCE4 /* ForAdminLeaveView.swift in Sources */,
 				B1639D172BD8E31300EAB15E /* appointmentCardDataM.swift in Sources */,
 				37D86AB12BE362A90064DCE4 /* AdminDashboard.swift in Sources */,
 				3621E0A42BDF700400F22807 /* PatientDetails.swift in Sources */,
@@ -834,6 +849,7 @@
 				175AD9D22BE3973B006E3347 /* Some-Saves.swift in Sources */,
 				17F7C6732BE00E8200720B5E /* DoctorDetails.swift in Sources */,
 				B1639D1F2BDA465500EAB15E /* patientTabItems.swift in Sources */,
+				37D86AD42BEA3E550064DCE4 /* AdminLeaveList.swift in Sources */,
 				369ADAF02BDE1CB60062CFDD /* AddingSlots.swift in Sources */,
 				B1639D192BD9219B00EAB15E /* DoctorsList.swift in Sources */,
 				17F63AED2BD63E440089511F /* AppDelegate.swift in Sources */,
