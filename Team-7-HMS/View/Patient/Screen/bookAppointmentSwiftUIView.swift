@@ -26,86 +26,68 @@ struct bookAppointmentSwiftUIView: View {
         ButtonData(image: "Cardiology-icon", title: "Cardiology"),
         ButtonData(image: "Dermatology-icon", title: "Dermatology")
     ]
-    
-    //buttons by symptoms
-    let buttons2: [ButtonData] = [
-        ButtonData(image: "Cough-icon", title: "General Physician"),
-        ButtonData(image: "RunnyNose-icon", title: "Obstetrics & Gynaecology"),
-        ButtonData(image: "Stress-icon", title: "Orthopaedics\n"),
-        ButtonData(image: "ThroatPain-icon", title: "ENT\n"),
-        ButtonData(image: "Fever-icon", title: "Urology"),
-        ButtonData(image: "Periods-icon", title: "Paediatrics"),
-        ButtonData(image: "HairFall-icon", title: "Cardiology"),
-        ButtonData(image: "Acne-icon", title: "Dermatology")
-    ]
-    
-    
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack {
-                //Book appointment
-                
-                HStack {
-                    Text("Search by Specialities")
-                        .font(.title2)
-                        .bold()
-                    Spacer()
-                }
-                //list of specialities
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4), spacing: 20) {
-                    ForEach(buttons.indices, id: \.self) { index in
-                        NavigationLink(destination: SpecialitySwiftUIView(patientUID: patientUID, speciality: buttons[index].title, icon: buttons[index].image)) {
-                            VStack {
-                                Image(buttons[index].image)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 50, height: 50)
-                                    .padding(10)
-                                    .background(Color.lightAccentBG)
-                                    .cornerRadius(50)
-                                Text(buttons[index].title)
-                                    .font(bookAppFont.smallest)
-                                    .foregroundStyle(.gray)
+        NavigationView {
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    //Book appointment
+                    
+                    HStack {
+                        Text("Search by Specialities")
+                            .font(.title2)
+                            .bold()
+                        Spacer()
+                    }
+                    //list of specialities
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4), spacing: 20) {
+                        ForEach(buttons.indices, id: \.self) { index in
+                            NavigationLink(destination: SpecialitySwiftUIView(patientUID: patientUID, speciality: buttons[index].title, icon: buttons[index].image)) {
+                                VStack {
+                                    Image(buttons[index].image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 50, height: 50)
+                                        .padding(10)
+                                        .background(Color.lightAccentBG)
+                                        .cornerRadius(50)
+                                    Text(buttons[index].title)
+                                        .font(bookAppFont.smallest)
+                                        .foregroundStyle(.gray)
+                                }
                             }
                         }
                     }
-                }
-                
-                Spacer()
-                    .frame(height: 30)
-                
-                HStack {
-                    Text("Search by symptoms")
-                        .font(.title2)
-                        .bold()
+                    
                     Spacer()
-                }
-                
-                //list of symptoms
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4), spacing: 20) {
-                    ForEach(buttons.indices, id: \.self) { index in
-                        NavigationLink(destination: SpecialitySwiftUIView(patientUID: patientUID, speciality: buttons[index].title, icon: buttons[index].image)) {
-                            VStack {
-                                Image(buttons2[index].image)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                    .padding()
-                                    .background(Color.white)
-                                    .cornerRadius(15)
-                                Text(buttons2[index].title)
-                                    .font(bookAppFont.smallest)
-                                    .foregroundStyle(.gray)
-                            }
-                            .customShadow()
-                        }
+                        .frame(height: 30)
+                    
+                    HStack {
+                        Spacer()
+                        Text("Unsure which specialist to visit?")
+                            .font(.title2)
+                            .bold()
+                        Spacer()
                     }
+                    
+                   
+                    .padding(.vertical)
+                    HStack{
+                        NavigationLink {
+                            SymptomsRecommendationView()
+                                .navigationBarBackButtonHidden()
+                        } label: {
+                            HStack{
+                                Text("Click here to analyse for symtomps!")
+                                Image(systemName: "chevron.right")
+                            }
+                        }
+                        
+                    }
+                    
                 }
-                
-                Spacer()
             }
+            .background(Color.background)
         }
-        .background(Color.background)
     }
 }
 

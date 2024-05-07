@@ -29,7 +29,6 @@ struct MedicineView: View {
                                 VStack{
                                     Image(systemName: "sun.max.fill")
                                         .foregroundColor(.myAccent)
-                                    
                                 }
                             }
                             else{

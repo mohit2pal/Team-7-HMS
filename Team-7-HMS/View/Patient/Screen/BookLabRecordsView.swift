@@ -48,6 +48,7 @@ struct BookLabRecordsView: View {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 80, height: 80)
+                                            
                                             .background(Color.lightAccentBG)
                                             .clipShape(Circle())
                                         

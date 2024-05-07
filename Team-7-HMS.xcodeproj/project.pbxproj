@@ -97,6 +97,14 @@
 		36F93E472BE7E77F00AC1EE8 /* CompletedMedicalTestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E462BE7E77F00AC1EE8 /* CompletedMedicalTestsView.swift */; };
 		36F93E492BE8004200AC1EE8 /* MedicalTestsReminderFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E482BE8004200AC1EE8 /* MedicalTestsReminderFunctions.swift */; };
 		36F93E4B2BE8BCC800AC1EE8 /* ReportsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E4A2BE8BCC800AC1EE8 /* ReportsListView.swift */; };
+		36F93E4E2BE9273A00AC1EE8 /* SymptomsRecommendationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E4D2BE9273A00AC1EE8 /* SymptomsRecommendationView.swift */; };
+		36F93E502BE9276400AC1EE8 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 36F93E4F2BE9276400AC1EE8 /* GoogleGenerativeAI */; };
+		36F93E522BE9279D00AC1EE8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E512BE9279D00AC1EE8 /* APIKey.swift */; };
+		36F93E542BE927C700AC1EE8 /* GenerativeAI-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E532BE927C700AC1EE8 /* GenerativeAI-Info.plist */; };
+		36F93E572BE9490F00AC1EE8 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 36F93E562BE9490F00AC1EE8 /* SDWebImageSwiftUI */; };
+		36F93E592BE94A3500AC1EE8 /* SymptomOutPutPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E582BE94A3500AC1EE8 /* SymptomOutPutPageView.swift */; };
+		36F93E5B2BE94A5B00AC1EE8 /* 04-spinner.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */; };
+		36F93E972BEA18EB00AC1EE8 /* loadingScreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */; };
 		3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763784E2BD7D15900CB6198 /* PatientHistory.swift */; };
 		37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */; };
 		37D3A14B2BDA492000C04F35 /* DoctorHomeSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */; };
@@ -205,6 +213,12 @@
 		36F93E462BE7E77F00AC1EE8 /* CompletedMedicalTestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedMedicalTestsView.swift; sourceTree = "<group>"; };
 		36F93E482BE8004200AC1EE8 /* MedicalTestsReminderFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalTestsReminderFunctions.swift; sourceTree = "<group>"; };
 		36F93E4A2BE8BCC800AC1EE8 /* ReportsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsListView.swift; sourceTree = "<group>"; };
+		36F93E4D2BE9273A00AC1EE8 /* SymptomsRecommendationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsRecommendationView.swift; sourceTree = "<group>"; };
+		36F93E512BE9279D00AC1EE8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		36F93E532BE927C700AC1EE8 /* GenerativeAI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenerativeAI-Info.plist"; sourceTree = "<group>"; };
+		36F93E582BE94A3500AC1EE8 /* SymptomOutPutPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomOutPutPageView.swift; sourceTree = "<group>"; };
+		36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "04-spinner.gif"; path = "../../../../Downloads/04-spinner.gif"; sourceTree = "<group>"; };
+		36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loadingScreen.gif; path = ../../../../Downloads/loadingScreen.gif; sourceTree = "<group>"; };
 		3763784E2BD7D15900CB6198 /* PatientHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHistory.swift; sourceTree = "<group>"; };
 		37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorAppointmentCardData.swift; sourceTree = "<group>"; };
 		37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorHomeSwiftUI.swift; sourceTree = "<group>"; };
@@ -253,6 +267,8 @@
 				17F63AC62BD634EB0089511F /* FirebaseDatabaseSwift in Frameworks */,
 				17F63AD02BD634EB0089511F /* FirebaseFunctions in Frameworks */,
 				17F63AE62BD634EB0089511F /* FirebaseStorageCombine-Community in Frameworks */,
+				36F93E572BE9490F00AC1EE8 /* SDWebImageSwiftUI in Frameworks */,
+				36F93E502BE9276400AC1EE8 /* GoogleGenerativeAI in Frameworks */,
 				17F63AE02BD634EB0089511F /* FirebaseRemoteConfig in Frameworks */,
 				17F63ABC2BD634EB0089511F /* FirebaseAppDistribution-Beta in Frameworks */,
 				17F63AC02BD634EB0089511F /* FirebaseAuthCombine-Community in Frameworks */,
@@ -365,11 +381,15 @@
 		17F63AEB2BD63E380089511F /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */,
+				36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */,
 				17F63AEC2BD63E440089511F /* AppDelegate.swift */,
 				17F63AF82BD7A1BF0089511F /* FirebaseHelperFunctions.swift */,
 				17F63B262BDA127D0089511F /* AppState.swift */,
 				175AD9D52BE3B7B0006E3347 /* NetworkMonitor.swift */,
 				36F93E482BE8004200AC1EE8 /* MedicalTestsReminderFunctions.swift */,
+				36F93E512BE9279D00AC1EE8 /* APIKey.swift */,
+				36F93E532BE927C700AC1EE8 /* GenerativeAI-Info.plist */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -404,6 +424,8 @@
 				36F93E422BE7E2B100AC1EE8 /* PatientMedicalRecordView.swift */,
 				36F93E442BE7E49800AC1EE8 /* UpcomingMedicalRecodsView.swift */,
 				36F93E462BE7E77F00AC1EE8 /* CompletedMedicalTestsView.swift */,
+				36F93E4D2BE9273A00AC1EE8 /* SymptomsRecommendationView.swift */,
+				36F93E582BE94A3500AC1EE8 /* SymptomOutPutPageView.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -599,6 +621,8 @@
 				17F63AE72BD636610089511F /* GoogleSignIn */,
 				17F63AE92BD636610089511F /* GoogleSignInSwift */,
 				37D86AB32BE3655B0064DCE4 /* SwiftUICharts */,
+				36F93E4F2BE9276400AC1EE8 /* GoogleGenerativeAI */,
+				36F93E562BE9490F00AC1EE8 /* SDWebImageSwiftUI */,
 			);
 			productName = "Team-7-HMS";
 			productReference = 176900202BD2A94500F5F81E /* Team-7-HMS.app */;
@@ -676,6 +700,8 @@
 				1769004D2BD6192900F5F81E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				17F63AB82BD633370089511F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				37D86AB22BE3655B0064DCE4 /* XCRemoteSwiftPackageReference "chartview" */,
+				36F93E4C2BE9272200AC1EE8 /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
+				36F93E552BE9490F00AC1EE8 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 176900212BD2A94500F5F81E /* Products */;
 			projectDirPath = "";
@@ -695,7 +721,10 @@
 			files = (
 				1769002B2BD2A94700F5F81E /* Preview Assets.xcassets in Resources */,
 				176900282BD2A94700F5F81E /* Assets.xcassets in Resources */,
+				36F93E5B2BE94A5B00AC1EE8 /* 04-spinner.gif in Resources */,
+				36F93E542BE927C700AC1EE8 /* GenerativeAI-Info.plist in Resources */,
 				17F63ABA2BD6340D0089511F /* GoogleService-Info.plist in Resources */,
+				36F93E972BEA18EB00AC1EE8 /* loadingScreen.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,6 +756,7 @@
 				37D86AB12BE362A90064DCE4 /* AdminDashboard.swift in Sources */,
 				3621E0A42BDF700400F22807 /* PatientDetails.swift in Sources */,
 				369ADAF22BDE85200062CFDD /* navt.swift in Sources */,
+				36F93E4E2BE9273A00AC1EE8 /* SymptomsRecommendationView.swift in Sources */,
 				B1639D0F2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift in Sources */,
 				B1639D1D2BD9260100EAB15E /* slotsAvailableSwiftUIView.swift in Sources */,
 				17F63B2A2BDA164F0089511F /* UserModel.swift in Sources */,
@@ -773,6 +803,7 @@
 				095E99B42BE4E1DF00BF9CAE /* LabTestCard.swift in Sources */,
 				B1639D112BD8DA7700EAB15E /* SpecialitySwiftUIView.swift in Sources */,
 				1769005B2BD6201600F5F81E /* signInBack.swift in Sources */,
+				36F93E592BE94A3500AC1EE8 /* SymptomOutPutPageView.swift in Sources */,
 				B1639D092BD8DA1700EAB15E /* CentralisedFonts.swift in Sources */,
 				367FFA612BE38289007A995D /* AppointmentDataView.swift in Sources */,
 				36F93E4B2BE8BCC800AC1EE8 /* ReportsListView.swift in Sources */,
@@ -795,6 +826,7 @@
 				364631FB2BDA1E6600DD53CC /* HealthKitAppIntegration.swift in Sources */,
 				17B32FC92BE88AF000ADAB3B /* AppointmentDataModel.swift in Sources */,
 				37D3A14B2BDA492000C04F35 /* DoctorHomeSwiftUI.swift in Sources */,
+				36F93E522BE9279D00AC1EE8 /* APIKey.swift in Sources */,
 				171925562BE0DC8B0012E54D /* DoctorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1149,6 +1181,22 @@
 				minimumVersion = 7.1.0;
 			};
 		};
+		36F93E4C2BE9272200AC1EE8 /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/generative-ai-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.2;
+			};
+		};
+		36F93E552BE9490F00AC1EE8 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.4;
+			};
+		};
 		37D86AB22BE3655B0064DCE4 /* XCRemoteSwiftPackageReference "chartview" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apppear/chartview.git";
@@ -1304,6 +1352,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 17F63AB82BD633370089511F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		36F93E4F2BE9276400AC1EE8 /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36F93E4C2BE9272200AC1EE8 /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
+		};
+		36F93E562BE9490F00AC1EE8 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36F93E552BE9490F00AC1EE8 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		37D86AB32BE3655B0064DCE4 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;

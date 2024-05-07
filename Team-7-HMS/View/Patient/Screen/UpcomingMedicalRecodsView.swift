@@ -50,16 +50,22 @@ struct UpcomingMedicalRecodsView: View {
                                             }
                                         }
                                         Spacer()
+                                   
+
                                         
                                         Button(action: {
+                                            
+                                            notificationEnabled[index].toggle()
+                                            
                                             if notificationEnabled[index] {
-                                                scheduleNotifications(for: medicalTests[index])
+                                               scheduleNotifications(for: medicalTests[index])
                                             }
+                                            
                                             else {
                                                 removeNotification(for: medicalTests[index])
                                             }
                                             
-                                            notificationEnabled[index].toggle()
+                                            
                                             
                                             FirebaseHelperFunctions().updateNotificationStatus(for: medicalTests[index].caseID, isEnabled: notificationEnabled[index])
                                             
