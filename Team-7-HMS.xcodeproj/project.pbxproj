@@ -103,7 +103,6 @@
 		36F93E542BE927C700AC1EE8 /* GenerativeAI-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E532BE927C700AC1EE8 /* GenerativeAI-Info.plist */; };
 		36F93E572BE9490F00AC1EE8 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 36F93E562BE9490F00AC1EE8 /* SDWebImageSwiftUI */; };
 		36F93E592BE94A3500AC1EE8 /* SymptomOutPutPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E582BE94A3500AC1EE8 /* SymptomOutPutPageView.swift */; };
-		36F93E5B2BE94A5B00AC1EE8 /* 04-spinner.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */; };
 		36F93E972BEA18EB00AC1EE8 /* loadingScreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */; };
 		3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763784E2BD7D15900CB6198 /* PatientHistory.swift */; };
 		37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */; };
@@ -111,6 +110,8 @@
 		37D86AAD2BE353E80064DCE4 /* StaffData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86AAC2BE353E80064DCE4 /* StaffData.swift */; };
 		37D86AB12BE362A90064DCE4 /* AdminDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86AB02BE362A90064DCE4 /* AdminDashboard.swift */; };
 		37D86AB42BE3655B0064DCE4 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 37D86AB32BE3655B0064DCE4 /* SwiftUICharts */; };
+		37D86ACA2BEA32960064DCE4 /* LeaveApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86AC92BEA32960064DCE4 /* LeaveApplication.swift */; };
+		37D86ACC2BEA32C50064DCE4 /* LeaveApplicationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86ACB2BEA32C50064DCE4 /* LeaveApplicationDetail.swift */; };
 		542545B52BE4B67700F02AF6 /* LabTestCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542545B42BE4B67700F02AF6 /* LabTestCardData.swift */; };
 		B1639D092BD8DA1700EAB15E /* CentralisedFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */; };
 		B1639D0B2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */; };
@@ -217,13 +218,14 @@
 		36F93E512BE9279D00AC1EE8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		36F93E532BE927C700AC1EE8 /* GenerativeAI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenerativeAI-Info.plist"; sourceTree = "<group>"; };
 		36F93E582BE94A3500AC1EE8 /* SymptomOutPutPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomOutPutPageView.swift; sourceTree = "<group>"; };
-		36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "04-spinner.gif"; path = "../../../../Downloads/04-spinner.gif"; sourceTree = "<group>"; };
 		36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loadingScreen.gif; path = ../../../../Downloads/loadingScreen.gif; sourceTree = "<group>"; };
 		3763784E2BD7D15900CB6198 /* PatientHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHistory.swift; sourceTree = "<group>"; };
 		37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorAppointmentCardData.swift; sourceTree = "<group>"; };
 		37D3A14A2BDA492000C04F35 /* DoctorHomeSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorHomeSwiftUI.swift; sourceTree = "<group>"; };
 		37D86AAC2BE353E80064DCE4 /* StaffData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffData.swift; sourceTree = "<group>"; };
 		37D86AB02BE362A90064DCE4 /* AdminDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDashboard.swift; sourceTree = "<group>"; };
+		37D86AC92BEA32960064DCE4 /* LeaveApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApplication.swift; sourceTree = "<group>"; };
+		37D86ACB2BEA32C50064DCE4 /* LeaveApplicationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApplicationDetail.swift; sourceTree = "<group>"; };
 		542545B42BE4B67700F02AF6 /* LabTestCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabTestCardData.swift; sourceTree = "<group>"; };
 		B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentralisedFonts.swift; sourceTree = "<group>"; };
 		B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientHomeSwiftUIView.swift; sourceTree = "<group>"; };
@@ -382,7 +384,6 @@
 			isa = PBXGroup;
 			children = (
 				36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */,
-				36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */,
 				17F63AEC2BD63E440089511F /* AppDelegate.swift */,
 				17F63AF82BD7A1BF0089511F /* FirebaseHelperFunctions.swift */,
 				17F63B262BDA127D0089511F /* AppState.swift */,
@@ -504,6 +505,7 @@
 		17F7C6612BDD2B8A00720B5E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				37D86AC42BEA317E0064DCE4 /* Leave Management */,
 				17F7C6642BDE12DC00720B5E /* Admin */,
 				17F63AF42BD7A10E0089511F /* Doctors */,
 				17F63AF32BD7998F0089511F /* Patient */,
@@ -557,6 +559,47 @@
 				37D86AB02BE362A90064DCE4 /* AdminDashboard.swift */,
 			);
 			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		37D86AC42BEA317E0064DCE4 /* Leave Management */ = {
+			isa = PBXGroup;
+			children = (
+				37D86AC52BEA31A60064DCE4 /* Staff */,
+				37D86AC62BEA31AD0064DCE4 /* Admin */,
+			);
+			path = "Leave Management";
+			sourceTree = "<group>";
+		};
+		37D86AC52BEA31A60064DCE4 /* Staff */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Staff;
+			sourceTree = "<group>";
+		};
+		37D86AC62BEA31AD0064DCE4 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				37D86AC82BEA32630064DCE4 /* Admin Leave Detail */,
+				37D86AC72BEA32150064DCE4 /* Admin Leave List */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
+		37D86AC72BEA32150064DCE4 /* Admin Leave List */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Admin Leave List";
+			sourceTree = "<group>";
+		};
+		37D86AC82BEA32630064DCE4 /* Admin Leave Detail */ = {
+			isa = PBXGroup;
+			children = (
+				37D86AC92BEA32960064DCE4 /* LeaveApplication.swift */,
+				37D86ACB2BEA32C50064DCE4 /* LeaveApplicationDetail.swift */,
+			);
+			path = "Admin Leave Detail";
 			sourceTree = "<group>";
 		};
 		B1639D072BD8D9DD00EAB15E /* PatientHome and Appointments */ = {
@@ -721,7 +764,6 @@
 			files = (
 				1769002B2BD2A94700F5F81E /* Preview Assets.xcassets in Resources */,
 				176900282BD2A94700F5F81E /* Assets.xcassets in Resources */,
-				36F93E5B2BE94A5B00AC1EE8 /* 04-spinner.gif in Resources */,
 				36F93E542BE927C700AC1EE8 /* GenerativeAI-Info.plist in Resources */,
 				17F63ABA2BD6340D0089511F /* GoogleService-Info.plist in Resources */,
 				36F93E972BEA18EB00AC1EE8 /* loadingScreen.gif in Resources */,
@@ -751,6 +793,7 @@
 			files = (
 				17F63B2C2BDA1AFB0089511F /* SplashScreen.swift in Sources */,
 				17B32FD32BE8B90300ADAB3B /* MedicineView.swift in Sources */,
+				37D86ACA2BEA32960064DCE4 /* LeaveApplication.swift in Sources */,
 				542545B52BE4B67700F02AF6 /* LabTestCardData.swift in Sources */,
 				B1639D172BD8E31300EAB15E /* appointmentCardDataM.swift in Sources */,
 				37D86AB12BE362A90064DCE4 /* AdminDashboard.swift in Sources */,
@@ -815,6 +858,7 @@
 				B164324D2BE49B950002227C /* addPrescription.swift in Sources */,
 				095E99AA2BDF711F00BF9CAE /* PickerView.swift in Sources */,
 				13EF0E372BD7A4A80015FDDA /* OnBoardingScreen.swift in Sources */,
+				37D86ACC2BEA32C50064DCE4 /* LeaveApplicationDetail.swift in Sources */,
 				17F63B272BDA127D0089511F /* AppState.swift in Sources */,
 				176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */,
 				3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */,
