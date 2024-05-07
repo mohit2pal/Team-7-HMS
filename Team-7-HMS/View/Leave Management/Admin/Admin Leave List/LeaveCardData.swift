@@ -1,18 +1,38 @@
 //
-//  LeaveCardData.swift
+//  LeaveApprovalCardData.swift
 //  Team-7-HMS
 //
-//  Created by Ritwatz on 07/05/24.
+//  Created by Ekta  on 07/05/24.
 //
 
-import SwiftUI
+import Foundation
 
-struct LeaveCardData: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct LeaveCardData: Identifiable {
+            var id = UUID()
+            var date: String
+            var year: Int
+            var nodays: Int
+            var day: String
+            var DoctorName: String
+            var status: String
+            var DoctorID : String
     }
+struct LeaveMockData {
+    static let LeaveDataArray = [
+        LeaveCardData(date: "14 Apr", year: 24,nodays: 4, day: "Wed",DoctorName:"Dr. Fog" ,status: "Approved", DoctorID: ""),
+        LeaveCardData(date: "16 Apr", year: 24,nodays: 2, day: "Fri",DoctorName:"Dr. Aditya",status: "Pending", DoctorID: ""),
+        LeaveCardData(date: "17 Apr", year: 24,nodays: 3, day: "Sat",DoctorName:"Dr. Fog",status: "Approved",DoctorID: ""),
+        LeaveCardData(date: "19 Apr", year: 24,nodays: 1, day: "Mon",DoctorName:"Dr. Ekta",status: "Pending",DoctorID: "")
+        ]
 }
 
-#Preview {
-    LeaveCardData()
+struct LeaveData: Identifiable {
+    var id = UUID()
+    var date: String
+    var year: Int
+    var nodays: Int
+    var day: String
+    var DoctorName: String
+    var status: String
+    var DoctorID : String
 }
