@@ -16,7 +16,7 @@ struct DoctorHomeSwiftUI: View {
     @State var doctorName: String
     @State var selectedAppointmentTypeIndex: Int = 0
     @State var selectedDate: String? = nil
-    let appointmentType = ["Upcoming", "Completed"]
+    let appointmentType = ["Upcoming", "completed"]
     
     @State var fetchedAppointments: [DoctorAppointmentCardData] = []
     
@@ -27,9 +27,9 @@ struct DoctorHomeSwiftUI: View {
             return filterAppointments(appointments: fetchedAppointments, date: selectedDate, status: "Upcoming")
         case 1:
             if let selectedDate = selectedDate {
-                return fetchedAppointments.filter { $0.date == selectedDate && $0.status == "Completed" }
+                return fetchedAppointments.filter { $0.date == selectedDate && $0.status == "completed" }
             } else {
-                return fetchedAppointments.filter { $0.status == "Completed" }
+                return fetchedAppointments.filter { $0.status == "completed" }
             }
         default:
             return []
@@ -56,7 +56,6 @@ struct DoctorHomeSwiftUI: View {
             if let nextDate = calendar.date(byAdding: .day, value: i, to: today) {
                 let dateString = dateFormatter.string(from: nextDate)
                 dateList.append(dateString)
-                print(dateList)
 
             }
         }
@@ -167,7 +166,6 @@ struct DoctorHomeSwiftUI: View {
                     
                          if let appointments = appointments {
                              self.fetchedAppointments = appointments
-                             print(self.fetchedAppointments)
                          }
                      }
                  }
