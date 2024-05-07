@@ -199,7 +199,7 @@ struct BookLab: View {
                                 print("Symptom selected: \(PopularCategories[2])")
                             }) {
                                 VStack{
-                                    Image("bl8")
+                                    Image("Allergies")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 70, height: 70)

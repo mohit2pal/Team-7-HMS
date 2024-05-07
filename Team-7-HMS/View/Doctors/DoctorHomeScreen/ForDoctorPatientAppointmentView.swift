@@ -16,7 +16,6 @@ struct ForDoctorPatientAppointentView: View {
     @State private var showPrescriptionSheet: Bool = false
     
     @State private var showMedicalHistorySheet: Bool = false // State to control the medical history sheet
-    @State private var showOldPrescriptionSheet: Bool = false // State to cntrol old Prescription
     
     var body: some View {
         NavigationView {
@@ -104,64 +103,32 @@ struct ForDoctorPatientAppointentView: View {
                     
                     Spacer()
                     
-                    
-                    if doctorAppointmentData.status == "completed" {
-                        Button{
-                            showOldPrescriptionSheet.toggle()
-                        } label: {
-                            HStack{
-                                Spacer()
-                                Image(systemName: "list.bullet.circle")
-                                    .foregroundColor(.accentColor)
-                                Text("Show prescription")
-                                    .font(.headline)
-                                    .foregroundStyle(Color.black)
-                                Spacer()
-                            }
-                            .frame(width: 300, height: 50)
-                            .background(Color.white)
-                            .cornerRadius(20)
-                            .customShadow()
+                    Button{
+                        showPrescriptionSheet.toggle()
+                    } label: {
+                        HStack{
+                            Spacer()
+                            Image(systemName: "plus")
+                                .foregroundColor(.blue)
+                            Text("Write prescription")
+                                .font(.headline)
+                                .foregroundStyle(Color.black)
+                            Spacer()
                         }
-                    } else {
-                        Button{
-                            showPrescriptionSheet.toggle()
-                        } label: {
-                            HStack{
-                                Spacer()
-                                Image(systemName: "plus")
-                                    .foregroundColor(.blue)
-                                Text("Write prescription")
-                                    .font(.headline)
-                                    .foregroundStyle(Color.black)
-                                Spacer()
-                            }
-                            .frame(width: 300, height: 50)
-                            .background(Color.white)
-                            .cornerRadius(20)
-                            .customShadow()
-                        }
-                        
-                        Button(action: {
-                            let firebaseHelper = FirebaseHelperFunctions()
-                            
-                            firebaseHelper.completeAppointment(appointmentID: doctorAppointmentData.appointmentID) { result in
-                                switch result {
-                                case .success():
-                                    print("Appointment status updated successfully.")
-                                case .failure(let error):
-                                    print("Error updating appointment status: \(error)")
-                                }
-                            }
-                        }, label: {
-                            Text("Appointment Done")
-                                .frame(width: 300, height: 50)
-                                .foregroundStyle(Color.white)
-                                .background(Color.myAccent)
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                            
-                        })
+                        .frame(width: 300, height: 50)
+                        .background(Color.white)
+                        .cornerRadius(20)
+                        .customShadow()
                     }
+                    
+                    Button(action: {}, label: {
+                        Text("Appointment Done")
+                            .frame(width: 300, height: 50)
+                            .foregroundStyle(Color.white)
+                            .background(Color.myAccent)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                        
+                    })
                 }
                 .padding([.top, .leading, .trailing], 25)
                 .onAppear{
@@ -176,9 +143,6 @@ struct ForDoctorPatientAppointentView: View {
                 }
                 .sheet(isPresented: $showMedicalHistorySheet) {
                     MedicalRecordView(patientId: doctorAppointmentData.patientID)
-                }
-                .sheet(isPresented: $showOldPrescriptionSheet) {
-                    ViewPrescription(showOldPrescriptionSheet: $showOldPrescriptionSheet, appointmentID: doctorAppointmentData.appointmentID)
                 }
             }
         }
@@ -226,6 +190,7 @@ struct ForDoctorPatientAppointentView: View {
                     self.errorMessage = error.localizedDescription
                 } else if let appointmentDataModel = appointmentDataModel {
                     self.appointmentData = appointmentDataModel
+                    print(appointmentData)
                 } else {
                     self.errorMessage = "Failed to load appointment data."
                 }
