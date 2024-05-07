@@ -16,6 +16,7 @@
 		09A53BEB2BE9EBD1000F8037 /* AdminLeaveList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A53BEA2BE9EBD1000F8037 /* AdminLeaveList.swift */; };
 		09A53BED2BE9EC01000F8037 /* LeaveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A53BEC2BE9EC01000F8037 /* LeaveCard.swift */; };
 		09A53BEF2BE9EE45000F8037 /* LeaveCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A53BEE2BE9EE45000F8037 /* LeaveCardData.swift */; };
+		09A53BF12BEA07A4000F8037 /* ForAdminLeaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A53BF02BEA07A4000F8037 /* ForAdminLeaveView.swift */; };
 		133642742BDF77B000926989 /* LabReportUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133642732BDF77B000926989 /* LabReportUploadView.swift */; };
 		13D816D12BD901EE00D36A9C /* OnBoardingDoctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D816D02BD901ED00D36A9C /* OnBoardingDoctor.swift */; };
 		13D97B192BE9F4E300A59B6B /* doctorLeaveApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D97B182BE9F4E300A59B6B /* doctorLeaveApplication.swift */; };
@@ -155,6 +156,7 @@
 		09A53BEA2BE9EBD1000F8037 /* AdminLeaveList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdminLeaveList.swift; path = "Team-7-HMS/PatientHome and Appointments/LabReports/AdminLeaveList.swift"; sourceTree = SOURCE_ROOT; };
 		09A53BEC2BE9EC01000F8037 /* LeaveCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LeaveCard.swift; path = "Team-7-HMS/PatientHome and Appointments/LabReports/LeaveCard.swift"; sourceTree = SOURCE_ROOT; };
 		09A53BEE2BE9EE45000F8037 /* LeaveCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LeaveCardData.swift; path = "Team-7-HMS/PatientHome and Appointments/LabReports/LeaveCardData.swift"; sourceTree = SOURCE_ROOT; };
+		09A53BF02BEA07A4000F8037 /* ForAdminLeaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ForAdminLeaveView.swift; path = "Team-7-HMS/PatientHome and Appointments/LabReports/ForAdminLeaveView.swift"; sourceTree = SOURCE_ROOT; };
 		133642732BDF77B000926989 /* LabReportUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReportUploadView.swift; sourceTree = "<group>"; };
 		13D816D02BD901ED00D36A9C /* OnBoardingDoctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingDoctor.swift; sourceTree = "<group>"; };
 		13D97B182BE9F4E300A59B6B /* doctorLeaveApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorLeaveApplication.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				09A53BEA2BE9EBD1000F8037 /* AdminLeaveList.swift */,
 				09A53BEC2BE9EC01000F8037 /* LeaveCard.swift */,
 				09A53BEE2BE9EE45000F8037 /* LeaveCardData.swift */,
+				09A53BF02BEA07A4000F8037 /* ForAdminLeaveView.swift */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				17B32FD32BE8B90300ADAB3B /* MedicineView.swift in Sources */,
 				542545B52BE4B67700F02AF6 /* LabTestCardData.swift in Sources */,
 				B1639D172BD8E31300EAB15E /* appointmentCardDataM.swift in Sources */,
+				09A53BF12BEA07A4000F8037 /* ForAdminLeaveView.swift in Sources */,
 				37D86AB12BE362A90064DCE4 /* AdminDashboard.swift in Sources */,
 				3621E0A42BDF700400F22807 /* PatientDetails.swift in Sources */,
 				369ADAF22BDE85200062CFDD /* navt.swift in Sources */,

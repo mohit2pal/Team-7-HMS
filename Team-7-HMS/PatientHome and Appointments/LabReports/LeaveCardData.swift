@@ -24,3 +24,13 @@ struct LeaveMockData {
         LeaveCardData(date: "19 Apr", year: 24, day: "Mon",DoctorName:"Dr. Ekta",status: "Pending",DoctorID: "")
         ]
 }
+
+struct LeaveData: Identifiable {
+    var id = UUID()
+    var date: String
+    var year: Int
+    var day: String
+    var DoctorName: String
+    var status: String
+    var DoctorID : String
+}
