@@ -20,6 +20,7 @@ struct patientHomeSwiftUIView: View {
     @State var patientMedicalRecords: PatientMedicalRecords?
 
     var body: some View {
+        
         VStack{
             //header
             HStack(alignment: .top){
@@ -44,17 +45,17 @@ struct patientHomeSwiftUIView: View {
                         .font(.title)
                 }
                 Spacer()
-                NavigationLink(destination: patientNotificationSwiftUIView()) {
-                    Button(action: {
-                        // Handle button action here if needed
-                    }) {
-                        Image(systemName: "bell.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 24)
-                            .foregroundColor(.myAccent)
-                    }
+                 
+                NavigationLink {
+                    SosCallSwiftUIView()
+                        .navigationBarBackButtonHidden()
+                } label: {
+                    Image(systemName: "sos.circle")
+                        .resizable()
+                        .frame(width: 40 , height: 40)
+                        .foregroundStyle(.red)
                 }
+
             }
             .onAppear{
                 FirebaseHelperFunctions.getMedicalRecords(patientUID: patientUID) { medicalRecord, error in

@@ -63,9 +63,9 @@ struct bookAppointmentSwiftUIView: View {
                     
                     HStack {
                         Spacer()
-                        Text("Unsure which specialist to visit?")
-                            .font(.title2)
-                            .bold()
+                        Text(" ~ Unsure which specialist to visit? ~ ")
+                            .font(.title3)
+                            
                         Spacer()
                     }
                     
@@ -77,9 +77,14 @@ struct bookAppointmentSwiftUIView: View {
                                 .navigationBarBackButtonHidden()
                         } label: {
                             HStack{
-                                Text("Click here to analyse for symtomps!")
+                                Text("Click here to analyse for symptoms!")
                                 Image(systemName: "chevron.right")
+                                    .bold()
                             }
+                            .foregroundStyle(.white)
+                            .padding()
+                            .background(.accent)
+                            .cornerRadius(15)
                         }
                         
                     }

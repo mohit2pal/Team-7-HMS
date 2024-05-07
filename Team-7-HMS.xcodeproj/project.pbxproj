@@ -103,7 +103,6 @@
 		36F93E542BE927C700AC1EE8 /* GenerativeAI-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E532BE927C700AC1EE8 /* GenerativeAI-Info.plist */; };
 		36F93E572BE9490F00AC1EE8 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 36F93E562BE9490F00AC1EE8 /* SDWebImageSwiftUI */; };
 		36F93E592BE94A3500AC1EE8 /* SymptomOutPutPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E582BE94A3500AC1EE8 /* SymptomOutPutPageView.swift */; };
-		36F93E5B2BE94A5B00AC1EE8 /* 04-spinner.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */; };
 		36F93E972BEA18EB00AC1EE8 /* loadingScreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */; };
 		3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763784E2BD7D15900CB6198 /* PatientHistory.swift */; };
 		37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */; };
@@ -217,7 +216,6 @@
 		36F93E512BE9279D00AC1EE8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		36F93E532BE927C700AC1EE8 /* GenerativeAI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenerativeAI-Info.plist"; sourceTree = "<group>"; };
 		36F93E582BE94A3500AC1EE8 /* SymptomOutPutPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomOutPutPageView.swift; sourceTree = "<group>"; };
-		36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "04-spinner.gif"; path = "../../../../Downloads/04-spinner.gif"; sourceTree = "<group>"; };
 		36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loadingScreen.gif; path = ../../../../Downloads/loadingScreen.gif; sourceTree = "<group>"; };
 		3763784E2BD7D15900CB6198 /* PatientHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHistory.swift; sourceTree = "<group>"; };
 		37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorAppointmentCardData.swift; sourceTree = "<group>"; };
@@ -382,7 +380,6 @@
 			isa = PBXGroup;
 			children = (
 				36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */,
-				36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */,
 				17F63AEC2BD63E440089511F /* AppDelegate.swift */,
 				17F63AF82BD7A1BF0089511F /* FirebaseHelperFunctions.swift */,
 				17F63B262BDA127D0089511F /* AppState.swift */,
@@ -721,7 +718,6 @@
 			files = (
 				1769002B2BD2A94700F5F81E /* Preview Assets.xcassets in Resources */,
 				176900282BD2A94700F5F81E /* Assets.xcassets in Resources */,
-				36F93E5B2BE94A5B00AC1EE8 /* 04-spinner.gif in Resources */,
 				36F93E542BE927C700AC1EE8 /* GenerativeAI-Info.plist in Resources */,
 				17F63ABA2BD6340D0089511F /* GoogleService-Info.plist in Resources */,
 				36F93E972BEA18EB00AC1EE8 /* loadingScreen.gif in Resources */,
