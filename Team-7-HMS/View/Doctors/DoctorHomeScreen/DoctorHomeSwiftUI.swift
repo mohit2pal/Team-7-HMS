@@ -109,11 +109,11 @@ struct DoctorHomeSwiftUI: View {
             Spacer().frame(height: 30)
             // Appointments heading
             HStack(alignment: .top) {
-                    Text("Appointments")
-                        .font(.title)
-                        .padding(.bottom, 1)
-                }
-                        
+                Text("Appointments")
+                    .font(.title)
+                    .padding(.bottom, 1)
+            }
+            
             // Display appointment dates as circular cards
             HStack(alignment: .top){
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -128,8 +128,8 @@ struct DoctorHomeSwiftUI: View {
                                     .frame(width: 50 , height : 50)
                                     .padding()
                                     .background(selectedDate == date ? Color.myAccent : Color.white)
-                                    .clipShape(RoundedRectangle(cornerRadius: 50))
-                                    
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                
                                     .customShadow()
                             }
                         }
@@ -137,24 +137,24 @@ struct DoctorHomeSwiftUI: View {
                     
                 }
             }
-                        
+            
             Spacer().frame(height: 5)
             
             Picker("Appointment Type", selection: $selectedAppointmentTypeIndex) {
-                            ForEach(0..<appointmentType.count, id: \.self) {
-                                Text(appointmentType[$0])
-                            }
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
-                        .padding(.vertical)
-                        
-                        // Display appointments based on selected segment
+                ForEach(0..<appointmentType.count, id: \.self) {
+                    Text(appointmentType[$0])
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding(.vertical)
+            
+            // Display appointments based on selected segment
             ScrollView {
                 ForEach(displayedAppointments) { appointment in
                     DoctorAppointmentCard(appointmentData: appointment)
                 }
             }
-            }
+        }
         .padding([.horizontal, .top])
         .background(Color.background)
         .onAppear{
