@@ -69,7 +69,7 @@ struct patientHomeSwiftUIView: View {
             //vitals
             HStack{
                 Text("Vitals")
-                    .font(.title2)
+                    .font(.title3)
                 Spacer()
             }
             
@@ -171,7 +171,7 @@ struct patientHomeSwiftUIView: View {
             //apointments upcoming
             HStack{
                 Text("Upcoming appointments")
-                    .font(CentFont.mediumReg)
+                    .font(.title3)
                 Spacer()
             }
             

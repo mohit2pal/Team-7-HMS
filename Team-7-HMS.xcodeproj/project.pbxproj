@@ -96,6 +96,7 @@
 		367FFA612BE38289007A995D /* AppointmentDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367FFA602BE38289007A995D /* AppointmentDataView.swift */; };
 		369ADAF02BDE1CB60062CFDD /* AddingSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369ADAEF2BDE1CB60062CFDD /* AddingSlots.swift */; };
 		369ADAF22BDE85200062CFDD /* navt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369ADAF12BDE85200062CFDD /* navt.swift */; };
+		36ACD1C82BEB325B0094550D /* RescheduleAppointmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36ACD1C72BEB325B0094550D /* RescheduleAppointmentsView.swift */; };
 		36B1F1782BDD2C3000D5A9DF /* AppointmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B1F1772BDD2C3000D5A9DF /* AppointmentModel.swift */; };
 		36F93E432BE7E2B100AC1EE8 /* PatientMedicalRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E422BE7E2B100AC1EE8 /* PatientMedicalRecordView.swift */; };
 		36F93E452BE7E49800AC1EE8 /* UpcomingMedicalRecodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E442BE7E49800AC1EE8 /* UpcomingMedicalRecodsView.swift */; };
@@ -223,6 +224,7 @@
 		367FFA602BE38289007A995D /* AppointmentDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentDataView.swift; sourceTree = "<group>"; };
 		369ADAEF2BDE1CB60062CFDD /* AddingSlots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingSlots.swift; sourceTree = "<group>"; };
 		369ADAF12BDE85200062CFDD /* navt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = navt.swift; sourceTree = "<group>"; };
+		36ACD1C72BEB325B0094550D /* RescheduleAppointmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RescheduleAppointmentsView.swift; sourceTree = "<group>"; };
 		36B1F1772BDD2C3000D5A9DF /* AppointmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentModel.swift; sourceTree = "<group>"; };
 		36F93E422BE7E2B100AC1EE8 /* PatientMedicalRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientMedicalRecordView.swift; sourceTree = "<group>"; };
 		36F93E442BE7E49800AC1EE8 /* UpcomingMedicalRecodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingMedicalRecodsView.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				174C2D062BD629D200945401 /* LoginScreen.swift */,
 				095E99AB2BE0E4E300BF9CAE /* ViewPrescription.swift */,
 				367FFA602BE38289007A995D /* AppointmentDataView.swift */,
+				36ACD1C72BEB325B0094550D /* RescheduleAppointmentsView.swift */,
 				36F93E422BE7E2B100AC1EE8 /* PatientMedicalRecordView.swift */,
 				36F93E442BE7E49800AC1EE8 /* UpcomingMedicalRecodsView.swift */,
 				36F93E462BE7E77F00AC1EE8 /* CompletedMedicalTestsView.swift */,
@@ -825,6 +828,7 @@
 				17F63B2C2BDA1AFB0089511F /* SplashScreen.swift in Sources */,
 				37D86ACE2BEA3E0B0064DCE4 /* LeaveCardData.swift in Sources */,
 				17B32FD32BE8B90300ADAB3B /* MedicineView.swift in Sources */,
+				36ACD1C82BEB325B0094550D /* RescheduleAppointmentsView.swift in Sources */,
 				37D86ACA2BEA32960064DCE4 /* LeaveApplication.swift in Sources */,
 				542545B52BE4B67700F02AF6 /* LabTestCardData.swift in Sources */,
 				37D86AD22BEA3E3F0064DCE4 /* ForAdminLeaveView.swift in Sources */,

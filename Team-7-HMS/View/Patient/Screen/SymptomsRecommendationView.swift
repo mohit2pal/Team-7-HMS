@@ -40,94 +40,99 @@ struct SymptomsRecommendationView: View {
     
     var body: some View {
         NavigationView{
-            ZStack{
-                Color.background.ignoresSafeArea()
-                VStack {
-                    
-                    ScrollView{
+            VStack {
+                
+                ScrollView{
+                    Spacer(minLength: 10)
+                    HStack{
                         Text("What symptoms are you facing ?")
-                        
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(buttons2.indices, id: \.self) { index in
-                                VStack {
-                                    Image(buttons2[index].image)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 40, height: 40)
-                                        .padding()
-                                        .background(Color.white)
-                                        .cornerRadius(15)
-                                        .shadow(color: .black.opacity(0.5), radius: 1, x: 0.0, y: 0.0)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 15)
-                                                .stroke(selectedSymptoms.contains(buttons2[index].title) ? Color.blue : Color.black, lineWidth: 1)
-                                        )
-                                        .onTapGesture {
-                                            toggleSelection(buttons2[index].title)
-                                        }
-                                    Text(buttons2[index].title)
-                                        .font(.caption)
-                                        .foregroundColor(.black)
-                                }
-                            }
-                        }
-                        .padding(.horizontal)
-                        
-                        
-                        if !selectedSymptoms.isEmpty {
-                            ForEach(selectedSymptoms , id : \.self){ symptom in
-                                HStack{
-                                    Text(symptom)
-                                    Spacer()
-                                    Button(action: {
-                                        removeSymptom(symptom)
-                                    }) {
-                                        Image(systemName: "trash")
-                                            .foregroundStyle(.red)
-                                    }
-                                }
-                                .padding()
-                                .font(.title3)
-                                .frame(width: 350)
-                                .background(.white)
-                                .cornerRadius(15)
-                            }
-                        }
-                        
-            
-                        Text("Add more symptoms")
-                            .padding(.vertical)
-                        
-                        HStack{
-                            TextField("Add Symptom", text: $enteredSymptom)
-                            
-                            Button(action: {
-                                addSymptom()
-                            }, label: {
-                                Image(systemName: "plus.circle.fill")
-                                    .foregroundStyle(.blue)
-                            })
-                        }
-                        .padding()
-                        .font(.title3)
-                        .frame(width: 350)
-                        .background(.white)
-                        .cornerRadius(15)
-                        
-                        NavigationLink {
-                            SymptomOutPutPageView(finalPrompt: prompt, symptomps: selectedSymptoms)
-                        } label: {
-                            Text("Submit")
-                                .foregroundStyle(.white)
-                                .frame(width: 300)
-                                .padding()
-                                .background(.accent)
-                                .cornerRadius(15)
-                        }
-                        .disabled(selectedSymptoms.isEmpty)
+                            .font(.title3)
+                        Spacer()
                     }
+                    
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(buttons2.indices, id: \.self) { index in
+                            VStack {
+                                Image(buttons2[index].image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40)
+                                    .padding()
+                                    .background(Color.white)
+                                    .cornerRadius(15)
+                                    .customShadow()
+//                                    .overlay(
+//                                        RoundedRectangle(cornerRadius: 15)
+//                                            .stroke(selectedSymptoms.contains(buttons2[index].title) ? Color.blue : Color.black, lineWidth: 1)
+//                                    )
+                                    .onTapGesture {
+                                        toggleSelection(buttons2[index].title)
+                                    }
+                                Text(buttons2[index].title)
+                                    .font(.caption)
+                                    .foregroundColor(.black)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                    
+                    
+                    if !selectedSymptoms.isEmpty {
+                        ForEach(selectedSymptoms , id : \.self){ symptom in
+                            HStack{
+                                Text(symptom)
+                                Spacer()
+                                Button(action: {
+                                    removeSymptom(symptom)
+                                }) {
+                                    Image(systemName: "trash")
+                                        .foregroundStyle(.red)
+                                }
+                            }
+                            .padding()
+//                            .frame(width: 350)
+                            .background(.white)
+                            .cornerRadius(15)
+                            .customShadow()
+                        }
+                    }
+                    
+                    HStack{
+                        Text("Add more symptoms")
+                            .font(.title3)
+                        Spacer()
+                    }
+                    
+                    HStack{
+                        TextField("Add Symptom", text: $enteredSymptom)
+                        Spacer()
+                        Button(action: {
+                            addSymptom()
+                        }, label: {
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundStyle(.blue)
+                        })
+                    }
+                    .padding()
+                    .background(.white)
+                    .cornerRadius(15)
+                    .customShadow()
+                    Spacer().frame(height: 30)
+                    NavigationLink {
+                        SymptomOutPutPageView(finalPrompt: prompt, symptomps: selectedSymptoms)
+                    } label: {
+                        Text("Submit")
+                            .foregroundStyle(.white)
+                            .frame(width: 300)
+                            .padding()
+                            .background(.accent)
+                            .cornerRadius(15)
+                    }
+                    .disabled(selectedSymptoms.isEmpty)
                 }
             }
+            .padding()
+            .background(Color.background)
             .navigationBarTitle("Symptoms")
             .navigationBarBackButtonHidden(true)
 

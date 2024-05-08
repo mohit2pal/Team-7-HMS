@@ -16,6 +16,7 @@ struct PatientMedicalRecordView: View {
             ZStack{
                 Color.background.ignoresSafeArea()
                 VStack{
+                    Spacer(minLength: 20)
                     Picker(selection: $selectedSegmentIndex, label: Text("")) {
                                    ForEach(0..<2) { index in
                                        Text(segments[index])

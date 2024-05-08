@@ -24,13 +24,18 @@ struct AppointmentDataView: View {
                 VStack{
                     HStack{
                         Image(imageName)
+                            
+                        
                             .resizable()
+                            .frame(width: 60 , height: 60)
+                            .padding(12)
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 100 , height: 100)
+                            
+                        
                             .clipShape(Circle())
                             .overlay(
                                 Circle()
-                                    .stroke(Color.black, lineWidth: 2)
+                                    .stroke(Color.black.opacity(0.4), lineWidth: 2)
                             )
                         
                         Spacer()
@@ -51,11 +56,13 @@ struct AppointmentDataView: View {
                     
                     HStack{
                         Image(systemName: "calendar")
+                            .foregroundColor(.myAccent)
                         Text(data?.date ?? "Date of Appointment")
                         
                         Spacer()
                         
                         Image(systemName: "clock")
+                            .foregroundColor(.myAccent)
                         Text(data?.time ?? "time")
                     }
                     .padding(.vertical)

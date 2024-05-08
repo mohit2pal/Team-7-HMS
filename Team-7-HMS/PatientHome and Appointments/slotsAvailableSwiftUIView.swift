@@ -81,8 +81,10 @@ struct slotsAvailableSwiftUIView: View {
                                             }
                                             .frame(minWidth: 0, maxWidth: .infinity)
                                             .padding()
-                                            .background(slotColor(slot))
+                                            .background(Date() > getDateLiteral(date: date, time: time) ? .gray :slotColor(slot))
                                             .cornerRadius(15)
+                                            .foregroundStyle(Date() > getDateLiteral(date: date, time: time) ? .white : .black)
+                                            .disabled( Date() > getDateLiteral(date: date, time: time))
                                             
                                     }
                                 }
