@@ -29,14 +29,15 @@ struct AdminDashboard: View {
                         HStack(alignment: .top) {
                             Image(systemName: "person.circle.fill")
                                 .resizable()
-                                .frame(width: 70, height: 70)
+                                .frame(width: 60, height: 60)
                                 .foregroundColor(.gray)
                                 .padding(.trailing)
                             VStack(alignment: .leading) {
                                 Text("Hello 👋")
-                                    .font(.headline)
+                                    .font(CentFont.mediumReg)
                                 Text("Admin")
-                                    .font(.subheadline)
+                                    .font(.title)
+                                    .fontWeight(.semibold)
                             }
                             Spacer()
                             NavigationLink(destination: patientNotificationSwiftUIView()) {

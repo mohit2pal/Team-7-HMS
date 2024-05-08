@@ -19,16 +19,12 @@ struct PatientView: View {
                     .tabItem {
                         Label("Home", systemImage: "house.fill")
                     }
-                SosCallSwiftUIView()
-                    .tabItem {
-                        Label("Call Help", systemImage: "sos")
-                    }
                 
                 
                 BookingView(patientID: patientUid)
                 
                     .tabItem {
-                        Label("Book Appointment", systemImage: "calendar.badge.plus")
+                        Label("Book Appointment", systemImage: "plus")
                     }
                 NavigationStack{
                     PatientMedicalRecordView()
@@ -36,12 +32,6 @@ struct PatientView: View {
                 .tabItem {
                     Label("Medical Tests" , systemImage:  "doc.fill")
                 }
-                
-                SymptomsRecommendationView()
-                    .tabItem {
-                        Label("Symptom" , systemImage:  "stethoscope")
-                    }
-                
             }
             .sheet(isPresented: $showPatientHistory, content: {
                 PatientHistory(isPresented: $showPatientHistory, uid: patientUid)

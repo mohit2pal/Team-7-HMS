@@ -55,16 +55,8 @@ struct doctorLeaveApplication: View {
         
     var body: some View {
         NavigationView{
+            ScrollView(.vertical, showsIndicators: false){
             VStack{
-                HStack {
-                    Text("Number of days: \(getDays(fromDate: fromDate, toDate: toDate))")
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                    Spacer()
-                }
-                .padding(.horizontal)
-              
-                
                 HStack {
                     VStack {
                         RoundedRectangle(cornerRadius: 20)
@@ -147,16 +139,13 @@ struct doctorLeaveApplication: View {
                 .background(.white)
                 .cornerRadius(10)
                 .customShadow()
-                
-                Divider()
-                    .overlay(
-                            Rectangle()
-                                .fill(.myAccent)
-                                .frame(height: 1)
-                                
-                        )
-                    .padding()
-                
+                HStack {
+                    Text("Number of days: \(getDays(fromDate: fromDate, toDate: toDate))")
+                        .font(.headline)
+                        .foregroundColor(.gray)
+                    Spacer()
+                }
+//                .padding(.horizontal)
                 TextField("Subject", text: $subject)
                     .padding(.horizontal)
                     .padding(.vertical, 15)
@@ -180,11 +169,8 @@ struct doctorLeaveApplication: View {
                         .cornerRadius(20)
                 })
             }
-            .padding()
             .background(Color.background)
-            .navigationBarTitle("Leave Application")
-            .navigationBarTitleDisplayMode(.inline)
-            
+        }
             
                     }
         .onAppear{

@@ -18,7 +18,7 @@ struct bookAppointmentSwiftUIView: View {
     //buttons by speciality
     let buttons: [ButtonData] = [
         ButtonData(image: "Doctor-icon", title: "General Physician"),
-        ButtonData(image: "gynaecology-icon", title: "Obstetrics & Gynaecology"),
+        ButtonData(image: "Obstetrics & Gynaecology-icon", title: "Obstetrics & Gynaecology"),
         ButtonData(image: "Orthopaedics-icon", title: "Orthopaedics"),
         ButtonData(image: "ENT-icon", title: "ENT"),
         ButtonData(image: "Urology-icon", title: "Urology"),
@@ -63,26 +63,36 @@ struct bookAppointmentSwiftUIView: View {
                     
                     HStack {
                         Spacer()
-                        Text("Unsure which specialist to visit?")
-                            .font(.title2)
-                            .bold()
+                        Text(" ~ Unsure which specialist to visit? ~ ")
+                            .font(.title3)
+                            
                         Spacer()
                     }
                     
                    
                     .padding(.vertical)
-                    HStack{
-                        NavigationLink {
-                            SymptomsRecommendationView()
-                                .navigationBarBackButtonHidden()
-                        } label: {
-                            HStack{
-                                Text("Click here to analyse for symtomps!")
-                                Image(systemName: "chevron.right")
+                    
+                    VStack{
+                       
+                        HStack{
+                            NavigationLink {
+                                SymptomsRecommendationView()
+                                    .navigationBarBackButtonHidden()
+                            } label: {
+                                HStack{
+                                    Text("Click here to analyse for symptoms!")
+                                    Image(systemName: "chevron.right")
+                                        .bold()
+                                }
+                                .foregroundStyle(.white)
+                                .padding()
+                                .background(.accent)
+                                .cornerRadius(15)
                             }
+                            
                         }
-                        
                     }
+                    .offset(y:25)
                     
                 }
             }
