@@ -87,7 +87,7 @@ struct CompletedMedicalTestsView: View {
                 isLoading = true
                 FirebaseHelperFunctions().fetchMedicalTests(patientUID: patientUID) { tests in
                     let inProgressTests = tests.filter { $0.status == "finish" }
-                    self.medicalTests = inProgressTests.sorted(by: {$0.dateFull < $1.dateFull})
+                    self.medicalTests = inProgressTests.sorted(by: {$0.dateFull > $1.dateFull})
                     isLoading = false
                 }
             }

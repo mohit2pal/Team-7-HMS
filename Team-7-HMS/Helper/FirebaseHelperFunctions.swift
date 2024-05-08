@@ -869,6 +869,8 @@ class FirebaseHelperFunctions {
                         // Assuming you have a function to get the day from the date string
                         let day = self.getDayOfWeekFromDate(dateString: dateString) ?? "Unknown"
                         
+                        
+                        
                         // Create a DoctorAppointmentCardData object for each appointment
                         let appointmentData = DoctorAppointmentCardData(appointmentID: appointmentID, date: dateString, year: year, day: day, time: slotTime, patientName: patientName, gender: gender, age: age, status: status, patientID: patientUID)
                         
@@ -1332,3 +1334,10 @@ class FirebaseHelperFunctions {
 }
 
 
+
+func getDateLiteral(date : String , time : String) -> Date {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd-MM-yyyy hh:mm a"
+    
+    return dateFormatter.date(from: date.replacingOccurrences(of: "_", with: "-") + " " + time) ?? Date()
+}

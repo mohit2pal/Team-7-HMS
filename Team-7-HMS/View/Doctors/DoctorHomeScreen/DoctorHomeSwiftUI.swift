@@ -160,16 +160,21 @@ struct DoctorHomeSwiftUI: View {
         .onAppear{
             
             FirebaseHelperFunctions.getAppointmentsForDoctor(doctorUID: doctorUid) { appointments, error in
-                     if let error = error {
-                         print("Error retrieving appointments:", error)
-                         // Handle error if needed
-                     } else {
-                    
-                         if let appointments = appointments {
-                             self.fetchedAppointments = appointments
-                         }
-                     }
-                 }
+                if let error = error {
+                    print("Error retrieving appointments:", error)
+                    // Handle error if needed
+                } else {
+                    if let appointments = appointments {
+                        let sortedAppointments = appointments.sorted { (report1, report2) in
+                            let date1 = getDateLiteral(date: report1.date, time: report1.time)
+                            let date2 = getDateLiteral(date: report2.date, time: report2.time)
+                            return date1 > date2
+                        }
+                        // Assign the sorted appointments to your fetchedAppointments variable
+                        self.fetchedAppointments = sortedAppointments
+                    }
+                }
+            }
         }
     }
     
