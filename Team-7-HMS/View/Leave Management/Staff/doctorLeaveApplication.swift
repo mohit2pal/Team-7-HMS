@@ -58,15 +58,6 @@ struct doctorLeaveApplication: View {
             ScrollView(.vertical, showsIndicators: false){
             VStack{
                 HStack {
-                    Text("Number of days: \(getDays(fromDate: fromDate, toDate: toDate))")
-                        .font(.headline)
-                        .foregroundColor(.gray)
-                    Spacer()
-                }
-                .padding(.horizontal)
-                
-                
-                HStack {
                     VStack {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(Color.myAccent)
@@ -148,15 +139,13 @@ struct doctorLeaveApplication: View {
                 .background(.white)
                 .cornerRadius(10)
                 .customShadow()
-                
-                Divider()
-                    .overlay(
-                        Rectangle()
-                            .fill(.gray.opacity(0.3))
-                            .frame(height: 1)
-                    )
-                    .padding(.vertical)
-                
+                HStack {
+                    Text("Number of days: \(getDays(fromDate: fromDate, toDate: toDate))")
+                        .font(.headline)
+                        .foregroundColor(.gray)
+                    Spacer()
+                }
+//                .padding(.horizontal)
                 TextField("Subject", text: $subject)
                     .padding(.horizontal)
                     .padding(.vertical, 15)
