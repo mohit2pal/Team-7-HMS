@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct ForDoctorPatientAppointentView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     @State private var appointmentData: AppointmentDataModel?
     @State var doctorAppointmentData: DoctorAppointmentCardData
     @State private var isLoading = true
@@ -16,6 +18,10 @@ struct ForDoctorPatientAppointentView: View {
     @State private var showPrescriptionSheet: Bool = false
     
     @State private var showMedicalHistorySheet: Bool = false // State to control the medical history sheet
+    @State private var showOldPrescriptionSheet: Bool = false // State to cntrol old Prescription
+    
+    @State private var disableAppointmentDone: Bool = true // State to disable the ui button
+    @State private var showSuccessAnimation = false // New state variable for showing the tick animation
     
     var body: some View {
         NavigationView {
@@ -103,36 +109,79 @@ struct ForDoctorPatientAppointentView: View {
                     
                     Spacer()
                     
-                    Button{
-                        showPrescriptionSheet.toggle()
-                    } label: {
-                        HStack{
-                            Spacer()
-                            Image(systemName: "plus")
-                                .foregroundColor(.blue)
-                            Text("Write prescription")
-                                .font(.headline)
-                                .foregroundStyle(Color.black)
-                            Spacer()
-                        }
-                        .frame(width: 300, height: 50)
-                        .background(Color.white)
-                        .cornerRadius(20)
-                        .customShadow()
-                    }
                     
-                    Button(action: {}, label: {
-                        Text("Appointment Done")
+                    if doctorAppointmentData.status == "completed" {
+                        Button{
+                            showOldPrescriptionSheet.toggle()
+                        } label: {
+                            HStack{
+                                Spacer()
+                                Image(systemName: "list.bullet.circle")
+                                    .foregroundColor(.accentColor)
+                                Text("Show prescription")
+                                    .font(.headline)
+                                    .foregroundStyle(Color.black)
+                                Spacer()
+                            }
                             .frame(width: 300, height: 50)
-                            .foregroundStyle(Color.white)
-                            .background(Color.myAccent)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            .background(Color.white)
+                            .cornerRadius(20)
+                            .customShadow()
+                        }
+                    } else {
+                        Button{
+                            showPrescriptionSheet.toggle()
+                        } label: {
+                            HStack{
+                                Spacer()
+                                Image(systemName: "plus")
+                                    .foregroundColor(.blue)
+                                Text("Write prescription")
+                                    .font(.headline)
+                                    .foregroundStyle(Color.black)
+                                Spacer()
+                            }
+                            .frame(width: 300, height: 50)
+                            .background(Color.white)
+                            .cornerRadius(20)
+                            .customShadow()
+                        }
                         
-                    })
+                        Button(action: {
+                            let firebaseHelper = FirebaseHelperFunctions()
+                            
+                            firebaseHelper.completeAppointment(appointmentID: doctorAppointmentData.appointmentID) { result in
+                                switch result {
+                                case .success():
+                                    print("Appointment status updated successfully.")
+                                    self.showSuccessAnimation = true
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                        self.showSuccessAnimation = false
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                case .failure(let error):
+                                    print("Error updating appointment status: \(error)")
+                                }
+                            }
+                        }, label: {
+                            Text("Appointment Done")
+                                .frame(width: 300, height: 50)
+                                .foregroundStyle(Color.white)
+                                .background(disableAppointmentDone ? Color.gray : Color.myAccent)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                            
+                        })
+                        .disabled(disableAppointmentDone)
+                        .fullScreenCover(isPresented: $showSuccessAnimation) {
+                            SuccessAnimationView()
+                        }
+                    }
                 }
                 .padding([.top, .leading, .trailing], 25)
                 .onAppear{
                     fetchAppointmentData()
+                    fetchPrescriptionData()
                 }
                 .sheet(isPresented: $showPrescriptionSheet) {
                     if let appointment = appointmentData {
@@ -143,6 +192,14 @@ struct ForDoctorPatientAppointentView: View {
                 }
                 .sheet(isPresented: $showMedicalHistorySheet) {
                     MedicalRecordView(patientId: doctorAppointmentData.patientID)
+                }
+                .sheet(isPresented: $showOldPrescriptionSheet) {
+                    ViewPrescription(showOldPrescriptionSheet: $showOldPrescriptionSheet, appointmentID: doctorAppointmentData.appointmentID)
+                }
+                .onChange(of: showPrescriptionSheet) { newValue in
+                    if !newValue { // When showPrescriptionSheet changes to false
+                        fetchPrescriptionData()
+                    }
                 }
             }
         }
@@ -190,13 +247,25 @@ struct ForDoctorPatientAppointentView: View {
                     self.errorMessage = error.localizedDescription
                 } else if let appointmentDataModel = appointmentDataModel {
                     self.appointmentData = appointmentDataModel
-                    print(appointmentData)
                 } else {
                     self.errorMessage = "Failed to load appointment data."
                 }
             }
         }
     }
+    
+    private func fetchPrescriptionData() {
+            // Assuming FirebaseHelperFunctions is the class where fetchPrescription is defined
+            let firebaseHelper = FirebaseHelperFunctions()
+        firebaseHelper.fetchPrescription(appointmentID: doctorAppointmentData.appointmentID) { result in
+                switch result {
+                case .success(let prescription):
+                    disableAppointmentDone = false
+                case .failure(let error):
+                    disableAppointmentDone = true
+                }
+            }
+        }
 }
 
 #Preview{

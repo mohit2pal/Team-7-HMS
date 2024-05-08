@@ -18,6 +18,8 @@
 		13EF0E372BD7A4A80015FDDA /* OnBoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF0E362BD7A4A80015FDDA /* OnBoardingScreen.swift */; };
 		13FA586B2BD7BDCC00AC8CA4 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FA586A2BD7BDCC00AC8CA4 /* SignUpScreen.swift */; };
 		171925562BE0DC8B0012E54D /* DoctorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171925552BE0DC8B0012E54D /* DoctorView.swift */; };
+		171FE8D42BEB36620016167E /* PrescriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FE8D32BEB36620016167E /* PrescriptionModel.swift */; };
+		171FE8D62BEB36810016167E /* MedicineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FE8D52BEB36810016167E /* MedicineModel.swift */; };
 		174C2D072BD629D300945401 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C2D062BD629D200945401 /* LoginScreen.swift */; };
 		175AD9D22BE3973B006E3347 /* Some-Saves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175AD9D12BE3973B006E3347 /* Some-Saves.swift */; };
 		175AD9D62BE3B7B0006E3347 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175AD9D52BE3B7B0006E3347 /* NetworkMonitor.swift */; };
@@ -103,7 +105,6 @@
 		36F93E542BE927C700AC1EE8 /* GenerativeAI-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E532BE927C700AC1EE8 /* GenerativeAI-Info.plist */; };
 		36F93E572BE9490F00AC1EE8 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 36F93E562BE9490F00AC1EE8 /* SDWebImageSwiftUI */; };
 		36F93E592BE94A3500AC1EE8 /* SymptomOutPutPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F93E582BE94A3500AC1EE8 /* SymptomOutPutPageView.swift */; };
-		36F93E5B2BE94A5B00AC1EE8 /* 04-spinner.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */; };
 		36F93E972BEA18EB00AC1EE8 /* loadingScreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */; };
 		3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3763784E2BD7D15900CB6198 /* PatientHistory.swift */; };
 		37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */; };
@@ -158,6 +159,8 @@
 		13EF0E362BD7A4A80015FDDA /* OnBoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScreen.swift; sourceTree = "<group>"; };
 		13FA586A2BD7BDCC00AC8CA4 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		171925552BE0DC8B0012E54D /* DoctorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorView.swift; sourceTree = "<group>"; };
+		171FE8D32BEB36620016167E /* PrescriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrescriptionModel.swift; sourceTree = "<group>"; };
+		171FE8D52BEB36810016167E /* MedicineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineModel.swift; sourceTree = "<group>"; };
 		174C2D062BD629D200945401 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		175AD9D12BE3973B006E3347 /* Some-Saves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Some-Saves.swift"; sourceTree = "<group>"; };
 		175AD9D52BE3B7B0006E3347 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
@@ -217,7 +220,6 @@
 		36F93E512BE9279D00AC1EE8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		36F93E532BE927C700AC1EE8 /* GenerativeAI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenerativeAI-Info.plist"; sourceTree = "<group>"; };
 		36F93E582BE94A3500AC1EE8 /* SymptomOutPutPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomOutPutPageView.swift; sourceTree = "<group>"; };
-		36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "04-spinner.gif"; path = "../../../../Downloads/04-spinner.gif"; sourceTree = "<group>"; };
 		36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loadingScreen.gif; path = ../../../../Downloads/loadingScreen.gif; sourceTree = "<group>"; };
 		3763784E2BD7D15900CB6198 /* PatientHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHistory.swift; sourceTree = "<group>"; };
 		37D3A1462BDA48B000C04F35 /* DoctorAppointmentCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorAppointmentCardData.swift; sourceTree = "<group>"; };
@@ -382,7 +384,6 @@
 			isa = PBXGroup;
 			children = (
 				36F93E962BEA18EB00AC1EE8 /* loadingScreen.gif */,
-				36F93E5A2BE94A5B00AC1EE8 /* 04-spinner.gif */,
 				17F63AEC2BD63E440089511F /* AppDelegate.swift */,
 				17F63AF82BD7A1BF0089511F /* FirebaseHelperFunctions.swift */,
 				17F63B262BDA127D0089511F /* AppState.swift */,
@@ -496,6 +497,8 @@
 				B1639D162BD8E31300EAB15E /* appointmentCardDataM.swift */,
 				36B1F1772BDD2C3000D5A9DF /* AppointmentModel.swift */,
 				542545B42BE4B67700F02AF6 /* LabTestCardData.swift */,
+				171FE8D32BEB36620016167E /* PrescriptionModel.swift */,
+				171FE8D52BEB36810016167E /* MedicineModel.swift */,
 				17B32FC82BE88AF000ADAB3B /* AppointmentDataModel.swift */,
 			);
 			path = Model;
@@ -721,7 +724,6 @@
 			files = (
 				1769002B2BD2A94700F5F81E /* Preview Assets.xcassets in Resources */,
 				176900282BD2A94700F5F81E /* Assets.xcassets in Resources */,
-				36F93E5B2BE94A5B00AC1EE8 /* 04-spinner.gif in Resources */,
 				36F93E542BE927C700AC1EE8 /* GenerativeAI-Info.plist in Resources */,
 				17F63ABA2BD6340D0089511F /* GoogleService-Info.plist in Resources */,
 				36F93E972BEA18EB00AC1EE8 /* loadingScreen.gif in Resources */,
@@ -770,6 +772,7 @@
 				17F7C6712BDEC8D400720B5E /* Just-Some.swift in Sources */,
 				3626C4882BE4A69E00FA8C61 /* BookLabRecordsView.swift in Sources */,
 				176900262BD2A94500F5F81E /* ContentView.swift in Sources */,
+				171FE8D42BEB36620016167E /* PrescriptionModel.swift in Sources */,
 				17F63AFF2BD7A2A20089511F /* SendCredentials.swift in Sources */,
 				17B32FCB2BE88E5C00ADAB3B /* ForDoctorPatientAppointmentView.swift in Sources */,
 				17F63AF92BD7A1BF0089511F /* FirebaseHelperFunctions.swift in Sources */,
@@ -818,6 +821,7 @@
 				17F63B272BDA127D0089511F /* AppState.swift in Sources */,
 				176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */,
 				3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */,
+				171FE8D62BEB36810016167E /* MedicineModel.swift in Sources */,
 				36F93E452BE7E49800AC1EE8 /* UpcomingMedicalRecodsView.swift in Sources */,
 				13FA586B2BD7BDCC00AC8CA4 /* SignUpScreen.swift in Sources */,
 				096DA7CD2BDA457800241449 /* BookLab.swift in Sources */,

@@ -9,13 +9,6 @@ import SwiftUI
 import Firebase
 import FirebaseFirestore
 
-struct Medicine {
-    var name: String
-    var morningDose: Bool
-    var eveningDose: Bool
-    var nightDose: Bool
-}
-
 struct addPrescription: View {
     @State var appointmentData: AppointmentDataModel
     

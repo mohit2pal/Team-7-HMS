@@ -537,7 +537,8 @@ class FirebaseHelperFunctions {
             "doctorID" : doctorUID,
             "date" : date,
             "slotTime" : slotTime,
-            "issues" : issues
+            "issues" : issues,
+            "status" : "Upcoming"
         ]
         
         let appointmentDocRef = db.collection("appointments")
@@ -836,6 +837,7 @@ class FirebaseHelperFunctions {
                 let patientUID = document["patientID"] as? String ?? ""
                 let dateString = document["date"] as? String ?? ""
                 let slotTime = document["slotTime"] as? String ?? ""
+                let status = document["status"] as? String ?? "Unknown"
                 
                 // Enter the group before starting the asynchronous call
                 group.enter()
@@ -859,7 +861,7 @@ class FirebaseHelperFunctions {
                         let day = self.getDayOfWeekFromDate(dateString: dateString) ?? "Unknown"
                         
                         // Create a DoctorAppointmentCardData object for each appointment
-                        let appointmentData = DoctorAppointmentCardData(appointmentID: appointmentID, date: dateString, year: year, day: day, time: slotTime, patientName: patientName, gender: gender, age: age, status: "Upcoming", patientID: patientUID)
+                        let appointmentData = DoctorAppointmentCardData(appointmentID: appointmentID, date: dateString, year: year, day: day, time: slotTime, patientName: patientName, gender: gender, age: age, status: status, patientID: patientUID)
                         
                         // Add the appointment data to the appointments array
                         appointments.append(appointmentData)
@@ -1249,6 +1251,62 @@ class FirebaseHelperFunctions {
         } else {
             print("Medical test department not found.")
         }    }
+    
+    // Function to change the status of an appointment from "upcoming" to "completed"
+        func completeAppointment(appointmentID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+            let db = Firestore.firestore()
+
+            // Reference to the appointment document
+            let appointmentRef = db.collection("appointments").document(appointmentID)
+
+            // Update the status field to "completed"
+            appointmentRef.updateData([
+                "status": "completed"
+            ]) { error in
+                if let error = error {
+                    print("Error updating appointment status: \(error)")
+                    completion(.failure(error))
+                } else {
+                    print("Appointment status updated to completed successfully.")
+                    completion(.success(()))
+                }
+            }
+        }
+
+        // Function to fetch prescription based on the appointment ID
+    func fetchPrescription(appointmentID: String, completion: @escaping (Result<PrescriptionModel, Error>) -> Void) {
+        let db = Firestore.firestore()
+        
+        // Reference to the "prescriptions" collection
+        let prescriptionsRef = db.collection("prescriptions")
+        
+        // Create a query to fetch prescriptions where the appointmentId matches the provided appointmentID
+        let query = prescriptionsRef.whereField("appointmentId", isEqualTo: appointmentID)
+        
+        // Execute the query
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                // If there's an error executing the query, pass the error to the completion handler
+                completion(.failure(error))
+            } else if let documents = querySnapshot?.documents, !documents.isEmpty {
+                // Assuming there's only one prescription per appointment ID
+                let document = documents.first!
+                let data = document.data()
+                
+                // Parse the document data into a PrescriptionModel instance
+                if let prescription = PrescriptionModel(dictionary: data) {
+                    // Pass the prescription model to the completion handler
+                    completion(.success(prescription))
+                } else {
+                    // If parsing fails, pass a custom error to the completion handler
+                    completion(.failure(NSError(domain: "DataParsingError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to parse prescription data."])))
+                }
+            } else {
+                // If no documents are found, pass a custom error to the completion handler
+                completion(.failure(NSError(domain: "DocumentNotFoundError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Prescription document does not exist for the given appointment ID."])))
+            }
+        }
+    }
 }
 
 
