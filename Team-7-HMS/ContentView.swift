@@ -27,6 +27,8 @@ struct ContentView: View {
                 ZStack {
                     if viewModel.showSplashScreen {
                         SplashScreen(viewModel: viewModel)
+                            .transition(.opacity.combined(with: .slide)) // Combine fade and slide for the transition
+                            .animation(.easeInOut(duration: 1.0), value: viewModel.showSplashScreen) // Smooth transition animation
                             .onAppear {
                                 fetchCurrentUserAndData()
                             }
@@ -35,13 +37,19 @@ struct ContentView: View {
                             if role == "patient" {
                                 if let patient = patient {
                                     PatientView(patientName: patient.name, showPatientHistory: false, patientUid: self.currentUser?.uid ?? "Not Fetched")
+                                        .transition(.opacity.combined(with: .slide)) // Combine fade and slide for the transition
+                                        .animation(.easeInOut(duration: 1.0), value: viewModel.showSplashScreen) // Smooth transition animation
                                 }
                             } else if role == "doctor" {
                                 if let doctor = doctor {
                                     DoctorView(doctorUid: self.currentUser?.uid ?? "Not Fetched", doctorDetails: doctor, doctorName: doctor.name)
+                                        .transition(.opacity.combined(with: .slide)) // Combine fade and slide for the transition
+                                        .animation(.easeInOut(duration: 1.0), value: viewModel.showSplashScreen) // Smooth transition animation
                                 }
                             } else {
                                 OnBoardingScreen()
+                                    .transition(.opacity.combined(with: .slide)) // Combine fade and slide for the transition
+                                    .animation(.easeInOut(duration: 1.0), value: viewModel.showSplashScreen) // Smooth transition animation
                             }
                         } else {
                             VStack{
