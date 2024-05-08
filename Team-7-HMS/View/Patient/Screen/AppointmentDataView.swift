@@ -14,6 +14,8 @@ struct AppointmentDataView: View {
     @State var isLoading : Bool  = false
     @State var deleted  :Bool = false
     @State var showAlert: Bool = false
+    
+    @State var showOldPrescriptionSheet: Bool = false
     var body: some View {
         
         NavigationStack{
@@ -103,59 +105,84 @@ struct AppointmentDataView: View {
                     
                     Spacer()
                     
-                    Button(action: {}, label: {
-                        Text("Reschedule")
-                            .frame(width: 300)
-                            .padding()
-                            .foregroundStyle(Color.white)
-                            .background(Color.green)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                    if let status = data?.status {
                         
-                    })
-                    
-                    Button(action: {
-                        showAlert = true
-                    }, label: {
-                        
-                        if isLoading{
-                            ProgressView()
-                        }
-                        else {
-                            
-                            if deleted {
-                                Text("Appointment Canceled")
+                        if status == "completed" {
+                            Button{
+                                showOldPrescriptionSheet.toggle()
+                            } label: {
+                                HStack{
+                                    Spacer()
+                                    Image(systemName: "list.bullet.circle")
+                                        .foregroundColor(.accentColor)
+                                    Text("Show prescription")
+                                        .font(.headline)
+                                        .foregroundStyle(Color.black)
+                                    Spacer()
+                                }
+                                .frame(width: 300, height: 50)
+                                .background(Color.white)
+                                .cornerRadius(20)
+                                .customShadow()
+                            }
+                        } else {
+                            Button(action: {}, label: {
+                                Text("Reschedule")
                                     .frame(width: 300)
                                     .padding()
                                     .foregroundStyle(Color.white)
-                                    .background(Color.red)
+                                    .background(Color.green)
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
                                 
-                            }
-                            else {
-                                Text("Cancel Appointment")
-                                    .frame(width: 300)
-                                    .padding()
-                                    .foregroundStyle(Color.white)
-                                    .background(.myAccent)
-                                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                            })
+                            
+                            Button(action: {
+                                showAlert = true
+                            }, label: {
+                                
+                                if isLoading{
+                                    ProgressView()
+                                }
+                                else {
+                                    
+                                    if deleted {
+                                        Text("Appointment Canceled")
+                                            .frame(width: 300)
+                                            .padding()
+                                            .foregroundStyle(Color.white)
+                                            .background(Color.red)
+                                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                                        
+                                    }
+                                    else {
+                                        Text("Cancel Appointment")
+                                            .frame(width: 300)
+                                            .padding()
+                                            .foregroundStyle(Color.white)
+                                            .background(.myAccent)
+                                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                                    }
+                                }
+                                
+                            })
+                            .alert(isPresented: $showAlert) {
+                                Alert(
+                                    title: Text("Cancel Appointment"),
+                                    message: Text("Are you sure you want to cancel this appointment?"),
+                                    primaryButton: .destructive(Text("Cancel Appointment")) {
+                                        // Handle cancellation
+                                        cancelAppointment()
+                                    },
+                                    secondaryButton: .cancel()
+                                )
                             }
                         }
-                        
-                    })
-                    .alert(isPresented: $showAlert) {
-                        Alert(
-                            title: Text("Cancel Appointment"),
-                            message: Text("Are you sure you want to cancel this appointment?"),
-                            primaryButton: .destructive(Text("Cancel Appointment")) {
-                                // Handle cancellation
-                                cancelAppointment()
-                            },
-                            secondaryButton: .cancel()
-                        )
                     }
-                    
                 }
                 .padding(.horizontal , 25)
+                .sheet(isPresented: $showOldPrescriptionSheet) {
+                    ViewPrescription(showOldPrescriptionSheet: $showOldPrescriptionSheet, appointmentID: data?.appointmentID ?? "Null Value")
+                }
                 .onAppear{
                     FirebaseHelperFunctions().getAppointmentData(appointmentUID: appointmentID) { appData, error in
                         if let appointment = appData {

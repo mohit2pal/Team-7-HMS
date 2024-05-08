@@ -18,7 +18,7 @@ struct patientAppointmentCard: View {
             } label: {
                 HStack{
                     VStack{
-                        Text("\(appointmentData.date)")
+                        Text("\(String(appointmentData.date.prefix(2)))")
                             .font(CentFont.mediumBold)
                         Text(appointmentData.day)
                             .font(CentFont.smallReg)

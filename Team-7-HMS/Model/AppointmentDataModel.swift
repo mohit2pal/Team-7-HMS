@@ -14,12 +14,14 @@ struct AppointmentDataModel {
     let issues: [String]?
     let patientID: String
     let slotTime: String
+    let status: String
 
     init?(dictionary: [String: Any], appointmentID: String) {
         guard let date = dictionary["date"] as? String,
               let doctorID = dictionary["doctorID"] as? String,
               let issues = dictionary["issues"] as? [String],
               let patientID = dictionary["patientID"] as? String,
+              let status = dictionary["status"] as? String,
               let slotTime = dictionary["slotTime"] as? String else {
             return nil
         }
@@ -30,6 +32,7 @@ struct AppointmentDataModel {
         self.issues = issues
         self.patientID = patientID
         self.slotTime = slotTime
+        self.status = status
     }
 }
 
@@ -39,9 +42,9 @@ struct AppointmentDataModelMock {
 
     func generateMockAppointmentData() -> [AppointmentDataModel] {
         let mockAppointments = [
-            ["date": "2024-05-10", "doctorID": "doc123", "issues": ["Cough", "Cold"], "patientID": "pat456", "slotTime": "09:00 AM"],
-            ["date": "2024-05-12", "doctorID": "doc456", "issues": ["Headache"], "patientID": "pat789", "slotTime": "10:30 AM"],
-            ["date": "2024-05-15", "doctorID": "doc789", "issues": ["Back Pain"], "patientID": "pat012", "slotTime": "02:00 PM"]
+            ["date": "2024-05-10", "doctorID": "doc123", "issues": ["Cough", "Cold"], "patientID": "pat456", "slotTime": "09:00 AM", "status": "completed"],
+            ["date": "2024-05-12", "doctorID": "doc456", "issues": ["Headache"], "patientID": "pat789", "slotTime": "10:30 AM", "status": "Upcoming"],
+            ["date": "2024-05-15", "doctorID": "doc789", "issues": ["Back Pain"], "patientID": "pat012", "slotTime": "02:00 PM", "status": "completed"]
         ]
 
         return mockAppointments.compactMap { dictionary in

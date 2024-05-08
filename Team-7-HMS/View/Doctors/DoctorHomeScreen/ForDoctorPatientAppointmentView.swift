@@ -259,9 +259,9 @@ struct ForDoctorPatientAppointentView: View {
             let firebaseHelper = FirebaseHelperFunctions()
         firebaseHelper.fetchPrescription(appointmentID: doctorAppointmentData.appointmentID) { result in
                 switch result {
-                case .success(let prescription):
+                case .success(_):
                     disableAppointmentDone = false
-                case .failure(let error):
+                case .failure(_):
                     disableAppointmentDone = true
                 }
             }
