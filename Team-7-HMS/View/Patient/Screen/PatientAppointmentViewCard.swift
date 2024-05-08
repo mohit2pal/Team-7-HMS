@@ -42,12 +42,10 @@ struct PatientAppointmentViewCard: View {
             }
             HStack{
                 Image(systemName: "calendar")
-                    .foregroundColor(.black) // Added foregroundColor
                 Text(appointment.date.replacingOccurrences(of: "_", with: "-"))
                     .foregroundColor(.black) // Added foregroundColor
                 Spacer()
                 Image(systemName: "clock")
-                    .foregroundColor(.black) // Added foregroundColor
                 Text(appointment.time)
                     .foregroundColor(.black) // Added foregroundColor
             }
