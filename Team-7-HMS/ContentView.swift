@@ -15,34 +15,41 @@ struct ContentView: View {
     @State private var patient: Patient? = nil // Add this line to store fetched patient data
     @State private var doctor: DoctorDetails? = nil
     @State var patientID : String?
-    @State private var isShowingSplash = true
+//    @State private var isShowingSplash = true
     @State var role: String?
+    
+    @StateObject private var viewModel = AppViewModel()
     
     @StateObject private var networkMonitor = NetworkMonitor()
     
     var body: some View {
             NavigationStack {
                 ZStack {
-                    if isShowingSplash {
-                        SplashScreen()
+                    if viewModel.showSplashScreen {
+                        SplashScreen(viewModel: viewModel)
+                            .transition(.opacity.combined(with: .slide)) // Combine fade and slide for the transition
+                            .animation(.easeInOut(duration: 1.0), value: viewModel.showSplashScreen) // Smooth transition animation
                             .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    isShowingSplash = false
-                                    fetchCurrentUserAndData()
-                                }
+                                fetchCurrentUserAndData()
                             }
-                    } else {
+                    }else {
                         if networkMonitor.isConnected {
                             if role == "patient" {
                                 if let patient = patient {
                                     PatientView(patientName: patient.name, showPatientHistory: false, patientUid: self.currentUser?.uid ?? "Not Fetched")
+                                        .transition(.opacity.combined(with: .slide)) // Combine fade and slide for the transition
+                                        .animation(.easeInOut(duration: 1.0), value: viewModel.showSplashScreen) // Smooth transition animation
                                 }
                             } else if role == "doctor" {
                                 if let doctor = doctor {
                                     DoctorView(doctorUid: self.currentUser?.uid ?? "Not Fetched", doctorDetails: doctor, doctorName: doctor.name)
+                                        .transition(.opacity.combined(with: .slide)) // Combine fade and slide for the transition
+                                        .animation(.easeInOut(duration: 1.0), value: viewModel.showSplashScreen) // Smooth transition animation
                                 }
                             } else {
                                 OnBoardingScreen()
+                                    .transition(.opacity.combined(with: .slide)) // Combine fade and slide for the transition
+                                    .animation(.easeInOut(duration: 1.0), value: viewModel.showSplashScreen) // Smooth transition animation
                             }
                         } else {
                             VStack{
