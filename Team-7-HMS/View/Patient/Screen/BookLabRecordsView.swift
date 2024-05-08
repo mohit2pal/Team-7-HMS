@@ -33,8 +33,7 @@ struct BookLabRecordsView: View {
                     VStack{
                         HStack{
                             Text("Book Medical Tests")
-                                .font(.title2)
-                                .bold()
+                                .font(.title3)
                             Spacer()
                         }
                         

@@ -13,7 +13,8 @@ struct SosCallSwiftUIView: View {
         NavigationStack{
             ZStack{
                 Color.background.ignoresSafeArea()
-                ScrollView{
+                VStack{
+                    Spacer()
                     Image("AmbulanceImage")
                         .resizable()
                         .aspectRatio(contentMode: .fit)

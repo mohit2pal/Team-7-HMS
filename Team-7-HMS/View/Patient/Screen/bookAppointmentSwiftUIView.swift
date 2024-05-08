@@ -34,8 +34,7 @@ struct bookAppointmentSwiftUIView: View {
                     
                     HStack {
                         Text("Search by Specialities")
-                            .font(.title2)
-                            .bold()
+                            .font(.title3)
                         Spacer()
                     }
                     //list of specialities
@@ -62,8 +61,8 @@ struct bookAppointmentSwiftUIView: View {
                         .frame(height: 30)
                     
                     HStack {
-                        Spacer()
-                        Text(" ~ Unsure which specialist to visit? ~ ")
+//                        Spacer()
+                        Text("Unsure which specialist to visit?")
                             .font(.title3)
                             
                         Spacer()

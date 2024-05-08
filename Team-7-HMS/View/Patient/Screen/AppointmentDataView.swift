@@ -49,11 +49,13 @@ struct AppointmentDataView: View {
                     
                     HStack{
                         Image(systemName: "calendar")
+                            .foregroundColor(.myAccent)
                         Text(data?.date ?? "Date of Appointment")
                         
                         Spacer()
                         
                         Image(systemName: "clock")
+                            .foregroundColor(.myAccent)
                         Text(data?.time ?? "time")
                     }
                     .padding(.vertical)
@@ -108,9 +110,8 @@ struct AppointmentDataView: View {
                             .frame(width: 300)
                             .padding()
                             .foregroundStyle(Color.white)
-                            .background(Color.green)
+                            .background(.myAccent)
                             .clipShape(RoundedRectangle(cornerRadius: 15))
-                        
                     })
                     
                     Button(action: {
@@ -135,9 +136,10 @@ struct AppointmentDataView: View {
                                 Text("Cancel Appointment")
                                     .frame(width: 300)
                                     .padding()
-                                    .foregroundStyle(Color.white)
-                                    .background(.myAccent)
+//                                    .foregroundStyle(Color.white)
+                                    .background(.white)
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
+                                    .customShadow()
                             }
                         }
                         
