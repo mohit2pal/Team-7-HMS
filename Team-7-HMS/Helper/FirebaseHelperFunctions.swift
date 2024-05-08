@@ -499,6 +499,15 @@ class FirebaseHelperFunctions {
                 let doctorUID = document["doctorID"] as? String ?? ""
                 let dateString = document["date"] as? String ?? ""
                 let appointmentID = document.documentID
+                let timeSlot = document["slotTime"] as? String ?? ""
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy hh:mm a"
+                
+                let dateFormatedString = dateString.replacingOccurrences(of: "_", with: "-") + " " + timeSlot
+                let dateFormated = dateFormatter.date(from: dateFormatedString)
+
+                
                 
                 let day = FirebaseHelperFunctions.getDayOfWeekFromDate(dateString: dateString)
                 let date = String(dateString.prefix(2))
@@ -512,8 +521,8 @@ class FirebaseHelperFunctions {
                     
                     if let doctorData = doctorSnapshot?.data(),
                        let doctorName = doctorData["name"] as? String,
-                       let doctorSpeciality = doctorData["specialty"] as? String {
-                        let appointmentData = AppointmentCardData(date: date, day: day ?? "", time: document["slotTime"] as! String, doctorName: doctorName, doctorSpeciality: doctorSpeciality, appointmentID: appointmentID)
+                       let doctorSpeciality = doctorData["specialty"] as? String  {
+                        let appointmentData = AppointmentCardData(date: date, day: day ?? "", time: document["slotTime"] as! String, doctorName: doctorName, doctorSpeciality: doctorSpeciality, appointmentID: appointmentID, dateString: dateFormated!)
                         
                         appointments.append(appointmentData)
                     }
@@ -894,6 +903,7 @@ class FirebaseHelperFunctions {
         
         let docRef = db.collection("doctor_details")
         if let specialty = medicalTestDepartments[medicalTest] {
+            print(specialty)
             let query = docRef.whereField("specialty", isEqualTo: specialty)
             
             // Dispatch group to wait for asynchronous queries
@@ -1054,14 +1064,26 @@ class FirebaseHelperFunctions {
             
             var medicalTests: [MedicalTest] = []
             
+            
+            
             guard let querySnapshot = querySnapshot else {
                 // Handle nil snapshot
                 completion(medicalTests)
                 return
             }
             for document in querySnapshot.documents {
+                
+                let date = document["date"] as? String ?? ""
+                let time = document["slot"] as? String ?? ""
+                
+                let dateFullForm = date.replacingOccurrences(of: "_", with: "-") + " " + time
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy hh:mm a"
+                
+                let fullDate = dateFormatter.date(from: dateFullForm)
+                
                 // Assuming MedicalTest has an initializer that takes a Firestore document
-                let medicalTest = MedicalTest(caseID: document.documentID, medicalTest: document["medicalTest"] as? String ?? "", date: document["date"] as? String ?? "", time: document["slot"] as? String ?? "", status: document["status"] as? String ?? "", notifications: document["notification"] as? Bool ?? false , pdfURL:  document["medicalTestLink"] as? String ?? "")
+                let medicalTest = MedicalTest(caseID: document.documentID, medicalTest: document["medicalTest"] as? String ?? "", date: document["date"] as? String ?? "", time: document["slot"] as? String ?? "", status: document["status"] as? String ?? "", notifications: document["notification"] as? Bool ?? false , pdfURL:  document["medicalTestLink"] as? String ?? "", dateFull: fullDate!)
                 medicalTests.append(medicalTest)
             }
             completion(medicalTests)

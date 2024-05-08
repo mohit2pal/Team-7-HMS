@@ -90,6 +90,7 @@ struct DoctorHomeSwiftUI: View {
                         .font(CentFont.mediumReg)
                     Text(doctorName)
                         .font(.title)
+                        .fontWeight(.semibold)
                 }
                 Spacer()
                 NavigationLink(destination: patientNotificationSwiftUIView()) {

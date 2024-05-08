@@ -20,6 +20,7 @@ struct patientHomeSwiftUIView: View {
     @State var patientMedicalRecords: PatientMedicalRecords?
 
     var body: some View {
+        
         VStack{
             //header
             HStack(alignment: .top){
@@ -42,19 +43,20 @@ struct patientHomeSwiftUIView: View {
                         .font(CentFont.mediumReg)
                     Text(String(userName.prefix(20)))
                         .font(.title)
+                        .fontWeight(.semibold)
                 }
                 Spacer()
-                NavigationLink(destination: patientNotificationSwiftUIView()) {
-                    Button(action: {
-                        // Handle button action here if needed
-                    }) {
-                        Image(systemName: "bell.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 24)
-                            .foregroundColor(.myAccent)
-                    }
+                 
+                NavigationLink {
+                    SosCallSwiftUIView()
+                        .navigationBarBackButtonHidden()
+                } label: {
+                    Image(systemName: "sos.circle")
+                        .resizable()
+                        .frame(width: 40 , height: 40)
+                        .foregroundStyle(.red)
                 }
+
             }
             .onAppear{
                 FirebaseHelperFunctions.getMedicalRecords(patientUID: patientUID) { medicalRecord, error in
@@ -201,7 +203,8 @@ struct patientHomeSwiftUIView: View {
                      } else {
                     
                          if let appointments = appointments {
-                             self.appointments = appointments
+                             let filteredAppointments = appointments.filter{ $0.dateString > Date() }
+                             self.appointments = filteredAppointments.sorted(by: { $0.dateString < $1.dateString })
                          }
                      }
                  }

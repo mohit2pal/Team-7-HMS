@@ -8,58 +8,67 @@
 import SwiftUI
 
 struct SosCallSwiftUIView: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         NavigationStack{
-            VStack{
-                HStack{
-                    Text("Call Help")
+            ZStack{
+                Color.background.ignoresSafeArea()
+                ScrollView{
+                    Image("AmbulanceImage")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 400)
+                    
                     Spacer()
+                        .frame(height: 40)
+                    
+                    Text("Get Instant Ambulance \n by Calling the following number.")
+                        .multilineTextAlignment(.center)
+                        .font(CentFont.smallReg)
+                    
+                    Spacer()
+                    Spacer()
+                        .frame(height: 60)
+                    Text("+91 98765 43210\n+91 98765 43210")
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(.gray)
+                    
+                    Spacer()
+                        .frame(height: 60)
+                    Button(action: {
+                        guard let phoneURL = URL(string: "tel://9237498273") else { return }
+                        UIApplication.shared.open(phoneURL)
+                    }) {
+                        Image(systemName: "phone.fill")
+                            .font(.system(size: 27))
+                        Text("Call")
+                            .font(CentFont.largeSemiBold)
+                    }
+                    .foregroundColor(.white)
+                    .padding(10)
+                    .padding(.horizontal)
+                    .background(Color.red)
+                    .cornerRadius(20)
                 }
-                .font(.largeTitle)
-                .bold()
-                Spacer().frame(height: 100)
                 
-                Image("AmbulanceImage")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 400)
-                
-                Spacer()
-                    .frame(height: 40)
-                
-                Text("Get Instant Ambulance \n by Calling the following number.")
-                    .multilineTextAlignment(.center)
-                    .font(CentFont.smallReg)
-                
-                Spacer()
-                    .frame(height: 60)
-                
-                
-                
-                Text("+91 98765 43210\n+91 98765 43210")
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.gray)
-                
-                Spacer()
-                    .frame(height: 60)
-                Button(action: {
-                    guard let phoneURL = URL(string: "tel://9237498273") else { return }
-                    UIApplication.shared.open(phoneURL)
-                }) {
-                    Image(systemName: "phone.fill")
-                        .font(.system(size: 27))
-                    Text("Call")
-                        .font(CentFont.largeSemiBold)
-                }
-                .foregroundColor(.white)
-                .padding(10)
-                .padding(.horizontal)
-                .background(Color.red)
-                .cornerRadius(20)
             }
-            .padding()
-            .background(Color.background)
+            .navigationTitle("Call Help")
+            .navigationBarBackButtonHidden(true)
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        HStack{
+                            Image(systemName: "chevron.left")
+                                .bold()
+                            Text("Back")
+                        }
+                    })
+                }
+            })
         }
+        
     }
 }
 

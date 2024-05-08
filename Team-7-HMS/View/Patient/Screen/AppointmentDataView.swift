@@ -136,7 +136,7 @@ struct AppointmentDataView: View {
                                     .frame(width: 300)
                                     .padding()
                                     .foregroundStyle(Color.white)
-                                    .background(Color.red)
+                                    .background(.myAccent)
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
                             }
                         }
