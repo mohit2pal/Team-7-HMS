@@ -79,3 +79,13 @@ let medicalTestDepartments: [String: String] = [
     "Blood Analysis": "Phlebotomy",
     "MRI": "Radiology"
 ]
+
+let daysDict: [Int: String] = [
+    1: "Sun", // Sunday
+    2: "Mon", // Monday
+    3: "Tue", // Tuesday
+    4: "Wed", // Wednesday
+    5: "Thu", // Thursday
+    6: "Fri", // Friday
+    7: "Sat"  // Saturday
+]

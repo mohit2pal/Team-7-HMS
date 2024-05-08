@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AppointmentDataView: View {
+    @Environment(\.presentationMode) var presentationMode
     var appointmentID : String
     @State var data : AppointmentData?
     @State var imageName : String = ""
@@ -108,15 +109,18 @@ struct AppointmentDataView: View {
                     
                     Spacer()
                     
-                    Button(action: {}, label: {
+                    NavigationLink {
+                        RescheduleAppointmentsView(appointmentId: appointmentID, prevTime: data?.time ?? "time", date: data?.date ?? "date", previousDate: data?.date ?? "date")
+                    } label: {
                         Text("Reschedule")
                             .frame(width: 300)
                             .padding()
                             .foregroundStyle(Color.white)
                             .background(Color.myAccent)
                             .clipShape(RoundedRectangle(cornerRadius: 15))
-                        
-                    })
+                    }
+
+                    
                     
                     Button(action: {
                         showAlert = true
@@ -188,6 +192,7 @@ struct AppointmentDataView: View {
             print("deleted")
             isLoading = false
             deleted = true
+            presentationMode.wrappedValue.dismiss()
         }
     }
 }

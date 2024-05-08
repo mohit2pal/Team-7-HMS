@@ -22,6 +22,7 @@ struct slotsAvailableSwiftUIView: View {
     
     @State private var complaints: [String] = []
     @State private var newComplaint: String = ""
+    
     var body: some View {
         
         VStack {
