@@ -43,6 +43,7 @@ struct patientHomeSwiftUIView: View {
                         .font(CentFont.mediumReg)
                     Text(String(userName.prefix(20)))
                         .font(.title)
+                        .fontWeight(.semibold)
                 }
                 Spacer()
                  

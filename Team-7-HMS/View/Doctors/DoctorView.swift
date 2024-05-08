@@ -24,6 +24,10 @@ struct DoctorView : View {
                     .tabItem {
                         Label("Upload Reports", systemImage: "doc.text.magnifyingglass")
                     }
+                leaveRequestPicker(doctor: doctorDetails, doctorUid: doctorUid)
+                    .tabItem {
+                        Label("Leave requests", systemImage: "doc.on.doc")
+                    }
             }
         }
     }

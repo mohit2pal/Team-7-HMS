@@ -41,9 +41,7 @@ struct DoctorAppointmentCard: View {
                     }//VStack End
                     Spacer() // Add Spacer to push the arrow to the right
                     NavigationLink(destination: ForDoctorPatientAppointentView(doctorAppointmentData: appointmentData)){
-                        Image("Arrow")
-                            .rotationEffect(.degrees(180))
-                            .foregroundColor(Color("PrimaryColor"))
+                        Image(systemName: "chevron.right")
                     }
                 }
                 .padding()
