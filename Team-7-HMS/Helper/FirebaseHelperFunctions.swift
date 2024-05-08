@@ -1110,7 +1110,7 @@ class FirebaseHelperFunctions {
             }
             for document in querySnapshot.documents {
                 // Assuming MedicalTest has an initializer that takes a Firestore document
-                let medicalTest = PatientReport(testName: document["medicalTest"] as? String ?? "", patientID: document["patientId"] as? String ?? "", scheduledDate: document["date"] as? String ?? "", caseId: document.documentID)
+                let medicalTest = PatientReport(testName: document["medicalTest"] as? String ?? "", patientID: document["patientId"] as? String ?? "", scheduledDate: document["date"] as? String ?? "", caseId: document.documentID, status: document["status"] as? String ?? "" , pdfURL: document["medicalTestLink"] as? String ?? "")
                 medicalTests.append(medicalTest)
             }
             completion(medicalTests)

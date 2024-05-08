@@ -120,9 +120,7 @@ struct CompletedMedicalTestsView: View {
         task.resume()
     }
 
-    func openURLInSafari(url : URL ) {
-            UIApplication.shared.open(url)
-        }
+
 
 
 }

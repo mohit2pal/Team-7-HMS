@@ -9,11 +9,14 @@ import SwiftUI
 import FirebaseStorage
 
 struct LabReportUploadView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    @State var isLoading = false
     @State private var labReportURL: URL?
     @State private var documentPickerIsPresented = false
     @State private var selectedPatientIndex = 0 // Default selected patient index
     @State private var diagnosis : String = ""
-
+    @State var errorMsg = false
     @State var fileName : String?// Assign the file name here
     
     @State var patientUID : String
@@ -36,6 +39,10 @@ struct LabReportUploadView: View {
                                 
                                 Text(caseID.suffix(5))
                                 
+                                if errorMsg{
+                                    Text("Error uploading file. Please try again")
+                                        .foregroundStyle(.red)
+                                }
                             }
                         }
                         .padding()
@@ -122,27 +129,41 @@ struct LabReportUploadView: View {
                         }
                         
                         Button(action: {
+                            isLoading = true
                             if let reportURL = labReportURL {
                                 // Forward report action
                                 uploadFileToFirebaseStorage(url: reportURL) { result in
                                     switch result {
                                     case .success(let url):
                                         FirebaseHelperFunctions().updateMedicalRecord(for: caseID, pdf: url, analysis: diagnosis)
+                                        
+                                        isLoading = false
+                                        presentationMode.wrappedValue.dismiss()
                                     case .failure(let error):
                                         print("Error uploading file to Firebase Storage: \(error.localizedDescription)")
+                                        
+                                        isLoading = false
+                                        errorMsg = true
+                                 
                                         // Handle error if necessary
                                     }
                                 }
                             }
                         }) {
-                            Text("Forward Report")
-                                .padding()
-                                .font(.headline)
-                                .frame(width: 360)
-                                .background(labReportURL != nil ? Color("PrimaryColor") : Color.gray) // Change color based on document selection
-                                .foregroundColor(.white)
-                                .cornerRadius(20)
-                                .disabled(labReportURL == nil) // Disable button if no document is selected
+                            
+                            if isLoading {
+                                ProgressView()
+                            }
+                            else{
+                                Text("Forward Report")
+                                    .padding()
+                                    .font(.headline)
+                                    .frame(width: 360)
+                                    .background(labReportURL != nil ? Color("PrimaryColor") : Color.gray) // Change color based on document selection
+                                    .foregroundColor(.white)
+                                    .cornerRadius(20)
+                                    .disabled(labReportURL == nil) // Disable button if no document is selected
+                            }
                         }
                     }
                     .padding()
