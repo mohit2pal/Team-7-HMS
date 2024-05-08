@@ -55,6 +55,7 @@ struct MedicalTest{
     let status : String
     let notifications : Bool
     let pdfURL : String
+    let dateFull : Date
 }
 
 let medicalTestInformation: [String: String] = [
@@ -67,7 +68,6 @@ let medicalTestInformation: [String: String] = [
     "Biopsy": "Inform your healthcare provider about any medications you're taking, as some may need to be temporarily stopped before a biopsy.",
     "Stool Test": "Follow any specific dietary or medication instructions provided by your healthcare provider before collecting the stool sample."
 ]
-
 
 let medicalTestDepartments: [String: String] = [
     "XRay": "Radiology",

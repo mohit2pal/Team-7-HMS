@@ -137,7 +137,7 @@ struct UpcomingMedicalRecodsView: View {
                 isLoading = true
                 FirebaseHelperFunctions().fetchMedicalTests(patientUID: patientUID) { tests in
                     let inProgressTests = tests.filter { $0.status == "In progress" }
-                    self.medicalTests = inProgressTests
+                    self.medicalTests = inProgressTests.sorted(by: {$0.dateFull < $1.dateFull})
                     self.notificationEnabled = inProgressTests.map { $0.notifications }
                     isLoading = false
                 }

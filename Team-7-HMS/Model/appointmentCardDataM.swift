@@ -8,14 +8,15 @@ struct AppointmentCardData : Identifiable{
     var doctorName: String
     var doctorSpeciality: String
     var appointmentID : String
+    var dateString : Date
 }
 
 struct AppointmentMockData {
     static let appointmentDataArray = [
-        AppointmentCardData(date: "11", day: "Mon", time: "09:30 AM", doctorName: "Dr. Awesome", doctorSpeciality: "Dermatology", appointmentID: ""),
-        AppointmentCardData(date: "12", day: "Tue", time: "10:30 AM", doctorName: "Dr. America", doctorSpeciality: "Urology", appointmentID: ""),
-        AppointmentCardData(date: "11", day: "Mon", time: "09:30 AM", doctorName: "Dr. Awesome", doctorSpeciality: "Dermatology", appointmentID: ""),
-        AppointmentCardData(date: "12", day: "Tue", time: "10:30 AM", doctorName: "Dr. America", doctorSpeciality: "Urology", appointmentID: "")
+        AppointmentCardData(date: "11", day: "Mon", time: "09:30 AM", doctorName: "Dr. Awesome", doctorSpeciality: "Dermatology", appointmentID: "", dateString: Date()),
+        AppointmentCardData(date: "12", day: "Tue", time: "10:30 AM", doctorName: "Dr. America", doctorSpeciality: "Urology", appointmentID: "", dateString: Date()),
+        AppointmentCardData(date: "11", day: "Mon", time: "09:30 AM", doctorName: "Dr. Awesome", doctorSpeciality: "Dermatology", appointmentID: "", dateString: Date()),
+        AppointmentCardData(date: "12", day: "Tue", time: "10:30 AM", doctorName: "Dr. America", doctorSpeciality: "Urology", appointmentID: "", dateString: Date())
     ]
 }
 

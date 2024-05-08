@@ -202,7 +202,8 @@ struct patientHomeSwiftUIView: View {
                      } else {
                     
                          if let appointments = appointments {
-                             self.appointments = appointments
+                             let filteredAppointments = appointments.filter{ $0.dateString > Date() }
+                             self.appointments = filteredAppointments.sorted(by: { $0.dateString < $1.dateString })
                          }
                      }
                  }
