@@ -118,6 +118,8 @@
 		37D86AD22BEA3E3F0064DCE4 /* ForAdminLeaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86AD12BEA3E3F0064DCE4 /* ForAdminLeaveView.swift */; };
 		37D86AD42BEA3E550064DCE4 /* AdminLeaveList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D86AD32BEA3E550064DCE4 /* AdminLeaveList.swift */; };
 		542545B52BE4B67700F02AF6 /* LabTestCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542545B42BE4B67700F02AF6 /* LabTestCardData.swift */; };
+		B15543832BEB3A240019E9DB /* slotChangeDoctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15543822BEB3A240019E9DB /* slotChangeDoctor.swift */; };
+		B15543852BEB3A480019E9DB /* leaveRequestPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15543842BEB3A480019E9DB /* leaveRequestPicker.swift */; };
 		B1639D092BD8DA1700EAB15E /* CentralisedFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */; };
 		B1639D0B2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */; };
 		B1639D0D2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1639D0C2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift */; };
@@ -236,6 +238,8 @@
 		37D86AD12BEA3E3F0064DCE4 /* ForAdminLeaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForAdminLeaveView.swift; sourceTree = "<group>"; };
 		37D86AD32BEA3E550064DCE4 /* AdminLeaveList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLeaveList.swift; sourceTree = "<group>"; };
 		542545B42BE4B67700F02AF6 /* LabTestCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabTestCardData.swift; sourceTree = "<group>"; };
+		B15543822BEB3A240019E9DB /* slotChangeDoctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = slotChangeDoctor.swift; sourceTree = "<group>"; };
+		B15543842BEB3A480019E9DB /* leaveRequestPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = leaveRequestPicker.swift; sourceTree = "<group>"; };
 		B1639D082BD8DA1700EAB15E /* CentralisedFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentralisedFonts.swift; sourceTree = "<group>"; };
 		B1639D0A2BD8DA3700EAB15E /* patientHomeSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientHomeSwiftUIView.swift; sourceTree = "<group>"; };
 		B1639D0C2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patientNotificationSwiftUIView.swift; sourceTree = "<group>"; };
@@ -581,6 +585,8 @@
 			isa = PBXGroup;
 			children = (
 				13D97B212BEA456A00A59B6B /* doctorLeaveApplication.swift */,
+				B15543822BEB3A240019E9DB /* slotChangeDoctor.swift */,
+				B15543842BEB3A480019E9DB /* leaveRequestPicker.swift */,
 			);
 			path = Staff;
 			sourceTree = "<group>";
@@ -823,6 +829,7 @@
 				17F63AF72BD7A1750089511F /* AddDoctorDetails.swift in Sources */,
 				095E99B62BE4E29200BF9CAE /* LabRecords.swift in Sources */,
 				37D3A1472BDA48B000C04F35 /* DoctorAppointmentCardData.swift in Sources */,
+				B15543832BEB3A240019E9DB /* slotChangeDoctor.swift in Sources */,
 				36B1F1782BDD2C3000D5A9DF /* AppointmentModel.swift in Sources */,
 				B1639D152BD8E2AD00EAB15E /* patientAppointmentCard.swift in Sources */,
 				17F7C6712BDEC8D400720B5E /* Just-Some.swift in Sources */,
@@ -830,6 +837,7 @@
 				176900262BD2A94500F5F81E /* ContentView.swift in Sources */,
 				17F63AFF2BD7A2A20089511F /* SendCredentials.swift in Sources */,
 				17B32FCB2BE88E5C00ADAB3B /* ForDoctorPatientAppointmentView.swift in Sources */,
+				B15543852BEB3A480019E9DB /* leaveRequestPicker.swift in Sources */,
 				17F63AF92BD7A1BF0089511F /* FirebaseHelperFunctions.swift in Sources */,
 				174C2D072BD629D300945401 /* LoginScreen.swift in Sources */,
 				B1639D132BD8DA8200EAB15E /* SosCallSwiftUIView.swift in Sources */,
