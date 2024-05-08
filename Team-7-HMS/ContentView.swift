@@ -15,23 +15,22 @@ struct ContentView: View {
     @State private var patient: Patient? = nil // Add this line to store fetched patient data
     @State private var doctor: DoctorDetails? = nil
     @State var patientID : String?
-    @State private var isShowingSplash = true
+//    @State private var isShowingSplash = true
     @State var role: String?
+    
+    @StateObject private var viewModel = AppViewModel()
     
     @StateObject private var networkMonitor = NetworkMonitor()
     
     var body: some View {
             NavigationStack {
                 ZStack {
-                    if isShowingSplash {
-                        SplashScreen()
+                    if viewModel.showSplashScreen {
+                        SplashScreen(viewModel: viewModel)
                             .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    isShowingSplash = false
-                                    fetchCurrentUserAndData()
-                                }
+                                fetchCurrentUserAndData()
                             }
-                    } else {
+                    }else {
                         if networkMonitor.isConnected {
                             if role == "patient" {
                                 if let patient = patient {

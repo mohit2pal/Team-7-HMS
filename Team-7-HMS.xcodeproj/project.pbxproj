@@ -23,6 +23,8 @@
 		171FE8D62BEB36810016167E /* MedicineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FE8D52BEB36810016167E /* MedicineModel.swift */; };
 		171FE8D82BEB41600016167E /* PatientAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FE8D72BEB41600016167E /* PatientAppointmentView.swift */; };
 		171FE8DA2BEB576D0016167E /* PatientAppointmentViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FE8D92BEB576D0016167E /* PatientAppointmentViewCard.swift */; };
+		171FE8DC2BEB851C0016167E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171FE8DB2BEB851C0016167E /* LaunchScreen.storyboard */; };
+		171FE8DE2BEB88B50016167E /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FE8DD2BEB88B50016167E /* AppViewModel.swift */; };
 		174C2D072BD629D300945401 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C2D062BD629D200945401 /* LoginScreen.swift */; };
 		175AD9D22BE3973B006E3347 /* Some-Saves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175AD9D12BE3973B006E3347 /* Some-Saves.swift */; };
 		175AD9D62BE3B7B0006E3347 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175AD9D52BE3B7B0006E3347 /* NetworkMonitor.swift */; };
@@ -175,6 +177,8 @@
 		171FE8D52BEB36810016167E /* MedicineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineModel.swift; sourceTree = "<group>"; };
 		171FE8D72BEB41600016167E /* PatientAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAppointmentView.swift; sourceTree = "<group>"; };
 		171FE8D92BEB576D0016167E /* PatientAppointmentViewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAppointmentViewCard.swift; sourceTree = "<group>"; };
+		171FE8DB2BEB851C0016167E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		171FE8DD2BEB88B50016167E /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		174C2D062BD629D200945401 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		175AD9D12BE3973B006E3347 /* Some-Saves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Some-Saves.swift"; sourceTree = "<group>"; };
 		175AD9D52BE3B7B0006E3347 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
@@ -369,6 +373,8 @@
 				17F63AEB2BD63E380089511F /* Helper */,
 				17F63AB92BD6340D0089511F /* GoogleService-Info.plist */,
 				17F63AEE2BD640570089511F /* Info.plist */,
+				17F63B2B2BDA1AFB0089511F /* SplashScreen.swift */,
+				171FE8DB2BEB851C0016167E /* LaunchScreen.storyboard */,
 				176900272BD2A94700F5F81E /* Assets.xcassets */,
 				17F7C66D2BDE887800720B5E /* Redundant */,
 				176900292BD2A94700F5F81E /* Preview Content */,
@@ -435,7 +441,6 @@
 				17F7C66A2BDE528300720B5E /* BookingView.swift */,
 				B1639D122BD8DA8200EAB15E /* SosCallSwiftUIView.swift */,
 				13EF0E362BD7A4A80015FDDA /* OnBoardingScreen.swift */,
-				17F63B2B2BDA1AFB0089511F /* SplashScreen.swift */,
 				13FA586A2BD7BDCC00AC8CA4 /* SignUpScreen.swift */,
 				171FE8D72BEB41600016167E /* PatientAppointmentView.swift */,
 				171FE8D92BEB576D0016167E /* PatientAppointmentViewCard.swift */,
@@ -497,6 +502,7 @@
 			children = (
 				17F63AFB2BD7A24D0089511F /* Doctor */,
 				360295FE2BD7DB92001C1397 /* medicalConditions.swift */,
+				171FE8DD2BEB88B50016167E /* AppViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -798,6 +804,7 @@
 				1769002B2BD2A94700F5F81E /* Preview Assets.xcassets in Resources */,
 				176900282BD2A94700F5F81E /* Assets.xcassets in Resources */,
 				36F93E542BE927C700AC1EE8 /* GenerativeAI-Info.plist in Resources */,
+				171FE8DC2BEB851C0016167E /* LaunchScreen.storyboard in Resources */,
 				17F63ABA2BD6340D0089511F /* GoogleService-Info.plist in Resources */,
 				36F93E972BEA18EB00AC1EE8 /* loadingScreen.gif in Resources */,
 			);
@@ -835,6 +842,7 @@
 				B1639D172BD8E31300EAB15E /* appointmentCardDataM.swift in Sources */,
 				37D86AB12BE362A90064DCE4 /* AdminDashboard.swift in Sources */,
 				3621E0A42BDF700400F22807 /* PatientDetails.swift in Sources */,
+				171FE8DE2BEB88B50016167E /* AppViewModel.swift in Sources */,
 				369ADAF22BDE85200062CFDD /* navt.swift in Sources */,
 				36F93E4E2BE9273A00AC1EE8 /* SymptomsRecommendationView.swift in Sources */,
 				B1639D0F2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift in Sources */,
@@ -1084,10 +1092,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Team-7-HMS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Your Care";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "I want to share the health details of the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1116,10 +1127,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Team-7-HMS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Your Care";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "I want to share the health details of the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
