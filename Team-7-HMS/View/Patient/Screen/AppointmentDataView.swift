@@ -22,13 +22,18 @@ struct AppointmentDataView: View {
                 VStack{
                     HStack{
                         Image(imageName)
+                            
+                        
                             .resizable()
+                            .frame(width: 60 , height: 60)
+                            .padding(12)
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 100 , height: 100)
+                            
+                        
                             .clipShape(Circle())
                             .overlay(
                                 Circle()
-                                    .stroke(Color.black, lineWidth: 2)
+                                    .stroke(Color.black.opacity(0.4), lineWidth: 2)
                             )
                         
                         Spacer()
@@ -110,7 +115,7 @@ struct AppointmentDataView: View {
                             .frame(width: 300)
                             .padding()
                             .foregroundStyle(Color.white)
-                            .background(.myAccent)
+                            .background(Color.myAccent)
                             .clipShape(RoundedRectangle(cornerRadius: 15))
                     })
                     
@@ -128,7 +133,7 @@ struct AppointmentDataView: View {
                                     .frame(width: 300)
                                     .padding()
                                     .foregroundStyle(Color.white)
-                                    .background(Color.red)
+                                    .background(Color.red.opacity(0.8))
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
                                 
                             }
@@ -136,8 +141,8 @@ struct AppointmentDataView: View {
                                 Text("Cancel Appointment")
                                     .frame(width: 300)
                                     .padding()
-//                                    .foregroundStyle(Color.white)
-                                    .background(.white)
+                                    .foregroundStyle(Color.white)
+                                    .background(.red.opacity(0.8))
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
                                     .customShadow()
                             }

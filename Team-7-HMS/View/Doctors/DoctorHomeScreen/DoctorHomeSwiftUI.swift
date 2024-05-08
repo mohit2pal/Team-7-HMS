@@ -16,7 +16,7 @@ struct DoctorHomeSwiftUI: View {
     @State var doctorName: String
     @State var selectedAppointmentTypeIndex: Int = 0
     @State var selectedDate: String? = nil
-    let appointmentType = ["Upcoming", "Completed"]
+    let appointmentType = ["Upcoming", "completed"]
     
     @State var fetchedAppointments: [DoctorAppointmentCardData] = []
     
@@ -27,9 +27,9 @@ struct DoctorHomeSwiftUI: View {
             return filterAppointments(appointments: fetchedAppointments, date: selectedDate, status: "Upcoming")
         case 1:
             if let selectedDate = selectedDate {
-                return fetchedAppointments.filter { $0.date == selectedDate && $0.status == "Completed" }
+                return fetchedAppointments.filter { $0.date == selectedDate && $0.status == "completed" }
             } else {
-                return fetchedAppointments.filter { $0.status == "Completed" }
+                return fetchedAppointments.filter { $0.status == "completed" }
             }
         default:
             return []
@@ -56,7 +56,6 @@ struct DoctorHomeSwiftUI: View {
             if let nextDate = calendar.date(byAdding: .day, value: i, to: today) {
                 let dateString = dateFormatter.string(from: nextDate)
                 dateList.append(dateString)
-                print(dateList)
 
             }
         }
@@ -161,17 +160,21 @@ struct DoctorHomeSwiftUI: View {
         .onAppear{
             
             FirebaseHelperFunctions.getAppointmentsForDoctor(doctorUID: doctorUid) { appointments, error in
-                     if let error = error {
-                         print("Error retrieving appointments:", error)
-                         // Handle error if needed
-                     } else {
-                    
-                         if let appointments = appointments {
-                             self.fetchedAppointments = appointments
-                             print(self.fetchedAppointments)
-                         }
-                     }
-                 }
+                if let error = error {
+                    print("Error retrieving appointments:", error)
+                    // Handle error if needed
+                } else {
+                    if let appointments = appointments {
+                        let sortedAppointments = appointments.sorted { (report1, report2) in
+                            let date1 = getDateLiteral(date: report1.date, time: report1.time)
+                            let date2 = getDateLiteral(date: report2.date, time: report2.time)
+                            return date1 > date2
+                        }
+                        // Assign the sorted appointments to your fetchedAppointments variable
+                        self.fetchedAppointments = sortedAppointments
+                    }
+                }
+            }
         }
     }
     

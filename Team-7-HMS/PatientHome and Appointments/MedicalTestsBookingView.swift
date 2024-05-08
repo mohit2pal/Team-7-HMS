@@ -28,6 +28,7 @@ struct MedicalTestsBookingView: View {
         timeSlots()
     }
     @State private var slotColors: [Color?] = []
+    
     var body: some View {
         NavigationStack{
             VStack {
@@ -80,9 +81,12 @@ struct MedicalTestsBookingView: View {
                                 }
                                 .frame(minWidth: 0, maxWidth: .infinity)
                                 .padding()
-                                .background(getColor(timeSlot: presentTimeSlots[index]) ? Color.accentColor : .gray.opacity(0.2))
-                                .foregroundStyle(getColor(timeSlot: presentTimeSlots[index]) ? .white : .black)
+                                .background(disabled(selectedDayIndex: selectedDayIndex ?? 0, selectedTimeSlotIndex: index) ? .gray : getColor(timeSlot: presentTimeSlots[index]) ? Color.accentColor : .gray.opacity(0.2))
+                                .foregroundStyle(disabled(selectedDayIndex: selectedDayIndex ?? 0, selectedTimeSlotIndex: index) ? .white : getColor(timeSlot: presentTimeSlots[index]) ? .white : .black)
+
                                 .cornerRadius(15)
+                                .disabled(disabled(selectedDayIndex: selectedDayIndex ?? 0, selectedTimeSlotIndex: index))
+                                
                         }
                     }
                 }
@@ -96,6 +100,14 @@ struct MedicalTestsBookingView: View {
                 }
                 Spacer()
                 
+                
+                if isAfterNoon() {
+                    // Current time is after 12 PM
+                    Text("There are no slots avaliable for today. Book another day")
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(.red)
+                        .padding()
+                }
                 
                 Button(action: {
                     isLoading = true
@@ -140,9 +152,7 @@ struct MedicalTestsBookingView: View {
             .onAppear {
                 // Select today's date index when the view appears
                 selectedDayIndex = daysInCurrentWeek().firstIndex(of: currentDayString())
-                fetchSlotColors()
-                self.shouldReloadScrollView.toggle()
-                
+               
             }
             .onChange(of: selectedDayIndex) { _ in
                 selectedTimeSlot = ""
@@ -151,10 +161,6 @@ struct MedicalTestsBookingView: View {
         }
     }
     
-    
-
-
-
     // Function to get the current day string (e.g., "Mon")
     func currentDayString() -> String {
         let dateFormatter = DateFormatter()
@@ -162,21 +168,16 @@ struct MedicalTestsBookingView: View {
         return dateFormatter.string(from: Date())
     }
     
-    func fetchSlotColors() {
-            // Reset slotColors array
-            slotColors = Array(repeating: nil, count: presentTimeSlots.count)
-            
-            for (index, timeSlot) in presentTimeSlots.enumerated() {
-                FirebaseHelperFunctions().fetchSlotColorForDateAndTimeSlot(date: selectedDateString, timeSlot: timeSlot, medicalTest: speciality) { count in
-                    // Determine color based on count (or any other condition)
-                    let color: Color = count > 0 ? .accentColor : .gray.opacity(0.4)
-                    // Update slotColors array
-                    slotColors[index] = color
-                }
-            }
+    func isAfterNoon() -> Bool {
+        if selectedDayIndex == 0 {
+            let calendar = Calendar.current
+            let now = Date()
+            let hour = calendar.component(.hour, from: now)
+            return hour >= 12
         }
+        return false
+    }
     
-
     // Function to get the selected date based on the selectedDayIndex
     func selectedDate() -> String {
         
@@ -221,6 +222,7 @@ struct MedicalTestsBookingView: View {
         return days
     }
     
+    //function to get the timeslots
     func timeSlots() -> [String] {
             var timeSlots: [String] = []
             var currentTime = startTime
@@ -241,9 +243,32 @@ struct MedicalTestsBookingView: View {
         }
         return false
     }
+    
+    private func disabled(selectedDayIndex: Int, selectedTimeSlotIndex: Int) -> Bool {
+        guard let futureDate = Calendar.current.date(byAdding: .day, value: selectedDayIndex, to: Date()) else {
+            return false
+        }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd_MM_yyyy"
+        let formattedFutureDate = dateFormatter.string(from: futureDate)
+
+        let currentTimeSlot = presentTimeSlots[selectedTimeSlotIndex]
+        return Date() > getDateLiteral(date: formattedFutureDate, time: currentTimeSlot)
+    }
+    
+    func getDateinString() -> String{
+        let calendar = Calendar.current
+        let futureDate = calendar.date(byAdding: .day, value: selectedDayIndex ?? 0, to: Date())!
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        
+        return dateFormatter.string(from: futureDate)
+    }
 }
 
 #Preview {
     MedicalTestsBookingView(patientUID: "", speciality:
-                                "Cardiology", icon: "Ent-icon")
+                                "Cardiology", icon: "ENT-icon")
 }

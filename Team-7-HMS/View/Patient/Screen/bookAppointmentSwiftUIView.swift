@@ -18,7 +18,7 @@ struct bookAppointmentSwiftUIView: View {
     //buttons by speciality
     let buttons: [ButtonData] = [
         ButtonData(image: "Doctor-icon", title: "General Physician"),
-        ButtonData(image: "gynaecology-icon", title: "Obstetrics & Gynaecology"),
+        ButtonData(image: "Obstetrics & Gynaecology-icon", title: "Obstetrics & Gynaecology"),
         ButtonData(image: "Orthopaedics-icon", title: "Orthopaedics"),
         ButtonData(image: "ENT-icon", title: "ENT"),
         ButtonData(image: "Urology-icon", title: "Urology"),
@@ -70,23 +70,28 @@ struct bookAppointmentSwiftUIView: View {
                     
                    
                     .padding(.vertical)
-                    HStack{
-                        NavigationLink {
-                            SymptomsRecommendationView()
-                                .navigationBarBackButtonHidden()
-                        } label: {
-                            HStack{
-                                Text("Click here to analyse for symptoms!")
-                                Image(systemName: "chevron.right")
-                                    .bold()
+                    
+                    VStack{
+                       
+                        HStack{
+                            NavigationLink {
+                                SymptomsRecommendationView()
+                                    .navigationBarBackButtonHidden()
+                            } label: {
+                                HStack{
+                                    Text("Click here to analyse for symptoms!")
+                                    Image(systemName: "chevron.right")
+                                        .bold()
+                                }
+                                .foregroundStyle(.white)
+                                .padding()
+                                .background(.accent)
+                                .cornerRadius(15)
                             }
-                            .foregroundStyle(.white)
-                            .padding()
-                            .background(.accent)
-                            .cornerRadius(15)
+                            
                         }
-                        
                     }
+                    .offset(y:25)
                     
                 }
             }

@@ -13,7 +13,7 @@ struct LeaveApplicationDetail: View {
                                             leavesAvailable: 20,
                                             totalLeavesTaken: 5,
                                             subject: "Sick Leave",
-                                            description: "Feeling unwell",
+                                            description: "Feeling unwell and having a lot of pain the head and throat",
                                             fromDate: Date(),
                                             toDate: Date())
     
@@ -114,6 +114,7 @@ struct LeaveApplicationDetail: View {
                             
                             Text("Subject:")
                                 .padding(.leading)
+                                .fontWeight(.semibold)
                             Text("\(leaveApplication.subject)")
                             Spacer()
             
@@ -121,18 +122,38 @@ struct LeaveApplicationDetail: View {
                         .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.gray.opacity(0.1)).frame(height: 50))
                     }
                     Spacer()
-                    VStack(){
-                        HStack(){
+                    VStack() {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .frame(height: 200)//Change the size here for change the backfround size of desxription
+                                .foregroundColor(Color.gray.opacity(0.1))
+                                .lineLimit(8)
                             
-                            Text("Description:")
-                                .padding(.leading)
-                            Text("\(leaveApplication.description)")
-                            Spacer()
-            
+                            VStack() {
+                                HStack{
+                                    Text("Description:")
+                                        .fontWeight(.semibold)
+                                    Spacer()
+                                }
+                                HStack {
+                                    Text("\(leaveApplication.description)")
+                                    Spacer()
+                                }
+                                Spacer()
+                            }
+                            .padding()
                         }
-                        .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.gray.opacity(0.1)).frame(height: 50))
                     }
-                    Spacer()
+//                    VStack(){
+//                        HStack(alignment:.top){
+//                            
+//                            Text("Description:")
+//                                .padding(.leading)
+//                            Spacer()
+//            
+//                        }
+//                        .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.gray.opacity(0.1)).frame(height: 50))
+//                    }
                     
                     Button(action: {}, label: {
                         Text("Confirm")
@@ -143,20 +164,18 @@ struct LeaveApplicationDetail: View {
                             .clipShape(RoundedRectangle(cornerRadius: 15))
                         
                     })
+                    .padding(.leading)
                     
                     Button(action: {}, label: {
                         Text("Reject")
                             .frame(width: 300)
                             .padding()
                             .foregroundStyle(Color.white)
-                            .background(Color.myAccent)
+                            .background(Color.red.opacity(0.8))
                             .clipShape(RoundedRectangle(cornerRadius: 15))
                         
                     })
-//                    Text("Subject: \(leaveApplication.subject)")
-//                    Text("Description: \(leaveApplication.description)")
-//                    Text("Leave From Date: \(formattedDate(leaveApplication.fromDate))")
-//                    Text("Leave To Date: \(formattedDate(leaveApplication.toDate))")
+                    .padding(.leading)
                 }
                 .padding()
                 .navigationTitle("Leave Approval")
