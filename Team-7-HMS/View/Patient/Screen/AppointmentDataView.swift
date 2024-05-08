@@ -108,7 +108,7 @@ struct AppointmentDataView: View {
                             .frame(width: 300)
                             .padding()
                             .foregroundStyle(Color.white)
-                            .background(Color.green)
+                            .background(Color.myAccent)
                             .clipShape(RoundedRectangle(cornerRadius: 15))
                         
                     })
@@ -127,7 +127,7 @@ struct AppointmentDataView: View {
                                     .frame(width: 300)
                                     .padding()
                                     .foregroundStyle(Color.white)
-                                    .background(Color.red)
+                                    .background(Color.red.opacity(0.8))
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
                                 
                             }
@@ -136,7 +136,7 @@ struct AppointmentDataView: View {
                                     .frame(width: 300)
                                     .padding()
                                     .foregroundStyle(Color.white)
-                                    .background(.myAccent)
+                                    .background(.red.opacity(0.8))
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
                             }
                         }
