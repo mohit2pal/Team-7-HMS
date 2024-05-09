@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MedicalTestsBookingView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var patientUID : String
     @EnvironmentObject var appState : AppState
     @State var speciality: String
@@ -16,6 +18,8 @@ struct MedicalTestsBookingView: View {
     @State private var shouldReloadScrollView = false
     @State private var isLoading : Bool = false
     @State private var booked : Bool = false
+    
+    @State private var showSuccessAnimation: Bool = false
     
     let startTime = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date())!
        let endTime = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!
@@ -115,6 +119,10 @@ struct MedicalTestsBookingView: View {
                         isLoading = false
                         booked = true
                     }
+                    self.showSuccessAnimation = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // 2 seconds delay
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
                   
                 }, label: {
                     if isLoading {
@@ -149,6 +157,10 @@ struct MedicalTestsBookingView: View {
             .padding()
             .background(Color.background)
             .navigationBarTitle("Book Medical Test", displayMode: .inline)
+            .fullScreenCover(isPresented: $showSuccessAnimation) {
+                // FullScreenCover for success animation
+                SuccessAnimationView()
+            }
             .onAppear {
                 // Select today's date index when the view appears
                 selectedDayIndex = daysInCurrentWeek().firstIndex(of: currentDayString())

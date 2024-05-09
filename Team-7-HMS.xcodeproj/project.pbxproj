@@ -456,7 +456,6 @@
 				3763784E2BD7D15900CB6198 /* PatientHistory.swift */,
 				369ADAF12BDE85200062CFDD /* navt.swift */,
 				B1639D142BD8E2AD00EAB15E /* patientAppointmentCard.swift */,
-				133E2A662BEB8F6000F11EB2 /* PaymentPageView.swift */,
 				174C2D062BD629D200945401 /* LoginScreen.swift */,
 				095E99AB2BE0E4E300BF9CAE /* ViewPrescription.swift */,
 				367FFA602BE38289007A995D /* AppointmentDataView.swift */,
@@ -476,6 +475,7 @@
 				17F63AF12BD799660089511F /* Components */,
 				17F63AF22BD799830089511F /* Screen */,
 				17F7C6682BDE42C600720B5E /* PatientView.swift */,
+				133E2A662BEB8F6000F11EB2 /* PaymentPageView.swift */,
 			);
 			path = Patient;
 			sourceTree = "<group>";
