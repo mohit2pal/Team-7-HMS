@@ -128,7 +128,7 @@ struct DoctorHomeSwiftUI: View {
                                     .frame(width: 50 , height : 50)
                                     .padding()
                                     .background(selectedDate == date ? Color.myAccent : Color.white)
-                                    .clipShape(RoundedRectangle(cornerRadius: 50))
+                                    .clipShape(RoundedRectangle(cornerRadius: 30))
                                     
                                     .customShadow()
                             }

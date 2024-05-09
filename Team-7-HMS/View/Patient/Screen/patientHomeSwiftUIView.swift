@@ -69,7 +69,7 @@ struct patientHomeSwiftUIView: View {
             //vitals
             HStack{
                 Text("Vitals")
-                    .font(.title2)
+                    .font(.title3)
                 Spacer()
             }
             
@@ -171,7 +171,7 @@ struct patientHomeSwiftUIView: View {
             //apointments upcoming
             HStack{
                 Text("Upcoming appointments")
-                    .font(CentFont.mediumReg)
+                    .font(.title3)
                 Spacer()
             }
             
@@ -183,7 +183,17 @@ struct patientHomeSwiftUIView: View {
                             .foregroundStyle(Color.gray)
                     }
                     else{
-                        ForEach(appointments) { appointment in patientAppointmentCard(appointmentData: appointment)
+                        let upcomingAppointments = appointments.filter { $0.status == "Upcoming" }
+                        
+                        if upcomingAppointments.isEmpty {
+                            Text("There are no appointments scheduled")
+                                .foregroundStyle(Color.gray)
+                        } else {
+                            ForEach(appointments) { appointment in
+                                if appointment.status == "Upcoming" {
+                                    patientAppointmentCard(appointmentData: appointment)
+                                }
+                            }
                         }
                     }
                 }
@@ -196,7 +206,7 @@ struct patientHomeSwiftUIView: View {
         })
         .onAppear {
             print("this is my patientUID : \(patientUID)")
-            FirebaseHelperFunctions().getAppointments(patientUID: patientUID) { appointments, error in
+            FirebaseHelperFunctions.getAppointments(patientUID: patientUID) { appointments, error in
                      if let error = error {
                          print("Error retrieving appointments:", error)
                          // Handle error if needed

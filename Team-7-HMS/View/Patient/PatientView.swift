@@ -32,6 +32,11 @@ struct PatientView: View {
                 .tabItem {
                     Label("Medical Tests" , systemImage:  "doc.fill")
                 }
+                
+                PatientAppointmentView()
+                    .tabItem {
+                        Label("Appointments", systemImage: "calendar")
+                    }
             }
             .sheet(isPresented: $showPatientHistory, content: {
                 PatientHistory(isPresented: $showPatientHistory, uid: patientUid)

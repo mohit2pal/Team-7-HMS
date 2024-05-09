@@ -14,6 +14,7 @@
 		096DA7CB2BDA0AF800241449 /* BookAppointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DA7CA2BDA0AF800241449 /* BookAppointment.swift */; };
 		096DA7CD2BDA457800241449 /* BookLab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DA7CC2BDA457800241449 /* BookLab.swift */; };
 		133642742BDF77B000926989 /* LabReportUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133642732BDF77B000926989 /* LabReportUploadView.swift */; };
+		133E2A672BEB8F6000F11EB2 /* PaymentPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133E2A662BEB8F6000F11EB2 /* PaymentPageView.swift */; };
 		13D816D12BD901EE00D36A9C /* OnBoardingDoctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D816D02BD901ED00D36A9C /* OnBoardingDoctor.swift */; };
 		13D97B222BEA456A00A59B6B /* doctorLeaveApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D97B212BEA456A00A59B6B /* doctorLeaveApplication.swift */; };
 		13EF0E372BD7A4A80015FDDA /* OnBoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF0E362BD7A4A80015FDDA /* OnBoardingScreen.swift */; };
@@ -21,6 +22,10 @@
 		171925562BE0DC8B0012E54D /* DoctorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171925552BE0DC8B0012E54D /* DoctorView.swift */; };
 		171FE8D42BEB36620016167E /* PrescriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FE8D32BEB36620016167E /* PrescriptionModel.swift */; };
 		171FE8D62BEB36810016167E /* MedicineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FE8D52BEB36810016167E /* MedicineModel.swift */; };
+		171FE8D82BEB41600016167E /* PatientAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FE8D72BEB41600016167E /* PatientAppointmentView.swift */; };
+		171FE8DA2BEB576D0016167E /* PatientAppointmentViewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FE8D92BEB576D0016167E /* PatientAppointmentViewCard.swift */; };
+		171FE8DC2BEB851C0016167E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171FE8DB2BEB851C0016167E /* LaunchScreen.storyboard */; };
+		171FE8DE2BEB88B50016167E /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171FE8DD2BEB88B50016167E /* AppViewModel.swift */; };
 		174C2D072BD629D300945401 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174C2D062BD629D200945401 /* LoginScreen.swift */; };
 		175AD9D22BE3973B006E3347 /* Some-Saves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175AD9D12BE3973B006E3347 /* Some-Saves.swift */; };
 		175AD9D62BE3B7B0006E3347 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175AD9D52BE3B7B0006E3347 /* NetworkMonitor.swift */; };
@@ -164,6 +169,7 @@
 		096DA7CA2BDA0AF800241449 /* BookAppointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAppointment.swift; sourceTree = "<group>"; };
 		096DA7CC2BDA457800241449 /* BookLab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookLab.swift; sourceTree = "<group>"; };
 		133642732BDF77B000926989 /* LabReportUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabReportUploadView.swift; sourceTree = "<group>"; };
+		133E2A662BEB8F6000F11EB2 /* PaymentPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPageView.swift; sourceTree = "<group>"; };
 		13D816D02BD901ED00D36A9C /* OnBoardingDoctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingDoctor.swift; sourceTree = "<group>"; };
 		13D97B212BEA456A00A59B6B /* doctorLeaveApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = doctorLeaveApplication.swift; sourceTree = "<group>"; };
 		13EF0E362BD7A4A80015FDDA /* OnBoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScreen.swift; sourceTree = "<group>"; };
@@ -171,6 +177,10 @@
 		171925552BE0DC8B0012E54D /* DoctorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorView.swift; sourceTree = "<group>"; };
 		171FE8D32BEB36620016167E /* PrescriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrescriptionModel.swift; sourceTree = "<group>"; };
 		171FE8D52BEB36810016167E /* MedicineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicineModel.swift; sourceTree = "<group>"; };
+		171FE8D72BEB41600016167E /* PatientAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAppointmentView.swift; sourceTree = "<group>"; };
+		171FE8D92BEB576D0016167E /* PatientAppointmentViewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAppointmentViewCard.swift; sourceTree = "<group>"; };
+		171FE8DB2BEB851C0016167E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		171FE8DD2BEB88B50016167E /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		174C2D062BD629D200945401 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		175AD9D12BE3973B006E3347 /* Some-Saves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Some-Saves.swift"; sourceTree = "<group>"; };
 		175AD9D52BE3B7B0006E3347 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
@@ -365,6 +375,8 @@
 				17F63AEB2BD63E380089511F /* Helper */,
 				17F63AB92BD6340D0089511F /* GoogleService-Info.plist */,
 				17F63AEE2BD640570089511F /* Info.plist */,
+				17F63B2B2BDA1AFB0089511F /* SplashScreen.swift */,
+				171FE8DB2BEB851C0016167E /* LaunchScreen.storyboard */,
 				176900272BD2A94700F5F81E /* Assets.xcassets */,
 				17F7C66D2BDE887800720B5E /* Redundant */,
 				176900292BD2A94700F5F81E /* Preview Content */,
@@ -431,12 +443,14 @@
 				17F7C66A2BDE528300720B5E /* BookingView.swift */,
 				B1639D122BD8DA8200EAB15E /* SosCallSwiftUIView.swift */,
 				13EF0E362BD7A4A80015FDDA /* OnBoardingScreen.swift */,
-				17F63B2B2BDA1AFB0089511F /* SplashScreen.swift */,
 				13FA586A2BD7BDCC00AC8CA4 /* SignUpScreen.swift */,
+				171FE8D72BEB41600016167E /* PatientAppointmentView.swift */,
+				171FE8D92BEB576D0016167E /* PatientAppointmentViewCard.swift */,
 				17F63AEF2BD671080089511F /* +View.swift */,
 				3763784E2BD7D15900CB6198 /* PatientHistory.swift */,
 				369ADAF12BDE85200062CFDD /* navt.swift */,
 				B1639D142BD8E2AD00EAB15E /* patientAppointmentCard.swift */,
+				133E2A662BEB8F6000F11EB2 /* PaymentPageView.swift */,
 				174C2D062BD629D200945401 /* LoginScreen.swift */,
 				095E99AB2BE0E4E300BF9CAE /* ViewPrescription.swift */,
 				367FFA602BE38289007A995D /* AppointmentDataView.swift */,
@@ -491,6 +505,7 @@
 			children = (
 				17F63AFB2BD7A24D0089511F /* Doctor */,
 				360295FE2BD7DB92001C1397 /* medicalConditions.swift */,
+				171FE8DD2BEB88B50016167E /* AppViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -792,6 +807,7 @@
 				1769002B2BD2A94700F5F81E /* Preview Assets.xcassets in Resources */,
 				176900282BD2A94700F5F81E /* Assets.xcassets in Resources */,
 				36F93E542BE927C700AC1EE8 /* GenerativeAI-Info.plist in Resources */,
+				171FE8DC2BEB851C0016167E /* LaunchScreen.storyboard in Resources */,
 				17F63ABA2BD6340D0089511F /* GoogleService-Info.plist in Resources */,
 				36F93E972BEA18EB00AC1EE8 /* loadingScreen.gif in Resources */,
 			);
@@ -829,6 +845,7 @@
 				B1639D172BD8E31300EAB15E /* appointmentCardDataM.swift in Sources */,
 				37D86AB12BE362A90064DCE4 /* AdminDashboard.swift in Sources */,
 				3621E0A42BDF700400F22807 /* PatientDetails.swift in Sources */,
+				171FE8DE2BEB88B50016167E /* AppViewModel.swift in Sources */,
 				369ADAF22BDE85200062CFDD /* navt.swift in Sources */,
 				36F93E4E2BE9273A00AC1EE8 /* SymptomsRecommendationView.swift in Sources */,
 				B1639D0F2BD8DA6500EAB15E /* bookAppointmentSwiftUIView.swift in Sources */,
@@ -863,6 +880,8 @@
 				17F7C66F2BDEC37A00720B5E /* AdminHomeView.swift in Sources */,
 				17B32FD52BE8D62600ADAB3B /* OldAppointment.swift in Sources */,
 				17B32FCF2BE896D100ADAB3B /* MedicalRecordView.swift in Sources */,
+				133E2A672BEB8F6000F11EB2 /* PaymentPageView.swift in Sources */,
+				171FE8DA2BEB576D0016167E /* PatientAppointmentViewCard.swift in Sources */,
 				17F7C6672BDE177C00720B5E /* EmailFunctions.swift in Sources */,
 				B1639D0D2BD8DA4C00EAB15E /* patientNotificationSwiftUIView.swift in Sources */,
 				13D97B222BEA456A00A59B6B /* doctorLeaveApplication.swift in Sources */,
@@ -903,6 +922,7 @@
 				096DA7CD2BDA457800241449 /* BookLab.swift in Sources */,
 				095E99AC2BE0E4E300BF9CAE /* ViewPrescription.swift in Sources */,
 				13D816D12BD901EE00D36A9C /* OnBoardingDoctor.swift in Sources */,
+				171FE8D82BEB41600016167E /* PatientAppointmentView.swift in Sources */,
 				364631FB2BDA1E6600DD53CC /* HealthKitAppIntegration.swift in Sources */,
 				17B32FC92BE88AF000ADAB3B /* AppointmentDataModel.swift in Sources */,
 				37D3A14B2BDA492000C04F35 /* DoctorHomeSwiftUI.swift in Sources */,
@@ -1076,10 +1096,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Team-7-HMS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Your Care";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "I want to share the health details of the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1108,10 +1131,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Team-7-HMS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Your Care";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "I want to share the health details of the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

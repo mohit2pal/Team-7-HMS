@@ -77,7 +77,9 @@ struct CompletedMedicalTestsView: View {
                         }
                         else {
                             Text("There are no completed Medical Documents")
-                                .frame(width: 360)
+                                .multilineTextAlignment(.center)
+                                .padding()
+                                .foregroundColor(.gray)
                         }
                     }
                 }

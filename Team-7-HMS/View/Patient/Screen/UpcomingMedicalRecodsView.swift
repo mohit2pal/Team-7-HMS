@@ -102,9 +102,11 @@ struct UpcomingMedicalRecodsView: View {
                                     }
                                     HStack{
                                         Image(systemName: "calendar")
+                                            .foregroundColor(.myAccent)
                                         Text(medicalTests[index].date.replacingOccurrences(of: "_", with: "-"))
                                         Spacer()
                                         Image(systemName: "clock")
+                                            .foregroundColor(.myAccent)
                                         Text(medicalTests[index].time)
                                     }
                                     
@@ -127,6 +129,7 @@ struct UpcomingMedicalRecodsView: View {
                         }
                         else {
                             Text("There are no upcoming Medical Tests.")
+                                .foregroundStyle(.gray)
                                 .padding()
                         }
                     }

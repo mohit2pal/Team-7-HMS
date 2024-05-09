@@ -451,6 +451,7 @@ class FirebaseHelperFunctions {
             let dateString = documentData["date"] as? String ?? ""
             let slotTime = documentData["slotTime"] as? String ?? ""
             let issues = documentData["issues"] as? [String] ?? []
+            let status = documentData["status"] as? String ?? ""
             
             // Fetch doctor details
             let doctorInfoRef = db.collection("doctor_details").document(doctorID)
@@ -470,7 +471,7 @@ class FirebaseHelperFunctions {
                 }
                 
                 // Create an instance of AppointmentData with the extracted data
-                let appointmentData = AppointmentData(appointmentID: appointmentUID, doctorName: doctorName, doctorSpeciality: doctorSpeciality, date: dateString.replacingOccurrences(of: "_", with: "-"), time: slotTime, issues: issues)
+                let appointmentData = AppointmentData(appointmentID: appointmentUID, doctorName: doctorName, doctorSpeciality: doctorSpeciality, date: dateString.replacingOccurrences(of: "_", with: "-"), time: slotTime, issues: issues, status: status)
                 
                 // Call the completion handler with the appointment data
                 completion(appointmentData, nil)
@@ -480,14 +481,14 @@ class FirebaseHelperFunctions {
     
     
     // retrieving the slot data from patient end
-    func getAppointments(patientUID: String, completion: @escaping ([AppointmentCardData]?, Error?) -> Void) {
+    static func getAppointments(patientUID: String, completion: @escaping ([AppointmentCardData]?, Error?) -> Void) {
         let db = Firestore.firestore()
         
         let appointmentDocRef = db.collection("appointments")
         
         let query = appointmentDocRef.whereField("patientID", isEqualTo: patientUID)
         
-        query.getDocuments { [self] (querySnapshot, error) in
+        query.getDocuments {(querySnapshot, error) in
             if let error = error {
                 completion(nil, error)
                 return
@@ -500,6 +501,7 @@ class FirebaseHelperFunctions {
                 let dateString = document["date"] as? String ?? ""
                 let appointmentID = document.documentID
                 let timeSlot = document["slotTime"] as? String ?? ""
+                let status = document["status"] as? String ?? "Unknown"
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy hh:mm a"
@@ -510,7 +512,7 @@ class FirebaseHelperFunctions {
                 
                 
                 let day = FirebaseHelperFunctions.getDayOfWeekFromDate(dateString: dateString)
-                let date = String(dateString.prefix(2))
+                let date = String(dateString)
                 let doctorInfoRef = db.collection("doctor_details").document(doctorUID)
                 
                 doctorInfoRef.getDocument { (doctorSnapshot, doctorError) in
@@ -522,7 +524,7 @@ class FirebaseHelperFunctions {
                     if let doctorData = doctorSnapshot?.data(),
                        let doctorName = doctorData["name"] as? String,
                        let doctorSpeciality = doctorData["specialty"] as? String  {
-                        let appointmentData = AppointmentCardData(date: date, day: day ?? "", time: document["slotTime"] as! String, doctorName: doctorName, doctorSpeciality: doctorSpeciality, appointmentID: appointmentID, dateString: dateFormated!)
+                        let appointmentData = AppointmentCardData(date: date, day: day ?? "", time: document["slotTime"] as! String, doctorName: doctorName, doctorSpeciality: doctorSpeciality, appointmentID: appointmentID, dateString: dateFormated!, status: status)
                         
                         appointments.append(appointmentData)
                     }
