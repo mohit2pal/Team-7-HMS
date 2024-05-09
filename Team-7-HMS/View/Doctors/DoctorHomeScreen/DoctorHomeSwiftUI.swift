@@ -18,6 +18,28 @@ struct DoctorHomeSwiftUI: View {
     @State var selectedDate: String? = nil
     let appointmentType = ["Upcoming", "completed"]
     
+    var dateDict : [String : String] {
+            let dateFormatterInput = DateFormatter()
+            dateFormatterInput.dateFormat = "dd\nEE"
+            
+            let dateFormatterOutput = DateFormatter()
+            dateFormatterOutput.dateFormat = "dd_MM_yyyy"
+            
+            var dateDictionary = [String: String]()
+            let today = Date()
+            let calendar = Calendar.current
+            
+            for i in 0..<7 {
+                if let nextDate = calendar.date(byAdding: .day, value: i, to: today) {
+                    let inputDateString = dateFormatterInput.string(from: nextDate)
+                    let outputDateString = dateFormatterOutput.string(from: nextDate)
+                    dateDictionary[inputDateString] = outputDateString
+                }
+            }
+            return dateDictionary
+    }
+
+    
     @State var fetchedAppointments: [DoctorAppointmentCardData] = []
     
     // Separate arrays for upcoming and completed appointments
@@ -27,7 +49,7 @@ struct DoctorHomeSwiftUI: View {
             return filterAppointments(appointments: fetchedAppointments, date: selectedDate, status: "Upcoming")
         case 1:
             if let selectedDate = selectedDate {
-                return fetchedAppointments.filter { $0.date == selectedDate && $0.status == "completed" }
+                return fetchedAppointments.filter { $0.date == dateDict[selectedDate] && $0.status == "completed" }
             } else {
                 return fetchedAppointments.filter { $0.status == "completed" }
             }
@@ -38,7 +60,7 @@ struct DoctorHomeSwiftUI: View {
 
     func filterAppointments(appointments: [DoctorAppointmentCardData], date: String?, status: String) -> [DoctorAppointmentCardData] {
             if let selectedDate = date {
-                return appointments.filter { $0.date == selectedDate && $0.status == status }
+                return appointments.filter { $0.date == dateDict[selectedDate] && $0.status == status }
             } else {
                 return appointments.filter { $0.status == status }
             }
@@ -120,7 +142,9 @@ struct DoctorHomeSwiftUI: View {
                     HStack(alignment:.top, spacing: 10) {
                         ForEach(uniqueAppointmentDates, id: \.self) { date in
                             Button(action: {
+                                
                                 selectedDate = date
+                                
                             }) {
                                 Text(date)
                                     .font(.callout)
@@ -150,6 +174,30 @@ struct DoctorHomeSwiftUI: View {
                         
                         // Display appointments based on selected segment
             ScrollView {
+                if displayedAppointments.isEmpty {
+                    HStack{
+                        Spacer()
+                        
+                        if selectedDate == nil {
+                            Text("There are no appointments booked")
+                                .italic()
+                                .foregroundStyle(.gray)
+                                .multilineTextAlignment(.center)
+                        }
+                        
+                        if let d = selectedDate  ,let date = dateDict[d] as? String{
+                            Text("There are no appointments booked for \(date.replacingOccurrences(of: "_", with: "-"))")
+                                .italic()
+                                .foregroundStyle(.gray)
+                                .multilineTextAlignment(.center)
+                        }
+                        
+                            
+                        
+                        Spacer()
+                    }
+                   
+                }
                 ForEach(displayedAppointments) { appointment in
                     DoctorAppointmentCard(appointmentData: appointment)
                 }

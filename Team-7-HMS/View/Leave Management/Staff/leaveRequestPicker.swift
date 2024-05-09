@@ -25,8 +25,8 @@ struct leaveRequestPicker: View {
                     doctorLeaveApplication()
                         .navigationBarTitle("Leave Application", displayMode: .inline)
                 } else {
-                    slotChangeDoctor(doctor: doctor, doctorUid: doctorUid)
-                        .navigationBarTitle("Slot Change", displayMode: .inline)
+                  ViewLeaveApplications()
+                        .navigationBarTitle("Leave Histories", displayMode: .inline)
                 }
                 
             }

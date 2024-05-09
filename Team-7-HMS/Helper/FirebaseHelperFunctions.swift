@@ -1476,7 +1476,117 @@ class FirebaseHelperFunctions {
         }
     }
     
+    func leaveManagement(doctorID: String, fromDate: Date, toDate: Date, subject: String, description: String) {
+        let db = Firestore.firestore()
+        let leaveManagementRef = db.collection("leave_management").document(doctorID)
+        
+        // Check if there is existing data for the doctor
+        leaveManagementRef.getDocument { document, error in
+            if let error = error {
+                print("Error fetching leave management data: \(error)")
+                return
+            }
+            
+            if let document = document, document.exists {
+                // Existing data found, append new leave data to existing data
+                
+                // Get existing leave data
+                var existingLeaveData = document.data() as? [String: [String: Any]] ?? [:]
+                
+                // Append new leave data
+                existingLeaveData[getDateStringNow()] = [
+                    "fromDate": fromDate,
+                    "toDate": toDate,
+                    "subject": subject,
+                    "description": description,
+                    "status": "Pending"
+                ]
+                
+                // Set the updated leave data to Firestore
+                leaveManagementRef.setData(existingLeaveData) { error in
+                    if let error = error {
+                        print("Error updating leave management data: \(error)")
+                    } else {
+                        print("Leave management data updated successfully.")
+                    }
+                }
+            } else {
+                // No existing data found, create new leave data
+                
+                let leaveData: [String: [String: Any]] = [
+                    getDateStringNow(): [
+                        "id" : UUID(),
+                        "fromDate": fromDate,
+                        "toDate": toDate,
+                        "subject": subject,
+                        "description": description,
+                        "status": "Pending"
+                    ]
+                ]
+                
+                // Set the leave data to Firestore
+                leaveManagementRef.setData(leaveData) { error in
+                    if let error = error {
+                        print("Error adding leave management data: \(error)")
+                    } else {
+                        print("Leave management data added successfully.")
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchLeaveManagementData(docID: String, completion: @escaping ([LeaveManagementCard]?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        // Reference to the document in the "leave_management" collection
+        let leaveManagementDocumentRef = db.collection("leave_management").document(docID)
+        
+        // Fetch document from Firestore
+        leaveManagementDocumentRef.getDocument { document, error in
+            if let error = error {
+                // Error occurred while fetching data
+                completion(nil, error)
+                return
+            }
+            
+            // Check if the document exists and contains data
+            guard let document = document, document.exists else {
+                // Document doesn't exist or is empty
+                completion([], nil)
+                return
+            }
+            
+            // Extract data from the document
+            if let data = document.data() {
+                // Array to hold leave management cards
+                var leaveManagementCards: [LeaveManagementCard] = []
+                
+                // Parse data and create LeaveManagementCard instances
+                for (dateString, leaveData) in data {
+                    if let dataDict = leaveData as? [String: Any] , let status = dataDict["status"] as? String , let id = dataDict["id"] as? String {
+                        let LeaveInfo = LeaveManagementCard(id: id , status: status , appliedDate: dateString)
+                        leaveManagementCards.append(LeaveInfo)
+                    }
+                    else{
+                        print("error")
+                    }
+                 }
+                
+                // Completion with leave management cards array
+                completion(leaveManagementCards, nil)
+            } else {
+                // Data format is incorrect or missing
+                completion(nil, NSError(domain: "FetchError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid data format"]))
+            }
+        }
+    }
+
+
+
 }
+
+
 
 
 func getDateLiteral(date : String , time : String) -> Date {
@@ -1484,4 +1594,19 @@ func getDateLiteral(date : String , time : String) -> Date {
     dateFormatter.dateFormat = "dd-MM-yyyy hh:mm a"
     
     return dateFormatter.date(from: date.replacingOccurrences(of: "_", with: "-") + " " + time) ?? Date()
+}
+
+
+func getDateStringNow() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd-MM-yyyy"
+    
+    return dateFormatter.string(from:  Date())
+}
+
+func getDateLiteral(date : String) -> Date {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd-MM-yyyy "
+    
+    return dateFormatter.date(from: date.replacingOccurrences(of: "_", with: "-")) ?? Date()
 }
