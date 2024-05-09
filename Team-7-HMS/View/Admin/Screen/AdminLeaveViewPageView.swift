@@ -18,7 +18,7 @@ struct AdminLeaveViewPageView: View {
         NavigationView{
             ZStack{
                 Color.background.ignoresSafeArea()
-                ScrollView{
+          
                     VStack{
                         Picker("Status", selection: $selectedStatus) {
                             Text("Pending").tag("Pending")
@@ -37,7 +37,6 @@ struct AdminLeaveViewPageView: View {
                                 .navigationBarTitle("Previous Leave Management" , displayMode: .inline)
                         }
                     }
-                }
             }
         }
         
