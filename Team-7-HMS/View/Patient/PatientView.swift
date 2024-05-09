@@ -28,13 +28,11 @@ struct PatientView: View {
             HStack {
                 ForEach(0..<4, id: \.self) { index in
                     Button(action: {
-                        withAnimation(.easeInOut) {
                             selectedTab = index
                             bounce = true
                             DispatchQueue.main.asyncAfter(deadline: .now()) {
                                 bounce = false
                             }
-                        }
                     }) {
                         VStack {
                             Image(systemName: iconName(for: index))
