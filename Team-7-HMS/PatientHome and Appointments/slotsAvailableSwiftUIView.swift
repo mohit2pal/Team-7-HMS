@@ -25,6 +25,9 @@ struct slotsAvailableSwiftUIView: View {
     @State private var complaints: [String] = []
     @State private var newComplaint: String = ""
     
+    // State for showing PaymentDetailsView
+    @State private var showingPaymentDetails = false
+    
     var body: some View {
         
         VStack {
@@ -189,12 +192,13 @@ struct slotsAvailableSwiftUIView: View {
                             .transition(.scale)
                     } else {
                             //PATIENT
-                            Text("Book Selected Slot").font(.system(size: 20, weight: .regular))
-                            .foregroundColor(.white)
+                        Text("Book Selected Slot").font(.system(size: 20, weight: .regular))
+                            .foregroundColor(selectedSlot == nil ? .white.opacity(0.5) : .white) // Change text color opacity based on whether a slot is selected
                             .multilineTextAlignment(.center)
                     }
                 }
             }
+            .disabled(selectedSlot == nil)
             
             
         }
@@ -203,6 +207,18 @@ struct slotsAvailableSwiftUIView: View {
         .fullScreenCover(isPresented: $showSuccessAnimation) {
             // FullScreenCover for success animation
             SuccessAnimationView()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    showingPaymentDetails = true
+                }) {
+                    Image(systemName: "creditcard")
+                }
+            }
+        }
+        .sheet(isPresented: $showingPaymentDetails) {
+            PaymentPageView()
         }
         .onAppear {
             fetchDoctorsDetails(name: doctorName) { details, error in

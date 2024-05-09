@@ -103,13 +103,22 @@ struct addPrescription: View {
                                 isShowingProgressView = false // Hide progress view
                                 showPrescriptionSheet.toggle() // Toggle the sheet
                             }
+                            
                         }
                     }) {
-                        Text("Add Prescription")
-                            .frame(width: 300, height: 50)
-                            .foregroundStyle(Color.white)
-                            .background(Color.blue) // Assuming Color.myAccent is defined elsewhere, replace `Color.blue` with `Color.myAccent`
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                        if isShowingProgressView {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                    .frame(width: 300, height: 50)
+                                    .background(Color.blue) // Assuming Color.myAccent is defined elsewhere, replace Color.blue with Color.myAccent
+                                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                            } else {
+                                Text("Add Prescription")
+                                    .frame(width: 300, height: 50)
+                                    .foregroundStyle(Color.white)
+                                    .background(Color.blue) // Assuming Color.myAccent is defined elsewhere, replace Color.blue with Color.myAccent
+                                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                            }
                     }
                     .disabled(isShowingProgressView) // Optionally disable the button while the progress view is showing
                     
