@@ -14,7 +14,6 @@ struct AppointmentDataView: View {
     @State var isLoading : Bool  = false
     @State var deleted  :Bool = false
     @State var showAlert: Bool = false
-    @Environment(\.presentationMode) var presentationMode
     
     @State var showOldPrescriptionSheet: Bool = false
     @State var isDisabled: Bool = false // New state variable to control disabled state
@@ -233,7 +232,6 @@ struct AppointmentDataView: View {
             isLoading = false
             deleted = true
             isDisabled = true
-            presentationMode.wrappedValue.dismiss()
         }
     }
 }
