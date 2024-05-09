@@ -221,7 +221,7 @@ struct AddDoctorDetails: View {
                                         let emailTemplate = """
                                                 Dear Dr. \(name),
                                                 
-                                                We are delighted to welcome you to the UrHealth team! As part of your onboarding process, we're providing you with your account credentials.
+                                                We are delighted to welcome you to the Your Care team! As part of your onboarding process, we're providing you with your account credentials.
                                                 
                                                 Email: \(email)
                                                 Password: \(password)
@@ -235,7 +235,7 @@ struct AddDoctorDetails: View {
                                                 Best regards,
                                                 """
                                         
-                                        EmailFunction.sendEmail(subject: "Welcome To UrHealth", body: emailTemplate, to: email)
+                                        EmailFunction.sendEmail(subject: "Welcome To Your Care", body: emailTemplate, to: email)
                                         
                                     case .failure(let error):
                                         print("Error registering user: \(error.localizedDescription)")

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct AdminDashboard: View {
     let dashboardData: DashboardData = DashboardData(
@@ -19,7 +20,7 @@ struct AdminDashboard: View {
         dashboardData.staffInfo.nursesCount +
         dashboardData.staffInfo.sanitaryStaffCount
     }
-    
+    @State private var shouldNavigateToLogin = false
     var body: some View {
         NavigationView {
             HStack {
@@ -27,11 +28,19 @@ struct AdminDashboard: View {
                     LazyVStack(alignment: .leading) {
                         // Header
                         HStack(alignment: .top) {
-                            Image(systemName: "person.circle.fill")
-                                .resizable()
-                                .frame(width: 60, height: 60)
-                                .foregroundColor(.gray)
-                                .padding(.trailing)
+                            Button{
+                                signOut()
+                            } label: {
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .frame(width: 60, height: 60)
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing)
+                            }
+                            NavigationLink(destination: LoginScreen().navigationBarBackButtonHidden(true), isActive: $shouldNavigateToLogin) {
+                                EmptyView()
+                            }
+                            
                             VStack(alignment: .leading) {
                                 Text("Hello 👋")
                                     .font(CentFont.mediumReg)
@@ -251,7 +260,17 @@ struct AdminDashboard: View {
                 }
             }
         }
-}   }
+    }
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            self.shouldNavigateToLogin = true
+            print("User signed out successfully")
+        } catch let signOutError as NSError {
+            print("Error signing out: \(signOutError.localizedDescription)")
+        }
+    }
+}
 
 struct AdminDashboard_Previews: PreviewProvider {
     static var previews: some View {

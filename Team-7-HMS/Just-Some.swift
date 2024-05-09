@@ -1,103 +1,295 @@
+////
+////  slotsAvailableSwiftUIView.swift
+////  Team-7-HMS
+////
+////  Created by Vikashini G on 24/04/24.
+////
+//
 //import SwiftUI
-//import UIKit
 //
-//struct BlurView: UIViewRepresentable {
-//    var style: UIBlurEffect.Style
-//
-//    func makeUIView(context: Context) -> UIVisualEffectView {
-//        let view = UIVisualEffectView(effect: UIBlurEffect(style: style))
-//        return view
-//    }
-//
-//    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-//        uiView.effect = UIBlurEffect(style: style)
-//    }
-//}
-//
-//struct PatientView: View {
-//    @State private var selectedTab: Int = 0
-//    @State var patientName: String
-//    @State var showPatientHistory: Bool = false
-//    @State var patientUid: String
+//struct slotsAvailableSwiftUIVie: View {
+//    @Environment(\.presentationMode) var presentationMode
+//    
+//    @State private var isBooking = false
+//    @State private var bookingCompleted = false
+//    @State private var showSuccessAnimation: Bool = false
+//    
+//    var patientUID : String
+//    @State private var doctorDetails: [String: Any]? // Optional dictionary
+//    @State private var slotDetails : [String : Any]?
+//    @State private var selectedSlot: String?
+//    let doctorName: String
+//    let date : String
+//    @State var doctorId : String
+//    
+//    @State private var complaints: [String] = []
+//    @State private var newComplaint: String = ""
+//    
+//    // State for showing PaymentDetailsView
+//    @State private var showingPaymentDetails = false
 //    
 //    var body: some View {
-//        // Use a ZStack to overlay the tab bar on top of the content
-//        ZStack(alignment: .bottom) {
-//            // Main content view
-//            ScrollView {
-//                VStack(spacing: 0) {
-//                    switch selectedTab {
-//                    case 0:
-//                        patientHomeSwiftUIView(patientUID: patientUid, userName: patientName)
-//                    case 1:
-//                        BookingView(patientID: patientUid)
-//                    case 2:
-//                        PatientMedicalRecordView()
-//                    case 3:
-//                        PatientAppointmentView()
-//                    default:
-//                        Text("Selection does not exist")
-//                    }
-//                }
-//            }
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
-//            
-//            // Custom Tab Bar with transparent background and blur effect
-//            // Use a ZStack to apply the shadow to the BlurView
-//            ZStack {
-//                // Shadow layer
-//                Color.clear // Use a clear color for the shadow layer
-//                    .frame(height: 50) // Match the height of the tab bar
-//                    .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 2) // Apply the shadow here
-//                
-//                // BlurView layer
-//                HStack {
-//                    ForEach(0..<4, id: \.self) { index in
-//                        Button(action: {
-//                            withAnimation(.easeInOut) {
-//                                selectedTab = index
+//        
+//        VStack {
+//            ScrollView{
+//                if doctorDetails != nil && !doctorDetails!.isEmpty { // Check if doctorDetails is not nil and not empty
+//                    HStack(alignment: .top) {
+//                        VStack(alignment: .leading, spacing: 12){
+//                            Text(doctorName)
+//                                .font(CentFont.largeSemiBold)
+//                            Text(doctorDetails?["speciality"] as? String ?? "")
+//                                .font(.title2)
+//                            Text(doctorDetails?["education"] as? String ?? "")   .font(.subheadline)
+//                            HStack{
+//                                Text("\(doctorDetails?["experience"] as? Int ?? 0) years of Experience")
 //                            }
-//                        }) {
+//                            .font(.subheadline)
+//                        }
+//                        Spacer()
+//                        
+//                        Image(systemName: "person.circle.fill")
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(width: 80, height: 80)
+//                    }
+//                    .padding()
+//                    .padding(.vertical)
+//                    .foregroundStyle(.white)
+//                    .background(Color.myAccent)
+//                    .cornerRadius(28)
+//                    .customShadow()
+//                } else {
+//                    ProgressView()
+//                }
+//                
+//                VStack {
+//                    if let slotDetails = slotDetails as? [String: [[String: String]]] {
+//                        ForEach(slotDetails.sorted(by: { $0.key < $1.key }), id: \.key) { date, slots in
+//                            HStack{
+//                                Text("Selected date: ")
+//                                    .font(.headline)
+//                                Text(date.replacingOccurrences(of: "_", with: "-"))
+//                                    .foregroundStyle(Color.gray)
+//                                    .font(.headline)
+//                            }
+//                            .padding()
+//                            
 //                            VStack {
-//                                Image(systemName: iconName(for: index))
-//                                    .symbolRenderingMode(.palette)
-//                                    .foregroundStyle(index == selectedTab ? Color.blue : Color.gray, Color.gray.opacity(0.5))
-//                                    .scaleEffect(1.6)
-//                                    .padding(.vertical, index == selectedTab ? 5 : 0)
+//                                LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 10) {
+//                                    ForEach(slots, id: \.self) { slot in
+//                                        let time = slot.keys.first ?? ""
+//                                        Text(time)
+//                                            .onTapGesture {
+//                                                // Handle slot selection
+//                                                selectedSlot = time
+//                                                print(selectedSlot!)
+//                                                print(self.doctorId)
+//                                            }
+//                                            .frame(minWidth: 0, maxWidth: .infinity)
+//                                            .padding()
+//                                            .background(Date() > getDateLiteral(date: date, time: time) ? .gray :slotColor(slot))
+//                                            .cornerRadius(15)
+//                                            .foregroundStyle(Date() > getDateLiteral(date: date, time: time) ? .white : .black)
+//                                            .disabled( Date() > getDateLiteral(date: date, time: time))
+//                                            
+//                                    }
+//                                }
+//                            }
+//                        
+//                            VStack(alignment: .leading) {
+//                                Text("Symptoms")
+//                                    .font(.title2)
+//                                    .bold()
+//                                List{
+//                                    ForEach(complaints, id: \.self) { complaint in
+//                                        HStack {
+//                                            Text(complaint)
+//                                            Spacer()
+//                                            Button(action: {
+//                                                // Action to delete complaint
+//                                                if let index = complaints.firstIndex(of: complaint) {
+//                                                    complaints.remove(at: index)
+//                                                }
+//                                            }, label: {
+//                                                Image(systemName: "trash")
+//                                            })
+//                                        }
+//                                    }
+//                                    .onDelete(perform: deleteComplaints)
+//                                }
+//                                .listStyle(PlainListStyle())
+//                                .background(Color.background)
+//                                .frame(height: complaints.isEmpty ? 0 : CGFloat(complaints.count * 50))
+//                                HStack {
+//                                    TextField("Add Complaint", text: $newComplaint)
+//                                        .padding()
+//                                        .background(Color.white)
+//                                        .cornerRadius(10)
+//                                        .customShadow()
+//                                    Button(action: {
+//                                        // Action to add complaint
+//                                        complaints.append(newComplaint)
+//                                        newComplaint = ""
+//                                    }, label: {
+//                                        Image(systemName: "plus.circle")
+//                                            .foregroundColor(.blue)
+//                                            .font(.title3)
+//                                    })
+//                                }
 //                            }
 //                        }
-//                        .frame(maxWidth: .infinity)
+//                    } else {
+//                        Text("No slots available")
+//                            .foregroundStyle(Color.gray)
+//                            .padding()
 //                    }
 //                }
-//                .frame(height: 50) // Set a constant height for the tab bar
-//                .padding(.top, 10)
-//                .padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom)
-//                .background(BlurView(style: .systemMaterial)) // Apply the blur effect here
+//            }
+//            .scrollIndicators(.hidden)
+//            Spacer()
+//            
+//            Button {
+//                isBooking = true
+//                // Ensure a slot is selected before attempting to book
+//                guard let selectedSlot = selectedSlot else {
+//                    print("No slot selected")
+//                    return
+//                }
+//                
+//                // Call the bookSlot function
+//                FirebaseHelperFunctions.bookSlot(doctorUID: doctorId, date: date, slotTime: selectedSlot, patientUID: patientUID , issues: complaints) { result in
+//                    switch result {
+//                    case .success(let successMessage):
+//                        print(successMessage)
+//                        // Handle successful booking, e.g., show an alert or update the UI
+//                        
+//                    case .failure(let error):
+//                        print("Failed to book slot: \(error)")
+//                        // Handle failure, e.g., show an error message
+//                    }
+//                }
+//                self.showSuccessAnimation = true
+//                
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // 2 seconds delay
+//                    self.isBooking = false
+//                    self.bookingCompleted = true
+//                    presentationMode.wrappedValue.dismiss()
+//                }
+//            } label: {
+//                ZStack {
+//                    RoundedRectangle(cornerRadius: 20)
+//                        .fill(Color(#colorLiteral(red: 0.48627451062202454, green: 0.5882353186607361, blue: 1, alpha: 1)))
+//                        .frame(width: 300, height: 50)
+//                    
+//                    if isBooking {
+//                        ProgressView()
+//                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+//                            .scaleEffect(0.5)
+//                    } else if bookingCompleted {
+//                        Image(systemName: "checkmark.circle.fill")
+//                            .foregroundColor(.green)
+//                            .scaleEffect(1.5)
+//                            .transition(.scale)
+//                    } else {
+//                            //PATIENT
+//                        Text("Book Selected Slot").font(.system(size: 20, weight: .regular))
+//                            .foregroundColor(selectedSlot == nil ? .white.opacity(0.5) : .white) // Change text color opacity based on whether a slot is selected
+//                            .multilineTextAlignment(.center)
+//                    }
+//                }
+//            }
+//            .disabled(selectedSlot == nil)
+//            
+//            
+//        }
+//        .padding()
+//        .background(Color.background)
+//        .fullScreenCover(isPresented: $showSuccessAnimation) {
+//            // FullScreenCover for success animation
+//            SuccessAnimationView()
+//        }
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                Button(action: {
+//                    showingPaymentDetails = true
+//                }) {
+//                    Image(systemName: "creditcard")
+//                }
 //            }
 //        }
-//        .edgesIgnoringSafeArea(.bottom) // Ensures the tab bar extends into the safe area
-//        .sheet(isPresented: $showPatientHistory, content: {
-//            PatientHistory(isPresented: $showPatientHistory, uid: patientUid)
-//        })
+//        .sheet(isPresented: $showingPaymentDetails) {
+//            PaymentPageView()
+//        }
+//        .onAppear {
+//            fetchDoctorsDetails(name: doctorName) { details, error in
+//                if let error = error {
+//                    print("Error fetching doctor details: \(error)")
+//                } else {
+//                    self.doctorDetails = details
+//                }
+//                
+//                //fetching free slots for the doctor
+//                FirebaseHelperFunctions().fetchSlots(doctorID: doctorId, date: date) { slots, error in
+//                    if let error = error {
+//                        print("Error fetching slots: \(error)")
+//                    } else {
+//                        if let slots = slots {
+//                            // Slots are present, assign them to the state variable
+//                            self.slotDetails = slots
+//                            print(slotDetails ?? "")
+//                        } else {
+//                            // Slots are not present
+//                            print("No slots available for this doctor.")
+//                        }
+//                    }
+//                }
+//
+//            }
+//            
+//            
+//        }
 //    }
 //    
-//    func iconName(for index: Int) -> String {
-//        switch index {
-//        case 0: return "house.fill"
-//        case 1: return "plus"
-//        case 2: return "doc.fill"
-//        case 3: return "calendar"
-//        default: return ""
-//        }
+//    private func slotColor(_ slot: [String: String]) -> Color {
+//        let time = slot.keys.first ?? ""
+//        return time == selectedSlot ? .myAccent : .gray.opacity(0.2)
+//    }
+//    
+//    private func deleteComplaints(at offsets: IndexSet) {
+//        complaints.remove(atOffsets: offsets)
 //    }
 //}
 //
-//// Dummy views and preview for compilation
-//// Add your existing dummy views and preview code here
 //
-//// Preview struct
-//struct PatientView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PatientView(patientName: "Luigi", showPatientHistory: false, patientUid: "hi")
+//struct doctorInfoCard: View{
+//    var body: some View {
+//        HStack(alignment: .top){
+//            VStack(alignment: .leading, spacing: 18){
+//                Text("Dr. Harry Potter")
+//                    .font(CentFont.largeSemiBold)
+//                Text("General Physician")
+//                    .font(.title2)
+//                Text("(MBBS, Ph.D, Fellow, International College of Surgeons)")
+//                    .font(.subheadline)
+//                Text("15 years of Experience")
+//                    .font(.subheadline)
+//            }
+//            Spacer()
+//            Image(systemName: "person.circle.fill")
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 80, height: 80)
+//        }
+//        .padding()
+//        .padding(.vertical)
+//        .foregroundStyle(.white)
+//        .background(Color.myAccent)
+//        .cornerRadius(28)
+//        .customShadow()
 //    }
+//}
+//
+//#Preview {
+//    slotsAvailableSwiftUIView(patientUID: "", doctorName: "Nithin Reddy", date: "02_05_2024", doctorId: "xh3HrIsjjxdrXzRZouDgxqTdLn92")
+//
 //}
