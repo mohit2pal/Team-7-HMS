@@ -203,7 +203,7 @@ struct RescheduleAppointmentsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .onAppear{
                 FirebaseHelperFunctions().getAppointmentData(appointmentUID: appointmentId) { Appointment, error in
-                    if let drName = Appointment?.doctorName , let drSpeciality = Appointment?.doctorSpeciality , let d = Appointment?.date {
+                    if let drName = Appointment?.doctorName , let drSpeciality = Appointment?.doctorSpeciality{
                         doctorName = drName
                         doctorSpeciality = drSpeciality
                         deparmtentImage = drSpeciality+"-icon"
@@ -213,10 +213,9 @@ struct RescheduleAppointmentsView: View {
                         if let id = docID{
                             self.doctorID = id
                             
-                            FirebaseHelperFunctions().fetchSlots(doctorID: doctorID, date: date) { slots, error in
+                            FirebaseHelperFunctions().fetchSlots(doctorID: doctorID, date: returnToday().replacingOccurrences(of: "-", with: "_")) { slots, error in
                                 if let slots = slots {
                                     self.slotDetails = slots
-                                    print(slotDetails ?? "")
                                 } else {
                                     // Slots are not present
                                     print("No slots available for this doctor.")

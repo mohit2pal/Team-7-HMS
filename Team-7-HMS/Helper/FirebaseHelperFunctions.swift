@@ -1428,8 +1428,6 @@ class FirebaseHelperFunctions {
                         
                     }
                 }
-                
-                
                 if slotFound1 && slotFound2 {
                     // Update the slots data with the modified slots for the date
                     if newDate == prevDate {
@@ -1461,11 +1459,7 @@ class FirebaseHelperFunctions {
                 print("No slots available for the specified date. 1")
             }
         }
-        
-            
             // Check if there are slots for the specified date and modify the slot if found
-
-        
         let appointmentRef = db.collection("appointments").document(appointmentID)
         appointmentRef.updateData([
             "doctorID": doctorID,

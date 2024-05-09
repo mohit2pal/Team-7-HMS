@@ -14,6 +14,7 @@ struct AppointmentDataView: View {
     @State var isLoading : Bool  = false
     @State var deleted  :Bool = false
     @State var showAlert: Bool = false
+    @State var isLoading1 : Bool  = false
     @Environment(\.presentationMode) var presentationMode
     
     @State var showOldPrescriptionSheet: Bool = false
@@ -23,15 +24,19 @@ struct AppointmentDataView: View {
             ZStack{
                 Color.background.ignoresSafeArea()
                 VStack{
+                    if isLoading1{
+                        ProgressView()
+                    }
+                    else {
                     HStack{
                         Image(imageName)
-                            
+                        
                         
                             .resizable()
                             .frame(width: 60 , height: 60)
                             .padding(12)
                             .aspectRatio(contentMode: .fit)
-                            
+                        
                         
                             .clipShape(Circle())
                             .overlay(
@@ -52,7 +57,6 @@ struct AppointmentDataView: View {
                         
                         Spacer()
                     }
-                    
                     Divider()
                     
                     HStack{
@@ -68,6 +72,8 @@ struct AppointmentDataView: View {
                     }
                     .padding(.vertical)
                     
+                    }
+
                     Text("Please arrive 15 minutes before your appointment time for quick and efficient service.")
                         .font(.callout)
                         .foregroundColor(.gray)
@@ -109,8 +115,6 @@ struct AppointmentDataView: View {
                                 .padding(.bottom)
                         }
                     }
-                    
-                    
                     Spacer()
                     
                     if let status = data?.status {
@@ -193,7 +197,9 @@ struct AppointmentDataView: View {
                     ViewPrescription(showOldPrescriptionSheet: $showOldPrescriptionSheet, appointmentID: data?.appointmentID ?? "Null Value")
                 }
                 .onAppear{
+                    isLoading1 = true
                     FirebaseHelperFunctions().getAppointmentData(appointmentUID: appointmentID) { appData, error in
+                        
                         if let appointment = appData {
                             self.data = appointment
                             if let spec = data?.doctorSpeciality {
@@ -205,6 +211,7 @@ struct AppointmentDataView: View {
                                 }
                             }
                         }
+                        isLoading1 = false
                     }
                     
                     
