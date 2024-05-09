@@ -16,22 +16,19 @@ struct AppointmentDataView: View {
     @State var showAlert: Bool = false
     
     @State var showOldPrescriptionSheet: Bool = false
+    @State var isDisabled: Bool = false // New state variable to control disabled state
+    
     var body: some View {
-        
         NavigationStack{
             ZStack{
                 Color.background.ignoresSafeArea()
                 VStack{
                     HStack{
                         Image(imageName)
-                            
-                        
                             .resizable()
                             .frame(width: 60 , height: 60)
                             .padding(12)
                             .aspectRatio(contentMode: .fit)
-                            
-                        
                             .clipShape(Circle())
                             .overlay(
                                 Circle()
@@ -112,7 +109,7 @@ struct AppointmentDataView: View {
                     
                     Spacer()
                     
-                    if let status = data?.status {
+                    if let status = data?.status{
                         
                         if status == "completed" {
                             Button{
@@ -187,6 +184,7 @@ struct AppointmentDataView: View {
                     }
                 }
                 .padding(.horizontal , 25)
+                .disabled(isDisabled)
                 .sheet(isPresented: $showOldPrescriptionSheet) {
                     ViewPrescription(showOldPrescriptionSheet: $showOldPrescriptionSheet, appointmentID: data?.appointmentID ?? "Null Value")
                 }
@@ -204,8 +202,23 @@ struct AppointmentDataView: View {
                             }
                         }
                     }
-                    
-                    
+                }
+                
+                // Fullscreen gray overlay conditionally displayed based on isDisabled
+                if isDisabled {
+                    Color.black.opacity(0.8).ignoresSafeArea()
+                        .overlay(
+                            // VStack for the symbol and text
+                            VStack {
+                                Image(systemName: "checkmark.seal")
+                                    .font(.system(size: 52))
+                                    .foregroundColor(.white)
+                                Text("Your appointment is successfully canceled")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                                    .padding()
+                            }
+                        )
                 }
             }
         }
@@ -217,6 +230,7 @@ struct AppointmentDataView: View {
             print("deleted")
             isLoading = false
             deleted = true
+            isDisabled = true
         }
     }
 }

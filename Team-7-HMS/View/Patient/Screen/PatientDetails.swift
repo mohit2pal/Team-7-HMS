@@ -30,8 +30,7 @@ struct PatientDetails: View {
         NavigationStack{
             HStack{
                 Spacer()
-                Image(systemName: "person.circle")
-                    .resizable()
+                profile_pic()
                     .frame(width: 100 , height: 100
                     )
                 Spacer()
