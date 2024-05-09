@@ -103,6 +103,7 @@
 		3673E5D62BECA6D2001D3FBF /* ViewLeaveApplications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3673E5D52BECA6D2001D3FBF /* ViewLeaveApplications.swift */; };
 		3673E5D82BECCFDF001D3FBF /* AdminLeaveViewPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3673E5D72BECCFDF001D3FBF /* AdminLeaveViewPageView.swift */; };
 		3673E5DA2BECD137001D3FBF /* PendingLeaveRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3673E5D92BECD137001D3FBF /* PendingLeaveRequestsView.swift */; };
+		3673E5DC2BECF793001D3FBF /* CompletedLeaveRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3673E5DB2BECF793001D3FBF /* CompletedLeaveRequestsView.swift */; };
 		367FFA5F2BE34F5F007A995D /* PatientDetailsAppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367FFA5E2BE34F5F007A995D /* PatientDetailsAppointmentView.swift */; };
 		367FFA612BE38289007A995D /* AppointmentDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367FFA602BE38289007A995D /* AppointmentDataView.swift */; };
 		369ADAF02BDE1CB60062CFDD /* AddingSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369ADAEF2BDE1CB60062CFDD /* AddingSlots.swift */; };
@@ -242,6 +243,7 @@
 		3673E5D52BECA6D2001D3FBF /* ViewLeaveApplications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLeaveApplications.swift; sourceTree = "<group>"; };
 		3673E5D72BECCFDF001D3FBF /* AdminLeaveViewPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLeaveViewPageView.swift; sourceTree = "<group>"; };
 		3673E5D92BECD137001D3FBF /* PendingLeaveRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingLeaveRequestsView.swift; sourceTree = "<group>"; };
+		3673E5DB2BECF793001D3FBF /* CompletedLeaveRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedLeaveRequestsView.swift; sourceTree = "<group>"; };
 		367FFA5E2BE34F5F007A995D /* PatientDetailsAppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailsAppointmentView.swift; sourceTree = "<group>"; };
 		367FFA602BE38289007A995D /* AppointmentDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentDataView.swift; sourceTree = "<group>"; };
 		369ADAEF2BDE1CB60062CFDD /* AddingSlots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingSlots.swift; sourceTree = "<group>"; };
@@ -583,6 +585,7 @@
 				369ADAEF2BDE1CB60062CFDD /* AddingSlots.swift */,
 				3673E5D72BECCFDF001D3FBF /* AdminLeaveViewPageView.swift */,
 				3673E5D92BECD137001D3FBF /* PendingLeaveRequestsView.swift */,
+				3673E5DB2BECF793001D3FBF /* CompletedLeaveRequestsView.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -942,6 +945,7 @@
 				095E99AA2BDF711F00BF9CAE /* PickerView.swift in Sources */,
 				13EF0E372BD7A4A80015FDDA /* OnBoardingScreen.swift in Sources */,
 				37D86ACC2BEA32C50064DCE4 /* LeaveApplicationDetail.swift in Sources */,
+				3673E5DC2BECF793001D3FBF /* CompletedLeaveRequestsView.swift in Sources */,
 				17F63B272BDA127D0089511F /* AppState.swift in Sources */,
 				176900242BD2A94500F5F81E /* Team_7_HMSApp.swift in Sources */,
 				3763784F2BD7D15900CB6198 /* PatientHistory.swift in Sources */,

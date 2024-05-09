@@ -300,6 +300,20 @@ struct SuccessAnimationView: View {
     }
 }
 
+
+struct FailureAnimationView: View {
+    var body: some View {
+        ZStack {
+            Color.background.edgesIgnoringSafeArea(.all)
+            Image(systemName: "multiply.circle.fill") // Use a tick mark image or system symbol
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+                .foregroundColor(.red)
+        }
+    }
+}
+
 struct SearchBar: View {
     @Binding var text: String
     

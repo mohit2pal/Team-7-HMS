@@ -12,6 +12,9 @@ struct LeaveApplicationDetail: View {
     
     @State var leaveData : leaveManagementInfo
     @Environment(\.presentationMode) var presentationMode
+    @State private var showSuccessAnimation: Bool = false
+    @State private var failSuccessAnimation: Bool = false
+
     
     var body: some View {
         NavigationView {
@@ -143,6 +146,12 @@ struct LeaveApplicationDetail: View {
                     }
                     Button(action: {
                         FirebaseHelperFunctions().updateLeave(leaveID: leaveData.id, doctorID: leaveData.docID, status: "Approved")
+                         showSuccessAnimation = true
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            self.showSuccessAnimation = false
+                            presentationMode.wrappedValue.dismiss()
+                        }
                     }, label: {
                         Text("Confirm")
                             .frame(width: 300)
@@ -156,6 +165,14 @@ struct LeaveApplicationDetail: View {
                     
                     Button(action: {
                         FirebaseHelperFunctions().updateLeave(leaveID: leaveData.id, doctorID: leaveData.docID, status: "Rejected")
+                        
+                        failSuccessAnimation = true
+
+                       DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                           self.failSuccessAnimation = false
+                           presentationMode.wrappedValue.dismiss()
+                       }
+
 
                     }, label: {
                         Text("Reject")
@@ -169,6 +186,12 @@ struct LeaveApplicationDetail: View {
                     .padding(.leading)
                 }
                 .padding()
+                .fullScreenCover(isPresented: $showSuccessAnimation) {
+                    SuccessAnimationView()
+                }
+                .fullScreenCover(isPresented: $failSuccessAnimation) {
+                    FailureAnimationView()
+                }
                 .toolbar{
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: {

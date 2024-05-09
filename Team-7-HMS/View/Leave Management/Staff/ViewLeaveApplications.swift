@@ -50,7 +50,7 @@ struct ViewLeaveApplications: View {
                                             Text("Status of Approval :")
                                                 .bold()
                                             Text(LeaveData[index].status + " " )
-                                                .foregroundStyle(LeaveData[index].status == "Pending" ? .red : .green)
+                                                .foregroundStyle(LeaveData[index].status == "Pending" ? .red : LeaveData[index].status == "Rejected" ? .red : .green)
                                             if LeaveData[index].status == "Pending" {
                                                 ProgressView()
                                                     .progressViewStyle(CircularProgressViewStyle(tint: .red))

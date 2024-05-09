@@ -25,6 +25,8 @@ struct doctorLeaveApplication: View {
         totalLeaves - leavesTaken
     }
     
+    @State private var showSuccessAnimation: Bool = false
+    
     // Variable to store the minimum selectable date
     var minSelectableDate: Date {
         Calendar.current.date(byAdding: .day, value: 7, to: Date()) ?? Date()
@@ -164,6 +166,17 @@ struct doctorLeaveApplication: View {
                 Spacer()
                 Button(action: {
                     FirebaseHelperFunctions().leaveManagement(doctorID: docId, fromDate: fromDate, toDate: toDate, subject: subject, description: desc)
+                    
+                    self.showSuccessAnimation = true
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self.showSuccessAnimation = false
+                        fromDate = Date()
+                        toDate = Date()
+                        subject = ""
+                        desc  = ""
+                    }
+
                 }, label: {
                     Text("Submit")
                         .foregroundStyle(Color.white)
@@ -182,6 +195,10 @@ struct doctorLeaveApplication: View {
             .padding(.bottom , 50)
             
                     }
+        .fullScreenCover(isPresented: $showSuccessAnimation) {
+            SuccessAnimationView()
+        }
+        
         .onAppear{
             self.fromDate = Calendar.current.date(byAdding: .day, value: 7, to: fromDate) ?? Date()
             

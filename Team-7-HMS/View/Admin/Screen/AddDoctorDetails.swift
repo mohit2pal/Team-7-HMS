@@ -21,6 +21,7 @@ struct AddDoctorDetails: View {
     @State private var selectedMedicalIndex = 0
     @State private var phoneNumber : String = ""
     @State private var password : String = ""
+    @State private var showSuccessAnimation: Bool = false
     
     let genders = ["Male", "Female", "Other"]
     
@@ -202,6 +203,9 @@ struct AddDoctorDetails: View {
                     .background(Color.background)
                     .navigationTitle("Add Doctors")
                     .navigationBarTitleDisplayMode(.inline)
+                    .fullScreenCover(isPresented: $showSuccessAnimation) {
+                        SuccessAnimationView()
+                    }
                     .toolbar{
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
@@ -242,6 +246,15 @@ struct AddDoctorDetails: View {
                                     }
                                     
                                     navigatePage = true
+                                }
+                                self.showSuccessAnimation = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    self.showSuccessAnimation = false
+                                    self.name = ""
+                                    self.email = ""
+                                    self.phoneNumber = ""
+                                    self.experience  = 0
+                                    self.dateOfJoining = Date()
                                 }
                                 
                             }, label: {

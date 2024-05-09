@@ -33,7 +33,8 @@ struct AdminLeaveViewPageView: View {
                                 .navigationBarTitle("Leave Management" , displayMode: .automatic)
                             
                         } else {
-                            
+                            CompletedLeaveRequestsView()
+                                .navigationBarTitle("Previous Leave Management" , displayMode: .automatic)
                         }
                     }
                 }
