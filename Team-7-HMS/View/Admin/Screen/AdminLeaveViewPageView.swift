@@ -30,11 +30,11 @@ struct AdminLeaveViewPageView: View {
                         if selectedStatus == "Pending" {
                             PendingLeaveRequestsView()
                                 
-                                .navigationBarTitle("Leave Management" , displayMode: .automatic)
+                                .navigationBarTitle("Leave Management" , displayMode: .inline)
                             
                         } else {
                             CompletedLeaveRequestsView()
-                                .navigationBarTitle("Previous Leave Management" , displayMode: .automatic)
+                                .navigationBarTitle("Previous Leave Management" , displayMode: .inline)
                         }
                     }
                 }

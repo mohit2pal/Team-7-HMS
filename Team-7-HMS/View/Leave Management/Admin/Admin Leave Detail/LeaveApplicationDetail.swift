@@ -206,6 +206,7 @@ struct LeaveApplicationDetail: View {
                         })
                     }
                 }
+                Spacer(minLength: 110)
             }
         }
     }

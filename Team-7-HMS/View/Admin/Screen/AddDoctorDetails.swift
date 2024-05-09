@@ -265,6 +265,7 @@ struct AddDoctorDetails: View {
                             })
                         }
                     }
+                    Spacer(minLength: 90)
                 }
             }
         }
