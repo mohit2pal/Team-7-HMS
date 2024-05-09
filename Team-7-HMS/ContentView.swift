@@ -21,6 +21,7 @@ struct ContentView: View {
     @StateObject private var viewModel = AppViewModel()
     
     @StateObject private var networkMonitor = NetworkMonitor()
+    @State private var isConnected: Bool = true
     
     var body: some View {
             NavigationStack {
@@ -53,12 +54,13 @@ struct ContentView: View {
                             }
                         } else {
                             VStack{
-                                Image("NotConnected")
+                                Image(systemName: "wifi.exclamationmark")
                                     .resizable()
-                                    .frame(width: 250, height: 200)
-                                Text("NOT CONNECTED TO THE INTERNET")
-                                    .foregroundColor(.red)
-                                    .bold()
+                                    .frame(width: 110, height: 100)
+                                    .symbolEffect(.bounce.down.byLayer, value: isConnected)
+                            }
+                            .onAppear{
+                                isConnected.toggle()
                             }
                         }
                     }
