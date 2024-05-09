@@ -70,9 +70,11 @@ struct PatientAppointmentView: View {
                                 }
                             } else {
                                 Text("There are no Appointments.")
+                                    .foregroundStyle(Color.gray)
                             }
                         } else {
                             Text("There are no Appointments booked.")
+                                .foregroundStyle(Color.gray)
                                 .padding()
                         }
                     }

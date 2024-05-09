@@ -19,16 +19,17 @@ struct PaymentPageView: View {
     
     var body: some View {
         ZStack {
-            Color(.white).edgesIgnoringSafeArea(.all)
+//            Color(.white).edgesIgnoringSafeArea(.all)
             
             VStack {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Please choose your payment method")
-                            .font(.callout)
-                            .padding(.leading)
-                            .padding([.top, .trailing])
-                        
+                        HStack{
+                            Spacer()
+                            Text("Please choose your payment method")
+                                .font(.headline)
+                            Spacer()
+                        }
                         LazyVGrid(columns: columns, spacing: 20) {
                             PaymentMethodSquare(imageName: "paypal", name: "PayPal", isSelected: $selectedPaymentMethod)
                             PaymentMethodSquare(imageName: "gpay", name: "Google Pay", isSelected: $selectedPaymentMethod)
@@ -41,17 +42,38 @@ struct PaymentPageView: View {
                         if selectedPaymentMethod == "Credit Card" {
                             creditCardFields
                         } else if selectedPaymentMethod == "PayPal" {
-                            TextField("PayPal Email", text: $paypalEmail)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            HStack{
+                                TextField("PayPal Email", text: $paypalEmail)
+                                Spacer()
+                            }
+                                .textFieldStyle(.plain)
                                 .padding(.horizontal)
+                                .padding(.vertical, 15)
+                                .background(.white)
+                                .cornerRadius(10)
+                                .customShadow()
                         } else if selectedPaymentMethod == "Google Pay" {
-                            TextField("Google Pay Email", text: $googlePayEmail)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            HStack{
+                                TextField("Google Pay Email", text: $googlePayEmail)
+                                Spacer()
+                            }
+                                .textFieldStyle(.plain)
                                 .padding(.horizontal)
+                                .padding(.vertical, 15)
+                                .background(.white)
+                                .cornerRadius(10)
+                                .customShadow()
                         } else if selectedPaymentMethod == "Apple Pay" {
-                            TextField("Apple Pay Email", text: $applePayEmail)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            HStack{
+                                TextField("Apple Pay Email", text: $applePayEmail)
+                                    Spacer()
+                            }
+                                .textFieldStyle(.plain)
                                 .padding(.horizontal)
+                                .padding(.vertical, 15)
+                                .background(.white)
+                                .cornerRadius(10)
+                                .customShadow()
                         }
                     }
                 }
@@ -63,15 +85,17 @@ struct PaymentPageView: View {
                     Text("Continue")
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
+                        .frame(width: 300, height: 50)
+//                        .padding(.vertical, 15)
                         .background(selectedPaymentMethod != nil ? Color("PrimaryColor") : Color.gray)
                         .cornerRadius(18)
-                        .padding(.horizontal)
+//                        .padding(.horizontal)
                 }
                 .disabled(selectedPaymentMethod == nil) // Disable button if no payment method is selected
                 .padding(.bottom, 20) // Add some padding at the bottom
             }
+            .padding()
+            .background(Color.background)
         }
         .navigationBarItems(trailing:
                                 Button(action: {
@@ -90,15 +114,36 @@ struct PaymentPageView: View {
     // Extracted credit card fields for better readability
     private var creditCardFields: some View {
         VStack(alignment: .leading, spacing: 10) {
-            TextField("Card Number", text: $cardNumber)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            HStack{
+                TextField("Card Number", text: $cardNumber)
+                Spacer()
+            }
+                .textFieldStyle(.plain)
                 .padding(.horizontal)
-            TextField("Expiration Date (MM/YY)", text: $expirationDate)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.vertical, 15)
+                .background(.white)
+                .cornerRadius(10)
+                .customShadow()
+            HStack{
+                TextField("Expiration Date (MM/YY)", text: $expirationDate)
+                Spacer()
+            }
+                .textFieldStyle(.plain)
                 .padding(.horizontal)
-            TextField("CVV", text: $cvv)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.vertical, 15)
+                .background(.white)
+                .cornerRadius(10)
+                .customShadow()
+            HStack{
+                TextField("CVV", text: $cvv)
+                Spacer()
+            }
+                .textFieldStyle(.plain)
                 .padding(.horizontal)
+                .padding(.vertical, 15)
+                .background(.white)
+                .cornerRadius(10)
+                .customShadow()
         }
     }
 }
@@ -128,9 +173,10 @@ struct PaymentMethodSquare: View {
             .frame(width: 150, height: 150)
             .background(isSelected == name ? Color("PrimaryColor").opacity(0.3) : .white)
             .cornerRadius(18)
-            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+            .customShadow()
+//            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
             .overlay(
-                RoundedRectangle(cornerRadius: 18)
+                RoundedRectangle(cornerRadius: 20)
                     .stroke(isSelected == name ? Color("PrimaryColor").opacity(0.8) : Color.black.opacity(0.1), lineWidth: 1.3)
             )
         }

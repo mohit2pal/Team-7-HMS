@@ -65,7 +65,7 @@ struct PatientView: View {
     func iconName(for index: Int) -> String {
         switch index {
         case 0: return "house.fill"
-        case 1: return "plus.app"
+        case 1: return "plus.circle.fill"
         case 2: return "doc.fill"
         case 3: return "calendar"
         default: return ""
