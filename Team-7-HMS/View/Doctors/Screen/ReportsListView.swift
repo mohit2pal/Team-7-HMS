@@ -148,6 +148,7 @@ struct ReportsListView: View {
                             }
                         }
                     }
+                    Spacer(minLength: 110)
                 }
                 .padding(.horizontal)
             }

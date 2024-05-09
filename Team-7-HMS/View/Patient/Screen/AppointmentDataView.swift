@@ -17,6 +17,9 @@ struct AppointmentDataView: View {
     
     @State var showOldPrescriptionSheet: Bool = false
     @State var isDisabled: Bool = false // New state variable to control disabled state
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State private var shouldDismiss: Bool = false
     
     var body: some View {
         NavigationStack{
@@ -131,7 +134,7 @@ struct AppointmentDataView: View {
                             }
                         } else {
                             NavigationLink {
-                                 RescheduleAppointmentsView(appointmentId: appointmentID, prevTime: data?.time ?? "time", date: data?.date ?? "date", previousDate: data?.date ?? "date")
+                                RescheduleAppointmentsView(appointmentId: appointmentID, prevTime: data?.time ?? "time", date: data?.date ?? "date", previousDate: data?.date ?? "date", shouldDismiss: $shouldDismiss)
                              } label: {
                                  Text("Reschedule")
                                      .frame(width: 300)
@@ -190,6 +193,9 @@ struct AppointmentDataView: View {
                     ViewPrescription(showOldPrescriptionSheet: $showOldPrescriptionSheet, appointmentID: data?.appointmentID ?? "Null Value")
                 }
                 .onAppear{
+                    if shouldDismiss {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
                     FirebaseHelperFunctions().getAppointmentData(appointmentUID: appointmentID) { appData, error in
                         if let appointment = appData {
                             self.data = appointment
@@ -232,6 +238,12 @@ struct AppointmentDataView: View {
             isLoading = false
             deleted = true
             isDisabled = true
+            
+            // Wait for 2 seconds before executing the code inside the block
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                // Dismiss the view
+                self.presentationMode.wrappedValue.dismiss()
+            }
         }
     }
 }

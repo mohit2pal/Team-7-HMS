@@ -170,6 +170,8 @@ struct doctorLeaveApplication: View {
                 })
             }
             .background(Color.background)
+            
+            Spacer(minLength: 90)
         }
             
                     }

@@ -149,10 +149,11 @@ struct DoctorHomeSwiftUI: View {
                         .padding(.vertical)
                         
                         // Display appointments based on selected segment
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 ForEach(displayedAppointments) { appointment in
                     DoctorAppointmentCard(appointmentData: appointment)
                 }
+                Spacer(minLength: 130)
             }
             }
         .padding([.horizontal, .top])

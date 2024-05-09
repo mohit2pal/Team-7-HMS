@@ -196,6 +196,7 @@ struct patientHomeSwiftUIView: View {
                         }
                     }
                 }
+                Spacer(minLength: 110)
             }.customShadow()
             
             Spacer()

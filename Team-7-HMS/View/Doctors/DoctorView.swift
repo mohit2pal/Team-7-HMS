@@ -27,26 +27,27 @@ struct DoctorView: View {
             HStack {
                 ForEach(0..<3, id: \.self) { index in
                     Button(action: {
-                        withAnimation(.easeInOut) {
                             selectedTab = index
                             bounce = true
-                            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                bounce = false
-                            }
+                        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                            bounce = false
                         }
                     }) {
                         VStack {
                             Image(systemName: iconName(for: index))
                                 .symbolRenderingMode(.palette)
-                                .foregroundStyle(index == selectedTab ? Color.blue : Color.gray, Color.gray.opacity(0.5))
+                                .foregroundStyle(index == selectedTab ? Color.accentColor : Color.gray, Color.gray.opacity(0.5))
                                 .scaleEffect(bounce && index == selectedTab ? 2.2 : 1.6) // Apply scale effect
-                                .padding(.vertical, index == selectedTab ? 5 : 0)
+                                .padding(.vertical, index == selectedTab ? 3 : 2)
+                            Text(iconLabel(for: index)) // Add this line to include text
+                                .font(.caption)
+                                .foregroundColor(index == selectedTab ? .accentColor : .gray)
                         }
                     }
                     .frame(maxWidth: .infinity)
                 }
             }
-            .frame(height: 50)
+            .frame(height: 70)
             .padding(.top, 10)
             .padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom)
             .background {
@@ -60,8 +61,16 @@ struct DoctorView: View {
     func iconName(for index: Int) -> String {
         switch index {
         case 0: return "house.fill"
-        case 1: return "doc.text.magnifyingglass"
-        case 2: return "doc.on.doc"
+        case 1: return "doc.text.image"
+        case 2: return "airplane.departure"
+        default: return ""
+        }
+    }
+    func iconLabel(for index: Int) -> String {
+        switch index {
+        case 0: return "Home"
+        case 1: return "Reports"
+        case 2: return "Leave Request"
         default: return ""
         }
     }
