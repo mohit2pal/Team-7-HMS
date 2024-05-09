@@ -96,35 +96,6 @@ struct CompletedMedicalTestsView: View {
         }
     }
     
-    func downloadAndSavePDFFromURL(pdfURL: URL) {
-        let task = URLSession.shared.downloadTask(with: pdfURL) { localURL, _, error in
-            if let localURL = localURL {
-                do {
-                    // Destination URL within the app's document directory
-                    guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-                        print("Error: Unable to access documents directory.")
-                        return
-                    }
-                    let destinationURL = documentsDirectory.appendingPathComponent(localURL.lastPathComponent)
-
-                    // Copy the file from temporary location to destination URL
-                    try FileManager.default.copyItem(at: localURL, to: destinationURL)
-
-                    print("File saved successfully to \(destinationURL)")
-                } catch {
-                    print("Error: \(error)")
-                }
-            } else if let error = error {
-                print("Error downloading file: \(error)")
-            }
-        }
-        
-        task.resume()
-    }
-
-
-
-
 }
 
 #Preview {

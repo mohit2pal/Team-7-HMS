@@ -14,6 +14,7 @@ struct AppointmentDataView: View {
     @State var isLoading : Bool  = false
     @State var deleted  :Bool = false
     @State var showAlert: Bool = false
+    @Environment(\.presentationMode) var presentationMode
     
     @State var showOldPrescriptionSheet: Bool = false
     @State var isDisabled: Bool = false // New state variable to control disabled state
@@ -130,16 +131,17 @@ struct AppointmentDataView: View {
                                 .customShadow()
                             }
                         } else {
-                            Button(action: {}, label: {
-                                Text("Reschedule")
-                                    .frame(width: 300)
-                                    .padding()
-                                    .foregroundStyle(Color.white)
-                                    .background(Color.green)
-                                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                                
-                            })
-                            
+                            NavigationLink {
+                                 RescheduleAppointmentsView(appointmentId: appointmentID, prevTime: data?.time ?? "time", date: data?.date ?? "date", previousDate: data?.date ?? "date")
+                             } label: {
+                                 Text("Reschedule")
+                                     .frame(width: 300)
+                                     .padding()
+                                     .foregroundStyle(Color.white)
+                                     .background(Color.green)
+                                     .clipShape(RoundedRectangle(cornerRadius: 15))
+                             }
+
                             Button(action: {
                                 showAlert = true
                             }, label: {
@@ -231,6 +233,7 @@ struct AppointmentDataView: View {
             isLoading = false
             deleted = true
             isDisabled = true
+            presentationMode.wrappedValue.dismiss()
         }
     }
 }

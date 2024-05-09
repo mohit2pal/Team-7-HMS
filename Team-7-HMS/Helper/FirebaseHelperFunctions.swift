@@ -508,7 +508,7 @@ class FirebaseHelperFunctions {
                 
                 let dateFormatedString = dateString.replacingOccurrences(of: "_", with: "-") + " " + timeSlot
                 let dateFormated = dateFormatter.date(from: dateFormatedString)
-
+                
                 
                 
                 let day = FirebaseHelperFunctions.getDayOfWeekFromDate(dateString: dateString)
@@ -1023,7 +1023,7 @@ class FirebaseHelperFunctions {
             print("Medical test department not found.")
         }
     }
-
+    
     
     //fetch the count
     func fetchSlotColorForDateAndTimeSlot(date: String, timeSlot: String, medicalTest  : String ,completion: @escaping (Int) -> Void) {
@@ -1122,7 +1122,7 @@ class FirebaseHelperFunctions {
             completion(medicalTests)
         }
     }
-
+    
     
     // updating notifications
     func updateNotificationStatus(for caseID: String, isEnabled: Bool) {
@@ -1150,7 +1150,7 @@ class FirebaseHelperFunctions {
         medicalTestRef.document(caseID).updateData([    "medicalTestLink": pdf,
                                                         "status": "finish" ,
                                                         "analysis" : analysis
-                                                    ]) { error in
+                                                   ]) { error in
             if let error = error {
                 print("Error updating document: \(error)")
             } else {
@@ -1176,7 +1176,7 @@ class FirebaseHelperFunctions {
             }
         }
     }
-
+    
     //delete medical Test
     func deleteMedicalTest(for caseID: String) {
         let db = Firestore.firestore()
@@ -1208,7 +1208,7 @@ class FirebaseHelperFunctions {
         return caseNumber
     }
     
-
+    
     // Function to add a prescription to Firestore
     static func addPrescription(appointmentData: AppointmentDataModel, diagnosis: String, symptoms: String, labTest: String, followUp: String, medicines: [Medicine], completion: @escaping (Result<Void, Error>) -> Void) {
         let db = Firestore.firestore()
@@ -1255,7 +1255,7 @@ class FirebaseHelperFunctions {
         
         if let specialty = medicalTestDepartments[medicalTest] {
             let query = docRef.whereField("specialty", isEqualTo: specialty)
-
+            
             // Execute the query
             query.getDocuments { (querySnapshot, error) in
                 if let error = error {
@@ -1265,7 +1265,7 @@ class FirebaseHelperFunctions {
                         print("No documents found.")
                         return
                     }
-
+                    
                     for document in documents {
                         let documentID = document.documentID
                         doctorID.append(documentID)
@@ -1279,27 +1279,27 @@ class FirebaseHelperFunctions {
         }    }
     
     // Function to change the status of an appointment from "upcoming" to "completed"
-        func completeAppointment(appointmentID: String, completion: @escaping (Result<Void, Error>) -> Void) {
-            let db = Firestore.firestore()
-
-            // Reference to the appointment document
-            let appointmentRef = db.collection("appointments").document(appointmentID)
-
-            // Update the status field to "completed"
-            appointmentRef.updateData([
-                "status": "completed"
-            ]) { error in
-                if let error = error {
-                    print("Error updating appointment status: \(error)")
-                    completion(.failure(error))
-                } else {
-                    print("Appointment status updated to completed successfully.")
-                    completion(.success(()))
-                }
+    func completeAppointment(appointmentID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let db = Firestore.firestore()
+        
+        // Reference to the appointment document
+        let appointmentRef = db.collection("appointments").document(appointmentID)
+        
+        // Update the status field to "completed"
+        appointmentRef.updateData([
+            "status": "completed"
+        ]) { error in
+            if let error = error {
+                print("Error updating appointment status: \(error)")
+                completion(.failure(error))
+            } else {
+                print("Appointment status updated to completed successfully.")
+                completion(.success(()))
             }
         }
-
-        // Function to fetch prescription based on the appointment ID
+    }
+    
+    // Function to fetch prescription based on the appointment ID
     func fetchPrescription(appointmentID: String, completion: @escaping (Result<PrescriptionModel, Error>) -> Void) {
         let db = Firestore.firestore()
         
@@ -1333,8 +1333,156 @@ class FirebaseHelperFunctions {
             }
         }
     }
-}
+    
+    
+    func getDoctorID(from appointmentUID: String, completion: @escaping (String?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        let appointmentDocRef = db.collection("appointments").document(appointmentUID)
+        
+        appointmentDocRef.getDocument { (documentSnapshot, error) in
+            if let error = error {
+                // Propagate the error to the completion handler
+                completion(nil, error)
+                return
+            }
+            
+            guard let documentData = documentSnapshot?.data(),
+                  let doctorID = documentData["doctorID"] as? String else {
+                // Handle missing document data or doctor ID
+                completion(nil, nil)
+                return
+            }
+            
+            // Call the completion handler with the doctor ID
+            completion(doctorID, nil)
+        }
+    }
+    
+    func rescheduleAppointment(appointmentID: String, doctorID: String, newTime: String, newDate: String,prevDate : String , prevTime : String , completion: @escaping (Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        
+        // Update the appointment document with new time and date
+        print(doctorID)
+        let slotDocRef = db.collection("slots").document(doctorID)
+        
+        slotDocRef.getDocument{ document, error in
+            if let error = error {
+                print("Error fetching document: \(error)")
+                return
+            }
+            
+            guard let document = document, document.exists, var slotsData = document.data() as? [String: [[String: String]]] else {
+                print("Document does not exist or data format is incorrect.")
+                return
+            }
+            
+          
+           
+            // Check if there are slots for the specified date and modify the slot if found
+            if var slotsForDate = slotsData[prevDate] , var slotsForDate2 = slotsData[newDate] {
+                var slotFound1 = false
+                var slotFound2 = false
+                
+                if newDate == prevDate {
+                    
+                    for i in 0..<slotsForDate.count {
+                        if slotsForDate[i].keys.contains(prevTime), slotsForDate[i][prevTime] == appointmentID {
+                            // Mark the slot as booked by changing its value
+                            slotsForDate[i][prevTime] = "Empty" // Or "Booked" if you prefer not to use patientUID
+                            slotFound1 = true
+                            break
+                        }
+                    }
+                    
+                    for i in 0..<slotsForDate.count {
+                        if slotsForDate[i].keys.contains(newTime), slotsForDate[i][newTime] == "Empty" {
+                            // Mark the slot as booked by changing its value
+                            slotsForDate[i][newTime] = appointmentID// Or "Booked" if you prefer not to use patientUID
+                            slotFound2 = true
+                            break
+                        }
+                    }
 
+                }
+                else {
+                    
+                    for i in 0..<slotsForDate.count {
+                        if slotsForDate[i].keys.contains(prevTime), slotsForDate[i][prevTime] == appointmentID {
+                            // Mark the slot as booked by changing its value
+                            slotsForDate[i][prevTime] = "Empty" // Or "Booked" if you prefer not to use patientUID
+                            slotFound1 = true
+                            
+                            break
+                        }
+                        
+                    }
+                    
+                    for i in 0..<slotsForDate2.count {
+                        if slotsForDate2[i].keys.contains(newTime), slotsForDate2[i][newTime] == "Empty" {
+                            // Mark the slot as booked by changing its value
+                            slotsForDate2[i][newTime] = appointmentID // Or "Booked" if you prefer not to use patientUID
+                            slotFound2 = true
+                            break
+                        }
+                        
+                    }
+                }
+                
+                
+                if slotFound1 && slotFound2 {
+                    // Update the slots data with the modified slots for the date
+                    if newDate == prevDate {
+                        slotsData[prevDate] = slotsForDate
+                    }
+                    
+                    else {
+                        slotsData[prevDate] = slotsForDate
+                        slotsData[newDate] = slotsForDate2
+                    }
+                    
+//                     Update the document with the new slots data
+                    slotDocRef.setData(slotsData) { error in
+                        if let error = error {
+                            print("Error updating document: \(error)")
+                            
+                        } else {
+                            print("Slot booked successfully! 1" )
+                            
+                            
+                            
+                        }
+                    }
+                } else {
+                    print("Slot not found or already booked. 1")
+                    
+                }
+            } else {
+                print("No slots available for the specified date. 1")
+            }
+        }
+        
+            
+            // Check if there are slots for the specified date and modify the slot if found
+
+        
+        let appointmentRef = db.collection("appointments").document(appointmentID)
+        appointmentRef.updateData([
+            "doctorID": doctorID,
+            "date": newDate,
+            "slotTime": newTime
+        ]) { error in
+            if let error = error {
+            
+                completion(error)
+                return
+            }
+
+            completion(nil)
+        }
+    }
+    
+}
 
 
 func getDateLiteral(date : String , time : String) -> Date {
