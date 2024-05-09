@@ -176,6 +176,8 @@ struct doctorLeaveApplication: View {
                 
             }
             .background(Color.background)
+            
+            Spacer(minLength: 90)
         }
             .padding(.bottom , 50)
             

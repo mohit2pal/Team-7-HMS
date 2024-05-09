@@ -201,6 +201,7 @@ struct DoctorHomeSwiftUI: View {
                 ForEach(displayedAppointments) { appointment in
                     DoctorAppointmentCard(appointmentData: appointment)
                 }
+                Spacer(minLength: 130)
             }
             }
         .padding([.horizontal, .top])

@@ -23,6 +23,11 @@ struct RescheduleAppointmentsView: View {
     @State var prevTime : String
     @State var date : String
     @State var previousDate : String
+    
+    @Binding var shouldDismiss: Bool
+    
+    @State private var showSuccessAnimation: Bool = false
+    
     var body: some View {
         NavigationStack{
             ZStack{
@@ -77,7 +82,7 @@ struct RescheduleAppointmentsView: View {
                                         .padding()
                                         .clipShape(Rectangle())
                                         
-                                        .background(pressed(index) ? Color.accentColor : .gray.opacity(0.5))
+                                        .background(pressed(index) ? Color.accentColor : .gray.opacity(0.2))
                                         .cornerRadius(15)
                                         .onTapGesture {
                                             selectedDateIndex = index
@@ -170,10 +175,12 @@ struct RescheduleAppointmentsView: View {
                             print(date)
                             print(selectedSlot)
                             print(appointmentId)
+                            self.showSuccessAnimation = true
                             FirebaseHelperFunctions().rescheduleAppointment(appointmentID: appointmentId, doctorID: doctorID, newTime: selectedSlot, newDate: date, prevDate: previousDate.replacingOccurrences(of: "-", with: "_"), prevTime: prevTime) { error in
                                 
                                 isLoading2 = false
                                 presentationMode.wrappedValue.dismiss()
+                                self.shouldDismiss = true
                             }
                         }
 
@@ -201,6 +208,10 @@ struct RescheduleAppointmentsView: View {
             }
             .navigationTitle("Reschedule Appointments")
             .navigationBarTitleDisplayMode(.inline)
+            .fullScreenCover(isPresented: $showSuccessAnimation) {
+                // FullScreenCover for success animation
+                SuccessAnimationView()
+            }
             .onAppear{
                 FirebaseHelperFunctions().getAppointmentData(appointmentUID: appointmentId) { Appointment, error in
                     if let drName = Appointment?.doctorName , let drSpeciality = Appointment?.doctorSpeciality{
@@ -216,6 +227,7 @@ struct RescheduleAppointmentsView: View {
                             FirebaseHelperFunctions().fetchSlots(doctorID: doctorID, date: returnToday().replacingOccurrences(of: "-", with: "_")) { slots, error in
                                 if let slots = slots {
                                     self.slotDetails = slots
+                                    print(slotDetails)
                                 } else {
                                     // Slots are not present
                                     print("No slots available for this doctor.")
