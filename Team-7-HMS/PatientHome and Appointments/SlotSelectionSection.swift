@@ -24,7 +24,7 @@ struct SlotSelectionSection: View {
                                         .padding()
                                         .background(Date() > getDateLiteral(date: date, time: time) ? Color.gray : slotColor(slot: slot))
                                         .cornerRadius(15)
-                                        .foregroundColor(Date() > getDateLiteral(date: date, time: time) ? Color.white : Color.black)
+                                        .foregroundColor(Date() > getDateLiteral(date: date, time: time) ? Color.white : selectedSlot == time ? .white : .black)
                                         .disabled(Date() > getDateLiteral(date: date, time: time))
                                 }
                             }
@@ -86,6 +86,6 @@ struct SlotSelectionSection: View {
     
     private func slotColor(slot: [String: String]) -> Color {
         let time = slot.keys.first ?? ""
-        return time == selectedSlot ? Color.blue : Color.gray.opacity(0.2)
+        return time == selectedSlot ? Color.accentColor : Color.gray.opacity(0.2)
     }
 }
