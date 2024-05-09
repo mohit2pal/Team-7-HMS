@@ -17,7 +17,7 @@ struct profile_pic: View {
                 switch phase {
                 case .empty:
                     // Placeholder image while loading
-                    Image(systemName: "person.circle")
+                    Image(systemName: "person.circle.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 60, height: 60)
@@ -32,7 +32,7 @@ struct profile_pic: View {
                         .clipShape(Circle())
                 case .failure(_):
                     // Placeholder image for failure
-                    Image(systemName: "person.circle")
+                    Image(systemName: "person.circle.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 60, height: 60)
@@ -40,7 +40,7 @@ struct profile_pic: View {
                         .foregroundColor(.red)
                 @unknown default:
                     // Placeholder image for unknown state
-                    Image(systemName: "person.circle")
+                    Image(systemName: "person.circle.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 60, height: 60)
@@ -50,7 +50,7 @@ struct profile_pic: View {
             }
         } else {
             // Fallback if the URL is not available
-            Image(systemName: "person.circle")
+            Image(systemName: "person.circle.fill")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 60, height: 60)

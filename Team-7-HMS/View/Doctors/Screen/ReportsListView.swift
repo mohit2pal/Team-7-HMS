@@ -125,6 +125,7 @@ struct ReportsListView: View {
                     if selectedViewIndex == 0 {
                         if reportsUpcoming.isEmpty {
                             Text("There are no medical tests appointed")
+                                .foregroundStyle(.gray)
                         }
                         else{
                             LazyVStack(alignment: .leading) {
@@ -138,6 +139,7 @@ struct ReportsListView: View {
                     else{
                         if reportsCompleted.isEmpty{
                             Text("There are no completed medical tests.")
+                                .foregroundStyle(.gray)
                         }
                         else {
                             LazyVStack(alignment: .leading) {

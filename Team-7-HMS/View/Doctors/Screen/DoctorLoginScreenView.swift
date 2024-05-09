@@ -27,13 +27,22 @@ struct DoctorLoginScreenView: View {
                     
                     //Rectangle 2626
                     ZStack {
-                        RoundedRectangle(cornerRadius: 40)
-                            .fill(Color(#colorLiteral(red: 0.9803921580314636, green: 0.9803921580314636, blue: 0.9960784316062927, alpha: 1)))
-                            .frame(width: 361, height: 400)
+//                        RoundedRectangle(cornerRadius: 40)
+//                            .fill(Color(#colorLiteral(red: 0.9803921580314636, green: 0.9803921580314636, blue: 0.9960784316062927, alpha: 1)))
+//                            .frame(width: 361, height: 400)
                         
                         VStack {
-                            Text("Welcome back").font(.system(size: 32, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.49, green: 0.59, blue: 1, alpha: 1))).tracking(-0.41).multilineTextAlignment(.center)
-                            
+                            HStack{
+                                Image("doctor-icon")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: 55)
+                                    .padding(15)
+                                    .background(.white)
+                                    .cornerRadius(50)
+                                    .customShadow()
+                                Text("Welcome back").font(.system(size: 32, weight: .bold, design: .rounded)).foregroundColor(Color("PrimaryColor")).tracking(-0.41).multilineTextAlignment(.center)
+                            }
                             TextField("Email Address", text: $emailAddress)
                                 .foregroundColor(Color.gray)
                             //                            .textFieldStyle(.roundedBorder)
@@ -129,21 +138,26 @@ struct DoctorLoginScreenView: View {
                                     .foregroundStyle(Color.red)
                             }
                             
-                        }
-                    }
+                        }//vend
+                        .padding()
+                        .background(Color.background)
+                        .cornerRadius(40)
+                    }//zend
                     
                     Spacer()
                     
                     NavigationLink(destination: LoginScreen(), label: {
-                        ZStack {
-                            //Rectangle 2645
-                            RoundedRectangle(cornerRadius: 99)
-                                .fill(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                                .frame(width: 354, height: 60)
-                            
-                            //Doctor's Login
-                            Text("Patient's Login").font(.title3)
+                        HStack{
+                            Text("Are you a patient?")
+                                .foregroundStyle(.black)
+                            Text("Log in")
+                                .foregroundStyle(.myAccent)
                         }
+//                        .font(.title3)
+                        .font(.system(size: 16, weight: .regular))
+                        .frame(width: 300, height: 50)
+                        .background(.white)
+                        .cornerRadius(50)
                     })
                 }
             }

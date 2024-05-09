@@ -23,7 +23,7 @@ struct PaymentPageView: View {
     
     var body: some View {
         ZStack {
-            Color(.white).edgesIgnoringSafeArea(.all)
+//            Color(.white).edgesIgnoringSafeArea(.all)
             
             NavigationView {
                 VStack {
@@ -72,6 +72,8 @@ struct PaymentPageView: View {
                 .navigationTitle("Choose the Payment Method")
                 .navigationBarTitleDisplayMode(.inline)
             }
+            .padding()
+            .background(Color.background)
         }
         .navigationBarItems(trailing:
                                 Button(action: {
@@ -132,9 +134,10 @@ struct PaymentMethodSquare: View {
             .frame(width: 150, height: 150)
             .background(isSelected == name ? Color.accentColor.opacity(0.5) : .white)
             .cornerRadius(18)
-            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+            .customShadow()
+//            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
             .overlay(
-                RoundedRectangle(cornerRadius: 18)
+                RoundedRectangle(cornerRadius: 20)
                     .stroke(isSelected == name ? Color("PrimaryColor").opacity(0.8) : Color.black.opacity(0.1), lineWidth: 1.3)
             )
         }

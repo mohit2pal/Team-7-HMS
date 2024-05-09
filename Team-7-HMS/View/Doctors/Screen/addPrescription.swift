@@ -116,7 +116,7 @@ struct addPrescription: View {
                                 Text("Add Prescription")
                                     .frame(width: 300, height: 50)
                                     .foregroundStyle(Color.white)
-                                    .background(Color.blue) // Assuming Color.myAccent is defined elsewhere, replace Color.blue with Color.myAccent
+                                    .background(Color.myAccent) // Assuming Color.myAccent is defined elsewhere, replace Color.blue with Color.myAccent
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
                             }
                     }
