@@ -108,8 +108,6 @@ struct AppointmentDataView: View {
                                 .padding(.bottom)
                         }
                     }
-                    
-                    
                     Spacer()
                     
                     if let status = data?.status{

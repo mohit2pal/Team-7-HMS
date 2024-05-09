@@ -89,3 +89,17 @@ let daysDict: [Int: String] = [
     6: "Fri", // Friday
     7: "Sat"  // Saturday
 ]
+
+struct LeaveManagementCard {
+    var id : String
+    var status : String
+    var appliedDate : String
+}
+
+struct leaveManagementInfo {
+    var id : String
+    var fromDate : Date
+    var toDate : Date
+    var status : String
+    var description :  String
+}

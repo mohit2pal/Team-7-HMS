@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Firebase
 struct doctorLeaveApplication: View {
     @State var fromDate = Date()
     @State var toDate = Date()
@@ -14,7 +14,9 @@ struct doctorLeaveApplication: View {
     @State var desc = ""
     @State private var selectedReasonIndex = 0
     @State var dateString = ""
-    
+    var docId : String {
+        Auth.auth().currentUser?.uid ?? ""
+    }
     @State var error = false
     // Variables for Total Leaves, Leaves Left, and Leaves Taken
     let totalLeaves = 20
@@ -160,7 +162,9 @@ struct doctorLeaveApplication: View {
                     .customShadow()
                 
                 Spacer()
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Button(action: {
+                    FirebaseHelperFunctions().leaveManagement(doctorID: docId, fromDate: fromDate, toDate: toDate, subject: subject, description: desc)
+                }, label: {
                     Text("Submit")
                         .foregroundStyle(Color.white)
                         .font(.headline)
@@ -168,11 +172,14 @@ struct doctorLeaveApplication: View {
                         .background(Color.myAccent)
                         .cornerRadius(20)
                 })
+                
+                
             }
             .background(Color.background)
             
             Spacer(minLength: 90)
         }
+            .padding(.bottom , 50)
             
                     }
         .onAppear{
@@ -181,17 +188,10 @@ struct doctorLeaveApplication: View {
             let fromDate1 = self.fromDate
             self.toDate = fromDate1
             let toDate2 = toDate
-            
             self.numberOfDays = getDays(fromDate: fromDate1 , toDate:  toDate2)
-            
-            
-            
-            
             let formatter  = DateFormatter()
             formatter.dateFormat = "dd-MM-YYYY"
             dateString = formatter.string(from: toDate)
-            
-            
         }
         
     }

@@ -61,15 +61,15 @@ struct SymptomsRecommendationView: View {
                                     .background(Color.white)
                                     .cornerRadius(15)
                                     .customShadow()
-//                                    .overlay(
-//                                        RoundedRectangle(cornerRadius: 15)
-//                                            .stroke(selectedSymptoms.contains(buttons2[index].title) ? Color.blue : Color.black, lineWidth: 1)
-//                                    )
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .stroke(selectedSymptoms.contains(buttons2[index].title) ? Color.blue : Color.black, lineWidth: 1)
+                                    )
                                     .onTapGesture {
                                         toggleSelection(buttons2[index].title)
                                     }
                                 Text(buttons2[index].title)
-                                    .font(.caption)
+                                    .font(.caption2)
                                     .foregroundColor(.black)
                             }
                         }
