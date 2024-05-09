@@ -11,9 +11,9 @@ import FirebaseAuth
 struct AdminDashboard: View {
     let dashboardData: DashboardData = DashboardData(
         date: Date(),
-        staffInfo: StaffInformation(doctorsCount: 10, nursesCount: 20, sanitaryStaffCount: 5),
-        amenities: Amenities(totalStaffCount: 35, totalBedsCount: 100, otCount: 3, ambulanceCount: 2),
-        patientInfo: PatientInformation(totalPatientsCount: 50, doctorsAttendingPatientsCount: 15, appointmentsScheduledCount: 30, appointmentsCancelledCount: 5)
+        staffInfo: StaffInformation(doctorsCount: 10, nursesCount: 0, sanitaryStaffCount: 5),
+        amenities: Amenities(totalStaffCount: 15, totalBedsCount: 100, otCount: 3, ambulanceCount: 2),
+        patientInfo: PatientInformation(totalPatientsCount: 25, doctorsAttendingPatientsCount: 15, appointmentsScheduledCount: 30, appointmentsCancelledCount: 5)
     )
     var activeStaffCount: Int {
         return dashboardData.staffInfo.doctorsCount +
@@ -85,6 +85,7 @@ struct AdminDashboard: View {
                             Spacer()
                             VStack {
                                 HStack {
+                                    Spacer()
                                     VStack {
                                         Text("\(dashboardData.staffInfo.doctorsCount)")
                                             .font(.title)
@@ -93,19 +94,19 @@ struct AdminDashboard: View {
                                             .font(.caption)
                                             .foregroundColor(.gray)
                                     }
-                                    Spacer()
-                                    RoundedRectangle(cornerRadius: 50)
-                                        .foregroundColor(.gray)
-                                        .frame(width: 2, height: 33)
-                                    Spacer()
-                                    VStack {
-                                        Text("\(dashboardData.staffInfo.nursesCount)")
-                                            .font(.title)
-                                            .bold()
-                                        Text("Nurses")
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
-                                    }
+                                  //  Spacer()
+//                                    RoundedRectangle(cornerRadius: 50)
+//                                        .foregroundColor(.gray)
+//                                        .frame(width: 2, height: 33)
+//                                    Spacer()
+//                                    VStack {
+//                                        Text("\(dashboardData.staffInfo.nursesCount)")
+//                                            .font(.title)
+//                                            .bold()
+//                                        Text("Nurses")
+//                                            .font(.caption)
+//                                            .foregroundColor(.gray)
+//                                    }
                                     Spacer()
                                     RoundedRectangle(cornerRadius: 50)
                                         .foregroundColor(.gray)
@@ -119,6 +120,7 @@ struct AdminDashboard: View {
                                             .font(.caption)
                                             .foregroundColor(.gray)
                                     }
+                                    Spacer()
                                 }
                                 .padding()//Hstack Closes
                                 
@@ -208,6 +210,7 @@ struct AdminDashboard: View {
                             Spacer()
                             VStack {
                                 HStack {
+                                    Spacer()
                                     VStack {
                                         Text("\(dashboardData.patientInfo.appointmentsScheduledCount)")
                                             .font(.title)
@@ -217,19 +220,19 @@ struct AdminDashboard: View {
                                             .foregroundColor(.gray)
                                     }
                                     Spacer()
-                                    RoundedRectangle(cornerRadius: 50)
-                                        .foregroundColor(.gray)
-                                        .frame(width: 2, height: 33)
-                                    Spacer()
-                                    VStack {
-                                        Text("\(dashboardData.patientInfo.doctorsAttendingPatientsCount)")
-                                            .font(.title)
-                                            .bold()
-                                        Text("Doctors")
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
-                                    }
-                                    Spacer()
+//                                    RoundedRectangle(cornerRadius: 50)
+//                                        .foregroundColor(.gray)
+//                                        .frame(width: 2, height: 33)
+//                                    Spacer()
+//                                    VStack {
+//                                        Text("\(dashboardData.patientInfo.doctorsAttendingPatientsCount)")
+//                                            .font(.title)
+//                                            .bold()
+//                                        Text("Doctors")
+//                                            .font(.caption)
+//                                            .foregroundColor(.gray)
+//                                    }
+//                                    Spacer()
                                     RoundedRectangle(cornerRadius: 50)
                                         .foregroundColor(.gray)
                                         .frame(width: 2, height: 33)
@@ -242,6 +245,7 @@ struct AdminDashboard: View {
                                             .font(.caption)
                                             .foregroundColor(.gray)
                                     }
+                                    Spacer()
                                 }
                                 .padding()//Hstack Closes
                                 
