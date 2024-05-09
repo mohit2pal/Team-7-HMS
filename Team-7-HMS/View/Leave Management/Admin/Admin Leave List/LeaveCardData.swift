@@ -17,6 +17,7 @@ struct LeaveCardData: Identifiable {
             var status: String
             var DoctorID : String
     }
+
 struct LeaveMockData {
     static let LeaveDataArray = [
         LeaveCardData(date: "14 Apr", year: 24,nodays: 4, day: "Wed",DoctorName:"Dr. Fog" ,status: "Approved", DoctorID: ""),
@@ -36,3 +37,4 @@ struct LeaveData: Identifiable {
     var status: String
     var DoctorID : String
 }
+

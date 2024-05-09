@@ -17,7 +17,7 @@ struct leaveRequestPicker: View {
             VStack(alignment: .leading) {
                 Picker("View", selection: $selectedPicker){
                     Text("Leave Application").tag(0)
-                    Text("Slot Change").tag(1)
+                    Text("Leave Histories").tag(1)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 Spacer(minLength: 20)

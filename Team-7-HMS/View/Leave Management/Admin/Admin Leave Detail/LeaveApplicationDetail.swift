@@ -8,23 +8,22 @@
 import SwiftUI
 
 struct LeaveApplicationDetail: View {
-    // Example LeaveApplication data
-    let leaveApplication = LeaveApplication(doctorName: "Dr. Smith",
-                                            leavesAvailable: 20,
-                                            totalLeavesTaken: 5,
-                                            subject: "Sick Leave",
-                                            description: "Feeling unwell and having a lot of pain the head and throat",
-                                            fromDate: Date(),
-                                            toDate: Date())
+
+    
+    @State var leaveData : leaveManagementInfo
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    VStack{
-                        Text(leaveApplication.doctorName)
+                    VStack(alignment: .leading){
+                        Text(leaveData.doctorName)
                             .font(.title2)
-                            .fontWeight(.semibold)
+                            .fontWeight(.bold)
+                        Text(leaveData.doctorDepartment + " Department")
+                            .font(.title2)
+                            .bold()
                     }
                     HStack {
                         VStack {
@@ -33,7 +32,7 @@ struct LeaveApplicationDetail: View {
                                 .frame(width: 100, height: 100, alignment: .center)
                                 .overlay(
                                     VStack {
-                                        Text("\(leaveApplication.leavesAvailable - leaveApplication.totalLeavesTaken)")
+                                        Text("15")
                                             .font(.title)
                                             .foregroundColor(.white)
                                             .bold()
@@ -45,15 +44,13 @@ struct LeaveApplicationDetail: View {
                                 .padding(.vertical, 10)
                         }
                         Spacer()
-//                        RoundedRectangle(cornerRadius: 50)
-//                            .foregroundColor(.gray)
-//                            .frame(width: 2, height: 33)
+
                         Spacer()
                         VStack {
                             HStack {
                                 Spacer()
                                 VStack {
-                                    Text("\(leaveApplication.leavesAvailable)")
+                                    Text("21")
                                         .font(.title)
                                         .bold()
                                     Text("Total Leaves")
@@ -66,7 +63,7 @@ struct LeaveApplicationDetail: View {
                                     .frame(width: 2, height: 33)
                                 Spacer()
                                 VStack {
-                                    Text("\(leaveApplication.totalLeavesTaken)")
+                                    Text("15")
                                         .font(.title)
                                         .bold()
                                     Text("Leaves Taken")
@@ -86,7 +83,7 @@ struct LeaveApplicationDetail: View {
                             HStack{
                                 Spacer()
                                 Text("From:")
-                                Text(" \(formattedDate(leaveApplication.fromDate))")
+                                Text(" \(formattedDate(leaveData.fromDate))")
                                     .fontWeight(.semibold)
                                 Spacer()
                     
@@ -99,7 +96,7 @@ struct LeaveApplicationDetail: View {
                             HStack{
                                 Spacer()
                                 Text("To:")
-                                Text(" \(formattedDate(leaveApplication.toDate))")
+                                Text(" \(formattedDate(leaveData.toDate))")
                                     .fontWeight(.semibold)
                                 Spacer()
                     
@@ -115,7 +112,7 @@ struct LeaveApplicationDetail: View {
                             Text("Subject:")
                                 .padding(.leading)
                                 .fontWeight(.semibold)
-                            Text("\(leaveApplication.subject)")
+                            Text("Leave application")
                             Spacer()
             
                         }
@@ -136,7 +133,7 @@ struct LeaveApplicationDetail: View {
                                     Spacer()
                                 }
                                 HStack {
-                                    Text("\(leaveApplication.description)")
+                                    Text("\(leaveData.description)")
                                     Spacer()
                                 }
                                 Spacer()
@@ -144,18 +141,9 @@ struct LeaveApplicationDetail: View {
                             .padding()
                         }
                     }
-//                    VStack(){
-//                        HStack(alignment:.top){
-//                            
-//                            Text("Description:")
-//                                .padding(.leading)
-//                            Spacer()
-//            
-//                        }
-//                        .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.gray.opacity(0.1)).frame(height: 50))
-//                    }
-                    
-                    Button(action: {}, label: {
+                    Button(action: {
+                        FirebaseHelperFunctions().updateLeave(leaveID: leaveData.id, doctorID: leaveData.docID, status: "Approved")
+                    }, label: {
                         Text("Confirm")
                             .frame(width: 300)
                             .padding()
@@ -166,7 +154,10 @@ struct LeaveApplicationDetail: View {
                     })
                     .padding(.leading)
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        FirebaseHelperFunctions().updateLeave(leaveID: leaveData.id, doctorID: leaveData.docID, status: "Rejected")
+
+                    }, label: {
                         Text("Reject")
                             .frame(width: 300)
                             .padding()
@@ -178,7 +169,20 @@ struct LeaveApplicationDetail: View {
                     .padding(.leading)
                 }
                 .padding()
-                .navigationTitle("Leave Approval")
+                .toolbar{
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss()
+                        }, label: {
+                            HStack{
+                                Image(systemName: "chevron.left")
+                                    .bold()
+                                Text("Back")
+                            }
+                            .foregroundColor(.blue)
+                        })
+                    }
+                }
             }
         }
     }
@@ -194,6 +198,14 @@ struct LeaveApplicationDetail: View {
 // Preview
 struct LeaveApplicationDetail_Previews: PreviewProvider {
     static var previews: some View {
-        LeaveApplicationDetail()
+        LeaveApplicationDetail(leaveData: leaveManagementInfo(
+            id: "1",
+            fromDate: Date(),
+            toDate: Date(),
+            status: "Pending",
+            description: "Family emergency",
+            doctorName: "Dr. John Doe",
+            doctorDepartment: "Cardiology", docID: " "
+        ))
     }
 }

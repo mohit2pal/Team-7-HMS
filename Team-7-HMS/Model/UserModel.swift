@@ -102,4 +102,7 @@ struct leaveManagementInfo {
     var toDate : Date
     var status : String
     var description :  String
+    var doctorName : String
+    var doctorDepartment : String
+    var docID : String
 }

@@ -55,9 +55,13 @@ struct ViewLeaveApplications: View {
                                                 ProgressView()
                                                     .progressViewStyle(CircularProgressViewStyle(tint: .red))
                                             }
-                                            else{
+                                            else if LeaveData[index].status == "Approved"{
                                                 Image(systemName: "checkmark.circle")
                                                     .foregroundStyle(.green)
+                                            }
+                                            else {
+                                                Image(systemName: "multiply.circle.fill")
+                                                    .foregroundStyle(.red)
                                             }
                                         }
                                     }

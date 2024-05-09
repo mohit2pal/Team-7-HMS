@@ -9,20 +9,26 @@ import SwiftUI
 
 struct AdminHomeView: View {
     var body: some View {
-        TabView {
-            AdminDashboard()
-                .tabItem {
-                    Label("Dashboard", systemImage: "list.number")
+        NavigationView{
+            TabView {
+                AdminDashboard()
+                    .tabItem {
+                        Label("Dashboard", systemImage: "list.number")
+                    }
+                AddingSlots()
+                    .tabItem {
+                        Label("Add Slots", systemImage: "calendar.badge.plus")
+                    }
+                NavigationView{
+                    AddDoctorDetails()
                 }
-            AddingSlots()
                 .tabItem {
-                    Label("Add Slots", systemImage: "calendar.badge.plus")
+                    Label("Add Doctors", systemImage: "person.badge.plus")
                 }
-            NavigationView{
-                AddDoctorDetails()
-            }
-            .tabItem {
-                Label("Add Doctors", systemImage: "person.badge.plus")
+                AdminLeaveViewPageView()
+                    .tabItem {
+                        Label("Doctor Leave Management" , systemImage: "calendar.badge.checkmark.rtl")
+                    }
             }
         }
     }

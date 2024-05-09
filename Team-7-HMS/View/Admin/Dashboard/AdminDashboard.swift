@@ -244,6 +244,12 @@ struct AdminDashboard: View {
                     .padding()
                 }
             }
+            .onAppear{
+                FirebaseHelperFunctions().fetchLeaveData(){slots , error in
+                    print(slots)
+                    
+                }
+            }
         }
 }   }
 

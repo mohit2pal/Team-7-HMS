@@ -1479,7 +1479,7 @@ class FirebaseHelperFunctions {
     func leaveManagement(doctorID: String, fromDate: Date, toDate: Date, subject: String, description: String) {
         let db = Firestore.firestore()
         let leaveManagementRef = db.collection("leave_management").document(doctorID)
-        
+        let newUUID = UUID().uuidString
         // Check if there is existing data for the doctor
         leaveManagementRef.getDocument { document, error in
             if let error = error {
@@ -1495,6 +1495,7 @@ class FirebaseHelperFunctions {
                 
                 // Append new leave data
                 existingLeaveData[getDateStringNow()] = [
+                    "id" : newUUID,
                     "fromDate": fromDate,
                     "toDate": toDate,
                     "subject": subject,
@@ -1512,10 +1513,10 @@ class FirebaseHelperFunctions {
                 }
             } else {
                 // No existing data found, create new leave data
-                
+
                 let leaveData: [String: [String: Any]] = [
                     getDateStringNow(): [
-                        "id" : UUID(),
+                        "id": newUUID,
                         "fromDate": fromDate,
                         "toDate": toDate,
                         "subject": subject,
@@ -1581,9 +1582,180 @@ class FirebaseHelperFunctions {
             }
         }
     }
+    
+   func fetchLeaveData(completion: @escaping ([leaveManagementInfo]?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        let leaveRef = db.collection("leave_management")
+        
+        var leaveInfoList : [leaveManagementInfo] = []
+        
+        leaveRef.getDocuments { snapshot , error in
+            if let error = error {
+                // Error occurred while fetching documents
+                completion(nil, error)
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                // No documents found
+                completion(nil, nil)
+                return
+            }
+            
+            let dispatchGroup = DispatchGroup()
+            
+            for document in documents {
+                dispatchGroup.enter()
+                
+                let docID = document.documentID
+                
+                self.getDoctorName(docID) { name, error in
+                    defer {
+                        dispatchGroup.leave()
+                    }
+                    
+                    guard let doctorName = name[0], let doctorSpe = name[1] else {
+                        return
+                    }
+                    
+                    guard let documentData = document.data() as? [String: Any] else {
+                        return
+                    }
+                    
+                    for (_, info) in documentData {
+                        guard let data = info as? [String: Any] else {
+                            continue
+                        }
+                        
+                    
+                        if let id = data["id"] as? String,
+                           let fromDate = data["fromDate"] as? Timestamp,
+                           let toDate = data["toDate"] as? Timestamp,
+                           let status = data["status"] as? String,
+                           let description = data["description"] as? String {
+                            
+                            let leaveInfo = leaveManagementInfo(id: id, fromDate: fromDate.dateValue(), toDate: toDate.dateValue(), status: status, description: description, doctorName: doctorName, doctorDepartment: doctorSpe , docID : docID)
+                            
+                            leaveInfoList.append(leaveInfo)
+                            
+//                            print("yes")
+                        }
+                        else{
+                            print("error")
+                        }
+                    }
+                }
+            }
+            
+            dispatchGroup.notify(queue: .main) {
+                // Completion handler called when all data is fetched
+                completion(leaveInfoList, nil)
+            }
+        }
+    }
 
+    
+    func getDays(doctorID: String, completion: @escaping ([Date: Date]?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("leave_management").document(doctorID)
+        
+        var dateData: [Date: Date] = [:]
+        
+        docRef.getDocument { snapshot, error in
+            if let error = error {
+                print("Error getting the data: \(error)")
+                completion(nil, error)
+                return
+            }
+            
+            guard let data = snapshot?.data() else {
+                print("Data was empty")
+                completion(nil, nil) // Data is empty, so return nil for both data and error
+                return
+            }
+            
+            for (_, info) in data {
+                guard let infoData = info as? [String: Any] else {
+                    continue
+                }
+                
+                if let fromDate = infoData["fromDate"] as? Timestamp,
+                   let toDate = infoData["toDate"] as? Timestamp , let status = infoData["status"] as? String{
+                    if status == "Approved"{
+                        dateData[fromDate.dateValue()] = toDate.dateValue()
+                    }
+                
+                }
+            }
+            
+            completion(dateData.isEmpty ? nil : dateData, nil) 
+        }
+    }
 
+    
+    func getDoctorName(_ doctorID : String , completion: @escaping ([String?], Error?) -> Void) {
+        let db = Firestore.firestore()
+        let docRef = db.collection("doctor_details").document(doctorID)
+        
+        docRef.getDocument{ snapshot , error in
+            if let error = error {
+                print("There is an error in fetching the doctors Name :\(error)")
+            }
+            
+            if let document = snapshot?.data(){
+                
+                if let name = document["name"] as? String  , let dept = document["specialty"] as? String{
+                    completion([name, dept] , error)
+                }
+                
+            }
+        }
 
+    }
+    
+    
+    func updateLeave(leaveID: String, doctorID: String, status: String) {
+        let db = Firestore.firestore()
+        var datePresent = ""
+        let leaveRef = db.collection("leave_management").document(doctorID)
+        
+        leaveRef.getDocument { snapshot, error in
+            if let error = error {
+                print("Error fetching leave document: \(error)")
+                return
+            }
+            
+            guard var data = snapshot?.data() else {
+                print("Document data was empty.")
+                return
+            }
+            
+            // Find the date for the leaveID
+            for (date, info) in data {
+                if let dataInfo = info as? [String: Any], let leaveId = dataInfo["id"] as? String, leaveId == leaveID {
+                    datePresent = date
+                    break
+                }
+            }
+            
+            // Update the status for the leaveID
+            if var leaveInfo = data[datePresent] as? [String: Any] {
+                leaveInfo["status"] = status
+                data[datePresent] = leaveInfo
+                
+//                 Set the updated data back to Firestore
+                leaveRef.setData(data) { error in
+                    if let error = error {
+                        print("Error updating leave document: \(error)")
+                    } else {
+                        print("Leave document updated successfully.")
+                    }
+                }
+            } else {
+                print("Leave ID not found in document data.")
+            }
+        }
+    }
 }
 
 
@@ -1609,4 +1781,11 @@ func getDateLiteral(date : String) -> Date {
     dateFormatter.dateFormat = "dd-MM-yyyy "
     
     return dateFormatter.date(from: date.replacingOccurrences(of: "_", with: "-")) ?? Date()
+}
+
+func getDateString(date : Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd-MM-yyyy"
+    
+    return dateFormatter.string(from: date)
 }

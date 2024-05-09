@@ -14,6 +14,10 @@ struct AddingSlots: View {
             fetchBookedSlots()
         }
     }
+    
+    @State var isDateInLeaves  = false
+    @State var leavesSlot : [Date : Date] = [:]
+    
     @State private var selectedDate: Date? = nil {
         didSet{
             fetchBookedSlots()
@@ -132,7 +136,9 @@ struct AddingSlots: View {
     
     // MARK: - Date and Slot Selection View
     var dateAndSlotSelectionView: some View {
-        VStack {
+        
+        
+        return VStack {
             // Include a back button at the top
             HStack {
                 Button(action: {
@@ -164,6 +170,21 @@ struct AddingSlots: View {
                     ForEach(daysOfWeek, id: \.self) { date in
                         DateButton(date: date, isSelected: date == selectedDate, action: {
                             selectedDate = date
+                            self.isDateInLeaves = false
+                            
+                            guard let selectedDate1 = date as? Date else {
+                                return
+                            }
+                            
+                            for (fromDate, toDate) in leavesSlot {
+                            
+                                if selectedDate1 >= fromDate && selectedDate1 <= toDate {
+                                    self.isDateInLeaves = true
+                                    break
+                                }
+                            }
+                            
+                            
                         })
                     }
                 }
@@ -181,25 +202,34 @@ struct AddingSlots: View {
                 .font(.headline)
                 .padding(.vertical)
                 
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
-                    ForEach(timeSlots, id: \.self) { slot in
-                        Button(action: {
-                            // Check if the slot is not booked before toggling the selection
-                            if !bookedSlots.contains(slot) {
-                                if selectedSlots.contains(slot) {
-                                    selectedSlots.removeAll(where: { $0 == slot })
-                                } else {
-                                    selectedSlots.append(slot)
+                if isDateInLeaves {
+                    Text("The admin has approved a leave on \(getDateString(date: selectedDate ?? Date()))")
+                        .font(.callout)
+                        .foregroundStyle(.gray)
+                        .multilineTextAlignment(.center)
+                }
+                
+                else {
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
+                        ForEach(timeSlots, id: \.self) { slot in
+                            Button(action: {
+                                // Check if the slot is not booked before toggling the selection
+                                if !bookedSlots.contains(slot) {
+                                    if selectedSlots.contains(slot) {
+                                        selectedSlots.removeAll(where: { $0 == slot })
+                                    } else {
+                                        selectedSlots.append(slot)
+                                    }
                                 }
+                            }) {
+                                Text(slot)
+                                    .padding()
+                                    .background(bookedSlots.contains(slot) ? Color.gray : (selectedSlots.contains(slot) ? Color.myAccent : Color.white))
+                                    .foregroundStyle(bookedSlots.contains(slot) ? Color.white : (selectedSlots.contains(slot) ? Color.white : Color.black))
+                                    .cornerRadius(12)
+                                    .customShadow()
+                                    .disabled(bookedSlots.contains(slot))
                             }
-                        }) {
-                            Text(slot)
-                                .padding()
-                                .background(bookedSlots.contains(slot) ? Color.gray : (selectedSlots.contains(slot) ? Color.myAccent : Color.white))
-                                .foregroundStyle(bookedSlots.contains(slot) ? Color.white : (selectedSlots.contains(slot) ? Color.white : Color.black))
-                                .cornerRadius(12)
-                                .customShadow()
-                                .disabled(bookedSlots.contains(slot))
                         }
                     }
                 }
@@ -208,11 +238,26 @@ struct AddingSlots: View {
             Spacer()
             submitButton
         }
+        .onAppear{
+            if let Docid = selectedDoctor?.id {
+                FirebaseHelperFunctions().getDays(doctorID: Docid) { data, error in
+                    if let data = data {
+                        self.leavesSlot = data
+                    }
+                    else {
+                        self.leavesSlot = [:]
+                    }
+                    
+                    print(self.leavesSlot)
+                }
+            }
+        }
     }
     
     
     // MARK: - Submit Button
     var submitButton: some View {
+        
         Button(action: {
             if let selectedDoctor = selectedDoctor {
                 firebaseHelper.createSlots(doctorName: selectedDoctor.name, doctorID: selectedDoctor.id, date: selectedDate ?? Date(), slots: selectedSlots)
