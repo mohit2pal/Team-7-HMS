@@ -90,6 +90,7 @@ struct AddingSlots: View {
                 dateAndSlotSelectionView
                     .transition(.move(edge: .trailing))
             }
+            Spacer(minLength: 120)
         }
         .padding()
         .background(Color.background)
@@ -112,6 +113,8 @@ struct AddingSlots: View {
             HStack {
                 Text("Select Doctor")
                     .font(.headline)
+                    .multilineTextAlignment(.center) // Centers text within each line
+                    .frame(maxWidth: .infinity) // Stretches the frame to the parent's width
                 Spacer()
             }
             SearchBar(text: $searchText)

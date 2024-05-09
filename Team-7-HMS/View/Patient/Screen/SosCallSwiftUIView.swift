@@ -30,14 +30,14 @@ struct SosCallSwiftUIView: View {
                     Spacer()
                     Spacer()
                         .frame(height: 60)
-                    Text("+91 98765 43210\n+91 98765 43210")
+                    Text("+91 93619 09556\n+91 93619 09556")
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.gray)
                     
                     Spacer()
                         .frame(height: 60)
                     Button(action: {
-                        guard let phoneURL = URL(string: "tel://9237498273") else { return }
+                        guard let phoneURL = URL(string: "tel://9361909556") else { return }
                         UIApplication.shared.open(phoneURL)
                     }) {
                         Image(systemName: "phone.fill")
