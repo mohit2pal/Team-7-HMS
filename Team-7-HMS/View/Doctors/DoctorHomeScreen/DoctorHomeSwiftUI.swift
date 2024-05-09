@@ -173,7 +173,7 @@ struct DoctorHomeSwiftUI: View {
                         .padding(.vertical)
                         
                         // Display appointments based on selected segment
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 if displayedAppointments.isEmpty {
                     HStack{
                         Spacer()
