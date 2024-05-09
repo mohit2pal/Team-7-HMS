@@ -27,8 +27,7 @@ struct patientHomeSwiftUIView: View {
                 Button {
                     openDetailsView = true
                 } label: {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
+                    profile_pic()
                         .frame(width: 60, height: 60)
                         .foregroundColor(.gray)
                         .padding(.trailing)

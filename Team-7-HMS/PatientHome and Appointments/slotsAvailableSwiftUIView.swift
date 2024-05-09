@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct slotsAvailableSwiftUIView: View {
+    @Environment(\.presentationMode) var presentationMode
     
     @State private var isBooking = false
     @State private var bookingCompleted = false
+    @State private var showSuccessAnimation: Bool = false
     
     var patientUID : String
     @State private var doctorDetails: [String: Any]? // Optional dictionary
@@ -163,9 +165,12 @@ struct slotsAvailableSwiftUIView: View {
                         // Handle failure, e.g., show an error message
                     }
                 }
+                self.showSuccessAnimation = true
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // 2 seconds delay
                     self.isBooking = false
                     self.bookingCompleted = true
+                    presentationMode.wrappedValue.dismiss()
                 }
             } label: {
                 ZStack {
@@ -184,7 +189,7 @@ struct slotsAvailableSwiftUIView: View {
                             .transition(.scale)
                     } else {
                             //PATIENT
-                            Text("Book Selected Slots").font(.system(size: 20, weight: .regular))
+                            Text("Book Selected Slot").font(.system(size: 20, weight: .regular))
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
                     }
@@ -195,6 +200,10 @@ struct slotsAvailableSwiftUIView: View {
         }
         .padding()
         .background(Color.background)
+        .fullScreenCover(isPresented: $showSuccessAnimation) {
+            // FullScreenCover for success animation
+            SuccessAnimationView()
+        }
         .onAppear {
             fetchDoctorsDetails(name: doctorName) { details, error in
                 if let error = error {

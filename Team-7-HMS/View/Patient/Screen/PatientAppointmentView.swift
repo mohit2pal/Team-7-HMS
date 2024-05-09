@@ -76,6 +76,7 @@ struct PatientAppointmentView: View {
                                 .padding()
                         }
                     }
+                    Spacer(minLength: 90)
                 }
             }
             .padding([.horizontal, .top])

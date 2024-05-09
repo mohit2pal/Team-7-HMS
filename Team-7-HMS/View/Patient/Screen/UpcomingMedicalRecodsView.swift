@@ -133,6 +133,7 @@ struct UpcomingMedicalRecodsView: View {
                                 .padding()
                         }
                     }
+                    Spacer(minLength: 90)
                 }
             }
             
