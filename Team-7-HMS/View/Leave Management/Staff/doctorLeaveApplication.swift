@@ -19,10 +19,14 @@ struct doctorLeaveApplication: View {
     }
     @State var error = false
     // Variables for Total Leaves, Leaves Left, and Leaves Taken
-    let totalLeaves = 20
-    let leavesTaken = 7
+    let totalLeaves = 21
+    @State var leavesTaken : Int = 0
     var leavesLeft: Int {
         totalLeaves - leavesTaken
+    }
+    
+    var doctorId : String {
+        Auth.auth().currentUser?.uid ?? ""
     }
     
     @State private var showSuccessAnimation: Bool = false
@@ -199,6 +203,24 @@ struct doctorLeaveApplication: View {
         .fullScreenCover(isPresented: $showSuccessAnimation) {
             SuccessAnimationView()
         }
+        
+        .onAppear(perform: {
+            FirebaseHelperFunctions().getDays(doctorID: doctorId) { data, error in
+                var total = 0
+                if let dates = data {
+                    
+                    for (fromDate , toDate) in dates {
+                        let calendar = Calendar.current
+                        let components = calendar.dateComponents([.day], from: fromDate, to: toDate)
+                        if let days = components.day {
+                            total += days
+                        }
+                    }
+                    self.leavesTaken = total
+                }
+            }
+        })
+
         
         .onAppear{
             self.fromDate = Calendar.current.date(byAdding: .day, value: 7, to: fromDate) ?? Date()

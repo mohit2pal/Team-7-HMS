@@ -27,11 +27,21 @@ struct DoctorAppointmentCard: View {
                     VStack(alignment: .leading, spacing: 5){
                         Text(appointmentData.patientName)
                             .foregroundColor(.black)
+                            .bold()
                             .font(.title3)
                             .padding(.init(top: 0, leading: 0, bottom: 1, trailing: 0))
-                        Text("\(appointmentData.gender), \(appointmentData.age)")
-                            .foregroundColor(.black)
-                            .font(.title3)
+                        Text("Appointment Id: " + appointmentData.appointmentID.suffix(6))
+                            .foregroundStyle(.gray)
+                        
+                        HStack{
+                            Image(systemName: "calendar")
+                            
+                            Text(appointmentData.date.replacingOccurrences(of: "_", with: "-"))
+                                .font(.title3)
+                            
+                        }
+                        .foregroundStyle(.black)
+                    
     //                    Text("\(appointmentData.day), \(appointmentData.date), \(appointmentData.year)")
     //                        .foregroundColor(.black)
     //                        .font(.title3)

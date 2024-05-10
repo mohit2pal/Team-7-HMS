@@ -14,7 +14,7 @@ struct LeaveApplicationDetail: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showSuccessAnimation: Bool = false
     @State private var failSuccessAnimation: Bool = false
-
+    @State var totalLeavesTaken : Int = 0
     
     var body: some View {
         NavigationView {
@@ -35,7 +35,7 @@ struct LeaveApplicationDetail: View {
                                 .frame(width: 100, height: 100, alignment: .center)
                                 .overlay(
                                     VStack {
-                                        Text("15")
+                                        Text("\(21 - totalLeavesTaken)")
                                             .font(.title)
                                             .foregroundColor(.white)
                                             .bold()
@@ -66,7 +66,7 @@ struct LeaveApplicationDetail: View {
                                     .frame(width: 2, height: 33)
                                 Spacer()
                                 VStack {
-                                    Text("15")
+                                    Text("\(totalLeavesTaken)")
                                         .font(.title)
                                         .bold()
                                     Text("Leaves Taken")
@@ -225,6 +225,23 @@ struct LeaveApplicationDetail: View {
                 Spacer(minLength: 110)
             }
         }
+        .onAppear(perform: {
+            FirebaseHelperFunctions().getDays(doctorID: leaveData.docID) { data, error in
+                var total = 0
+                if let dates = data {
+                    
+                    for (fromDate , toDate) in dates {
+                        let calendar = Calendar.current
+                        let components = calendar.dateComponents([.day], from: fromDate, to: toDate)
+                        if let days = components.day {
+                            total += days
+                        }
+                    }
+                    self.totalLeavesTaken = total
+                }
+            }
+        })
+        .navigationViewStyle(.stack)
     }
     
     // Helper function to format date

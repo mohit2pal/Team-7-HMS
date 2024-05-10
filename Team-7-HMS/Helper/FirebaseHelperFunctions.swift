@@ -860,11 +860,11 @@ class FirebaseHelperFunctions {
                         group.leave() // Leave the group after the asynchronous call is completed
                     }
                     
-                    if let patientDocument = patientDocument, patientDocument.exists {
+                    if let patientDocument = patientDocument, patientDocument.exists  {
                         let patientName = patientDocument["name"] as? String ?? "Unknown"
                         let gender = patientDocument["gender"] as? String ?? "Unknown"
-                        let age = patientDocument["age"] as? Int ?? 0 // Assuming age is stored as an Int
                         
+                    
                         // Extract year from the date string
                         let year = Calendar.current.component(.year, from: Date())
                         
@@ -874,7 +874,7 @@ class FirebaseHelperFunctions {
                         
                         
                         // Create a DoctorAppointmentCardData object for each appointment
-                        let appointmentData = DoctorAppointmentCardData(appointmentID: appointmentID, date: dateString, year: year, day: day, time: slotTime, patientName: patientName, gender: gender, age: age, status: status, patientID: patientUID)
+                        let appointmentData = DoctorAppointmentCardData(appointmentID: appointmentID, date: dateString, year: year, day: day, time: slotTime, patientName: patientName, gender: gender, status: status, patientID: patientUID)
                         
                         // Add the appointment data to the appointments array
                         appointments.append(appointmentData)
@@ -1788,4 +1788,14 @@ func getDateString(date : Date) -> String {
     dateFormatter.dateFormat = "dd-MM-yyyy"
     
     return dateFormatter.string(from: date)
+}
+
+func calculateAge(birthDate: Date) -> Int {
+    let currentDate = Date()
+    let calendar = Calendar.current
+    
+    let ageComponents = calendar.dateComponents([.year], from: birthDate, to: currentDate)
+    let age = ageComponents.year ?? 0
+    
+    return age
 }

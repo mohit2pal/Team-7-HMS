@@ -21,7 +21,7 @@ struct viewLabReportSwiftUIView: View {
                         RoundedRectangle(cornerRadius: 50)
                             .fill(Color(#colorLiteral(red: 0.8509804010391235, green: 0.8509804010391235, blue: 0.8509804010391235, alpha: 1)))
                             .frame(width: 2, height: 20)
-                        Text("\(appointmentData.age)")
+                        
                     }
                 }
                 Spacer()

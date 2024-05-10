@@ -33,12 +33,24 @@ struct ForDoctorPatientAppointentView: View {
                             Text(doctorAppointmentData.patientName)
                                 .font(.title2)
                             HStack{
-                                Text(doctorAppointmentData.gender)
-                                RoundedRectangle(cornerRadius: 50)
-                                    .fill(Color(#colorLiteral(red: 0.8509804010391235, green: 0.8509804010391235, blue: 0.8509804010391235, alpha: 1)))
-                                    .frame(width: 2, height: 20)
-                                Text("\(doctorAppointmentData.age)")
+                                Text("Appointment Id : ")
+                                Text(doctorAppointmentData.appointmentID.suffix(6))
+                                    .foregroundStyle(.white)
+                                    .font(.callout)
                             }
+                            Divider()
+                                
+                            HStack{
+                                Text(doctorAppointmentData.gender)
+                                    .foregroundStyle(.white)
+                                    .font(.callout)
+                                
+                                Spacer()
+                                
+                                Text("20")
+                            }
+                            .frame(width: 70)
+                          
                         }
                         Spacer()
                         Image(systemName: "person.circle.fill")
