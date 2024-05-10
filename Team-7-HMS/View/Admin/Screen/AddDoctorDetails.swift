@@ -269,7 +269,7 @@ struct AddDoctorDetails: View {
                 }
             }
         }
-        
+        .navigationViewStyle(.stack)
         if navigatePage{
             NavigationLink("", destination: Text("Dr.\(name) has been added.").navigationBarBackButtonHidden(), isActive: $navigatePage)
         }

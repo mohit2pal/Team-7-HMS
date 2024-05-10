@@ -28,9 +28,7 @@ struct DoctorNameUIView: View {
                         Text(doctorName)
                             .multilineTextAlignment(.leading)
                             .font(CentFont.mediumSemiBold)
-                        Text("Available from: ")
-                            .font(CentFont.smallReg)
-                            .foregroundStyle(.gray)
+                      
                     }
                     Spacer()
                     

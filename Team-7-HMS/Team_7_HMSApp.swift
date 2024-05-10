@@ -49,6 +49,7 @@ struct Team_7_HMSApp: App {
                   .environmentObject(appState)
                   .id(appState.rootViewId)
           }
+          .navigationViewStyle(.stack)
         }
       }
 }

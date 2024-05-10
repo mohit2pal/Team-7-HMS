@@ -99,6 +99,7 @@ struct ViewLeaveApplications: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
 

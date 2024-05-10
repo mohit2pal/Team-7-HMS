@@ -63,6 +63,7 @@ struct BookLabRecordsView: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
         .onAppear{
             if let user = Auth.auth().currentUser {
                 self.patientUID = user.uid

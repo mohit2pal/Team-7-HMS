@@ -56,6 +56,7 @@ struct CompletedLeaveRequestsView: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
         .onAppear {
             FirebaseHelperFunctions().fetchLeaveData { data, error in
                 if let data = data {

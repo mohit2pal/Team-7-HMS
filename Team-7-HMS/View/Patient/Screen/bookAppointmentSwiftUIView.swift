@@ -97,6 +97,7 @@ struct bookAppointmentSwiftUIView: View {
             }
             .background(Color.background)
         }
+        .navigationViewStyle(.stack)
     }
 }
 

@@ -144,46 +144,62 @@ struct LeaveApplicationDetail: View {
                             .padding()
                         }
                     }
-                    Button(action: {
-                        FirebaseHelperFunctions().updateLeave(leaveID: leaveData.id, doctorID: leaveData.docID, status: "Approved")
-                         showSuccessAnimation = true
-
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            self.showSuccessAnimation = false
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }, label: {
-                        Text("Confirm")
-                            .frame(width: 300)
-                            .padding()
-                            .foregroundStyle(Color.white)
-                            .background(Color.myAccent)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
-                        
-                    })
-                    .padding(.leading)
                     
-                    Button(action: {
-                        FirebaseHelperFunctions().updateLeave(leaveID: leaveData.id, doctorID: leaveData.docID, status: "Rejected")
+                    HStack{
+                        Spacer()
                         
-                        failSuccessAnimation = true
+                        Button(action: {
+                            FirebaseHelperFunctions().updateLeave(leaveID: leaveData.id, doctorID: leaveData.docID, status: "Approved")
+                             showSuccessAnimation = true
 
-                       DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                           self.failSuccessAnimation = false
-                           presentationMode.wrappedValue.dismiss()
-                       }
-
-
-                    }, label: {
-                        Text("Reject")
-                            .frame(width: 300)
-                            .padding()
-                            .foregroundStyle(Color.white)
-                            .background(Color.red.opacity(0.8))
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                self.showSuccessAnimation = false
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        }, label: {
+                            Text("Confirm")
+                                .frame(width: 300)
+                                .padding()
+                                .foregroundStyle(Color.white)
+                                .background(Color.myAccent)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                            
+                        })
+                        .padding(.leading)
                         
-                    })
-                    .padding(.leading)
+                        Spacer()
+                    }
+                    
+                    
+                    HStack{
+                        Spacer()
+                        
+                        Button(action: {
+                            FirebaseHelperFunctions().updateLeave(leaveID: leaveData.id, doctorID: leaveData.docID, status: "Rejected")
+                            
+                            failSuccessAnimation = true
+
+                           DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                               self.failSuccessAnimation = false
+                               presentationMode.wrappedValue.dismiss()
+                           }
+
+
+                        }, label: {
+                            Text("Reject")
+                                .frame(width: 300)
+                                .padding()
+                                .foregroundStyle(Color.white)
+                                .background(Color.red.opacity(0.8))
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                            
+                        })
+                        .padding(.leading)
+
+                        Spacer()
+
+                    }
+                    
                 }
                 .padding()
                 .fullScreenCover(isPresented: $showSuccessAnimation) {

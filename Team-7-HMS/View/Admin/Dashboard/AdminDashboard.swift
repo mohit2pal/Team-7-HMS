@@ -49,13 +49,7 @@ struct AdminDashboard: View {
                                     .fontWeight(.semibold)
                             }
                             Spacer()
-                            NavigationLink(destination: patientNotificationSwiftUIView()) {
-                                Image(systemName: "bell.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(height: 24)
-                                    .foregroundColor(.myAccent)
-                            }
+
                         }
                         // .frame(width: 400,height: 400)
                         .padding()
@@ -264,6 +258,7 @@ struct AdminDashboard: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
     func signOut() {
         do {

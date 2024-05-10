@@ -195,6 +195,7 @@ struct doctorLeaveApplication: View {
             .padding(.bottom , 50)
             
                     }
+        .navigationViewStyle(.stack)
         .fullScreenCover(isPresented: $showSuccessAnimation) {
             SuccessAnimationView()
         }

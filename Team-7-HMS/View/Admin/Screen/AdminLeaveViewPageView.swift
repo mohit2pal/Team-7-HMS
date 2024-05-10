@@ -39,6 +39,7 @@ struct AdminLeaveViewPageView: View {
                     }
             }
         }
+        .navigationViewStyle(.stack)
         
     }
 }
